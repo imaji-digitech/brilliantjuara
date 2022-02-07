@@ -18,7 +18,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('dashboard', function () {
+    return redirect(route('admin.dashboard'));
+})->name('dashboard');
 Route::post('/summernote', [SupportController::class, 'upload'])->name('summernote');
 Route::middleware(['auth:sanctum',])->name('admin.')->prefix('admin')->group(function () {
     Route::get('download/course/{link}',function ($id){
