@@ -29,25 +29,75 @@
                     <li class="sidebar-main-title">
                         <div>
                             <h6>General</h6>
-                            <p>Dashboards,widgets & layout.</p>
                         </div>
                     </li>
                     <li class="sidebar-list">
-                        <label class="badge badge-success">2</label>
-                        <a class="sidebar-link sidebar-title" href="#">
-                            <i data-feather="home"></i><span>Dashboard</span>
+                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.dashboard') }}">
+                            <i class="fas fa-home"></i><span> Dashboard</span>
                         </a>
-                        <ul class="sidebar-submenu">
-                            <li><a href="#">Default</a></li>
-                            <li><a href="#">Ecommerce</a></li>
-                        </ul>
                     </li>
-
+                    <li class="sidebar-main-title">
+                        <div>
+                            <h6>Pengaturan Kelas</h6>
+                        </div>
+                    </li>
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav" href="#">
-                            <i data-feather="git-pull-request"></i><span>File manager</span>
+                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.room.index') }}">
+                            <i class="fas fa-home"></i><span> Kelas</span>
                         </a>
                     </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.access.exam') }}">
+                            <i class="fas fa-home"></i><span> Akses TO</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.access.course') }}">
+                            <i class="fas fa-home"></i><span> Akses Bimbel</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-main-title">
+                        <div>
+                            <h6>Kelas ku</h6>
+                        </div>
+                    </li>
+                    @php
+                        $ownExam = auth()->user()->userOwnExams;
+                        $ownCourse = auth()->user()->userOwnCourses;
+                        $myClass = [];
+                        foreach ($ownExam as $oe) {
+                            $myClass[$oe->exam->room->title]['exam'][$oe->exam_id]=$oe;
+                        }
+                        foreach ($ownCourse as $oe){
+                            $myClass[$oe->course->room->title]['course'][$oe->exam_id]=$oe;
+                        }
+                    @endphp
+                    @foreach($myClass as $key=>$mc)
+                        <li class="sidebar-list">
+                            <a class="sidebar-link sidebar-title" href="#">
+                                <i class="fas fa-home"></i> <span>{{$key}}</span>
+                            </a>
+                            <ul class="sidebar-submenu">
+                                @isset($mc['exam'])
+                                    @foreach($mc['exam'] as $exam)
+                                        <li><a href="{{ route('admin.user.exam',$exam->exam->slug) }}">{{ $exam->exam->title }}</a></li>
+                                    @endforeach
+                                @endisset
+                                @isset($mc['course'])
+                                    @foreach($mc['course'] as $course)
+                                        <li><a href="{{ route('admin.user.course',$course->course->slug) }}">{{ $course->course->title }}</a></li>
+                                    @endforeach
+                                @endisset
+                            </ul>
+                        </li>
+                    @endforeach
+                    {{--                    @foreach( auth()->user()->userOwnExams as $own )--}}
+                    {{--                        <li class="sidebar-list">--}}
+                    {{--                            <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.room.index') }}">--}}
+                    {{--                                <i class="fas fa-home"></i><span> {{ $own->exam->title }}</span>--}}
+                    {{--                            </a>--}}
+                    {{--                        </li>--}}
+                    {{--                    @endforeach--}}
 
                 </ul>
             </div>

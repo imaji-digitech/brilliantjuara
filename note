@@ -1,0 +1,16 @@
+php artisan make:migration rooms
+php artisan make:migration courses // punya harga digunakan untuk ngurangi klo bundling
+php artisan make:migration exams // punya harga digunakan untuk ngurangi klo bundling
+php artisan make:migration sales // bisa paket / bisa 1 an harga disini
+php artisan make:migration sale_details // bisa course bisa exam
+php artisan make:migration discount // bisa membatasi waktu ada limit per account
+php artisan make:migration discount_can_use //
+php artisan make:migration referral_code // ada waktu limit penggunaan berdasarkan discount dari awal udah diset
+php artisan make:migration referral_code_use //
+
+php artisan make:migration exam_steps
+php artisan make:migration exam_quests
+php artisan make:migration exam_quest_choices
+php artisan make:migration exam_users (user_id exam_id) digunakan untuk first attemnp
+php artisan make:migration exam_answers (exam_users_id exam_quests_id)
+

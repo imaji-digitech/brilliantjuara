@@ -2,14 +2,34 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * @property integer $id
+ * @property int $role
+ * @property string $name
+ * @property string $email
+ * @property string $email_verified_at
+ * @property string $password
+ * @property string $two_factor_secret
+ * @property string $two_factor_recovery_codes
+ * @property string $remember_token
+ * @property integer $current_team_id
+ * @property string $profile_photo_path
+ * @property string $created_at
+ * @property string $updated_at
+ * @property ExamUser[] $examUsers
+ * @property ReferralCodeus[] $referralCodeUses
+ * @property ReferralCode[] $referralCodes
+ * @property UserOwnCourse[] $userOwnCourses
+ * @property UserOwnExam[] $userOwnExams
+ */
 class User extends Authenticatable
 {
     use HasApiTokens;
@@ -58,4 +78,54 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+    /**
+     * The "type" of the auto-incrementing ID.
+     *
+     * @var string
+     */
+    protected $keyType = 'integer';
+
+    /**
+     * @var array
+     */
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function examUsers()
+    {
+        return $this->hasMany('App\Models\ExamUser');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function referralCodeUses()
+    {
+        return $this->hasMany('App\Models\ReferralCodeus');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function referralCodes()
+    {
+        return $this->hasMany('App\Models\ReferralCode');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function userOwnCourses()
+    {
+        return $this->hasMany('App\Models\UserOwnCourse');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function userOwnExams()
+    {
+        return $this->hasMany('App\Models\UserOwnExam');
+    }
 }
