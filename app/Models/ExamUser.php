@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property integer $id
@@ -28,8 +30,19 @@ class ExamUser extends Model
      */
     protected $fillable = ['user_id', 'exam_id', 'created_at', 'updated_at'];
 
+    public static function search($query, $dataId)
+    {
+
+        return empty($query) ? static::query()->whereExamId($dataId)->whereUserId(auth()->id())
+            : static::whereExamId($dataId)
+                ->whereUserId(auth()->id())
+                ->whereHas('user', function ($q) use ($query) {
+                    $q->where('name', 'like', '%' . $query . '%');
+                });
+    }
+
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function exam()
     {
@@ -37,7 +50,7 @@ class ExamUser extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function user()
     {
@@ -45,20 +58,11 @@ class ExamUser extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function examAnswers()
     {
         return $this->hasMany('App\Models\ExamAnswer');
-    }
-    public static function search($query)
-    {
-        return empty($query) ? static::query()
-            : static::whereHas('user', function ($q) use ($query) {
-                $q->where('name', 'like', '%' . $query . '%');
-            })->orWhereHas('exam', function ($q) use ($query) {
-                $q->where('title', 'like', '%' . $query . '%');
-            });
     }
 
 }

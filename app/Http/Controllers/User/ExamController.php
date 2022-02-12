@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Exam;
 use App\Models\ExamAnswer;
 use App\Models\ExamUser;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ExamController extends Controller
@@ -37,6 +38,10 @@ class ExamController extends Controller
     {
         $exam = Exam::getExam($slug);
         $examUser = ExamUser::find($id);
-        return view('pages.exam.exam', compact('examUser', 'exam'));
+        $time=Carbon::now()->diffInSeconds($examUser->created_at->addMinutes($exam->time));
+        if (Carbon::now()>$examUser->created_at->addMinutes($exam->time)){
+            return redirect(route('admin.program.index',$exam->room->slug));
+        }
+        return view('pages.exam.exam', compact('examUser', 'exam','time'));
     }
 }

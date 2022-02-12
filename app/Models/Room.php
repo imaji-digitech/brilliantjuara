@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $slug
  * @property string $created_at
  * @property string $updated_at
+ * @property Bundle[] $bundles
  * @property Course[] $courses
  * @property Exam[] $exams
  */
@@ -26,6 +27,14 @@ class Room extends Model
      * @var array
      */
     protected $fillable = ['title', 'slug', 'created_at', 'updated_at'];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function bundles()
+    {
+        return $this->hasMany('App\Models\Bundle');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

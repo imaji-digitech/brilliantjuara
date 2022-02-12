@@ -10,6 +10,16 @@
                     dialogsInBody: true,
                     tabsize: 2,
                     height: 200,
+                    toolbar: [
+                        ['style', ['style']],
+                        ['font', ['bold', 'underline', 'italic', 'superscript', 'subscript', 'clear']],
+                        ['fontname', ['fontname','fontsize']],
+                        ['color', ['color']],
+                        ['para', ['ul', 'ol', 'paragraph']],
+                        ['table', ['table']],
+                        ['insert', ['link', 'picture', 'video']],
+                        ['view', ['fullscreen', 'help', 'undo','codeview', 'redo']],
+                    ],
                     callbacks: {
                         onImageUpload: function (files) {
                             for (let i = 0; i < files.length; i++) {
@@ -19,7 +29,6 @@
                         onChange: function (content, $editable) {
                         @this.set('{{$model}}', content)
                         },
-
                     }
                 });
                 $.upload{{str_replace(".", "", $model)}} = function (file) {
@@ -38,7 +47,6 @@
                         processData: false,
                         data: out,
                         success: function (img) {
-                            console.log("asdasda")
                             image = '<img src="' + window.location.protocol + '//' + window.location.host + img + '" alt="' + window.location.protocol + '//' + window.location.host + '/storage/' + img + '">'
                             $("textarea#{{str_replace('.', '', $model)}}").summernote('code', @this.get('{{$model}}') + image);
                         },

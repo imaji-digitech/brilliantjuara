@@ -33,6 +33,8 @@
     <link rel="stylesheet" type="text/css" href="{{asset('vendor/select2/select2.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/summernote.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/date-picker.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/date-picker.custom.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/owlcarousel.css')}}">
     <!-- Plugins css Ends-->
     <!-- Bootstrap css-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/bootstrap.css')}}">
@@ -63,9 +65,15 @@
             .mobile-cashier {
                 width: 33%
             }
+            .desktop-only{
+                display: none;
+            }
         }
 
         @media (min-width:800px) {
+            .mobile-only{
+                display: none;
+            }
             .product-list {
                 overflow-y: scroll;
                 height: 800px;
@@ -144,6 +152,7 @@
 <!-- latest jquery-->
 {{--<script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>--}}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{{--<script src="{{ asset('js/jquery.simple.timer.js') }}"></script>--}}
 <!-- Bootstrap js-->
 <script src="{{asset('assets/js/bootstrap/bootstrap.min.js')}}"></script>
 <script src="{{asset('assets/js/bootstrap/popper.min.js')}}"></script>
@@ -163,10 +172,16 @@
 {{--<script src="{{asset('assets/js/notify/index.js')}}"></script>--}}
 <script src="{{asset('assets/js/editor/summernote/summernote.js')}}"></script>
 <script src="{{asset('vendor/select2/select2.min.js')}}"></script>
-<script src="{{ asset('assets/js/datepicker/date-picker/datepicker.js') }}"></script>
+{{--<script src="{{ asset('assets/js/datepicker/date-picker/datepicker.js') }}"></script>--}}
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.2.3/jquery.datetimepicker.js"></script>--}}
+{{--<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>--}}
+{{--<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>--}}
+<script src="{{asset('assets/js/owlcarousel/owl.carousel.js')}}"></script>
+<script src="{{asset('assets/js/owlcarousel/owl-custom.js')}}"></script>
 <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.en.js') }}"></script>
 <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.custom.js') }}"></script>
 <script defer src="{{ asset('vendor/sweetalert/sweetalert.min.js') }}"></script>
+
 <!-- Plugins JS Ends-->
 <!-- Theme js-->
 <script src="{{asset('assets/js/script.js')}}"></script>

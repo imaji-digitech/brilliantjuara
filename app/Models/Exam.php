@@ -30,7 +30,7 @@ class Exam extends Model
     /**
      * @var array
      */
-    protected $fillable = ['room_id', 'title', 'price', 'slug', 'created_at', 'updated_at'];
+    protected $fillable = ['room_id', 'title', 'price', 'slug','time', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

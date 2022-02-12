@@ -128,4 +128,57 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\UserOwnExam');
     }
+    public static function haveCourse($id){
+//        dd($id);
+        if (auth()->user()->userOwnCourses->where('course_id',$id)->count()!=0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public static function haveExam($id){
+        if (auth()->user()->userOwnExams->where('exam_id',$id)->count()!=0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public static function haveProgram($id){
+        $examKey=[];
+        $myExam=auth()->user()->userOwnExams;
+        foreach ($myExam as $me){
+            array_push($examKey,$me->exam_id);
+        }
+        $exam = Bundle::find($id)->bundleDetails;
+        $examProgram=[];
+        foreach ($exam as $me){
+            if ($me->exam_id!=null) {
+                array_push($examProgram, $me->exam_id);
+            }
+        }
+        foreach ($examProgram as $index=>$e){
+            if (!in_array($e,$examKey)){
+                return 0;
+            }
+        }
+//        dd("asd");
+        $courseKey=[];
+        $myCourse=auth()->user()->userOwnCourses;
+        foreach ($myCourse as $me){
+            array_push($courseKey,$me->course_id);
+        }
+        $course = Bundle::find($id)->bundleDetails;
+        $courseProgram=[];
+        foreach ($course as $me){
+            if ($me->course_id!=null) {
+                array_push($courseProgram, $me->course_id);
+            }
+        }
+        foreach ($courseProgram as $e){
+            if (!in_array($e,$courseKey)){
+                return 0;
+            }
+        }
+        return 1;
+    }
 }

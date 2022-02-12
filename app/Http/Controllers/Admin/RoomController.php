@@ -12,8 +12,6 @@ class RoomController extends Controller
 
     public function index()
     {
-
-
         $room = Room::class;
         return view("pages.$this->feature.index", compact('room'));
     }

@@ -23,6 +23,8 @@
                 <td>
                     <a role="button" href="{{ route('admin.room.edit',$room->id) }}" style="margin-right:15px">
                         <i class="fa fa-16px fa-pen">Ubah</i></a>
+                    <a role="button" href="{{ route('admin.bundle.index',$room->slug) }}" style="margin-right:15px">
+                        <i class="fa fa-16px fa-cart-plus">Bundle</i></a>
                     <a role="button" href="{{ route('admin.course.index',$room->slug) }}" style="margin-right:15px">
                         <i class="fa fa-16px fa-book">Bimbel</i></a>
                     <a role="button" href="{{ route('admin.exam.index',$room->slug) }}" style="margin-right:15px">

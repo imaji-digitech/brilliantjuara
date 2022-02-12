@@ -11,14 +11,16 @@ class Exam extends Component
     public $active;
     public $questActive;
     public $examUser;
+    public $number;
 
     public function mount(){
         $this->countQuest=$this->examUser->examAnswers->count();
+        $this->changeActive(0);
     }
-    public function changeActive($id){
-        $this->active=$id;
-        $this->questActive=$this->examUser->examAnswers->find($id);
-//        dd($this->examUser->examAnswers);
+    public function changeActive($number){
+        $this->questActive=$this->examUser->examAnswers[$number];
+        $this->active=$this->questActive->id;
+        $this->number=$number;
     }
     public function changeAnswer($choice){
         $this->examUser->examAnswers->find($this->active)->update(['answer'=>$choice]);

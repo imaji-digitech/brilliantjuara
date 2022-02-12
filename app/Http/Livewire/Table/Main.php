@@ -139,6 +139,69 @@ class Main extends Component
                     "exams" =>  $exam,
                 ];
                 break;
+            case 'announcement':
+                $announcement = $this->model::search($this->search,$this->dataId)
+                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                    ->paginate($this->perPage);
+                return [
+                    "view" => "livewire.table.announcement",
+                    "announcements" =>  $announcement,
+                ];
+                break;
+            case 'banner':
+                $banner = $this->model::search($this->search,$this->dataId)
+                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                    ->paginate($this->perPage);
+                return [
+                    "view" => "livewire.table.banner",
+                    "banners" =>  $banner,
+                ];
+                break;
+            case 'event':
+                $event = $this->model::search($this->search,$this->dataId)
+                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                    ->paginate($this->perPage);
+                return [
+                    "view" => "livewire.table.event",
+                    "events" =>  $event,
+                ];
+                break;
+            case 'bundle':
+                $bundle = $this->model::search($this->search,$this->dataId)
+                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                    ->paginate($this->perPage);
+                return [
+                    "view" => "livewire.table.bundle",
+                    "bundles" =>  $bundle,
+                ];
+                break;
+            case 'bundle-detail':
+                $bundle = $this->model::search($this->search,$this->dataId)
+                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                    ->paginate($this->perPage);
+                return [
+                    "view" => "livewire.table.bundle-detail",
+                    "bundles" =>  $bundle,
+                ];
+                break;
+            case 'bundle-price':
+                $bundle = $this->model::search($this->search,$this->dataId)
+                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                    ->paginate($this->perPage);
+                return [
+                    "view" => "livewire.table.bundle-price",
+                    "bundles" =>  $bundle,
+                ];
+                break;
+            case 'token':
+                $token = $this->model::search($this->search,$this->dataId)
+                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                    ->paginate($this->perPage);
+                return [
+                    "view" => "livewire.table.token",
+                    "tokens" =>  $token,
+                ];
+                break;
             default:
                 break;
         }

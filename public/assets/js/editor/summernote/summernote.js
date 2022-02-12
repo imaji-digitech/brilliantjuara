@@ -3764,7 +3764,7 @@ var Editor = /** @class */ (function () {
             })(idx);
             this.context.memo('help.formatH' + idx, this.lang.help['formatH' + idx]);
         }
-        
+
         this.insertParagraph = this.wrapCommand(function () {
             _this.typing.insertParagraph(_this.editable);
         });
@@ -6384,7 +6384,7 @@ var VideoDialog = /** @class */ (function () {
             var youtubeId = ytMatch[1];
             $video = $$1('<iframe>')
                 .attr('frameborder', 0)
-                .attr('src', '//www.youtube.com/embed/' + youtubeId)
+                .attr('src', 'https://www.youtube.com/embed/' + youtubeId)
                 .attr('width', '640').attr('height', '360');
         }
         else if (igMatch && igMatch[0].length) {

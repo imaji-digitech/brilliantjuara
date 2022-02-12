@@ -1,11 +1,16 @@
 <?php
 
 use App\Http\Controllers\Admin\AccessController;
+use App\Http\Controllers\Admin\BundleController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\ExamController;
+use App\Http\Controllers\Admin\PublicAnnouncementController;
+use App\Http\Controllers\Admin\PublicBannerController;
+use App\Http\Controllers\Admin\PublicEventController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\UploadFile;
+use App\Http\Controllers\User\ProgramController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +26,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('dashboard', function () {
     return redirect(route('admin.dashboard'));
 })->name('dashboard');
+Route::get('/',function (){
+    return redirect(route('admin.dashboard'));
+});
 Route::post('/summernote', [SupportController::class, 'upload'])->name('summernote');
 Route::middleware(['auth:sanctum',])->name('admin.')->prefix('admin')->group(function () {
     Route::get('download/course/{link}',function ($id){
@@ -29,10 +37,12 @@ Route::middleware(['auth:sanctum',])->name('admin.')->prefix('admin')->group(fun
         return Response()->download($filepath);
     })->name('download.course');
     Route::get('dashboard', function () {
-        return view('dashboard');
+        return view('pages.dashboard');
     })->name('dashboard');
-    Route::post('/upload/quest/static',[UploadFile::class,'uploadQuestStatic'])->name('upload-static');
-    Route::post('/upload/quest/dynamic',[UploadFile::class,'uploadQuestDynamic'])->name('upload-dynamic');
+    Route::post('upload/quest/static',[UploadFile::class,'uploadQuestStatic'])->name('upload-static');
+    Route::post('upload/quest/dynamic',[UploadFile::class,'uploadQuestDynamic'])->name('upload-dynamic');
+
+    Route::get('program/{slug}',[ProgramController::class,'index'])->name('program.index');
 
     Route::get('course/{slug}',[\App\Http\Controllers\User\CourseController::class,'index'])->name('user.course');
     Route::get('exam/{slug}',[\App\Http\Controllers\User\ExamController::class,'index'])->name('user.exam');
@@ -41,6 +51,9 @@ Route::middleware(['auth:sanctum',])->name('admin.')->prefix('admin')->group(fun
 
     Route::middleware(['checkRole:1'])->group(function (){
         Route::resource('room', RoomController::class)->only('index', 'create', 'edit', 'show');
+        Route::resource('announcement', PublicAnnouncementController::class)->only('index', 'create', 'edit');
+        Route::resource('banner', PublicBannerController::class)->only('index', 'create', 'edit');
+        Route::resource('event', PublicEventController::class)->only('index', 'create', 'edit');
 
         Route::get('room/{room}/exam',[ExamController::class,'index'])->name('exam.index');
         Route::get('room/{room}/exam/create',[ExamController::class,'create'])->name('exam.create');
@@ -65,6 +78,16 @@ Route::middleware(['auth:sanctum',])->name('admin.')->prefix('admin')->group(fun
 
         Route::get('access/exam',[AccessController::class,'exam'])->name('access.exam');
         Route::get('access/course',[AccessController::class,'course'])->name('access.course');
+
+        Route::get('room/{room}/bundle',[BundleController::class,'index'])->name('bundle.index');
+        Route::get('room/{room}/bundle/create',[BundleController::class,'create'])->name('bundle.create');
+        Route::get('room/{room}/bundle/edit/{id}',[BundleController::class,'edit'])->name('bundle.edit');
+        Route::get('room/{room}/bundle/price/{id}',[BundleController::class,'bundlePrice'])->name('bundle.price.index');
+        Route::get('room/{room}/bundle/price/{id}/create',[BundleController::class,'bundlePriceCreate'])->name('bundle.price.create');
+        Route::get('room/{room}/bundle/detail/{id}',[BundleController::class,'bundleDetail'])->name('bundle.detail.index');
+        Route::get('room/{room}/bundle/detail/{id}/create',[BundleController::class,'bundleDetailCreate'])->name('bundle.detail.create');
+        Route::get('room/{room}/bundle/token/{id}',[BundleController::class,'bundleToken'])->name('bundle.token.index');
+        Route::get('room/{room}/bundle/token/{id}/create/{number}',[BundleController::class,'bundleTokenCreate'])->name('bundle.token.create');
     });
 //    Route::get('exam/{examSlug}', function ($examSlug) {
 //        $exam=\App\Models\ExamStep::whereSlug($examSlug)->firstOrFail();

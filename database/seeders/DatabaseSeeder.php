@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\BundleStatus;
 use App\Models\CourseType;
 use Illuminate\Database\Seeder;
 
@@ -22,5 +23,9 @@ class DatabaseSeeder extends Seeder
 //        CourseType::create(['title'=>'ppt']);
 //        CourseType::create(['title'=>'Excel']);
 //        CourseType::create(['title'=>'Word']);
+
+//        BundleStatus::create(['title'=>'active']);
+//        BundleStatus::create(['title'=>'sold']);
+//        BundleStatus::create(['title'=>'non-active']);
     }
 }
