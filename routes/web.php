@@ -27,7 +27,7 @@ Route::get('dashboard', function () {
     return redirect(route('admin.dashboard'));
 })->name('dashboard');
 Route::get('/',function (){
-    return redirect(route('admin.dashboard'));
+    return view('index');
 });
 Route::post('/summernote', [SupportController::class, 'upload'])->name('summernote');
 Route::middleware(['auth:sanctum',])->name('admin.')->prefix('admin')->group(function () {

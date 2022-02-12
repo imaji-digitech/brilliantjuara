@@ -1,0 +1,192 @@
+.navbar-sect {
+    width: 80%;
+}
+
+.navbar-light .navbar-toggler {
+    border-color: rgba(0,0,0,0)!important;
+}
+
+#mainNav {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    background-color: rgba(16, 20, 102, 0.945);
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: rgb(255, 255, 255);
+}
+
+.navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .show>.nav-link {
+    color: rgb(255, 196, 0);
+}
+
+.carousel-inner {
+    border-bottom-left-radius: 320px;
+    border-bottom: 18px solid rgba(16, 20, 102, 0.945);
+}
+.carousel-inner img{
+    border-bottom-left-radius: 320px;
+    /*border-bottom: 18px solid rgba(16, 20, 102, 0.945);*/
+}
+
+.carousel-item:before {
+    content:'';
+    position:absolute;
+    left:0; top:0;
+    width:100%; height:100%;
+    display:inline-block;
+    background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.65)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* IE10+ */
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
+}
+
+.carousel-item img {
+    min-height: 338px!important;
+    max-height: 675px!important;
+    object-fit: cover;
+    object-position: center;
+}
+
+.carousel-indicators {
+    margin-bottom: 2rem;
+}
+
+.carousel-caption {
+    text-align: justify;
+    max-width: 600px;
+}
+
+.carousel-control-next-icon:hover, .carousel-control-prev-icon:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.container.text {
+    padding: 1.5rem;
+    text-align: justify;
+}
+
+.page-section {
+    padding: 4rem 0;
+}
+
+.page-section-mini {
+    padding: 2rem 0 0 0;
+}
+
+.portofolio-item {
+    max-width: 26rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.portfolio-item .portfolio-caption {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background-color: #fff;
+}
+
+.contact-item  .contact-caption {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 1.5rem;
+}
+
+.portfolio-caption .icon {
+    width: 60px;
+    color: rgb(236, 181, 0);
+}
+
+.portfolio-caption .text h3 {
+    font-weight: 600;
+    color: rgba(22, 27, 136, 0.945);
+}
+
+.contact-caption .icon {
+    width: 50px;
+    color: rgb(236, 181, 0);
+}
+
+.portfolio-caption .text p {
+    text-align: justify;
+}
+
+.bg-blue {
+    background-color: rgba(16, 20, 102, 0.945);
+    color: white;
+}
+
+.btn-social {
+    height: 2.5rem;
+    width: 2.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border-radius: 100%;
+}
+
+@media (max-width: 1366px) {
+    .carousel-inner{
+        border-bottom-left-radius: 280px;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .navbar-collapse.navs {
+        flex-grow: 0!important;
+    }
+
+    #mainNav {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        border: none;
+        background-color: transparent;
+        transition: padding-top 0.3s ease-in-out, padding-bottom 0.3s ease-in-out;
+    }
+
+    #mainNav.navbar-shrink {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        background-color: rgba(16, 20, 102, 0.945);
+    }
+}
+
+@media (max-width: 991px) {
+    .carousel-inner {
+        border-bottom-left-radius: 250px;
+    }
+
+    .footer {
+        text-align: center;
+    }
+}
+
+@media (max-width: 767px) {
+    .carousel-inner {
+        border-bottom-left-radius: 120px;
+    }
+
+    #contact .row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #contact .row .col-lg-4 {
+        width: 80%!important;
+    }
+}
+
+@media (max-width: 420px) {
+    .contact-caption {
+        flex-direction: column;
+        align-items: center!important;
+    }
+}
+

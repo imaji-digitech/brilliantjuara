@@ -14,7 +14,7 @@
         </div>
     </form>
     <div class="header-logo-wrapper col-auto p-0">
-        <div class="logo-wrapper"><a href=""><img class="img-fluid" src="../assets/images/logo/logo.png"
+        <div class="logo-wrapper"><a href=""><img class="img-fluid" src="{{asset('assets/images/logo.png')}}"
                                                             alt=""></a></div>
         <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="align-center"></i>
         </div>
@@ -48,10 +48,10 @@
                     </div>
                 </div>
                 <ul class="profile-dropdown onhover-show-div">
-                    <li><a href="#"><i data-feather="user"></i><span>Account </span></a></li>
-                    <li><a href="#"><i data-feather="mail"></i><span>Inbox</span></a></li>
-                    <li><a href="#"><i data-feather="file-text"></i><span>Taskboard</span></a></li>
-                    <li><a href="#"><i data-feather="settings"></i><span>Settings</span></a></li>
+{{--                    <li><a href="#"><i data-feather="user"></i><span>Account </span></a></li>--}}
+{{--                    <li><a href="#"><i data-feather="mail"></i><span>Inbox</span></a></li>--}}
+{{--                    <li><a href="#"><i data-feather="file-text"></i><span>Taskboard</span></a></li>--}}
+{{--                    <li><a href="#"><i data-feather="settings"></i><span>Settings</span></a></li>--}}
 
                     <li>
                         <form method="POST" action="{{ route('logout') }}" style="margin: 0;padding: 0;">
