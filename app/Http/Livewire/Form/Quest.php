@@ -74,6 +74,7 @@ class Quest extends Component
             'type' => 'success',
             'title' => 'Data berhasil ditambahkan',
         ]);
+
         $this->emit('redirect', route('admin.exam.show', [$this->exam->room->slug, $this->exam->slug]));
     }
 

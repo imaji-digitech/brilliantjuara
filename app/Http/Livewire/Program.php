@@ -44,7 +44,7 @@ class Program extends Component
             $token->update(['user_id' => auth()->id()]);
             foreach ($token->bundle->bundleDetails as $item) {
                 if ($item->exam_id != null) {
-                    $uoe = UserOwnExam::where('user_id', auth()->id())->where('exam_id', $item->exam_id)->whereNull('user_id')->get();
+                    $uoe = UserOwnExam::where('user_id', auth()->id())->where('exam_id', $item->exam_id)->get();
                     if ($uoe->count()==0){
                         UserOwnExam::create(['user_id'=>auth()->id(),'exam_id'=>$item->exam_id]);
                     }

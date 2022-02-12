@@ -78,17 +78,17 @@
                                                 @foreach($bundle->bundleDetails as $detail)
                                                     @isset($detail->course->title)
                                                         @if(auth()->user()->haveCourse($detail->course_id))
-                                                            <del>Bimbel {{$detail->course->title}} <br></del>
+                                                            <del>{{$detail->course->title}} <br></del>
                                                             @php($minus+=$detail->course->price)
                                                         @else
-                                                            Bimbel {{$detail->course->title}} <br>
+                                                            {{$detail->course->title}} <br>
                                                         @endif
                                                     @else
                                                         @if(auth()->user()->haveExam($detail->exam_id))
-                                                            <del>TO {{$detail->exam->title}} <br></del>
+                                                            <del> {{$detail->exam->title}} <br></del>
                                                             @php($minus+=$detail->exam->price)
                                                         @else
-                                                            TO {{$detail->exam->title}} <br>
+                                                             {{$detail->exam->title}} <br>
                                                         @endif
                                                     @endisset
                                                 @endforeach
