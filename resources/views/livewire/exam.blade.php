@@ -46,7 +46,6 @@
                     @if($number+1!=$examUser->examAnswers->count())
                         <button class="btn btn-primary" wire:click="changeActive({{$number+1}})">Selanjutnya</button>
                     @endif
-
                 @endisset
             </div>
         </div>
