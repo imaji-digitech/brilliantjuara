@@ -24,7 +24,7 @@
                 <body>
 
                 @isset( $questActive->examQuest->question)
-                    {{$number+1}}. {{ $questActive->examQuest->question }}
+                    {{$number+1}}. {!! $questActive->examQuest->question  !!}
 
                     <div class="col">
                         <div class="mb-3 m-t-15 custom-radio-ml">
@@ -35,7 +35,7 @@
                                            wire:click="changeAnswer({{$eqc->choice}})" {{ $questActive->answer==$eqc->choice?'checked':'' }}>
                                     <label class="form-check-label"
                                            wire:click="changeAnswer({{$eqc->choice}})">{{ $alphabet[$eqc->choice] }}
-                                        . {{ $eqc->answer }}</label>
+                                        . {!! $eqc->answer !!}</label>
                                 </div>
                             @endforeach
 
