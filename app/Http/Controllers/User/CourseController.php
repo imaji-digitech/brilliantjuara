@@ -10,6 +10,7 @@ class CourseController extends Controller
 {
     public function index($slug){
         $course=Course::getCourse($slug);
-        return view('pages.course.show',compact('course'));
+        $room=$course->room;
+        return view('pages.course.show',compact('course','room'));
     }
 }
