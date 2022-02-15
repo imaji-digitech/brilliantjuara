@@ -12,6 +12,8 @@ use App\Http\Controllers\SupportController;
 use App\Http\Controllers\UploadFile;
 use App\Http\Controllers\User\ProgramController;
 use App\Models\Payment;
+use App\Models\UserOwnCourse;
+use App\Models\UserOwnExam;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Xendit\Invoice;
@@ -31,15 +33,30 @@ Route::get('dashboard', function () {
     return redirect(route('admin.dashboard'));
 })->name('dashboard');
 
-Route::post('xendit/callback',function (Request $request){
-    $request=$request->all();
-    Payment::where('payment_id',$request['id'])->update(['status'=>2]);
+Route::post('xendit/callback', function (Request $request) {
+    $request = $request->all();
+    $payment = Payment::where('payment_id', $request['id']);
+    $payment->update(['status' => 2]);
+    foreach ($payment->bundle->bundleDetails as $item) {
+        if ($item->exam_id != null) {
+            $uoe = UserOwnExam::where('user_id', auth()->id())->where('exam_id', $item->exam_id)->get();
+            if ($uoe->count() == 0) {
+                UserOwnExam::create(['user_id' => auth()->id(), 'exam_id' => $item->exam_id]);
+            }
+        }
+        if ($item->course_id != null) {
+            $uoe = UserOwnCourse::where('user_id', auth()->id())->where('course_id', $item->course_id)->get();
+            if ($uoe->count() == 0) {
+                UserOwnCourse::create(['user_id' => auth()->id(), 'course_id' => $item->course_id]);
+            }
+        }
+    }
     return response($request);
 });
 Route::get('create/xendit/invoice', function () {
     Xendit::setApiKey(env('API_KEY'));
     $params = [
-        'external_id' => auth()->id()."",
+        'external_id' => auth()->id() . "",
         'payer_email' => auth()->user()->email,
         'description' => "asd",
         'amount' => 10,
