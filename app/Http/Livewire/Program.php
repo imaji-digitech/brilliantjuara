@@ -70,7 +70,8 @@ class Program extends Component
             'bundle_id' => $this->bundleActive->id,
             'payment_id' => $createInvoice['id'],
             'amount' => $this->amount,
-            'status' => 1
+            'status' => 1,
+            'user_id'=>auth()->id()
         ]);
         $this->emit('redirect:new', $url);
     }
