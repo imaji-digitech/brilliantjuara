@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Form;
 
+use App\Models\RoomCategory;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
@@ -10,10 +11,13 @@ class Room extends Component
     public $action;
     public $data;
     public $dataId;
+    public $optionCategory;
 
     public function mount()
     {
+        $this->optionCategory=eloquent_to_options(RoomCategory::get(),'id','title');
         $this->data = [
+            'room_category_id' => 1,
             'title' => '',
             'slug' => ''
         ];

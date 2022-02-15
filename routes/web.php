@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\UploadFile;
 use App\Http\Controllers\User\ProgramController;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Xendit\Invoice;
@@ -31,20 +32,21 @@ Route::get('dashboard', function () {
 })->name('dashboard');
 
 Route::post('xendit/callback',function (Request $request){
+    $request=$request->all();
+    Payment::where('payment_id',$request['id'])->update(['status'=>2]);
     return response($request);
 });
-
-Route::get('/testing', function () {
-    Xendit::setApiKey('xnd_development_QqB3QgKVdbR6ARcMIuKD2hd4czwdR8aHb60LsM9dSoDSCA2hzxofemGDYl25cn7');
+Route::get('create/xendit/invoice', function () {
+    Xendit::setApiKey(env('API_KEY'));
     $params = [
-        'external_id' => 'demo_147580196270',
-        'payer_email' => 'sample_email@xendit.co',
-        'description' => 'Trip to Bali',
-        'amount' => 32000,
+        'external_id' => auth()->id()."",
+        'payer_email' => auth()->user()->email,
+        'description' => "asd",
+        'amount' => 10,
     ];
     $createInvoice = Invoice::create($params);
-    dd($createInvoice);
 });
+
 
 Route::get('/', function () {
     return view('index');
@@ -56,6 +58,19 @@ Route::middleware(['auth:sanctum',])->name('admin.')->prefix('admin')->group(fun
         $filepath = public_path('storage/' . $detailCourse->content);
         return Response()->download($filepath);
     })->name('download.course');
+
+    Route::post('create/xendit/invoice', function (Request $request) {
+        Xendit::setApiKey(env('API_KEY'));
+        $params = [
+            'external_id' => auth()->id(),
+            'payer_email' => auth()->user()->email,
+            'description' => $request->description,
+            'amount' => $request->amount,
+        ];
+        $createInvoice = Invoice::create($params);
+    });
+
+
     Route::get('dashboard', function () {
         return view('pages.dashboard');
     })->name('dashboard');
