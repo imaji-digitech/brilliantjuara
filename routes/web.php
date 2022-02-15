@@ -35,7 +35,7 @@ Route::get('dashboard', function () {
 
 Route::post('xendit/callback', function (Request $request) {
     $request = $request->all();
-    $payment = Payment::where('payment_id', $request['id']);
+    $payment = Payment::where('payment_id', $request['id'])->first();
     $payment->update(['status' => 2]);
     foreach ($payment->bundle->bundleDetails as $item) {
         if ($item->exam_id != null) {
