@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property integer $id
@@ -30,10 +32,21 @@ class Exam extends Model
     /**
      * @var array
      */
-    protected $fillable = ['room_id', 'title', 'price', 'slug','time', 'created_at', 'updated_at'];
+    protected $fillable = ['room_id', 'title', 'price', 'slug', 'time', 'created_at', 'updated_at', 'status_discussion', 'status_multiple_attempt', 'status_view_score'];
+
+    public static function search($query, $dataId)
+    {
+        return empty($query) ? static::query()->whereRoomId($dataId)
+            : static::whereRoomId($dataId)->where('title', 'like', '%' . $query . '%');
+    }
+
+    public static function getExam($exam)
+    {
+        return static::whereSlug($exam)->firstOrFail();
+    }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function room()
     {
@@ -41,7 +54,7 @@ class Exam extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function examSteps()
     {
@@ -49,7 +62,7 @@ class Exam extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function examUsers()
     {
@@ -57,7 +70,7 @@ class Exam extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function saleDetails()
     {
@@ -65,17 +78,10 @@ class Exam extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function userOwnExams()
     {
         return $this->hasMany('App\Models\UserOwnExam');
-    }
-    public static function search($query,$dataId){
-        return empty($query) ? static::query()->whereRoomId($dataId)
-            : static::whereRoomId($dataId)->where('title', 'like', '%' . $query . '%');
-    }
-    public static function getExam($exam){
-        return static::whereSlug($exam)->firstOrFail();
     }
 }

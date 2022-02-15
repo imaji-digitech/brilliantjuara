@@ -10,12 +10,12 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-5">
-        <div class="card">
+    <div class="col-sm-7" style="height: 380px;">
+        <div class="card" style="height: 100%;">
             <div class="card-header" style="padding: 15px">
                 <h4>Kelasku</h4>
             </div>
-            <div class="card-body" style="padding: 15px">
+            <div class="card-body" style="padding: 15px;overflow-y: scroll;">
                 <h4>Try Out</h4>
                 <div class="activity-timeline">
                     @foreach($myClass as $mc)
@@ -24,7 +24,6 @@
                                 <a href="{{ route('admin.user.exam',$exam['exam']['slug']) }}" class="media">
                                     <div class="activity-dot-primary"></div>
                                     <div class="media-body"><span>{{ $exam['exam']['title'] }}</span>
-                                        {{--                                        <p class="font-roboto">{{ $exam->updated_at->diffForHumans() }}</p>--}}
                                     </div>
                                 </a>
                             @endforeach
@@ -35,23 +34,23 @@
                 <h4>Bimbingan Belajar</h4>
                 <div class="activity-timeline">
                     @foreach($myClass as $mc)
-                    @isset($mc['course'])
-                        @foreach($mc['course'] as $course)
-                            <a href="{{ route('admin.user.course',$course['course']['slug']) }}" class="media"
-                               style="margin-top: 0">
-                                <div class="activity-dot-primary"></div>
-                                <div class="media-body"><span>{{ $course['course']['title'] }}</span>
-                                    {{--                                    <p class="font-roboto">{{ $course->updated_at->diffForHumans() }}</p>--}}
-                                </div>
-                            </a>
-                        @endforeach
-                    @endisset
+                        @isset($mc['course'])
+                            @foreach($mc['course'] as $course)
+                                <a href="{{ route('admin.user.course',$course['course']['slug']) }}" class="media"
+                                   style="margin-top: 0">
+                                    <div class="activity-dot-primary"></div>
+                                    <div class="media-body">
+                                        <span>{{ $course['course']['title'] }}</span>
+                                    </div>
+                                </a>
+                            @endforeach
+                        @endisset
                     @endforeach
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-sm-7">
+    <div class="col-sm-5" style="height: 400px">
         <livewire:dashboard-calendar/>
     </div>
     <div class="col-sm-12">
@@ -88,7 +87,7 @@
                                                             <del> {{$detail->exam->title}} <br></del>
                                                             @php($minus+=$detail->exam->price)
                                                         @else
-                                                             {{$detail->exam->title}} <br>
+                                                            {{$detail->exam->title}} <br>
                                                         @endif
                                                     @endisset
                                                 @endforeach
@@ -102,8 +101,9 @@
                                                     <div class="row" style="text-align: center">
                                                         <div class="col-md-6">
                                                             <form action="">
-                                                            <input type="text" wire:model="token" class="form-control"
-                                                                   placeholder="token">
+                                                                <input type="text" wire:model="token"
+                                                                       class="form-control"
+                                                                       placeholder="token">
                                                             </form>
                                                         </div>
                                                         <div class="col-md-1"></div>

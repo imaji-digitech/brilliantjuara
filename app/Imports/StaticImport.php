@@ -5,19 +5,22 @@ namespace App\Imports;
 use App\Models\ExamQuest;
 use App\Models\ExamQuestChoice;
 use App\Models\ExportCache;
-use Exception;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\ToCollection;
 
 class StaticImport implements ToCollection
 {
+    public function __construct($some)
+    {
+        dd($some);
+    }
+
     /**
      * @param Collection $collection
      */
     public function collection(Collection $collection)
     {
-        $step=ExportCache::getLastActive()->exam_step_id;
+        $step = ExportCache::getLastActive()->exam_step_id;
         foreach ($collection as $index => $row) {
             if ($index == 0) {
                 continue;

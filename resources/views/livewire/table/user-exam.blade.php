@@ -1,19 +1,19 @@
 <x-data-table :model="$exams">
     <x-slot name="head">
         <tr>
-            <th scope="col" wire:click.prevent="sortBy('id')" >
+            <th scope="col" wire:click.prevent="sortBy('id')">
                 # @include('components.sort-icon',['field'=>"id"])
             </th>
-            <th scope="col" wire:click.prevent="sortBy('title')" >
+            <th scope="col" wire:click.prevent="sortBy('title')">
                 Waktu mulai @include('components.sort-icon',['field'=>"title"])
             </th>
-            <th scope="col" wire:click.prevent="sortBy('title')" >
+            <th scope="col" wire:click.prevent="sortBy('title')">
                 Waktu selesai @include('components.sort-icon',['field'=>"title"])
             </th>
             <th>
                 Status
             </th>
-{{--            <th>Hasil</th>--}}
+            {{--            <th>Hasil</th>--}}
             <th>aksi</th>
         </tr>
     </x-slot>
@@ -25,14 +25,34 @@
                 <td>{{ $exam->created_at->addMinutes($exam->exam->time) }}</td>
                 <td>
                     @if (\Carbon\Carbon::now()>$exam->created_at->addMinutes($exam->exam->time))
-                    Selesai
+                        {{ $exam->setDone($exam->id) }}
+                        Selesai
                     @else
-                        Berlangsung
+                        {{ $exam->status==1?'Pengerjaan':'Selesai' }}
                     @endif
                 </td>
                 <td>
-                    <a role="button" href="{{ route('admin.user.exam.exam',[$exam->exam->slug,$exam->id]) }}" class="mr-3">
-                        <i class="fa fa-16px fa-book">Start</i></a>
+                    @if($exam->status==1)
+                        <a role="button" href="{{ route('admin.user.exam.exam',[$exam->exam->slug,$exam->id]) }}"
+                           class="mr-3">
+                            <i class="fa fa-16px fa-forward">Start</i>
+                        </a>
+                    @else
+                        @if($exam->exam->status_discussion==1)
+                            <a role="button"
+                               href="{{ route('admin.user.exam.discussion',[$exam->exam->slug,$exam->id]) }}"
+                               class="mr-3">
+                                <i class="fa fa-16px fa-book">Hasil&Pembahasan</i>
+                            </a>
+                        @endif
+{{--                        @if($exam->exam->status_view_score==1)--}}
+{{--                            <a role="button" href="{{ route('admin.user.exam.result',[$exam->exam->slug,$exam->id]) }}"--}}
+{{--                               class="mr-3">--}}
+{{--                                <i class="fa fa-16px fa-file">Hasil</i>--}}
+{{--                            </a>--}}
+{{--                        @endif--}}
+                    @endif
+
                 </td>
             </tr>
         @endforeach

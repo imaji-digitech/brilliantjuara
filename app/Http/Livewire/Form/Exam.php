@@ -19,7 +19,8 @@ class Exam extends Component
             'room_id'=>$this->room->id,
             'title' => '',
             'slug' => '',
-            'price'=>0
+            'price'=>0,
+            'time'=>0
         ];
         if ($this->dataId != null) {
             $data = \App\Models\Exam::find($this->dataId);
@@ -27,6 +28,7 @@ class Exam extends Component
                 'title' => $data->title,
                 'slug' => $data->slug,
                 'price'=>$data->price,
+                'time'=>$data->time
             ];
         }
     }

@@ -21,7 +21,7 @@ class UploadFile extends Controller
             'exam_step_id'=>$step,
             'status'=>1
         ]);
-        Excel::import(new StaticImport(), $request->file('uploaded_file'));
+        Excel::import(new StaticImport($step), $request->file('uploaded_file'));
     }
     public function uploadQuestStatic2(Request $request)
     {

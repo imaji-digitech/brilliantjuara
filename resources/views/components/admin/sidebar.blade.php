@@ -41,88 +41,112 @@
                             <h6>Program</h6>
                         </div>
                     </li>
-                    @foreach(\App\Models\Room::get() as $room)
-                        <li class="sidebar-list">
-                            <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.program.index',$room->slug) }}">
-                                <i class="fas fa-home"></i><span> {{ $room->title }}</span>
-                            </a>
-                        </li>
-                    @endforeach
-                    @if(auth()->user()->role==1)
-                    <li class="sidebar-main-title">
-                        <div>
-                            <h6>Admin Site</h6>
-                        </div>
-                    </li>
-                    <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.room.index') }}">
-                            <i class="fas fa-home"></i><span> Kelas</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.announcement.index') }}">
-                            <i class="fas fa-home"></i><span> Pengumuman</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.event.index') }}">
-                            <i class="fas fa-home"></i><span> Event</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.banner.index') }}">
-                            <i class="fas fa-home"></i><span> Banner</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.access.exam') }}">
-                            <i class="fas fa-home"></i><span> Akses TO</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.access.course') }}">
-                            <i class="fas fa-home"></i><span> Akses Bimbel</span>
-                        </a>
-                    </li>
-                    @endif
+                    @foreach(\App\Models\RoomCategory::get() as $rooms)
+                        @if($rooms->rooms->count()!=0)
+                            <li class="sidebar-list">
+                                {{--                            <label class="badge badge-light-primary">{{ $rooms->count() }}</label>--}}
+                                <a class="sidebar-link sidebar-title active" href="#">
+                                    <i class="fa fa-book"></i>
+                                    <span>{{$rooms->title}}</span>
+                                    <div class="according-menu"><i class="fa fa-angle-down"></i></div>
+                                </a>
+                                <ul class="sidebar-submenu" style="display: block;">
+                                    @foreach($rooms->rooms as $room)
+                                        <li><a class="active" href="{{ route('admin.program.index',$room->slug) }}">{{ $room->title }}</a></li>
+                                    @endforeach
+                                </ul>
+                                @endif
+                            </li>
+                            @endforeach
+                            {{--                    @foreach(\App\Models\Room::get() as $room)--}}
+                            {{--                        <li class="sidebar-list">--}}
+                            {{--                            <a class="sidebar-link sidebar-title link-nav" href="">--}}
+                            {{--                                <i class="fas fa-home"></i><span> {{ $room->title }}</span>--}}
+                            {{--                            </a>--}}
+                            {{--                        </li>--}}
+                            {{--                    @endforeach--}}
+                            @if(auth()->user()->role==1)
+                                <li class="sidebar-main-title">
+                                    <div>
+                                        <h6>Admin Site</h6>
+                                    </div>
+                                </li>
+                                <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title link-nav"
+                                       href="{{ route('admin.room.index') }}">
+                                        <i class="fas fa-home"></i><span> Kelas</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title link-nav"
+                                       href="{{ route('admin.announcement.index') }}">
+                                        <i class="fas fa-home"></i><span> Pengumuman</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title link-nav"
+                                       href="{{ route('admin.event.index') }}">
+                                        <i class="fas fa-home"></i><span> Event</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title link-nav"
+                                       href="{{ route('admin.banner.index') }}">
+                                        <i class="fas fa-home"></i><span> Banner</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title link-nav"
+                                       href="{{ route('admin.access.exam') }}">
+                                        <i class="fas fa-home"></i><span> Akses TO</span>
+                                    </a>
+                                </li>
 
-                    {{--                    @php--}}
-                    {{--                        $ownExam = auth()->user()->userOwnExams;--}}
-                    {{--                        $ownCourse = auth()->user()->userOwnCourses;--}}
-                    {{--                        $myClass = [];--}}
-                    {{--                        foreach ($ownExam as $oe) {--}}
-                    {{--                            $myClass[$oe->exam->room->title]['exam'][$oe->exam_id]=$oe;--}}
-                    {{--                        }--}}
-                    {{--                        foreach ($ownCourse as $oe){--}}
-                    {{--                            $myClass[$oe->course->room->title]['course'][$oe->exam_id]=$oe;--}}
-                    {{--                        }--}}
-                    {{--                    @endphp--}}
-                    {{--                    @foreach($myClass as $key=>$mc)--}}
-                    {{--                        <li class="sidebar-list">--}}
-                    {{--                            <a class="sidebar-link sidebar-title" href="#">--}}
-                    {{--                                <i class="fas fa-home"></i> <span>{{$key}}</span>--}}
-                    {{--                            </a>--}}
-                    {{--                            <ul class="sidebar-submenu">--}}
-                    {{--                                @isset($mc['exam'])--}}
-                    {{--                                    @foreach($mc['exam'] as $exam)--}}
-                    {{--                                        <li><a href="{{ route('admin.user.exam',$exam->exam->slug) }}">{{ $exam->exam->title }}</a></li>--}}
-                    {{--                                    @endforeach--}}
-                    {{--                                @endisset--}}
-                    {{--                                @isset($mc['course'])--}}
-                    {{--                                    @foreach($mc['course'] as $course)--}}
-                    {{--                                        <li><a href="{{ route('admin.user.course',$course->course->slug) }}">{{ $course->course->title }}</a></li>--}}
-                    {{--                                    @endforeach--}}
-                    {{--                                @endisset--}}
-                    {{--                            </ul>--}}
-                    {{--                        </li>--}}
-                    {{--                    @endforeach--}}
-                    {{--                    @foreach( auth()->user()->userOwnExams as $own )--}}
-                    {{--                        <li class="sidebar-list">--}}
-                    {{--                            <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.room.index') }}">--}}
-                    {{--                                <i class="fas fa-home"></i><span> {{ $own->exam->title }}</span>--}}
-                    {{--                            </a>--}}
-                    {{--                        </li>--}}
-                    {{--                    @endforeach--}}
+                                <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title link-nav"
+                                       href="{{ route('admin.access.course') }}">
+                                        <i class="fas fa-home"></i><span> Akses Bimbel</span>
+                                    </a>
+                                </li>
+                            @endif
+
+                            {{--                    @php--}}
+                            {{--                        $ownExam = auth()->user()->userOwnExams;--}}
+                            {{--                        $ownCourse = auth()->user()->userOwnCourses;--}}
+                            {{--                        $myClass = [];--}}
+                            {{--                        foreach ($ownExam as $oe) {--}}
+                            {{--                            $myClass[$oe->exam->room->title]['exam'][$oe->exam_id]=$oe;--}}
+                            {{--                        }--}}
+                            {{--                        foreach ($ownCourse as $oe){--}}
+                            {{--                            $myClass[$oe->course->room->title]['course'][$oe->exam_id]=$oe;--}}
+                            {{--                        }--}}
+                            {{--                    @endphp--}}
+                            {{--                    @foreach($myClass as $key=>$mc)--}}
+                            {{--                        <li class="sidebar-list">--}}
+                            {{--                            <a class="sidebar-link sidebar-title" href="#">--}}
+                            {{--                                <i class="fas fa-home"></i> <span>{{$key}}</span>--}}
+                            {{--                            </a>--}}
+                            {{--                            <ul class="sidebar-submenu">--}}
+                            {{--                                @isset($mc['exam'])--}}
+                            {{--                                    @foreach($mc['exam'] as $exam)--}}
+                            {{--                                        <li><a href="{{ route('admin.user.exam',$exam->exam->slug) }}">{{ $exam->exam->title }}</a></li>--}}
+                            {{--                                    @endforeach--}}
+                            {{--                                @endisset--}}
+                            {{--                                @isset($mc['course'])--}}
+                            {{--                                    @foreach($mc['course'] as $course)--}}
+                            {{--                                        <li><a href="{{ route('admin.user.course',$course->course->slug) }}">{{ $course->course->title }}</a></li>--}}
+                            {{--                                    @endforeach--}}
+                            {{--                                @endisset--}}
+                            {{--                            </ul>--}}
+                            {{--                        </li>--}}
+                            {{--                    @endforeach--}}
+                            {{--                    @foreach( auth()->user()->userOwnExams as $own )--}}
+                            {{--                        <li class="sidebar-list">--}}
+                            {{--                            <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.room.index') }}">--}}
+                            {{--                                <i class="fas fa-home"></i><span> {{ $own->exam->title }}</span>--}}
+                            {{--                            </a>--}}
+                            {{--                        </li>--}}
+                            {{--                    @endforeach--}}
 
                 </ul>
             </div>

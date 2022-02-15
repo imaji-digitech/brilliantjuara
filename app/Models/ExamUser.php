@@ -28,17 +28,21 @@ class ExamUser extends Model
     /**
      * @var array
      */
-    protected $fillable = ['user_id', 'exam_id', 'created_at', 'updated_at'];
+    protected $fillable = ['user_id', 'exam_id', 'status', 'created_at', 'updated_at'];
 
     public static function search($query, $dataId)
     {
-
         return empty($query) ? static::query()->whereExamId($dataId)->whereUserId(auth()->id())
             : static::whereExamId($dataId)
                 ->whereUserId(auth()->id())
                 ->whereHas('user', function ($q) use ($query) {
                     $q->where('name', 'like', '%' . $query . '%');
                 });
+    }
+
+    public static function setDone($id)
+    {
+        static::find($id)->update(['status'=>2]);
     }
 
     /**

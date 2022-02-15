@@ -148,6 +148,16 @@
         {{--            </div>--}}
         {{--        </footer>--}}
     </div>
+    <!-- Popup Modal -->
+    <div class="modal-background"></div>
+    <div class="modal-popup">
+        <div class="modal-popup__icon-close"></div>
+        <iframe
+            id="iframe-invoice"
+            class="iframe-invoice"
+            title="Invoice"
+        ></iframe>
+    </div>
 </div>
 <!-- latest jquery-->
 {{--<script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>--}}

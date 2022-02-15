@@ -26,7 +26,7 @@ class Room extends Model
     /**
      * @var array
      */
-    protected $fillable = ['title', 'slug', 'created_at', 'updated_at'];
+    protected $fillable = ['title', 'slug','room_category_id','order', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

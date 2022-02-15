@@ -21,7 +21,7 @@
                             if (--timer < 0) {
                                 timer = duration;
                                 setTimeout(function () {
-                                    window.location.href = "{{ route('admin.program.index',$exam->room->slug) }}";
+                                    location.reload();
                                 }, 2000);
                             }else{
 
