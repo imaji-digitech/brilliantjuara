@@ -39,15 +39,15 @@ Route::post('xendit/callback', function (Request $request) {
     $payment->update(['status' => 2]);
     foreach ($payment->bundle->bundleDetails as $item) {
         if ($item->exam_id != null) {
-            $uoe = UserOwnExam::where('user_id', auth()->id())->where('exam_id', $item->exam_id)->get();
+            $uoe = UserOwnExam::where('user_id', $payment->user_id)->where('exam_id', $item->exam_id)->get();
             if ($uoe->count() == 0) {
-                UserOwnExam::create(['user_id' => auth()->id(), 'exam_id' => $item->exam_id]);
+                UserOwnExam::create(['user_id' => $payment->user_id, 'exam_id' => $item->exam_id]);
             }
         }
         if ($item->course_id != null) {
-            $uoe = UserOwnCourse::where('user_id', auth()->id())->where('course_id', $item->course_id)->get();
+            $uoe = UserOwnCourse::where('user_id', $payment->user_id)->where('course_id', $item->course_id)->get();
             if ($uoe->count() == 0) {
-                UserOwnCourse::create(['user_id' => auth()->id(), 'course_id' => $item->course_id]);
+                UserOwnCourse::create(['user_id' => $payment->user_id, 'course_id' => $item->course_id]);
             }
         }
     }
