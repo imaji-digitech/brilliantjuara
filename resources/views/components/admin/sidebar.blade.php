@@ -36,11 +36,11 @@
                             <i class="fas fa-home"></i><span> Dashboard</span>
                         </a>
                     </li>
-                    <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.referral.me.use') }}">
-                            <i class="fas fa-home"></i><span> Referralku</span>
-                        </a>
-                    </li>
+{{--                    <li class="sidebar-list">--}}
+{{--                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.referral.me.use') }}">--}}
+{{--                            <i class="fas fa-home"></i><span> Referralku</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
                     <li class="sidebar-main-title">
                         <div>
                             <h6>Program</h6>
@@ -57,12 +57,35 @@
                                 </a>
                                 <ul class="sidebar-submenu" style="display: block;">
                                     @foreach($rooms->rooms as $room)
-                                        <li><a class="active" href="{{ route('admin.program.index',$room->slug) }}">{{ $room->title }}</a></li>
+                                        <li><a class="active"
+                                               href="{{ route('admin.program.index',$room->slug) }}">{{ $room->title }}</a>
+                                        </li>
                                     @endforeach
                                 </ul>
                                 @endif
                             </li>
                             @endforeach
+                            <li class="sidebar-main-title">
+                                <div>
+                                    <h6>Riwayat Pembelian</h6>
+                                </div>
+                            </li>
+                            <li class="sidebar-list">
+                                <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.referral.me.use') }}">
+                                    <i class="fas fa-home"></i><span> Riwayat</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-main-title">
+                                <div>
+                                    <h6>Refferal</h6>
+                                </div>
+                            </li>
+                            <li class="sidebar-list">
+                                <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.referral.me.use') }}">
+                                    <i class="fas fa-home"></i><span> Referralku</span>
+                                </a>
+                            </li>
+
                             {{--                    @foreach(\App\Models\Room::get() as $room)--}}
                             {{--                        <li class="sidebar-list">--}}
                             {{--                            <a class="sidebar-link sidebar-title link-nav" href="">--}}
@@ -77,12 +100,14 @@
                                     </div>
                                 </li>
                                 <li class="sidebar-list">
-                                    <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.referral.index') }}">
+                                    <a class="sidebar-link sidebar-title link-nav"
+                                       href="{{ route('admin.referral.index') }}">
                                         <i class="fas fa-home"></i><span> Referral Menu</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-list">
-                                    <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.quest-report') }}">
+                                    <a class="sidebar-link sidebar-title link-nav"
+                                       href="{{ route('admin.quest-report') }}">
                                         <i class="fas fa-home"></i><span> Soal Bermasalah</span>
                                     </a>
                                 </li>

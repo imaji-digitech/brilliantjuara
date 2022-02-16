@@ -1,13 +1,16 @@
 // greeting
 var today = new Date()
 var curHr = today.getHours()
-
-if (curHr >= 0 && curHr < 4) {
-    document.getElementById("greeting").innerHTML = 'Selamat malam';
-} else if (curHr >= 4 && curHr < 12) {
+//0-12 pagi
+//12-15 siang
+//15-18 sore
+//malam
+if (curHr >= 0 && curHr < 12) {
     document.getElementById("greeting").innerHTML = 'Selamat pagi';
-} else if (curHr >= 12 && curHr < 16) {
-    document.getElementById("greeting").innerHTML = 'Selamat Siang';
+} else if (curHr >= 12 && curHr < 15) {
+    document.getElementById("greeting").innerHTML = 'Selamat siang';
+} else if (curHr >= 15 && curHr < 18) {
+    document.getElementById("greeting").innerHTML = 'Selamat sore';
 } else {
     document.getElementById("greeting").innerHTML = 'Selamat malam';
 }

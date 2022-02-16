@@ -4,6 +4,9 @@
             <th scope="col" wire:click.prevent="sortBy('id')" >
                 # @include('components.sort-icon',['field'=>"id"])
             </th>
+            <th>
+                Judul promo
+            </th>
             <th scope="col" wire:click.prevent="sortBy('code')" >
                 code @include('components.sort-icon',['field'=>"code"])
             </th>
@@ -17,6 +20,7 @@
         @foreach ($referrals as $index=>$referral)
             <tr>
                 <td scope="row">{{ ($page-1)*$perPage+$index+1 }}</td>
+                <td>{{ ($referral->baseReferral->title) }}</td>
                 <td>{{ ($referral->code)?$referral->code:'Belum digunakan' }}</td>
                 <td>{{ $referral->referralCodeUses->count() }}</td>
                 <td>

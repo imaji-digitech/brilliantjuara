@@ -7,13 +7,13 @@
                         <div class="media-body">
                             <div class="greeting-user">
                                 <h4 class="f-w-600 font-primary" id="greeting">Good Night</h4>
-                                <p>Hai Sobat Brilli {{ auth()->user()->name }} !!!</p>
+                                <p>Hai Sobat Brilli {{ auth()->user()->name }} !</p>
 
                                 <div class="p-3 row badge-primary" style="height: 100%;">
                                     <i style="line-height: 20px" class="fa fa-warning col-md-1"></i>
                                     <div class="col-md-11">
                                         Link group telegram
-                                        <a href="http://www.google.com" target="_blank" style="color: white">
+                                        <a href="https://t.me/brilliantjuaraofficial" target="_blank" style="color: white">
                                             link
                                             <i class="fa fa-link" style="color: white"></i>
                                         </a>
@@ -118,7 +118,7 @@
             <div class="card-body new-update pt-0">
                 <div class="activity-timeline">
                     @foreach($announcements as $key=>$announcement)
-                        <a href="{{ $announcement->content }}" class="media">
+                        <a href="{{ $announcement->content }}" class="media" target="_blank">
                             @if ($key+1 != $announcements->count())
                                 <div class="activity-line"></div>
                             @endif

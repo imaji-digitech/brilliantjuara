@@ -24,9 +24,10 @@
                 <td>{{ \Illuminate\Support\Str::limit(strip_tags($reportQuest->examQuest->question), 150, $end='...') }}</td>
                 <td>{{ $reportQuest->examQuest->examStep->exam->title }}</td>
                 <td>
-
-                    <a role="button" wire:click="deleteItem({{$reportQuest->id}})" class="mr-3">
-                        <i class="fa fa-16px fa-trash text-danger"></i></a>
+                    <a role="button" href="{{ route('admin.exam.question.edit',[$reportQuest->examQuest->examStep->exam->room->slug,$reportQuest->examQuest->examStep->exam->slug,$reportQuest->examQuest->exam_step_id,$reportQuest->examQuest->id]) }}" class="mr-3">
+                        <i class="fa fa-16px fa-pen">Perbaiki soal</i></a>
+{{--                    <a role="button" wire:click="deleteItem({{$reportQuest->id}})" class="mr-3">--}}
+{{--                        <i class="fa fa-16px fa-trash text-danger"></i></a>--}}
                 </td>
             </tr>
         @endforeach

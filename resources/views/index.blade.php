@@ -42,7 +42,7 @@
                 {{-- <li class="nav-item"><a class="nav-link" href="#team">Team</a></li> --}}
                 <li class="nav-item"><a class="nav-link" href="#contact">Kontak</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Masuk</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Daftar</a></li>
+{{--                <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Daftar</a></li>--}}
             </ul>
         </div>
     </div>
@@ -57,7 +57,7 @@
     </div>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="{{ asset('frontpage/images/banner-1.jpg') }}" class="d-block w-100 h-50" alt="...">
+            <img src="{{ asset('frontpage/images/a.jpeg') }}" class="d-block w-100 h-50" alt="...">
             <div class="carousel-caption d-none d-md-block">
                 <h3><b>Brilliant Juara 1</b></h3>
                 <p>Platform belajar berbasis online berdiri pada tahun 2021, dengan menggunakan media belajar

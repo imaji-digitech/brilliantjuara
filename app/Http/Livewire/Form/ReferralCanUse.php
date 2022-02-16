@@ -14,7 +14,7 @@ class ReferralCanUse extends Component
     public function mount()
     {
         $this->canUse=[];
-        $this->optionUsers = eloquent_to_options(User::get(), 'id', 'name');
+        $this->optionUsers = eloquent_to_options(User::get(), 'id', 'email');
     }
     public function add(){
         foreach ($this->canUse as $can){

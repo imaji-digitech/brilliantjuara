@@ -20,7 +20,10 @@ class Exam extends Component
             'title' => '',
             'slug' => '',
             'price'=>0,
-            'time'=>0
+            'time'=>0,
+            'status_discussion',
+            'status_multiple_attempt',
+            'status_view_score'=>1
         ];
         if ($this->dataId != null) {
             $data = \App\Models\Exam::find($this->dataId);
