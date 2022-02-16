@@ -16,6 +16,7 @@ class Room extends Component
     public function mount()
     {
         $this->optionCategory=eloquent_to_options(RoomCategory::get(),'id','title');
+//        dd($this->optionCategory);
         $this->data = [
             'room_category_id' => 1,
             'title' => '',
@@ -25,7 +26,8 @@ class Room extends Component
             $data = \App\Models\Room::find($this->dataId);
             $this->data = [
                 'title' => $data->title,
-                'slug' => $data->slug
+                'slug' => $data->slug,
+                'room_category_id' => $data->room_category_id,
             ];
         }
     }

@@ -21,9 +21,9 @@ class Exam extends Component
             'slug' => '',
             'price'=>0,
             'time'=>0,
-            'status_discussion',
-            'status_multiple_attempt',
-            'status_view_score'=>1
+            'status_discussion'=>2,
+            'status_multiple_attempt'=>2,
+            'status_view_score'=>2
         ];
         if ($this->dataId != null) {
             $data = \App\Models\Exam::find($this->dataId);
