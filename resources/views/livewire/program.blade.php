@@ -33,7 +33,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-7" style="height: 450px;">
+    <div class="col-sm-7" style="height: 450px;margin-top: 10px">
         <div class="card" style="height: 100%;">
             <div class="card-header" style="padding: 15px">
                 <h4>Kelasku</h4>
@@ -75,7 +75,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-5">
+    <div class="col-sm-5" style=";margin-top: 10px">
         <livewire:dashboard-calendar :roomId="$room->id"/>
     </div>
     <div class="col-sm-12">
