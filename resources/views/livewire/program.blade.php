@@ -23,13 +23,33 @@
         </div>
     </div>
     <script></script>
+
     <div class="card">
         <div class="card-body" style="padding: 10px">
-            <div class="owl-carousel owl-theme" id="banner-dashboard">
-                @foreach($banners as $banner)
-                    <div class="item"><img src="{{ asset('storage/'.$banner->thumbnail) }}" alt="1"></div>
-                    {{--                <div class="item"><img src="{{ asset('assets/images/banner/4.png') }}" alt="1"></div>--}}
-                @endforeach
+{{--            <div class="owl-carousel owl-theme" id="banner-dashboard">--}}
+{{--                @foreach($banners as $banner)--}}
+{{--                    <div class="item"><img src="{{ asset('storage/'.$banner->thumbnail) }}" alt="1"></div>--}}
+{{--                    --}}{{--                <div class="item"><img src="{{ asset('assets/images/banner/4.png') }}" alt="1"></div>--}}
+{{--                @endforeach--}}
+{{--            </div>--}}
+            <div class="owl-carousel owl-theme owl-loaded owl-drag" id="owl-carousel-14">
+                <div class="owl-stage-outer owl-height" style="height: 279px;">
+                    <div class="owl-stage"
+                         style="transform: translate3d(0px, 0px, 0px); transition: 0s; width: 11396px;">
+                        @foreach($banners as $index=>$banner)
+                            <a href="{{ $banner->link }}" class="owl-item active" style="width: 1026px; margin-right: 10px;">
+                                <div class="item"><img style="width: 100%" src="{{asset('storage/'.$banner->thumbnail)}}" alt="1"></div>
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="owl-nav disabled">
+                    <button type="button" role="presentation" class="owl-prev" data-bs-original-title=""
+                            title=""><span aria-label="Previous">‹</span></button>
+                    <button type="button" role="presentation" class="owl-next" data-bs-original-title=""
+                            title=""><span aria-label="Next">›</span></button>
+                </div>
+
             </div>
         </div>
     </div>
