@@ -293,21 +293,21 @@
                     <label for="container_form_daftar">
                         <input type="text" placeholder="Nama Lengkap" name="name"
                                :value="old('name')" required
-                               autofocus autocomplete="name">
+                        >
                         <input placeholder="Alamat Email" type="email" name="email" :value="old('email')" required>
-                        <input placeholder="Password" type="password" name="password" required
+                        <input placeholder="Password" type="password" name="password" required id="registerPassword"
                                autocomplete="new-password">
                         <span>
                                                     <i class="fa-solid fa-eye" id="eye_daftar" onclick="toggle1()"></i>
                                                     </span>
                         <input placeholder="Konfirmasi Password" type="password" name="password_confirmation" required
-                               autocomplete="new-password">
+                               autocomplete="new-password" id="registerConfirmPassword">
                         <span>
                                                     <i class="fa-solid fa-eye" id="eye_daftar_konfirmasi"
                                                        onclick="toggle2()"></i>
                                                     </span>
-                        <input type="text" name="notelpon" placeholder="Nomor Telepon" required>
-{{--                        <input type="text" name="kode_referral" placeholder="Kode Referral (Opsional)" required>--}}
+                        <input type="text" name="phone_number" placeholder="Nomor Telepon" required>
+                        {{--                        <input type="text" name="kode_referral" placeholder="Kode Referral (Opsional)" required>--}}
                         <input type="submit" class="submit" name="daftar" value="Daftar">
                         <h5 id="goSignInLabel">Sudah Punya Akun ?</h5>
                     </label>
@@ -365,11 +365,11 @@
 
     function toggle1() {
         if (state1) {
-            document.getElementById("daftar_password").setAttribute("type", "password");
+            document.getElementById("registerPassword").setAttribute("type", "password");
             document.getElementById("eye_daftar").style.color = '#7a797e';
             state1 = false;
         } else {
-            document.getElementById("daftar_password").setAttribute("type", "text");
+            document.getElementById("registerPassword").setAttribute("type", "text");
             document.getElementById("eye_daftar").style.color = '#5887ef';
             state1 = true;
         }
@@ -379,11 +379,11 @@
 
     function toggle2() {
         if (state2) {
-            document.getElementById("daftar_password_konfirmasi").setAttribute("type", "password");
+            document.getElementById("registerConfirmPassword").setAttribute("type", "password");
             document.getElementById("eye_daftar_konfirmasi").style.color = '#7a797e';
             state2 = false;
         } else {
-            document.getElementById("daftar_password_konfirmasi").setAttribute("type", "text");
+            document.getElementById("registerConfirmPassword").setAttribute("type", "text");
             document.getElementById("eye_daftar_konfirmasi").style.color = '#5887ef';
             state2 = true;
         }

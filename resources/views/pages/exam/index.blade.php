@@ -8,17 +8,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-body">
-                            @if($exam->status_multiple_attempt==1)
-                                <a href="{{ route('admin.user.exam.start',$exam->slug) }}" class="btn btn-primary">
-                                    Mulai TO
-                                </a>
-                            @else
-                                @if($examUserCheck->count()==0)
-                                    <a href="{{ route('admin.user.exam.start',$exam->slug) }}" class="btn btn-primary">
-                                        Mulai TO
-                                    </a>
-                                @endif
-                            @endif
+                            <livewire:to-start :exam="$exam" :examUserCheck="$examUserCheck"/>
                             <livewire:table.main name="user-exam" :model="$examUser" :dataId="$exam->id"/>
                         </div>
                     </div>

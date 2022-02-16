@@ -23,7 +23,7 @@ class ExamController extends Controller
         $exam = Exam::getExam($slug);
         if ($exam->status_multiple_attempt != 1) {
             if (ExamUser::whereUserId(auth()->id())->whereExamId($exam->id)->first() != null) {
-                return redirect(route('user.exam', $slug));
+                return redirect(route('admin.user.exam', $slug));
             }
         }
         $examUser = ExamUser::create(['user_id' => auth()->id(), 'exam_id' => $exam->id]);
