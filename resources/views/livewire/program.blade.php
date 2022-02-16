@@ -123,7 +123,7 @@
                                                         @if($minus!=0)
                                                             <del>{{$bundle->bundlePrices[0]->price}} <br></del>
                                                         @endif
-                                                        Rp. {{ isset($bundle->bundlePrices[0])?$bundle->bundlePrices[0]->price-$minus:'' }}
+                                                        Rp. {{ isset($bundle->bundlePrices[0])?number_format($bundle->bundlePrices[0]->price-$minus):'' }}
                                                     @endif
                                                 @endisset
                                             </div>
