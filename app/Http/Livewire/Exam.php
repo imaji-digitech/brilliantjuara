@@ -45,7 +45,7 @@ class Exam extends Component
             'type' => 'success',
             'title' => 'Ujian telah diselsaikan',
         ]);
-        $this->emit('redirect', route('admin.program.index', $this->exam->slug));
+        $this->emit('redirect', route('admin.program.index', $this->exam->room->slug));
     }
 
     public function changeAnswer($choice)
@@ -56,7 +56,7 @@ class Exam extends Component
                 'type' => 'success',
                 'title' => 'Waktu pengerjaan telah selesai',
             ]);
-            $this->emit('redirect', route('admin.program.index', $this->exam->slug));
+            $this->emit('redirect', route('admin.program.index', $this->exam->room->slug));
         }
         $this->examUser->examAnswers->find($this->active)->update(['answer' => $choice]);
         $this->questActive = $this->examUser->examAnswers->find($this->active);
