@@ -167,6 +167,10 @@
     .footer {
         text-align: center;
     }
+    .navbar-sect {
+        width: 100%;
+    }
+
 }
 
 @media (max-width: 767px) {
