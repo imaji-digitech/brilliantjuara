@@ -16,7 +16,7 @@ class ReferralCanUse extends Model
 {
     /**
      * The "type" of the auto-incrementing ID.
-     * 
+     *
      * @var string
      */
     protected $keyType = 'integer';
@@ -32,5 +32,17 @@ class ReferralCanUse extends Model
     public function baseReferral()
     {
         return $this->belongsTo('App\Models\BaseReferral');
+    }
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+    public static function search($query, $dataId)
+    {
+        return empty($query) ? static::query()->where('base_referral_id',$dataId)
+            : static::where('base_referral_id',$dataId)
+                ->whereHas('user', function ($q) use ($query) {
+                    $q->where('name', 'like', '%' . $query . '%');
+                });
     }
 }

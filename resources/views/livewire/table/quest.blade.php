@@ -16,11 +16,13 @@
                 <td scope="row">{{ ($page-1)*$perPage+$index+1 }}</td>
                 <td>{{ \Illuminate\Support\Str::limit(strip_tags($quest->question), 150, $end='...') }}</td>
                 <td>
-{{--                    <a role="button" href="{{ route('admin.quest.edit',[$quest->room->slug,$quest->id]) }}" class="mr-3">--}}
-{{--                        <i class="fa fa-16px fa-pen">Ubah</i></a>--}}
+                    <a role="button" href="{{ route('admin.exam.question.edit',[$quest->examStep->exam->room->slug,$quest->examStep->exam->slug,$quest->exam_step_id,$quest->id]) }}" class="mr-3">
+                        <i class="fa fa-16px fa-pen">Ubah</i></a>
+                    <a role="button" wire:click="deleteItem({{$quest->id}})" class="mr-3">
+                        <i class="fa fa-16px fa-trash text-danger"></i></a>
 {{--                    <a role="button" href="{{ route('admin.quest.show',[$quest->room->slug,$quest->slug]) }}" class="mr-3">--}}
 {{--                        <i class="fa fa-16px fa-eye">Lihat</i></a>--}}
-{{--                    <a role="button" href="{{ route('admin.quest.index',$quest->slug) }}" class="mr-3">--}}
+{{--                    <a role="button" href="{{ route('quest.index',$quest->slug) }}" class="mr-3">--}}
 {{--                        <i class="fa fa-16px fa-book">Bimbel</i></a>--}}
                 </td>
             </tr>

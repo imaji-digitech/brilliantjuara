@@ -65,10 +65,16 @@ class ExamController extends Controller
     {
         $room = Room::getRoom($room);
         $exam = Exam::getExam($exam);
-//        dd($step);
         $step = ExamStep::findOrFail($step);
-
         return view("pages.room.exam.question-create", compact('exam', 'room','step'));
+    }
+
+    public function questionEdit($room, $exam, $step,$id)
+    {
+        $room = Room::getRoom($room);
+        $exam = Exam::getExam($exam);
+        $step = ExamStep::findOrFail($step);
+        return view("pages.room.exam.question-edit", compact('exam', 'room','step','id'));
     }
 
 }

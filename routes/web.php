@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ExamController;
 use App\Http\Controllers\Admin\PublicAnnouncementController;
 use App\Http\Controllers\Admin\PublicBannerController;
 use App\Http\Controllers\Admin\PublicEventController;
+use App\Http\Controllers\Admin\ReferralController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\UploadFile;
@@ -142,7 +143,15 @@ Route::middleware(['auth:sanctum',])->name('admin.')->prefix('admin')->group(fun
         Route::get('room/{room}/bundle/detail/{id}/create', [BundleController::class, 'bundleDetailCreate'])->name('bundle.detail.create');
         Route::get('room/{room}/bundle/token/{id}', [BundleController::class, 'bundleToken'])->name('bundle.token.index');
         Route::get('room/{room}/bundle/token/{id}/create/{number}', [BundleController::class, 'bundleTokenCreate'])->name('bundle.token.create');
+
+        Route::get('referral',[ReferralController::class,'index'])->name('referral.index');
+        Route::get('referral/create',[ReferralController::class,'create'])->name('referral.create');
+        Route::get('referral/edit/{id}',[ReferralController::class,'edit'])->name('referral.edit');
+        Route::get('referral/can-use/{id}',[ReferralController::class,'canUse'])->name('referral.can.use');
+        Route::get('referral/can-use/{id}/add',[ReferralController::class,'canUseAdd'])->name('referral.can.use.add');
     });
+    Route::get('referral/me',[\App\Http\Controllers\User\ReferralController::class,'index'])->name('referral.me.use');
+    Route::get('referral/me/{id}',[\App\Http\Controllers\User\ReferralController::class,'edit'])->name('referral.me.edit');
 //    Route::get('exam/{examSlug}', function ($examSlug) {
 //        $exam=\App\Models\ExamStep::whereSlug($examSlug)->firstOrFail();
 //        return view('exam',compact('exam'));

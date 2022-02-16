@@ -8,6 +8,7 @@
                 <h6>Benar : {{ $rightAnswer }}</h6>
                 <h6>Salah : {{ $wrongAnswer }}</h6>
                 <h6>Kosong : {{ $blankAnswer }}</h6>
+                <h6>Total nilai : {{ $totalPoint }}</h6>
                 <br>
                 <h6>Mulai Pengerjaan : {{ $examUser->created_at->format('d-m-Y H:i') }}</h6>
                 <h6>Selesai Pengerjaan : {{ $examUser->updated_at->format('d-m-Y H:i') }}</h6>

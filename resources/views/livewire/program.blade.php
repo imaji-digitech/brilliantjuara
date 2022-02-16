@@ -33,7 +33,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-7" style="height: 380px;">
+    <div class="col-sm-7" style="height: 450px;">
         <div class="card" style="height: 100%;">
             <div class="card-header" style="padding: 15px">
                 <h4>Kelasku</h4>
@@ -75,7 +75,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-5" style="height: 400px">
+    <div class="col-sm-5">
         <livewire:dashboard-calendar/>
     </div>
     <div class="col-sm-12">
@@ -118,51 +118,71 @@
                                                 @endforeach
                                             </p>
                                             <div class="product-price">
-                                                @if($minus<$bundle->bundlePrices[0]->price)
-                                                    @if($minus!=0)
-                                                        <del>{{$bundle->bundlePrices[0]->price}} <br></del>
+                                                @isset($bundle->bundlePrices[0])
+                                                    @if($minus<$bundle->bundlePrices[0]->price)
+                                                        @if($minus!=0)
+                                                            <del>{{$bundle->bundlePrices[0]->price}} <br></del>
+                                                        @endif
+                                                        Rp. {{ isset($bundle->bundlePrices[0])?$bundle->bundlePrices[0]->price-$minus:'' }}
                                                     @endif
-                                                    Rp. {{ isset($bundle->bundlePrices[0])?$bundle->bundlePrices[0]->price-$minus:'' }}
-                                                @endif
-
+                                                @endisset
                                             </div>
-                                            <div style="text-align: center">
-
+                                            <br>
+                                            <div style="text-align: center" class="row">
                                                 @if(auth()->user()->haveProgram($bundle->id)==0)
-                                                    <div class="row" style="text-align: center">
-                                                        <div class="col-md-6">
-                                                            <form action="">
-                                                                <input type="text" wire:model.defer="token"
-                                                                       class="form-control"
-                                                                       placeholder="token">
-                                                            </form>
-                                                        </div>
-                                                        <div class="col-md-1"></div>
-                                                        <button class="btn btn-warning-gradien col-md-4" type="button"
+                                                    <div class="col-md-12">
+                                                        <form action="">
+                                                            <input type="text" wire:model="token.{{$bundle->id}}"
+                                                                   class="form-control"
+                                                                   placeholder="token">
+                                                        </form>
+                                                        <button class="btn btn-warning-gradien col-md-12" type="button"
+                                                                style="margin-top: 5px"
                                                                 wire:click="activateToken({{$bundle->id}})">Redem
                                                         </button>
                                                     </div>
-                                                    <br>
-                                                    <div class="row" style="text-align: center">
-                                                        <div class="col-md-6">
+                                                    @isset($bundle->bundlePrices[0])
+                                                        <div class="col-md-12" style="margin-top: 10px">
                                                             <form action="">
-                                                                <input type="number" wire:model.defer="amount"
-                                                                       class="form-control"
-                                                                       placeholder="Input jumlah">
+                                                                {{--                                                                <input--}}
+                                                                {{--                                                                    type="number"--}}
+                                                                {{--                                                                    wire:model="amount.{{$bundle->id}}"--}}
+                                                                {{--                                                                    class="form-control"--}}
+                                                                {{--                                                                    placeholder="Input jumlah pembelian">--}}
+                                                                {{--                                                            </form>--}}
+                                                                @if($bundle->referral_can_use==2)
+                                                                    <div class="row">
+                                                                        <div class="col-sm-6">
+                                                                            <input
+                                                                                style="margin-top: 5px"
+                                                                                type="text"
+                                                                                wire:model="referral.{{$bundle->id}}"
+                                                                                class="form-control"
+                                                                                placeholder="Kode referral" required>
+                                                                        </div>
+                                                                        <div class="col-sm-6">
+                                                                            <button class="btn btn-success"
+                                                                                    type="button"
+                                                                                    style="margin-top: 5px;height: 38px"
+                                                                                    wire:click="checkReferral({{$bundle->id}})">
+                                                                                Cek Referral
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="col-sm-12 text-left" style="text-align: left">
+                                                                            {{ $referralMsg }}
+                                                                        </div>
+                                                                    </div>
+                                                                @endif
                                                             </form>
+                                                            <button class="btn btn-primary col-md-12" type="button"
+                                                                    style="margin-top: 5px"
+                                                                    wire:click="buy({{$bundle->id}})">Beli
+                                                            </button>
                                                         </div>
-                                                        <div class="col-md-1"></div>
-                                                        <button class="btn btn-primary col-md-4" type="button"
-                                                                wire:click="buy({{$bundle->id}})">Beli
-                                                        </button>
-                                                    </div>
-{{--                                                    <br>--}}
-{{--                                                    <a href="#" style="width: 90%" class="btn btn-primary col-md-12"--}}
-{{--                                                       wire:click="setBundle({{$bundle->id}})">Beli</a>--}}
+                                                    @endisset
                                                 @else
                                                     <button class="btn btn-success" disabled="">Sudah terbeli</button>
                                                 @endif
-
                                             </div>
                                             <br>
                                         </div>

@@ -1,11 +1,10 @@
 <div>
-    <div class="card" style="">
+    <div class="card" style="height: 450px">
         <div class="card-body" style="padding: 10px">
             <div class="default-datepicker" style="margin: 0">
                 <div id="calendar" data-language="en"></div>
             </div>
-
-            <div class="activity-timeline" style="padding: 10px" id="events">
+            <div class="activity-timeline" style="padding: 10px; overflow-y: scroll; height: 100px" id="events">
                 @foreach($eventNow as $event)
                     <div class='media' style='margin-top: 0'>
                         <div class="activity-dot-primary"></div>

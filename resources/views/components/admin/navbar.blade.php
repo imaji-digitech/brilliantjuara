@@ -25,7 +25,7 @@
         </ul>
     </div>
     <div class="nav-right col-8 pull-right right-header p-0">
-        <ul class="nav-menus">
+        <ul class="nav-menus" style="margin-right: 0">
             @isset($navbar)
                 {{ $navbar }}
             @endif
@@ -36,7 +36,7 @@
             <li><a class="text-dark" href="#" onclick="toggleFullScreen()">
                     <i data-feather="maximize"></i></a>
             </li>
-            <li class="profile-nav onhover-dropdown p-0 me-0">
+            <li class="onhover-dropdown p-0 me-0">
                 <div class="media profile-media">
                     {{--                    <img class="b-r-10" src="{{asset('assets/images/dashboard/profile.jpg')}}" alt="">--}}
                     <img src="{{ auth()->user()->profile_photo_url }}" alt="{{ auth()->user()->name }}"

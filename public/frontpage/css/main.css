@@ -9,11 +9,16 @@
 #mainNav {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
-    background-color: rgba(16, 20, 102, 0.945);
+    background-color: #36A7B3;
+}
+
+.navbar-brand img {
+    width: 180px;
 }
 
 .navbar-dark .navbar-nav .nav-link {
-    color: rgb(255, 255, 255);
+    color:#36A7B3 !important;
+    font-weight: bold;
 }
 
 .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .show>.nav-link {
@@ -22,13 +27,8 @@
 
 .carousel-inner {
     border-bottom-left-radius: 320px;
-    border-bottom: 18px solid rgba(16, 20, 102, 0.945);
+    border-bottom: 18px solid #36A7B3;
 }
-.carousel-inner img{
-
-    /*border-bottom: 18px solid rgba(16, 20, 102, 0.945);*/
-}
-
 .carousel-item:before {
     content:'';
     position:absolute;
@@ -46,7 +46,7 @@
 
 .carousel-item img {
     min-height: 338px!important;
-    max-height: 675px!important;
+    max-height: 450px!important;
     object-fit: cover;
     object-position: center;
 }
@@ -114,7 +114,7 @@
 }
 
 .portfolio-caption .text p {
-    text-align: justify;
+    text-align: left;
 }
 
 .bg-blue {
@@ -154,7 +154,7 @@
     #mainNav.navbar-shrink {
         padding-top: 0.5rem;
         padding-bottom: 0.5rem;
-        background-color: rgba(16, 20, 102, 0.945);
+        background-color: #ffffff;
     }
 }
 

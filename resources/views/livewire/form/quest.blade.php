@@ -12,6 +12,6 @@
         <x-form.input model="score4" title="nilai D" type="number"/>
         <x-form.input model="score5" title="nilai E" type="number"/>
     @endif
-    <x-form.input model="data.answer" title="Jawaban" type="number"/>
+    <x-form.select :options="$optionAnswer" :selected="$data['answer']" model="data.answer" title="Jawaban" type="number"/>
     <button type="submit" class="btn btn-primary float-end">Submit</button>
 </form>

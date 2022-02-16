@@ -19,7 +19,7 @@ class BaseReferral extends Model
 {
     /**
      * The "type" of the auto-incrementing ID.
-     * 
+     *
      * @var string
      */
     protected $keyType = 'integer';
@@ -34,7 +34,7 @@ class BaseReferral extends Model
      */
     public function referralCanUses()
     {
-        return $this->hasMany('App\Models\ReferralCanus');
+        return $this->hasMany('App\Models\ReferralCanUse');
     }
 
     /**
@@ -43,5 +43,11 @@ class BaseReferral extends Model
     public function referralCodes()
     {
         return $this->hasMany('App\Models\ReferralCode');
+    }
+    public static function search($query)
+    {
+        return empty($query) ? static::query()
+            : static::where('title', 'like', '%' . $query . '%')
+                    ->orWhere('discount', 'like', '%' . $query . '%');
     }
 }

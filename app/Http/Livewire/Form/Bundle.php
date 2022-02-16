@@ -19,17 +19,23 @@ class Bundle extends Component
     public $thumbnail;
     public $room;
     public $optionStatus;
+    public $optionCanUse;
 
     public function mount()
     {
         $this->optionStatus=eloquent_to_options(BundleStatus::get(),'id','title');
+        $this->optionCanUse=[
+            ['title'=>'Tidak dapat digunakan','value'=>1],
+            ['title'=>'Dapat digunakan','value'=>2]
+        ];
         $this->room = \App\Models\Room::getRoom($this->room);
         $this->data = [
             'room_id'=>$this->room->id,
             'bundle_status_id'=>2,
             'title'=>'',
             'content'=>'',
-            'thumbnail'=>''
+            'thumbnail'=>'',
+            'referral_can_use'=>1
         ];
         if ($this->dataId != null) {
             $data = \App\Models\Bundle::find($this->dataId);
@@ -39,6 +45,7 @@ class Bundle extends Component
                 'room_id'=>$data->room_id,
                 'bundle_status_id'=>$data->bundle_status_id,
                 'content'=>$data->content,
+                'referral_can_use'=>$data->referral_can_use
             ];
         }
     }

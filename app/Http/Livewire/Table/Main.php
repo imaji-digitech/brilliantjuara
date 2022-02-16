@@ -202,6 +202,33 @@ class Main extends Component
                     "tokens" =>  $token,
                 ];
                 break;
+            case 'referral':
+                $exam = $this->model::search($this->search)
+                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                    ->paginate($this->perPage);
+                return [
+                    "view" => "livewire.table.referral",
+                    "referrals" =>  $exam,
+                ];
+                break;
+            case 'referralCanUse':
+                $exam = $this->model::search($this->search,$this->dataId)
+                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                    ->paginate($this->perPage);
+                return [
+                    "view" => "livewire.table.referral-can-use",
+                    "referrals" =>  $exam,
+                ];
+                break;
+            case 'referralMe':
+                $exam = $this->model::searchme($this->search)
+                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                    ->paginate($this->perPage);
+                return [
+                    "view" => "livewire.table.referral-me",
+                    "referrals" =>  $exam,
+                ];
+                break;
             default:
                 break;
         }

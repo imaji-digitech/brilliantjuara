@@ -15,7 +15,7 @@ class Discussion extends Component
     public $rightAnswer = 0;
     public $wrongAnswer = 0;
     public $blankAnswer = 0;
-    public $totalPoint;
+    public $totalPoint=0;
 
     public function mount()
     {
@@ -26,6 +26,7 @@ class Discussion extends Component
             $answer = $eu->examQuest->answer == $eu->answer;
             if ($answer) {
                 $this->rightAnswer += 1;
+                $this->totalPoint+=$eu->examQuest->examStep->score_right;
             } else {
                 $this->wrongAnswer += 1;
             }

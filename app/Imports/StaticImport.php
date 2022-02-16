@@ -10,9 +10,10 @@ use Maatwebsite\Excel\Concerns\ToCollection;
 
 class StaticImport implements ToCollection
 {
-    public function __construct($some)
+    private $step;
+    public function __construct($step)
     {
-        dd($some);
+        $this->step=$step;
     }
 
     /**
@@ -20,7 +21,7 @@ class StaticImport implements ToCollection
      */
     public function collection(Collection $collection)
     {
-        $step = ExportCache::getLastActive()->exam_step_id;
+        $step = $this->step;
         foreach ($collection as $index => $row) {
             if ($index == 0) {
                 continue;

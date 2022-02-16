@@ -234,7 +234,15 @@ var owl_carousel_custom = {
             items: 1,
             margin: 10,
             autoHeight: true,
-            nav: false
+            nav: false,
+            autoplay: true,
+            autoplayTimeout: 3000,
+            responsive: {
+                576: {
+                    items: 1,
+                    mergeFit: true
+                },
+            }
         });
         var owl = $('#owl-carousel-15');
         owl.owlCarousel({

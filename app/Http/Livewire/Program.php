@@ -4,6 +4,8 @@ namespace App\Http\Livewire;
 
 use App\Models\Bundle;
 use App\Models\Payment;
+use App\Models\ReferralCode;
+use App\Models\ReferralCodeUse;
 use App\Models\Room;
 use App\Models\Token;
 use App\Models\UserOwnCourse;
@@ -18,38 +20,28 @@ class Program extends Component
     public $myClass;
     public $program;
     public $token;
-    public $amount = 0;
+    public $amount;
+    public $checkOut;
     public $bundleActive;
     public $mount;
     public $total;
+    public $referral;
+    public $referralMsg;
+    public $referralDiscount = 0;
+    public $referralUse;
     protected $listeners = ["payment" => "payment"];
-
-    public function increase()
-    {
-        $this->amount += 1;
-    }
-
-    public function decrease()
-    {
-        $this->amount -= 1;
-    }
-
-    public function setBundle($id)
-    {
-
-    }
 
     public function buy($id)
     {
-
+        $this->amount[$id] = 1;
+        $this->checkOut = $id;
         $this->bundleActive = Bundle::find($id);
-        $total = $this->amount * $this->bundleActive->bundlePrices[0]->price;
+        $total = $this->amount[$id] * $this->bundleActive->bundlePrices[0]->price;
         $this->total = $total;
-//        dd($total);
         $this->emit('swal:confirm', ['title' => 'Periksa kembali',
             'icon' => 'info',
             'confirmText' => 'Proses',
-            'text' => 'Pembelian Paket <br>' . $this->bundleActive->title . ' - ' . intval($this->amount) . 'x <br>' .
+            'text' => 'Pembelian Paket <br>' . $this->bundleActive->title . ' - ' . intval($this->amount[$id]) . 'x <br>' .
                 'Total : ' . $total
             ,
             'method' => 'payment']);
@@ -57,22 +49,38 @@ class Program extends Component
 
     public function payment()
     {
+        $id = $this->checkOut;
         Xendit::setApiKey(env('API_KEY'));
         $params = [
             'external_id' => auth()->id() . "",
             'payer_email' => auth()->user()->email,
-            'description' => 'Pembelian Paket ' . $this->bundleActive->title . ' - ' . $this->amount . 'x',
-            'amount' => $this->total,
+            'description' => 'Pembelian Paket ' . $this->bundleActive->title . ' - ' . $this->amount[$id] . 'x',
+            'amount' => $this->total - $this->referralDiscount,
         ];
         $createInvoice = Invoice::create($params);
         $url = $createInvoice['invoice_url'];
-        Payment::create([
-            'bundle_id' => $this->bundleActive->id,
-            'payment_id' => $createInvoice['id'],
-            'amount' => $this->amount,
-            'status' => 1,
-            'user_id'=>auth()->id()
-        ]);
+        if ($this->referralUse != null) {
+            Payment::create([
+                'bundle_id' => $this->bundleActive->id,
+                'payment_id' => $createInvoice['id'],
+                'amount' => $this->amount[$id],
+                'status' => 1,
+                'user_id' => auth()->id(),
+                'referral_code_id' => $this->referralUse->id
+            ]);
+            ReferralCodeUse::create([
+                'referral_code_id' => $this->referralUse->id,
+                'user_id' => auth()->id()
+            ]);
+        } else {
+            Payment::create([
+                'bundle_id' => $this->bundleActive->id,
+                'payment_id' => $createInvoice['id'],
+                'amount' => $this->amount[$id],
+                'status' => 1,
+                'user_id' => auth()->id(),
+            ]);
+        }
         $this->emit('redirect:new', $url);
     }
 
@@ -93,14 +101,12 @@ class Program extends Component
             }
         }
         $this->myClass = $myClass;
-//        dd($myClass);
     }
-
 
     public function activateToken($id)
     {
         $this->program = $id;
-        $token = Token::where('bundle_id', $this->program)->where('token', $this->token)->whereNull('user_id')->first();
+        $token = Token::where('bundle_id', $this->program)->where('token', $this->token[$id])->whereNull('user_id')->first();
         if ($token != null) {
             $token->update(['user_id' => auth()->id()]);
             foreach ($token->bundle->bundleDetails as $item) {
@@ -126,6 +132,29 @@ class Program extends Component
                 'type' => 'danger',
                 'title' => 'Token anda tidak valid atau telah terpakai',
             ]);
+        }
+    }
+
+    public function checkReferral($id)
+    {
+        if (isset($this->referral[$id])) {
+            if ($this->referral[$id] == null) {
+                $this->referralMsg = "Referral harus diisi";
+            } else {
+                $r = ReferralCode::whereCode($this->referral[$id])->first();
+                if ($r != null) {
+                    $b = ReferralCodeUse::whereReferralCodeId($r->id)->whereUserId(auth()->id())->get();
+                    if ($b->count()!=0) {
+                        $this->referralMsg = "Referral telah anda gunakan";
+                    } else {
+                        $this->referralMsg = "Potongan sebesar " . $r->baseReferral->discount . ' ';
+                        $this->referralDiscount = $r->baseReferral->discount;
+                        $this->referralUse = $r;
+                    }
+                } else {
+                    $this->referralMsg = "Referral tidak ditemukan";
+                }
+            }
         }
     }
 

@@ -111,7 +111,7 @@
     </div>
     <!-- Page Header Ends                              -->
     <!-- Page Body Start-->
-    <div class="page-body-wrapper">
+    <div class="page-body-wrapper" style="background-color: #36A7B320">
     @include('components.admin.sidebar')
     <!-- Page Sidebar Ends-->
         <div class="page-body">
@@ -149,15 +149,6 @@
         {{--        </footer>--}}
     </div>
     <!-- Popup Modal -->
-    <div class="modal-background"></div>
-    <div class="modal-popup">
-        <div class="modal-popup__icon-close"></div>
-        <iframe
-            id="iframe-invoice"
-            class="iframe-invoice"
-            title="Invoice"
-        ></iframe>
-    </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 {{--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>--}}
@@ -195,11 +186,13 @@
 <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.en.js') }}"></script>
 <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.custom.js') }}"></script>
 <script defer src="{{ asset('vendor/sweetalert/sweetalert.min.js') }}"></script>
+{{--file:///Users/mokhamadasif/Documents/cuba/assets/js/dashboard/default.js--}}
+<script src="{{ asset('assets/js/dashboard/default.js') }}"></script>
 
 <!-- Plugins JS Ends-->
 <!-- Theme js-->
 <script src="{{asset('assets/js/script.js')}}"></script>
-<script src="{{asset('assets/js/theme-customizer/customizer.js')}}"></script>
+{{--<script src="{{asset('assets/js/theme-customizer/customizer.js')}}"></script>--}}
 <!-- login js-->
 <script>
     const SwalModal = (icon, title, html) => {

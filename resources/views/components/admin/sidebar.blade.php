@@ -36,6 +36,11 @@
                             <i class="fas fa-home"></i><span> Dashboard</span>
                         </a>
                     </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.referral.me.use') }}">
+                            <i class="fas fa-home"></i><span> Referralku</span>
+                        </a>
+                    </li>
                     <li class="sidebar-main-title">
                         <div>
                             <h6>Program</h6>

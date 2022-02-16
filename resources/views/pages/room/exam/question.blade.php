@@ -22,8 +22,11 @@
                             <form action="{{ route('admin.upload-static',[$step->id]) }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
+                                    @if($errors->any())
+                                        <h4>{{$errors->first()}}</h4>
+                                    @endif
                                     <div class="col-7">
-                                        <input type="file" name="uploaded_file" class="form-control">
+                                        <input type="file" name="uploaded_file" class="form-control" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" required/>
                                     </div>
                                     <input type="submit" value="upload excel" class="btn btn-primary col-2 mr-3" style="margin-right: 10px">
                                 </div>

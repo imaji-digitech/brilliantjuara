@@ -10,6 +10,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 use Maatwebsite\Excel\Facades\Excel;
 
 
@@ -17,11 +18,12 @@ class UploadFile extends Controller
 {
 
     public function uploadQuestStatic(Request $request,$step){
-        ExportCache::create([
-            'exam_step_id'=>$step,
-            'status'=>1
-        ]);
-        Excel::import(new StaticImport($step), $request->file('uploaded_file'));
+        try {
+            Excel::import(new StaticImport($step), $request->file('uploaded_file'));
+        }catch (Exception $e){
+            return Redirect::back()->withErrors(['msg' => 'Format excel anda salah']);
+        }
+
     }
     public function uploadQuestStatic2(Request $request)
     {

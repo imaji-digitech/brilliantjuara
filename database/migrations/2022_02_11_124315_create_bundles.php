@@ -18,6 +18,7 @@ class CreateBundles extends Migration
             $table->string('title');
             $table->string('thumbnail')->nullable();
             $table->longText('content')->nullable();
+            $table->integer('referral_can_use');
             $table->unsignedBigInteger('room_id');
             $table->timestamps();
             $table->foreign('room_id')
