@@ -59,7 +59,7 @@ class ReferralCode extends Model
      */
     public function referralCodeUses()
     {
-        return $this->hasMany('App\Models\ReferralCodeus');
+        return $this->hasMany('App\Models\ReferralCodeUse');
     }
     public static function searchMe($query)
     {

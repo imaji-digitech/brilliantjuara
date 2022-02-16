@@ -77,6 +77,11 @@
                                     </div>
                                 </li>
                                 <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.referral.index') }}">
+                                        <i class="fas fa-home"></i><span> Referral Menu</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title link-nav"
                                        href="{{ route('admin.room.index') }}">
                                         <i class="fas fa-home"></i><span> Kelas</span>
