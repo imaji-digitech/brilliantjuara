@@ -135,29 +135,7 @@
 {{--            --}}{{--                        {{ __('Register') }}--}}
 {{--            --}}{{--                    </x-jet-button>--}}
 {{--            --}}{{--                </div>--}}
-{{--            <div class="form signupForm">--}}
-{{--                <form method="POST" action="{{ route('register') }}">--}}
-{{--                    <h3>Ayo Daftar dulu : </h3>--}}
-{{--                    <label for="container_form_daftar">--}}
-{{--                        <input type="text" placeholder="Nama Lengkap" name="name" :value="old('name')" required--}}
-{{--                               autofocus autocomplete="name">--}}
-{{--                        <input placeholder="Alamat Email" type="email" name="email" :value="old('email')" required>--}}
-{{--                        <input placeholder="Password" type="password" name="password" required--}}
-{{--                               autocomplete="new-password">--}}
-{{--                        <span>--}}
-{{--                            <i class="fa-solid fa-eye" id="eye_daftar" onclick="toggle1()"></i>--}}
-{{--                            </span>--}}
-{{--                        <input placeholder="Konfirmasi Password" type="password" name="password_confirmation" required--}}
-{{--                               autocomplete="new-password">--}}
-{{--                        <span>--}}
-{{--                            <i class="fa-solid fa-eye" id="eye_daftar_konfirmasi" onclick="toggle2()"></i>--}}
-{{--                            </span>--}}
-{{--                        <input type="text" name="notelpon" placeholder="Nomor Telepon" required>--}}
-{{--                        <input type="text" name="kode_referral" placeholder="Kode Referral (Opsional)" required>--}}
-{{--                        <input type="submit" class="submit" name="daftar" value="Daftar">--}}
-{{--                        <h5 id="goSignInLabel">Sudah Punya Akun ?</h5>--}}
-{{--                    </label>--}}
-{{--                </form>--}}
+
 {{--            </div>--}}
 
 {{--        </div>--}}
@@ -301,25 +279,35 @@
                     <h5 class="center-fpass-sign" id="goSignUpLabel" onclick="">Belum Punya Akun ?</h5>
                 </form>
             </div>
+            {{--            <div class="form signupForm">--}}
+
+            {{--                    <h3>Ayo Daftar dulu : </h3>--}}
+            {{--                    <label for="container_form_daftar">--}}
+
+            {{--                    </label>--}}
+            {{--                </form>--}}
             <div class="form signupForm">
-                <form action="" method="post">
+                <form method="POST" action="{{ route('register') }}">
+                    @csrf
                     <h3>Ayo Daftar dulu : </h3>
                     <label for="container_form_daftar">
-                        <input type="text" name="daftar_username" placeholder="Username" required>
-                        <input type="text" name="email" placeholder="Alamat Email" required>
+                        <input type="text" placeholder="Nama Lengkap" name="name"
+                               :value="old('name')" required
+                               autofocus autocomplete="name">
+                        <input placeholder="Alamat Email" type="email" name="email" :value="old('email')" required>
+                        <input placeholder="Password" type="password" name="password" required
+                               autocomplete="new-password">
                         <span>
-                            <i class="fa-solid fa-eye eye" id="eye_daftar" onclick="toggle1()"></i>
-                            </span>
-                        <input type="password" name="daftar_password" placeholder="Password" id="daftar_password"
-                               required>
+                                                    <i class="fa-solid fa-eye" id="eye_daftar" onclick="toggle1()"></i>
+                                                    </span>
+                        <input placeholder="Konfirmasi Password" type="password" name="password_confirmation" required
+                               autocomplete="new-password">
                         <span>
-                            <i class="fa-solid fa-eye eye" id="eye_daftar_konfirmasi" onclick="toggle2()"></i>
-                            </span>
-                        <input type="password" name="daftar_cpassword" placeholder="Konfirmasi Password"
-                               id="daftar_password_konfirmasi" required>
-
+                                                    <i class="fa-solid fa-eye" id="eye_daftar_konfirmasi"
+                                                       onclick="toggle2()"></i>
+                                                    </span>
                         <input type="text" name="notelpon" placeholder="Nomor Telepon" required>
-                        <input type="text" name="kode_referral" placeholder="Kode Referral (Opsional)" required>
+{{--                        <input type="text" name="kode_referral" placeholder="Kode Referral (Opsional)" required>--}}
                         <input type="submit" class="submit" name="daftar" value="Daftar">
                         <h5 id="goSignInLabel">Sudah Punya Akun ?</h5>
                     </label>

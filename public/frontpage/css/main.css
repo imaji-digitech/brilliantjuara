@@ -17,7 +17,7 @@
 }
 
 .navbar-dark .navbar-nav .nav-link {
-    color:#36A7B3 !important;
+    color:#36A7B3;
     font-weight: bold;
 }
 
@@ -45,8 +45,9 @@
 }
 
 .carousel-item img {
-    min-height: 338px!important;
+    /*min-height: 338px!important;*/
     max-height: 500px!important;
+    height: 100%;
     object-fit: cover;
     object-position: center;
 }
