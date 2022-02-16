@@ -58,31 +58,31 @@
     <div class="carousel-inner">
         <div class="carousel-item active">
             <img src="{{ asset('frontpage/images/b.jpeg') }}" class="d-block w-100 h-50" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-                <h3><b>Brilliant Juara 1</b></h3>
-                <p>Platform belajar berbasis online berdiri pada tahun 2021, dengan menggunakan media belajar
-                    terkini. Bertujuan menyediakan program bimbingan belajar yang terbaik dan memberikan pelayanan
-                    untuk mempermudah para pengguna meraih mimpi. </p>
-            </div>
+{{--            <div class="carousel-caption d-none d-md-block">--}}
+{{--                <h3><b>Brilliant Juara</b></h3>--}}
+{{--                <p>Platform belajar berbasis online berdiri pada tahun 2021, dengan menggunakan media belajar--}}
+{{--                    terkini. Bertujuan menyediakan program bimbingan belajar yang terbaik dan memberikan pelayanan--}}
+{{--                    untuk mempermudah para pengguna meraih mimpi. </p>--}}
+{{--            </div>--}}
         </div>
-        <div class="carousel-item">
-            <img src="{{ asset('frontpage/images/banner-2.jpg') }}" class="d-block w-100 h-50" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-                <h3><b>Brilliant Juara 2</b></h3>
-                <p>Platform belajar berbasis online berdiri pada tahun 2021, dengan menggunakan media belajar
-                    terkini. Bertujuan menyediakan program bimbingan belajar yang terbaik dan memberikan pelayanan
-                    untuk mempermudah para pengguna meraih mimpi. </p>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img src="{{ asset('frontpage/images/banner-3.jpg') }}" class="d-block w-100 h-50" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-                <h3><b>Brilliant Juara 3</b></h3>
-                <p>Platform belajar berbasis online berdiri pada tahun 2021, dengan menggunakan media belajar
-                    terkini. Bertujuan menyediakan program bimbingan belajar yang terbaik dan memberikan pelayanan
-                    untuk mempermudah para pengguna meraih mimpi. </p>
-            </div>
-        </div>
+{{--        <div class="carousel-item">--}}
+{{--            <img src="{{ asset('frontpage/images/banner-2.jpg') }}" class="d-block w-100 h-50" alt="...">--}}
+{{--            <div class="carousel-caption d-none d-md-block">--}}
+{{--                <h3><b>Brilliant Juara 2</b></h3>--}}
+{{--                <p>Platform belajar berbasis online berdiri pada tahun 2021, dengan menggunakan media belajar--}}
+{{--                    terkini. Bertujuan menyediakan program bimbingan belajar yang terbaik dan memberikan pelayanan--}}
+{{--                    untuk mempermudah para pengguna meraih mimpi. </p>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--        <div class="carousel-item">--}}
+{{--            <img src="{{ asset('frontpage/images/banner-3.jpg') }}" class="d-block w-100 h-50" alt="...">--}}
+{{--            <div class="carousel-caption d-none d-md-block">--}}
+{{--                <h3><b>Brilliant Juara 3</b></h3>--}}
+{{--                <p>Platform belajar berbasis online berdiri pada tahun 2021, dengan menggunakan media belajar--}}
+{{--                    terkini. Bertujuan menyediakan program bimbingan belajar yang terbaik dan memberikan pelayanan--}}
+{{--                    untuk mempermudah para pengguna meraih mimpi. </p>--}}
+{{--            </div>--}}
+{{--        </div>--}}
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselCaptions" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>

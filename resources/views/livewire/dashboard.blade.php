@@ -23,7 +23,7 @@
                                 <br>
                                 <div class="p-3 row badge-secondary" style="height: 100%">
                                     <i style="line-height: 30px" class="fa fa-warning col-md-1"></i>
-                                    <p class="col-md-11">Penting : Gunakan Chrome versi terbaru dan jaringan yang yang stabil saat buka
+                                    <p class="col-md-11">Penting : Gunakan Chrome versi terbaru dan jaringan yang stabil saat buka
                                         Website Brilliant
                                         Juara</p>
                                 </div>

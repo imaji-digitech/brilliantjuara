@@ -1,7 +1,7 @@
 <form wire:submit.prevent="{{$action}}" xmlns:wire="http://www.w3.org/1999/xhtml">
     <x-form.input model="data.title" title="Judul banner" type="text"/>
     <x-form.input model="data.link" title="Link" type="text"/>
-    <x-form.input model="thumbnail" title="thumbnail (rasio 1000pxx664px)" type="file" accept="image/*"/>
+    <x-form.input model="thumbnail" title="thumbnail (rasio 1000pxx664px)" type="file" accept="image/*" required/>
     <div wire:loading wire:target="thumbnail">
         Proses upload
     </div>
