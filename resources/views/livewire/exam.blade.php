@@ -21,7 +21,9 @@
     <div class="col-sm-8">
         <div class="card">
             <div class="card-body">
-                <body>
+                <button class="float-end btn btn-danger" wire:click="report({{$questActive->examQuest->id}})">Laporkan soal</button>
+                <br><br>
+                <br>
                 @isset( $questActive->examQuest->question)
                     {{$number+1}}. {!! $questActive->examQuest->question  !!}
 

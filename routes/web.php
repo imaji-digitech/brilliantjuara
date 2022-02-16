@@ -8,11 +8,14 @@ use App\Http\Controllers\Admin\PublicAnnouncementController;
 use App\Http\Controllers\Admin\PublicBannerController;
 use App\Http\Controllers\Admin\PublicEventController;
 use App\Http\Controllers\Admin\ReferralController;
+use App\Http\Controllers\Admin\RoomEventController;
+use App\Http\Controllers\Admin\RoomBannerController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\UploadFile;
 use App\Http\Controllers\User\ProgramController;
 use App\Models\Payment;
+use App\Models\ReportQuest;
 use App\Models\UserOwnCourse;
 use App\Models\UserOwnExam;
 use Illuminate\Http\Request;
@@ -109,6 +112,22 @@ Route::middleware(['auth:sanctum',])->name('admin.')->prefix('admin')->group(fun
         Route::resource('announcement', PublicAnnouncementController::class)->only('index', 'create', 'edit');
         Route::resource('banner', PublicBannerController::class)->only('index', 'create', 'edit');
         Route::resource('event', PublicEventController::class)->only('index', 'create', 'edit');
+
+        Route::get('room/{room}/banner', [RoomBannerController::class, 'index'])->name('room.banner.index');
+        Route::get('room/{room}/banner/create', [RoomBannerController::class, 'create'])->name('room.banner.create');
+        Route::get('room/{room}/banner/edit/{id}', [RoomBannerController::class, 'edit'])->name('room.banner.edit');
+
+//        Route::get('room/{room}/announcement', [RoomAnnouncementController::class, 'index'])->name('room.announcement.index');
+//        Route::get('room/{room}/announcement/create', [RoomAnnouncementController::class, 'create'])->name('room.announcement.create');
+//        Route::get('room/{room}/announcement/edit/{id}', [RoomAnnouncementController::class, 'edit'])->name('room.announcement.edit');
+        Route::get('quest-report', function (){
+            $reportQuests= ReportQuest::class;
+            return view('pages.report-quest',compact('reportQuests'));
+        })->name('quest-report');
+
+        Route::get('room/{room}/event', [RoomEventController::class, 'index'])->name('room.event.index');
+        Route::get('room/{room}/event/create', [RoomEventController::class, 'create'])->name('room.event.create');
+        Route::get('room/{room}/event/edit/{id}', [RoomEventController::class, 'edit'])->name('room.event.edit');
 
         Route::get('room/{room}/exam', [ExamController::class, 'index'])->name('exam.index');
         Route::get('room/{room}/exam/create', [ExamController::class, 'create'])->name('exam.create');

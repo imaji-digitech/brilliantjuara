@@ -13,13 +13,14 @@ class DashboardCalendar extends Component
     public $eventNow;
     public $events;
     public $date;
+    public $roomId;
     protected $listeners = ['setDate' => 'setDate'];
 
     public function mount()
     {
         $date = Carbon::now();
-        $this->events=PublicEvent::get();
-        $this->eventNow=PublicEvent::whereDate('created_at',$date)->get();
+        $this->events=PublicEvent::whereRoomId($this->roomId)->get();
+        $this->eventNow=PublicEvent::whereRoomId($this->roomId)->whereDate('created_at',$date)->get();
     }
 
     public function render()

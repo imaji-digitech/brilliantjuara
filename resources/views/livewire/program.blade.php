@@ -26,10 +26,10 @@
     <div class="card">
         <div class="card-body" style="padding: 10px">
             <div class="owl-carousel owl-theme" id="banner-dashboard">
-                {{--                @foreach($banners as $banner)--}}
-                <div class="item"><img src="{{ asset('assets/images/banner/4.png') }}" alt="1"></div>
-                <div class="item"><img src="{{ asset('assets/images/banner/4.png') }}" alt="1"></div>
-                {{--                @endforeach--}}
+                @foreach($banners as $banner)
+                    <div class="item"><img src="{{ asset('storage/'.$banner->thumbnail) }}" alt="1"></div>
+                    {{--                <div class="item"><img src="{{ asset('assets/images/banner/4.png') }}" alt="1"></div>--}}
+                @endforeach
             </div>
         </div>
     </div>
@@ -76,7 +76,7 @@
         </div>
     </div>
     <div class="col-sm-5">
-        <livewire:dashboard-calendar/>
+        <livewire:dashboard-calendar :roomId="$room->id"/>
     </div>
     <div class="col-sm-12">
         <div class="card">
@@ -168,7 +168,8 @@
                                                                                 Cek Referral
                                                                             </button>
                                                                         </div>
-                                                                        <div class="col-sm-12 text-left" style="text-align: left">
+                                                                        <div class="col-sm-12 text-left"
+                                                                             style="text-align: left">
                                                                             {{ $referralMsg }}
                                                                         </div>
                                                                     </div>
@@ -181,7 +182,12 @@
                                                         </div>
                                                     @endisset
                                                 @else
-                                                    <button class="btn btn-success" disabled="">Sudah terbeli</button>
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <button class="btn btn-success" disabled="">Sudah terbeli
+                                                            </button>
+                                                        </div>
+                                                    </div>
                                                 @endif
                                             </div>
                                             <br>

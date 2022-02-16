@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property integer $id
@@ -24,10 +25,17 @@ class PublicBanner extends Model
     /**
      * @var array
      */
-    protected $fillable = ['title', 'thumbnail', 'link', 'created_at', 'updated_at'];
-    public static function search($query)
+    protected $fillable = ['title', 'thumbnail', 'link','room_id', 'created_at', 'updated_at'];
+    public static function search($query,$dataId)
     {
-        return empty($query) ? static::query()
-            : static::where('title', 'like', '%' . $query . '%');
+        return empty($query) ? static::query()->whereRoomId($dataId)
+            : static::whereRoomId($dataId)->where('title', 'like', '%' . $query . '%');
+    }
+    /**
+     * @return BelongsTo
+     */
+    public function room()
+    {
+        return $this->belongsTo('App\Models\Room');
     }
 }

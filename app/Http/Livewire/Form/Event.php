@@ -11,18 +11,21 @@ class Event extends Component
     public $action;
     public $data;
     public $dataId;
+    public $roomId;
 
     public function mount()
     {
         $this->data = [
             'title' => '',
-            'created_at'=>Carbon::now()
+            'created_at'=>Carbon::now(),
+            'room_id'=>$this->roomId
         ];
         if ($this->dataId!=null){
             $data=PublicEvent::find($this->dataId);
             $this->data=[
                 'title'=>$data->title,
-                'created_at'=>$data->created_at
+                'created_at'=>$data->created_at,
+                'room_id'=>$this->roomId
             ];
         }
     }
@@ -41,7 +44,11 @@ class Event extends Component
             'type' => 'success',
             'title' => 'Pengumuman berhasil ditambahkan',
         ]);
-        $this->emit('redirect', route('admin.event.index'));
+        if ($this->roomId==null){
+            $this->emit('redirect', route('admin.event.index'));
+        }else{
+            $this->emit('redirect', route('admin.room.event.index',\App\Models\Room::find($this->roomId)->slug));
+        }
     }
 
     public function update()
@@ -52,7 +59,11 @@ class Event extends Component
             'type' => 'success',
             'title' => 'Pengumuman berhasil ditambahkan',
         ]);
-        $this->emit('redirect', route('admin.event.index'));
+        if ($this->roomId==null){
+            $this->emit('redirect', route('admin.event.index'));
+        }else{
+            $this->emit('redirect', route('admin.room.event.index',$this->roomId));
+        }
     }
 
     public function render()

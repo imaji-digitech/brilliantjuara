@@ -29,6 +29,10 @@
                         <i class="fa fa-16px fa-book">Bimbel</i></a>
                     <a role="button" href="{{ route('admin.exam.index',$room->slug) }}" style="margin-right:15px">
                         <i class="fa fa-16px fa-book-open">exam</i></a>
+                    <a role="button" href="{{ route('admin.room.banner.index',$room->slug) }}" style="margin-right:15px">
+                        <i class="fa fa-16px fa-image">banner</i></a>
+                    <a role="button" href="{{ route('admin.room.event.index',$room->slug) }}" style="margin-right:15px">
+                        <i class="fa fa-16px fa-calendar">event</i></a>
                     <a role="button" wire:click="deleteItem({{$room->id}})" class="mr-3">
                         <i class="fa fa-16px fa-trash text-danger">Hapus</i></a>
                     {{--                        <a role="button" x-on:click.prevent="deleteItem" href="#"><i class="fa fa-16px fa-trash text-red-500"></i></a>--}}

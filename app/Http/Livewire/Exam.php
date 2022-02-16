@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\ExamUser;
+use App\Models\ReportQuest;
 use Carbon\Carbon;
 use Livewire\Component;
 
@@ -26,6 +27,15 @@ class Exam extends Component
         $this->questActive = $this->examUser->examAnswers[$number];
         $this->active = $this->questActive->id;
         $this->number = $number;
+    }
+    public function report($id){
+        ReportQuest::create([
+            'user_id'=>auth()->id(), 'exam_quest_id'=>$id
+        ]);
+        $this->emit('notify', [
+            'type' => 'success',
+            'title' => 'Terima kasih telah melapor admin akan segera melihat permasalahan soal',
+        ]);
     }
 
     public function setDone()

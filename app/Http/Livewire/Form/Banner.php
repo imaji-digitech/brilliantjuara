@@ -16,20 +16,24 @@ class Banner extends Component
     public $dataId;
     public $action;
     public $thumbnail;
+    public $roomId;
 
     public function mount()
     {
+
         $this->data = [
             'title' => '',
             'thumbnail' => '',
-            'link' => ''
+            'link' => '',
+            'room_id'=>$this->roomId
         ];
         if ($this->dataId != null) {
             $data = PublicBanner::find($this->dataId);
             $this->data = [
                 'title' => $data->title,
                 'thumbnail' => $data->thumbnail,
-                'link' => $data->link
+                'link' => $data->link,
+                'room_id'=>$this->roomId
             ];
         }
     }
@@ -42,7 +46,12 @@ class Banner extends Component
             'type' => 'success',
             'title' => 'Banner berhasil ditambahkan',
         ]);
-        $this->emit('redirect', route('admin.announcement.index'));
+        if ($this->roomId==null){
+            $this->emit('redirect', route('admin.banner.index'));
+        }else{
+            $this->emit('redirect', route('admin.room.banner.index',\App\Models\Room::find($this->roomId)->slug));
+        }
+
     }
 
     private function upload()
@@ -67,7 +76,11 @@ class Banner extends Component
             'type' => 'success',
             'title' => 'Banner berhasil diubah',
         ]);
-        $this->emit('redirect', route('admin.announcement.index'));
+        if ($this->roomId==null){
+            $this->emit('redirect', route('admin.banner.index'));
+        }else{
+            $this->emit('redirect', route('admin.room.banner.index',$this->roomId));
+        }
     }
 
     public function render()

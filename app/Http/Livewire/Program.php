@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Bundle;
 use App\Models\Payment;
+use App\Models\PublicBanner;
 use App\Models\ReferralCode;
 use App\Models\ReferralCodeUse;
 use App\Models\Room;
@@ -29,6 +30,7 @@ class Program extends Component
     public $referralMsg;
     public $referralDiscount = 0;
     public $referralUse;
+    public $banners;
     protected $listeners = ["payment" => "payment"];
 
     public function buy($id)
@@ -87,6 +89,7 @@ class Program extends Component
     public function mount()
     {
         $this->room = Room::getRoom($this->room);
+        $this->banners=PublicBanner::whereRoomId($this->room->id)->get();
         $ownExam = auth()->user()->userOwnExams;
         $ownCourse = auth()->user()->userOwnCourses;
         $myClass = [];

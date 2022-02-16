@@ -82,6 +82,11 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.quest-report') }}">
+                                        <i class="fas fa-home"></i><span> Soal Bermasalah</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title link-nav"
                                        href="{{ route('admin.room.index') }}">
                                         <i class="fas fa-home"></i><span> Kelas</span>

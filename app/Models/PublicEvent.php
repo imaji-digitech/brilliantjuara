@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property integer $id
@@ -22,11 +23,22 @@ class PublicEvent extends Model
     /**
      * @var array
      */
-    protected $fillable = ['title', 'created_at', 'updated_at'];
-    public static function search($query)
+    protected $fillable = ['title', 'room_id', 'created_at', 'updated_at'];
+
+    public static function search($query, $dataId)
     {
-        return empty($query) ? static::query()
-            : static::where('title', 'like', '%' . $query . '%')
-            ->orWhere('created_at', 'like', '%' . $query . '%');
+        return empty($query) ? static::query()->whereRoomId($dataId)
+            : static::whereRoomId($dataId)->where(function ($q) use ($query) {
+                $q->where('title', 'like', '%' . $query . '%')
+                    ->orWhere('created_at', 'like', '%' . $query . '%');
+            });
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function room()
+    {
+        return $this->belongsTo('App\Models\Room');
     }
 }

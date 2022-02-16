@@ -229,6 +229,15 @@ class Main extends Component
                     "referrals" =>  $exam,
                 ];
                 break;
+            case 'reportQuest':
+                $exam = $this->model::query()
+                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                    ->paginate($this->perPage);
+                return [
+                    "view" => "livewire.table.report-quest",
+                    "reportQuests" =>  $exam,
+                ];
+                break;
             default:
                 break;
         }
