@@ -55,7 +55,7 @@
         <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
         <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
     </div>
-    <div class="carousel-inner">
+    <div class="carousel-inner" style="margin-top: 100px">
         <div class="carousel-item active">
             <img src="{{ asset('frontpage/images/b.jpeg') }}" class="d-block w-100 h-50" alt="...">
 {{--            <div class="carousel-caption d-none d-md-block">--}}
