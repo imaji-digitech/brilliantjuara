@@ -8,32 +8,31 @@
                             <div class="greeting-user">
                                 <h4 class="f-w-600 font-primary" id="greeting">Good Night</h4>
                                 <p>Hai Sobat Brilli {{ auth()->user()->name }} !</p>
-
-                                <div class="p-3 row badge-primary" style="height: 100%;">
-                                    <i style="line-height: 20px" class="fa fa-warning col-md-1"></i>
-                                    <div class="col-md-11">
-                                        Link group telegram
-                                        <a href="https://t.me/brilliantjuaraofficial" target="_blank" style="color: white">
-                                            link
-                                            <i class="fa fa-link" style="color: white"></i>
-                                        </a>
-                                    </div>
-
-                                </div>
-                                <br>
-                                <div class="p-3 row badge-secondary" style="height: 100%">
-                                    <i style="line-height: 30px" class="fa fa-warning col-md-1"></i>
-                                    <p class="col-md-11">Penting : Gunakan Chrome versi terbaru dan jaringan yang stabil saat buka
-                                        Website Brilliant
-                                        Juara</p>
-                                </div>
-
 {{--                                <div class="whatsnew-btn"><a class="btn btn-primary">Whats New !</a></div>--}}
                             </div>
                         </div>
+
                         <div class="badge-groups">
                             <div class="badge badge-primary f-10"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock me-1"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg><span id="txt">3:23 AM</span></div>
                         </div>
+                    </div>
+                    <br>
+                    <div class="p-3 row badge-primary" style="height: 100%;">
+                        <i style="line-height: 20px" class="fa fa-warning col-md-1"></i>
+                        <div class="col-md-11">
+                            Link group telegram
+                            <a href="https://t.me/brilliantjuaraofficial" target="_blank" style="color: white">
+                                link
+                                <i class="fa fa-link" style="color: white"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="p-3 row badge-secondary" style="height: 100%">
+                        <i style="line-height: 30px" class="fa fa-warning col-md-1"></i>
+                        <p class="col-md-11">Penting : Gunakan Chrome versi terbaru dan jaringan yang stabil saat buka
+                            Website Brilliant
+                            Juara</p>
                     </div>
                     <div class="cartoon"><img class="img-fluid" src="{{ asset('assets/images/cartoon.png') }}" alt=""></div>
                 </div>
