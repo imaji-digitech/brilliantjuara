@@ -36,15 +36,17 @@
                 </td>
                 @php
                 $totalPoint=0;
-$total
+$totalHigh=0;
                 foreach ($exam->examAnswers as $i => $eu) {
+                    $totalHigh+=+=$eu->examQuest->examStep->score_right;
                     $answer = $eu->examQuest->answer == $eu->answer;
                     if ($answer) {
                         $totalPoint+=$eu->examQuest->examStep->score_right;
                     }
                 }
                 @endphp
-                <td>{{ $exam->status==1?'-':$totalPoint/$eu->examQuest-> }}</td>
+                {{ number_format((float)($totalPoint/$totalHighValue*100), 2, '.', '') }}%
+                <td>{{ $exam->status==1?'-':number_format((float)($totalPoint/$totalHigh*100), 2, '.', '').'%' }}%</td>
                 <td>
                     @if($exam->status==1)
                         <a role="button" href="{{ route('admin.user.exam.exam',[$exam->exam->slug,$exam->id]) }}"
