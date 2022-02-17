@@ -71,7 +71,7 @@
                                 </div>
                             </li>
                             <li class="sidebar-list">
-                                <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.referral.me.use') }}">
+                                <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.payment') }}">
                                     <i class="fas fa-home"></i><span> Riwayat</span>
                                 </a>
                             </li>

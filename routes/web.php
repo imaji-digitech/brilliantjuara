@@ -125,6 +125,11 @@ Route::middleware(['auth:sanctum',])->name('admin.')->prefix('admin')->group(fun
             return view('pages.report-quest',compact('reportQuests'));
         })->name('quest-report');
 
+        Route::get('payment', function (){
+            $payments= Payment::class;
+            return view('pages.payment',compact('payments'));
+        })->name('payment');
+
         Route::get('room/{room}/event', [RoomEventController::class, 'index'])->name('room.event.index');
         Route::get('room/{room}/event/create', [RoomEventController::class, 'create'])->name('room.event.create');
         Route::get('room/{room}/event/edit/{id}', [RoomEventController::class, 'edit'])->name('room.event.edit');

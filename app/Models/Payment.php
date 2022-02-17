@@ -22,7 +22,7 @@ class Payment extends Model
 {
     /**
      * The "type" of the auto-incrementing ID.
-     * 
+     *
      * @var string
      */
     protected $keyType = 'integer';
@@ -54,5 +54,14 @@ class Payment extends Model
     public function referralCode()
     {
         return $this->belongsTo('App\Models\ReferralCode');
+    }
+    public static function search($query)
+    {
+        return empty($query) ? static::query()->whereUserId(auth()->id())
+            : static::whereUserId(auth()->id())->where(function ($q) use ($query) {
+                $q->whereHas('referralCode',function ($q2) use ($query) {
+                        $q2->where('code', 'like', '%' . $query . '%');
+                    });
+            });
     }
 }

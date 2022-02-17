@@ -238,6 +238,15 @@ class Main extends Component
                     "reportQuests" =>  $exam,
                 ];
                 break;
+            case 'payment':
+                $exam = $this->model::query()
+                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                    ->paginate($this->perPage);
+                return [
+                    "view" => "livewire.table.payment",
+                    "payments" =>  $exam,
+                ];
+                break;
             default:
                 break;
         }
