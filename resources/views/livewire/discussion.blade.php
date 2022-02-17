@@ -98,7 +98,7 @@
 
                         },
                         tooltip: {},
-                        colors: [CubaAdminConfig.primary, CubaAdminConfig.secondary, '#BC2C3D']
+                        colors: ['green', 'red', '#d0d0d0']
                     }
 
                     var chart3 = new ApexCharts(
