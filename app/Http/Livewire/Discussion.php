@@ -16,6 +16,8 @@ class Discussion extends Component
     public $wrongAnswer = 0;
     public $blankAnswer = 0;
     public $totalPoint=0;
+    public $totalHighValue=0;
+    public $graduate;
 
     public function mount()
     {
@@ -24,6 +26,7 @@ class Discussion extends Component
                 $this->blankAnswer+=1;
             }
             $answer = $eu->examQuest->answer == $eu->answer;
+            $this->totalHighValue+=$eu->examQuest->examStep->score_right;
             if ($answer) {
                 $this->rightAnswer += 1;
                 $this->totalPoint+=$eu->examQuest->examStep->score_right;
@@ -31,6 +34,12 @@ class Discussion extends Component
                 $this->wrongAnswer += 1;
             }
         }
+        if ($this->totalHighValue*0.8<$this->totalPoint){
+            $this->graduate="Lulus";
+        }else{
+            $this->graduate="Tidak lulus";
+        }
+
         $this->wrongAnswer=$this->wrongAnswer-$this->blankAnswer;
 //        $this->totalPoint=$this->rightAnswer*
         $this->countQuest = $this->examUser->examAnswers->count();

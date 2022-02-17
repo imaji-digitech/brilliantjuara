@@ -10693,19 +10693,19 @@ table.dataTable.display tbody tr.odd > .sorting_1 {
 }
 
 .radio-primary input[type="radio"] + label::before {
-    border-color: var(--theme-deafult)
+    border-color: #0d6efd !important
 }
 
 .radio-primary input[type="radio"] + label::after {
-    background-color: var(--theme-deafult)
+    background-color: #0d6efd !important
 }
 
 .radio-primary input[type="radio"]:checked + label::before {
-    border-color: var(--theme-deafult)
+    border-color: #0d6efd !important
 }
 
 .radio-primary input[type="radio"]:checked + label::after {
-    background-color: var(--theme-deafult)
+    background-color: #0d6efd !important
 }
 
 .checkbox-secondary label::before {
@@ -11090,7 +11090,7 @@ table.dataTable.display tbody tr.odd > .sorting_1 {
 }
 
 .radio input[type="radio"]:disabled + label {
-    opacity: 0.65
+    opacity: 1
 }
 
 .radio input[type="radio"]:disabled + label::before {
@@ -30332,19 +30332,19 @@ body.dark-only .browse .browse-articles ul li:hover {
 }
 
 body.dark-only .radio-primary input[type="radio"] + label::before {
-    border-color: var(--theme-deafult) !important
+    border-color: #0d6efd !important
 }
 
 body.dark-only .radio-primary input[type="radio"] + label::after {
-    background-color: var(--theme-deafult)
+    background-color: #0d6efd !important
 }
 
 body.dark-only .radio-primary input[type="radio"]:checked + label::before {
-    border-color: var(--theme-deafult) !important
+    border-color: #0d6efd !important
 }
 
 body.dark-only .radio-primary input[type="radio"]:checked + label::after {
-    background-color: var(--theme-deafult)
+    background-color: #0d6efd !important
 }
 
 body.dark-only .radio-secondary input[type="radio"] + label::before {

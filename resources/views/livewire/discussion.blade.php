@@ -1,27 +1,113 @@
 <div class="row">
     <div class="col-md-12">
-        <div class="card">
-            <div class="card-header" style="padding: 10px">
-                <h3>Hasil</h3>
-            </div>
-            <div class="card-body" style="padding: 10px;">
-                <h6>Benar : {{ $rightAnswer }}</h6>
-                <h6>Salah : {{ $wrongAnswer }}</h6>
-                <h6>Kosong : {{ $blankAnswer }}</h6>
-                <h6>Total nilai : {{ $totalPoint }}</h6>
-                <br>
-                <h6>Mulai Pengerjaan : {{ $examUser->created_at->format('d-m-Y H:i') }}</h6>
-                <h6>Selesai Pengerjaan : {{ $examUser->updated_at->format('d-m-Y H:i') }}</h6>
-                @php
-                    $time=$examUser->updated_at->diffInSeconds($examUser->created_at);
-                $minutes=intval($time/60);
-                $seconds=$time%60
-                @endphp
-                <h6>Total waktu pengerjaan : {{ $minutes }} menit {{ $seconds }} detik</h6>
-            </div>
-            <div id="discussion"></div>
-            <script>
+        <div class="row">
 
+            <div class="col-md-4">
+                <div class="card" style="height: 285px">
+                    <div class="card-body" style="padding: 10px;">
+                        <br><br>
+                        <div class="text-center">
+                            <h6 style="color: #38a7b3">Benar : {{ $rightAnswer }}</h6>
+                            <h6 style="color: #faa41b">Salah : {{ $wrongAnswer }}</h6>
+                            <h6 style="color: #BC2C3D">Kosong : {{ $blankAnswer }}</h6>
+                        </div>
+                        <br>
+                        <div style="text-align: left">
+                            <h6 style="color: #38a7b3">Mulai : {{ $examUser->created_at->format('d-m-Y H:i') }}</h6>
+                            <h6 style="color: #faa41b">Selesai : {{ $examUser->updated_at->format('d-m-Y H:i') }}</h6>
+                        </div>
+                        @php
+                            $time=$examUser->updated_at->diffInSeconds($examUser->created_at);
+                        $minutes=intval($time/60);
+                        $seconds=$time%60
+                        @endphp
+                        <h6 style="color: #BC2C3D">Waktu pengerjaan : {{ $minutes }} menit {{ $seconds }} detik</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card" style="height: 285px;">
+                    <div class="card-body" style="padding: 10px;text-align: center;">
+                        <div>
+                            <br>
+                            <h5 >Total nilai : </h5>
+                            <h4 style="color: #38a7b3">{{ $totalPoint }}</h4>
+                            <h5>Dari :</h5>
+                            <h4 style="color: #faa41b">{{ $totalHighValue }}</h4>
+                            <h5>Keterangan :</h5>
+                            <h4 style="color: {{ ($graduate=="Lulus")?'#38a7b3':'#BC2C3D' }}">{{ $graduate }}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card" style="height: 285px">
+                    <div class="card-body" style="padding: 10px;">
+                        <div id="result"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <script>
+                window.addEventListener('DOMContentLoaded', function () {
+                    var options3 = {
+                        chart: {
+                            height: 250,
+                            type: 'bar',
+                            toolbar: {
+                                show: false
+                            }
+                        },
+                        plotOptions: {
+                            bar: {
+                                horizontal: false,
+                                endingShape: 'rounded',
+                                columnWidth: '55%',
+                            },
+                        },
+                        dataLabels: {
+                            enabled: false
+                        },
+                        stroke: {
+                            show: true,
+                            width: 2,
+                            colors: ['transparent']
+                        },
+                        series: [{
+                            name: 'Benar',
+                            data: [{{ $rightAnswer }}]
+                        }, {
+                            name: 'Salah',
+                            data: [{{ $wrongAnswer }}]
+                        }, {
+                            name: 'Kosong',
+                            data: [{{ $blankAnswer }}]
+                        }],
+                        xaxis: {
+                            categories: [''],
+                        },
+                        yaxis: {
+                            title: {
+                                text: ''
+                            }
+                        },
+                        fill: {
+                            opacity: 1
+
+                        },
+                        tooltip: {},
+                        colors: [CubaAdminConfig.primary, CubaAdminConfig.secondary, '#BC2C3D']
+                    }
+
+                    var chart3 = new ApexCharts(
+                        document.querySelector("#result"),
+                        options3
+                    );
+
+                    chart3.render();
+                });
             </script>
         </div>
     </div>
@@ -51,7 +137,13 @@
             <div class="card-body">
                 <body>
                 @isset( $questActive->examQuest->question)
-                    {{$number+1}}. {!! $questActive->examQuest->question  !!}
+                    <div class="row">
+                        <div class="col-1" style="width: 1px;display: inline-block">{{$number+1}}</div>.
+                        <div class="col-11" >
+                            <p style="text-align: justify">{!! $questActive->examQuest->question  !!}</p>
+                        </div>
+                    </div>
+
 
                     <div class="col">
                         <div class="mb-3 m-t-15 custom-radio-ml">
@@ -62,7 +154,7 @@
 
                                 <div class="form-check radio
                                 @if($answer and $eqc->choice == $questActive->answer)
-                                    radio-success
+                                    radio-primary
                                     @elseif(!$answer and $eqc->choice == $questActive->answer)
                                     radio-danger
                                     @elseif(!$answer and $eqc->choice == $questActive->examQuest->answer)
@@ -70,10 +162,10 @@
                                     @else
                                     radio-option
                                     @endif">
-                                    <input class="form-check-input" type="radio"
+                                    <input class="form-check-input radio-primary" type="radio"
                                            {{ $questActive->answer==$eqc->choice?'checked':'' }} disabled>
                                     <label class="form-check-label @if($answer and $eqc->choice == $questActive->answer)
-                                        text-success
+                                        text-primary
 @elseif(!$answer and $eqc->choice == $questActive->answer)
                                         text-danger
 @elseif(!$answer and $eqc->choice == $questActive->examQuest->answer)
@@ -87,9 +179,15 @@
                             @endforeach
                         </div>
                         <div>
-                            Jawaban Benar : {{$alphabet[$questActive->examQuest->answer]}}
+
                             <br>
-                            {!! $questActive->examQuest->discussion !!}
+                            <div class="row">
+                                <div class="col-1" style="width: 1px;display: inline-block"></div>
+                                <div class="col-11" >
+                                    <span>Jawaban Benar : </span><span class="text-primary">{{$alphabet[$questActive->examQuest->answer]}}</span>
+                                    <p style="text-align: justify">{!! $questActive->examQuest->discussion  !!}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="float-end">
@@ -101,10 +199,7 @@
                             <button class="btn btn-primary mr-3" wire:click="changeActive({{$number+1}})">Selanjutnya
                             </button>
                         @endif
-                        @if($number+1==$examUser->examAnswers->count())
-                            <button class="btn btn-success mr-3" wire:click="setDone()">Selesai
-                            </button>
-                        @endif
+
                     </div>
                 @endisset
             </div>
@@ -118,6 +213,7 @@
                     @if($i%8==0)
                         <br>
                     @endif
+
                     <button class="btn-sm btn
                         @if($eu->answer==0) btn-light @elseif($answer) btn-success @else btn-danger @endif"
                             style="width: 30px;height: 30px; padding: 0;margin: 2px;
