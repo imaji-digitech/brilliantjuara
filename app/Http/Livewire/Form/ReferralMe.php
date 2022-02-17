@@ -44,7 +44,7 @@ class ReferralMe extends Component
     protected function getRules()
     {
         return [
-            'data.code'=>''
+            'data.code'=>'required|regex:/^[a-zA-Z]+$/u|max:15'
         ];
     }
 
