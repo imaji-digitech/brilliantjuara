@@ -101,7 +101,7 @@
     <div class="col-sm-12">
         <div class="card">
             <div class="card-header" style="padding: 10px">
-                <h4>Program Brillian Juara</h4>
+                <h4>Program Brilliant Juara</h4>
             </div>
             <div class="card-body" style="padding: 10px">
                 <div class="product-wrapper-grid">
