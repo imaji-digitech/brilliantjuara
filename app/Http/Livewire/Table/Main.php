@@ -239,7 +239,7 @@ class Main extends Component
                 ];
                 break;
             case 'payment':
-                $exam = $this->model::query()
+                $exam = $this->model::search()
                     ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
                     ->paginate($this->perPage);
                 return [
@@ -248,7 +248,7 @@ class Main extends Component
                 ];
                 break;
             case 'ranking':
-                $exam = $this->model::query()
+                $exam = $this->model::seacrh()
                     ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
                     ->paginate($this->perPage);
                 return [

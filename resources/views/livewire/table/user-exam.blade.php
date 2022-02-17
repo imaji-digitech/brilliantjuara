@@ -36,6 +36,7 @@
                 </td>
                 @php
                 $totalPoint=0;
+$total
                 foreach ($exam->examAnswers as $i => $eu) {
                     $answer = $eu->examQuest->answer == $eu->answer;
                     if ($answer) {
