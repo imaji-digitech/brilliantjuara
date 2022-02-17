@@ -23,8 +23,8 @@ class ToStart extends Component
             'icon' => 'warning',
             'confirmText' => 'Confirm',
 //            'cancelText' => 'Batal',
-            'text' => 'banyak soal : '.$total.'<br>'
-            .'waktu pengerjaan : '.$this->exam->time.' menit',
+            'text' => 'Banyak soal : '.$total.'<br>'.' soal'
+            .'Waktu pengerjaan : '.$this->exam->time.' menit',
             'method' => 'exam']);
     }
     public function exam(){
