@@ -1,6 +1,6 @@
 <x-admin>
     <x-slot name="title">
-        Data exam
+        Try Out
     </x-slot>
     <div>
         <div class="container-fluid">
