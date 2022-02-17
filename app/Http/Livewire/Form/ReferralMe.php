@@ -11,6 +11,7 @@ class ReferralMe extends Component
     public $dataId;
     public $me;
 
+
     public function mount()
     {
         $this->me = ReferralCode::findOrFail($this->dataId);
@@ -19,6 +20,7 @@ class ReferralMe extends Component
 
     public function edit()
     {
+        $this->validate();
         $code = ReferralCode::whereCode($this->data['code'])->get();
         if ($this->data['code'] == $this->me->code) {
             $this->emit('notify', [
@@ -41,15 +43,21 @@ class ReferralMe extends Component
         }
 
     }
-    protected function getRules()
-    {
-        return [
-            'data.code'=>'required|regex:/^[a-zA-Z]+$/u|max:15|min:6'
-        ];
-    }
 
     public function render()
     {
         return view('livewire.form.referral-me');
     }
+
+    protected function getRules()
+    {
+        return [
+            'data.code' => 'max:15|min:6|required|regex:/^[a-zA-Z]+$/u'
+        ];
+    }
+    protected $messages = [
+        'data.code.max' => 'Maksimal kode adalah 15.',
+        'data.code.min' => 'Minimal kode adalah 6.',
+        'data.code.regex' => 'Hanya menerima huruf.',
+    ];
 }
