@@ -38,7 +38,7 @@
                 $totalPoint=0;
 $totalHigh=0;
                 foreach ($exam->examAnswers as $i => $eu) {
-                    $totalHigh+=+=$eu->examQuest->examStep->score_right;
+                    $totalHigh+=$eu->examQuest->examStep->score_right;
                     $answer = $eu->examQuest->answer == $eu->answer;
                     if ($answer) {
                         $totalPoint+=$eu->examQuest->examStep->score_right;
