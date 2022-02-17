@@ -31,9 +31,9 @@
                         <div>
                             <br>
                             <h5 >Total nilai : </h5>
-                            <h4 style="color: #38a7b3">{{ $totalPoint }}</h4>
-                            <h5>Dari :</h5>
-                            <h4 style="color: #faa41b">{{ $totalHighValue }}</h4>
+                            <h4 style="color: #38a7b3">{{ $totalPoint/$totalHighValue*100 }}%</h4>
+{{--                            <h5>Dari :</h5>--}}
+{{--                            <h4 style="color: #faa41b">{{ $totalHighValue }}</h4>--}}
                             <h5>Keterangan :</h5>
                             <h4 style="color: {{ ($graduate=="Lulus")?'#38a7b3':'#BC2C3D' }}">{{ $graduate }}</h4>
                         </div>
