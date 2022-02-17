@@ -39,10 +39,14 @@
     <!-- Bootstrap css-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/bootstrap.css')}}">
     <!-- App css-->
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css?_='. time()) }}">
-    <link id="color" rel="stylesheet" href="{{asset('assets/css/color-1.css')}}" media="screen">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css?_=1') }}">
+    <link id="color" rel="stylesheet" href="{{asset('assets/css/color-1.css?_=1')}}" media="screen">
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/responsive.css')}}">
+
+    @isset($css)
+        {{ $css }}
+    @endif
     <style>
         .default-datepicker .datepicker-inline .datepicker .datepicker--content .datepicker--days .datepicker--days-names {
             margin: 20px 0 0;
