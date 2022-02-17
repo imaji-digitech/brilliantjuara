@@ -239,7 +239,7 @@ class Main extends Component
                 ];
                 break;
             case 'payment':
-                $exam = $this->model::search()
+                $exam = $this->model::search($this->search)
                     ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
                     ->paginate($this->perPage);
                 return [
