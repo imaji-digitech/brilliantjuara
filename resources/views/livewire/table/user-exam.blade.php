@@ -45,7 +45,6 @@ $totalHigh=0;
                     }
                 }
                 @endphp
-                {{ number_format((float)($totalPoint/$totalHighValue*100), 2, '.', '') }}%
                 <td>{{ $exam->status==1?'-':number_format((float)($totalPoint/$totalHigh*100), 2, '.', '').'%' }}%</td>
                 <td>
                     @if($exam->status==1)
