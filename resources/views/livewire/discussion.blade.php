@@ -29,7 +29,7 @@
                 <div class="card" style="height: 285px;">
                     <div class="card-body" style="padding: 10px;text-align: center;">
                         <div>
-                            <br>
+                            <br><br><br>
                             <h5 >Total nilai : </h5>
                             <h4 style="color: #38a7b3">{{ number_format((float)($totalPoint/$totalHighValue*100), 2, '.', '') }}%</h4>
 {{--                            <h5>Dari :</h5>--}}
@@ -138,7 +138,7 @@
                 <body>
                 @isset( $questActive->examQuest->question)
                     <div class="row">
-                        <div class="col-1" style="display: inline-block">{{$number+1}}</div>.
+                        <div class="col-1">{{$number+1}}. </div>
                         <div class="col-11" >
                             <p style="text-align: justify">{!! $questActive->examQuest->question  !!}</p>
                         </div>
