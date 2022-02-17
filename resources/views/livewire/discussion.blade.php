@@ -138,7 +138,7 @@
                 <body>
                 @isset( $questActive->examQuest->question)
                     <div class="row">
-                        <div class="col-1" style="width: 1px;display: inline-block">{{$number+1}}</div>.
+                        <div class="col-1" style="display: inline-block">{{$number+1}}</div>.
                         <div class="col-11" >
                             <p style="text-align: justify">{!! $questActive->examQuest->question  !!}</p>
                         </div>
