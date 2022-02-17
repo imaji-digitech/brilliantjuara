@@ -19,6 +19,10 @@
                 @endphp
                 <h6>Total waktu pengerjaan : {{ $minutes }} menit {{ $seconds }} detik</h6>
             </div>
+            <div id="discussion"></div>
+            <script>
+
+            </script>
         </div>
     </div>
     <div class="col-sm-4 desktop-only">

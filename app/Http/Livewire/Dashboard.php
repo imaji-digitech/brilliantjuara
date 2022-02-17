@@ -15,7 +15,7 @@ class Dashboard extends Component
 //    protected $listeners= ['setDate'=>'setDate'];
     public function mount(){
         $this->announcements=PublicAnnouncement::orderBy('id','desc')->limit(3)->get();
-        $this->banners=PublicBanner::orderBy('id','desc')->limit(6)->get();
+        $this->banners=PublicBanner::orderBy('id','desc')->whereRoomId(null)->limit(6)->get();
         $date=Carbon::now();
     }
 
