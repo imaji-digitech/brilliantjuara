@@ -23,7 +23,7 @@ class ToStart extends Component
             'icon' => 'warning',
             'confirmText' => 'Confirm',
 //            'cancelText' => 'Batal',
-            'text' => 'Banyak soal : '.$total.'<br>'.' soal'
+            'text' => 'Banyak soal : '.$total.' soal <br>'
             .'Waktu pengerjaan : '.$this->exam->time.' menit',
             'method' => 'exam']);
     }
