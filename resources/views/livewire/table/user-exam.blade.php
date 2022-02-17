@@ -11,11 +11,12 @@
                 Waktu selesai @include('components.sort-icon',['field'=>"title"])
             </th>
             <th>
-                Hasil
-            </th>
-            <th>
                 Status
             </th>
+            <th>
+                Hasil
+            </th>
+
             {{--            <th>Hasil</th>--}}
             <th>aksi</th>
         </tr>
@@ -45,7 +46,7 @@ $totalHigh=0;
                     }
                 }
                 @endphp
-                <td>{{ $exam->status==1?'-':number_format((float)($totalPoint/$totalHigh*100), 2, '.', '').'%' }}%</td>
+                <td>{{ $exam->status==1?'-':number_format((float)($totalPoint/$totalHigh*100), 2, '.', '').'%' }}</td>
                 <td>
                     @if($exam->status==1)
                         <a role="button" href="{{ route('admin.user.exam.exam',[$exam->exam->slug,$exam->id]) }}"
