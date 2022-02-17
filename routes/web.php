@@ -107,6 +107,11 @@ Route::middleware(['auth:sanctum',])->name('admin.')->prefix('admin')->group(fun
     Route::get('exam/{slug}/discussion/{id}', [\App\Http\Controllers\User\ExamController::class, 'discussion'])->name('user.exam.discussion');
     Route::get('exam/{slug}/result/{id}', [\App\Http\Controllers\User\ExamController::class, 'result'])->name('user.exam.result');
 
+    Route::get('payment', function (){
+        $payments= Payment::class;
+        return view('pages.payment',compact('payments'));
+    })->name('payment');
+
     Route::middleware(['checkRole:1'])->group(function () {
         Route::resource('room', RoomController::class)->only('index', 'create', 'edit', 'show');
         Route::resource('announcement', PublicAnnouncementController::class)->only('index', 'create', 'edit');
@@ -125,10 +130,7 @@ Route::middleware(['auth:sanctum',])->name('admin.')->prefix('admin')->group(fun
             return view('pages.report-quest',compact('reportQuests'));
         })->name('quest-report');
 
-        Route::get('payment', function (){
-            $payments= Payment::class;
-            return view('pages.payment',compact('payments'));
-        })->name('payment');
+
 
         Route::get('room/{room}/event', [RoomEventController::class, 'index'])->name('room.event.index');
         Route::get('room/{room}/event/create', [RoomEventController::class, 'create'])->name('room.event.create');

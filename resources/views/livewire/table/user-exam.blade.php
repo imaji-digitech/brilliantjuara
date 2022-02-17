@@ -11,6 +11,9 @@
                 Waktu selesai @include('components.sort-icon',['field'=>"title"])
             </th>
             <th>
+                Hasil
+            </th>
+            <th>
                 Status
             </th>
             {{--            <th>Hasil</th>--}}
@@ -31,6 +34,16 @@
                         {{ $exam->status==1?'Pengerjaan':'Selesai' }}
                     @endif
                 </td>
+                @php
+                $totalPoint=0;
+                foreach ($exam->examAnswers as $i => $eu) {
+                    $answer = $eu->examQuest->answer == $eu->answer;
+                    if ($answer) {
+                        $totalPoint+=$eu->examQuest->examStep->score_right;
+                    }
+                }
+                @endphp
+                <td>{{ $exam->status==1?'-':$totalPoint/$eu->examQuest-> }}</td>
                 <td>
                     @if($exam->status==1)
                         <a role="button" href="{{ route('admin.user.exam.exam',[$exam->exam->slug,$exam->id]) }}"
@@ -45,12 +58,12 @@
                                 <i class="fa fa-16px fa-book">Hasil&Pembahasan</i>
                             </a>
                         @endif
-{{--                        @if($exam->exam->status_view_score==1)--}}
-{{--                            <a role="button" href="{{ route('admin.user.exam.result',[$exam->exam->slug,$exam->id]) }}"--}}
-{{--                               class="mr-3">--}}
-{{--                                <i class="fa fa-16px fa-file">Hasil</i>--}}
-{{--                            </a>--}}
-{{--                        @endif--}}
+                        {{--                        @if($exam->exam->status_view_score==1)--}}
+                        {{--                            <a role="button" href="{{ route('admin.user.exam.result',[$exam->exam->slug,$exam->id]) }}"--}}
+                        {{--                               class="mr-3">--}}
+                        {{--                                <i class="fa fa-16px fa-file">Hasil</i>--}}
+                        {{--                            </a>--}}
+                        {{--                        @endif--}}
                     @endif
 
                 </td>
