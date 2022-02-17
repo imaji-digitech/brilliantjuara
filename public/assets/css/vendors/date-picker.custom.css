@@ -938,8 +938,8 @@ body .ui-tooltip {
     color: #333333;
 }
 .ui-state-default{
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     line-height: 50px;
     text-align: center;
 }

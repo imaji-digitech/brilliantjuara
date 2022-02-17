@@ -18,7 +18,7 @@
                 <td>{{ $banner->title }}</td>
                 <td><img src="{{ asset('storage/'.$banner->thumbnail) }}" style="height: 100px" alt=""></td>
                 <td>
-                    <a role="button" href="{{ route('admin.announcement.edit',[$banner->id]) }}" class="mr-3">
+                    <a role="button" href="{{ route('admin.banner.edit',[$banner->id]) }}" class="mr-3">
                         <i class="fa fa-16px fa-pen">Ubah</i></a>
                     <a role="button" wire:click="deleteItem({{$banner->id}})" class="mr-3">
                         <i class="fa fa-16px fa-trash text-danger"></i></a>
