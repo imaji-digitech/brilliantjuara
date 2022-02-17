@@ -14,7 +14,7 @@ class ExamController extends Controller
     {
         $examUser = ExamUser::class;
         $exam = Exam::getExam($slug);
-        $examUserCheck = ExamUser::whereExamId($exam->id)->whereUserId($exam->id)->get();
+        $examUserCheck = ExamUser::whereExamId($exam->id)->whereUserId(auth()->id())->get();
         return view('pages.exam.index', compact('exam', 'examUser','examUserCheck'));
     }
 
