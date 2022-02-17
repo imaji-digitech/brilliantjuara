@@ -172,7 +172,7 @@
                                                                 {{--                                                            </form>--}}
                                                                 @if($bundle->referral_can_use==2)
                                                                     <div class="row">
-                                                                        <div class="col-sm-6">
+                                                                        <div class="col-sm-5">
                                                                             <input
                                                                                 style="margin-top: 5px"
                                                                                 type="text"
@@ -180,8 +180,8 @@
                                                                                 class="form-control"
                                                                                 placeholder="Kode referral" required>
                                                                         </div>
-                                                                        <div class="col-sm-6">
-                                                                            <button class="btn btn-success"
+                                                                        <div class="col-sm-7">
+                                                                            <button class="btn btn-success col-md-12"
                                                                                     type="button"
                                                                                     style="margin-top: 5px;height: 38px"
                                                                                     wire:click="checkReferral({{$bundle->id}})">

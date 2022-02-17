@@ -42,7 +42,23 @@ class ExamUser extends Model
 
     public static function setDone($id)
     {
-        static::find($id)->update(['status'=>2]);
+        static::find($id)->update(['status' => 2]);
+        $examUser = static::find($id);
+        $exam=ExamUser::whereUserId($examUser->user_id)->whereExamId($examUser->exam_id)->get();
+        if ($exam->count()==1) {
+            $totalPoint = 0;
+            foreach ($examUser->examAnswers as $i => $eu) {
+                $answer = $eu->examQuest->answer == $eu->answer;
+                if ($answer) {
+                    $totalPoint += $eu->examQuest->examStep->score_right;
+                }
+            }
+            Ranking::create([
+                'user_id' => $examUser->user_id,
+                'exam_id' => $examUser->exam_id,
+                'point' => $totalPoint
+            ]);
+        }
     }
 
     /**

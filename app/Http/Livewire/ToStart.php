@@ -24,7 +24,7 @@ class ToStart extends Component
             'confirmText' => 'Confirm',
 //            'cancelText' => 'Batal',
             'text' => 'banyak soal : '.$total.'<br>'
-            .'waktu pengerjaan : '.$this->exam->time,
+            .'waktu pengerjaan : '.$this->exam->time.' menit',
             'method' => 'exam']);
     }
     public function exam(){

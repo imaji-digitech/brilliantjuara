@@ -298,14 +298,14 @@
                         <input placeholder="Password" type="password" name="password" required id="registerPassword"
                                autocomplete="new-password">
                         <span>
-                                                    <i class="fa-solid fa-eye" id="eye_daftar" onclick="toggle1()"></i>
-                                                    </span>
+                            <i class="fa-solid fa-eye" id="eye_daftar" onclick="toggle1()"></i>
+                        </span>
                         <input placeholder="Konfirmasi Password" type="password" name="password_confirmation" required
                                autocomplete="new-password" id="registerConfirmPassword">
                         <span>
-                                                    <i class="fa-solid fa-eye" id="eye_daftar_konfirmasi"
-                                                       onclick="toggle2()"></i>
-                                                    </span>
+                            <i class="fa-solid fa-eye" id="eye_daftar_konfirmasi"
+                               onclick="toggle2()"></i>
+                        </span>
                         <input type="text" name="phone_number" placeholder="Nomor Telepon" required>
                         {{--                        <input type="text" name="kode_referral" placeholder="Kode Referral (Opsional)" required>--}}
                         <input type="submit" class="submit" name="daftar" value="Daftar">

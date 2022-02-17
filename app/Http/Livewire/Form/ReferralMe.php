@@ -41,6 +41,12 @@ class ReferralMe extends Component
         }
 
     }
+    protected function getRules()
+    {
+        return [
+            'data.code'=>''
+        ];
+    }
 
     public function render()
     {
