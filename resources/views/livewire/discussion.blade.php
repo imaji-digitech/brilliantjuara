@@ -98,14 +98,16 @@
 
                         },
                         tooltip: {},
-                        colors: ['green', 'red', '#d0d0d0']
+                        colors: ['#38a7b3', '#BC2C3D', '#d0d0d0']
                     }
 
                     var chart3 = new ApexCharts(
                         document.querySelector("#result"),
                         options3
                     );
-
+                    {{--<h6 style="color: #38a7b3">Benar : {{ $rightAnswer }}</h6>--}}
+                    {{--<h6 style="color: #faa41b">Salah : {{ $wrongAnswer }}</h6>--}}
+                    {{--<h6 style="color: #">Kosong : {{ $blankAnswer }}</h6>--}}
                     chart3.render();
                 });
             </script>
