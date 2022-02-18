@@ -12,6 +12,7 @@ use Livewire\WithFileUploads;
 class Banner extends Component
 {
     use WithFileUploads;
+
     public $data;
     public $dataId;
     public $action;
@@ -25,7 +26,7 @@ class Banner extends Component
             'title' => '',
             'thumbnail' => '',
             'link' => '',
-            'room_id'=>$this->roomId
+            'room_id' => $this->roomId
         ];
         if ($this->dataId != null) {
             $data = PublicBanner::find($this->dataId);
@@ -33,7 +34,7 @@ class Banner extends Component
                 'title' => $data->title,
                 'thumbnail' => $data->thumbnail,
                 'link' => $data->link,
-                'room_id'=>$this->roomId
+                'room_id' => $this->roomId
             ];
         }
     }
@@ -46,10 +47,10 @@ class Banner extends Component
             'type' => 'success',
             'title' => 'Banner berhasil ditambahkan',
         ]);
-        if ($this->roomId==null){
+        if ($this->roomId == null) {
             $this->emit('redirect', route('admin.banner.index'));
-        }else{
-            $this->emit('redirect', route('admin.room.banner.index',\App\Models\Room::find($this->roomId)->slug));
+        } else {
+            $this->emit('redirect', route('admin.room.banner.index', \App\Models\Room::find($this->roomId)->slug));
         }
 
     }
@@ -57,7 +58,7 @@ class Banner extends Component
     private function upload()
     {
         $image = $this->thumbnail;
-        $filename = Str::slug($this->data['title']) . '.' . $image->getClientOriginalExtension();
+        $filename = Str::slug($this->data['title']) . rand() . '.' . $image->getClientOriginalExtension();
         $image = Image::make($image)->resize(1080, null, function ($constraint) {
             $constraint->aspectRatio();
         });
@@ -76,10 +77,10 @@ class Banner extends Component
             'type' => 'success',
             'title' => 'Banner berhasil diubah',
         ]);
-        if ($this->roomId==null){
+        if ($this->roomId == null) {
             $this->emit('redirect', route('admin.banner.index'));
-        }else{
-            $this->emit('redirect', route('admin.room.banner.index',$this->roomId));
+        } else {
+            $this->emit('redirect', route('admin.room.banner.index', $this->roomId));
         }
     }
 
