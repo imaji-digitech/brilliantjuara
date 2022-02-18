@@ -4,7 +4,7 @@
     </x-slot>
     <x-slot name="breadcumb">
         <li class="breadcrumb-item">
-            <a href="{{ route('admin.Banner.index') }}">Banner Umum</a>
+            <a href="{{ route('admin.banner.index') }}">Banner Umum</a>
         </li>
     </x-slot>
     <div>
