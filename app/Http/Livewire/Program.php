@@ -36,6 +36,7 @@ class Program extends Component
 
     public function buy($id)
     {
+//        dd($this->referralDiscount);
         $this->amount[$id] = 1;
         $this->checkOut = $id;
         $this->bundleActive = Bundle::find($id);
@@ -45,7 +46,7 @@ class Program extends Component
             'icon' => 'info',
             'confirmText' => 'Proses',
             'text' => 'Pembelian Paket <br>' . $this->bundleActive->title . ' - ' . intval($this->amount[$id]) . 'x <br>' .
-                'Total : ' . $total - $this->referralDiscount
+                'Total : ' . ($total - $this->referralDiscount)
             ,
             'method' => 'payment']);
     }
