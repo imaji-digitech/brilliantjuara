@@ -30,7 +30,7 @@ class Payment extends Model
     /**
      * @var array
      */
-    protected $fillable = ['bundle_id', 'user_id', 'referral_code_id', 'payment_id', 'amount', 'status', 'created_at', 'updated_at','referral_discount','referral_money'];
+    protected $fillable = ['bundle_id', 'user_id', 'referral_code_id', 'payment_id', 'amount', 'status', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
