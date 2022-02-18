@@ -52,6 +52,7 @@ class Bundle extends Component
 
     public function create()
     {
+        $this->validate();
         $this->upload();
         \App\Models\Bundle::create($this->data);
         $this->emit('notify', [
@@ -75,6 +76,7 @@ class Bundle extends Component
 
     public function update()
     {
+        $this->validate();
         if ($this->thumbnail != null) {
             $this->upload();
         }
