@@ -20,6 +20,7 @@ class UploadFile extends Controller
     public function uploadQuestStatic(Request $request,$step){
         try {
             Excel::import(new StaticImport($step), $request->file('uploaded_file'));
+            return Redirect::back();
         }catch (Exception $e){
             return Redirect::back()->withErrors(['msg' => 'Format excel anda salah']);
         }

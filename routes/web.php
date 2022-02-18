@@ -16,6 +16,7 @@ use App\Http\Controllers\UploadFile;
 use App\Http\Controllers\User\ProgramController;
 use App\Models\Payment;
 use App\Models\ReportQuest;
+use App\Models\User;
 use App\Models\UserOwnCourse;
 use App\Models\UserOwnExam;
 use Illuminate\Http\Request;
@@ -40,7 +41,14 @@ Route::get('dashboard', function () {
 Route::post('xendit/callback', function (Request $request) {
     $request = $request->all();
     $payment = Payment::where('payment_id', $request['id'])->first();
+    if ($payment->referralCode != null) {
+        $commission=User::find($payment->referralCode->user_id);
+        $commission->update([
+            'commission'=>$commission->commission+$payment->bundle->referral_money
+        ]);
+    }
     $payment->update(['status' => 2]);
+
     foreach ($payment->bundle->bundleDetails as $item) {
         if ($item->exam_id != null) {
             $uoe = UserOwnExam::where('user_id', $payment->user_id)->where('exam_id', $item->exam_id)->get();
@@ -107,9 +115,9 @@ Route::middleware(['auth:sanctum',])->name('admin.')->prefix('admin')->group(fun
     Route::get('exam/{slug}/discussion/{id}', [\App\Http\Controllers\User\ExamController::class, 'discussion'])->name('user.exam.discussion');
     Route::get('exam/{slug}/result/{id}', [\App\Http\Controllers\User\ExamController::class, 'result'])->name('user.exam.result');
 
-    Route::get('payment', function (){
-        $payments= Payment::class;
-        return view('pages.payment',compact('payments'));
+    Route::get('payment', function () {
+        $payments = Payment::class;
+        return view('pages.payment', compact('payments'));
     })->name('payment');
 
     Route::middleware(['checkRole:1'])->group(function () {
@@ -125,11 +133,10 @@ Route::middleware(['auth:sanctum',])->name('admin.')->prefix('admin')->group(fun
 //        Route::get('room/{room}/announcement', [RoomAnnouncementController::class, 'index'])->name('room.announcement.index');
 //        Route::get('room/{room}/announcement/create', [RoomAnnouncementController::class, 'create'])->name('room.announcement.create');
 //        Route::get('room/{room}/announcement/edit/{id}', [RoomAnnouncementController::class, 'edit'])->name('room.announcement.edit');
-        Route::get('quest-report', function (){
-            $reportQuests= ReportQuest::class;
-            return view('pages.report-quest',compact('reportQuests'));
+        Route::get('quest-report', function () {
+            $reportQuests = ReportQuest::class;
+            return view('pages.report-quest', compact('reportQuests'));
         })->name('quest-report');
-
 
 
         Route::get('room/{room}/event', [RoomEventController::class, 'index'])->name('room.event.index');
@@ -170,14 +177,15 @@ Route::middleware(['auth:sanctum',])->name('admin.')->prefix('admin')->group(fun
         Route::get('room/{room}/bundle/token/{id}', [BundleController::class, 'bundleToken'])->name('bundle.token.index');
         Route::get('room/{room}/bundle/token/{id}/create/{number}', [BundleController::class, 'bundleTokenCreate'])->name('bundle.token.create');
 
-        Route::get('referral',[ReferralController::class,'index'])->name('referral.index');
-        Route::get('referral/create',[ReferralController::class,'create'])->name('referral.create');
-        Route::get('referral/edit/{id}',[ReferralController::class,'edit'])->name('referral.edit');
-        Route::get('referral/can-use/{id}',[ReferralController::class,'canUse'])->name('referral.can.use');
-        Route::get('referral/can-use/{id}/add',[ReferralController::class,'canUseAdd'])->name('referral.can.use.add');
+        Route::get('referral', [ReferralController::class, 'index'])->name('referral.index');
+        Route::get('referral/create', [ReferralController::class, 'create'])->name('referral.create');
+        Route::get('referral/edit/{id}', [ReferralController::class, 'edit'])->name('referral.edit');
+        Route::get('referral/can-use/{id}', [ReferralController::class, 'canUse'])->name('referral.can.use');
+        Route::get('referral/can-use/{id}/add', [ReferralController::class, 'canUseAdd'])->name('referral.can.use.add');
     });
-    Route::get('referral/me',[\App\Http\Controllers\User\ReferralController::class,'index'])->name('referral.me.use');
-    Route::get('referral/me/{id}',[\App\Http\Controllers\User\ReferralController::class,'edit'])->name('referral.me.edit');
+    Route::get('referral/me', [\App\Http\Controllers\User\ReferralController::class, 'index'])->name('referral.me.use');
+    Route::get('referral/me/withdraw', [\App\Http\Controllers\User\ReferralController::class, 'withdraw'])->name('referral.me.withdraw');
+    Route::get('referral/me/{id}', [\App\Http\Controllers\User\ReferralController::class, 'edit'])->name('referral.me.edit');
 //    Route::get('exam/{examSlug}', function ($examSlug) {
 //        $exam=\App\Models\ExamStep::whereSlug($examSlug)->firstOrFail();
 //        return view('exam',compact('exam'));

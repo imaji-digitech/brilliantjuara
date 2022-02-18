@@ -121,6 +121,10 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\UserOwnCourse');
     }
+    public function withdraws()
+    {
+        return $this->hasMany('App\Models\Withdraw');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

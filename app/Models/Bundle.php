@@ -32,7 +32,7 @@ class Bundle extends Model
     /**
      * @var array
      */
-    protected $fillable = ['room_id','referral_can_use', 'bundle_status_id', 'title', 'content', 'thumbnail', 'created_at', 'updated_at'];
+    protected $fillable = ['room_id','referral_can_use', 'bundle_status_id', 'title', 'content', 'thumbnail', 'created_at', 'updated_at','referral_discount','referral_money'];
 
     public static function search($query, $dataId)
     {

@@ -256,6 +256,15 @@ class Main extends Component
                     "ranking" =>  $exam,
                 ];
                 break;
+            case 'withdraw':
+                $exam = $this->model::query()->whereUserId(auth()->id())
+                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                    ->paginate($this->perPage);
+                return [
+                    "view" => "livewire.table.withdraw",
+                    "withdraws" =>  $exam,
+                ];
+                break;
             default:
                 break;
         }

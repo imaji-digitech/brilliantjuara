@@ -27,6 +27,7 @@ class Program extends Component
     public $mount;
     public $total;
     public $referral;
+    public $referralBundle;
     public $referralMsg;
     public $referralDiscount = 0;
     public $referralUse;
@@ -44,7 +45,7 @@ class Program extends Component
             'icon' => 'info',
             'confirmText' => 'Proses',
             'text' => 'Pembelian Paket <br>' . $this->bundleActive->title . ' - ' . intval($this->amount[$id]) . 'x <br>' .
-                'Total : ' . $total
+                'Total : ' . $total - $this->referralDiscount
             ,
             'method' => 'payment']);
     }
@@ -140,6 +141,7 @@ class Program extends Component
 
     public function checkReferral($id)
     {
+        $this->referralBundle=Bundle::find($id);
         if (isset($this->referral[$id])) {
             if ($this->referral[$id] == null) {
                 $this->referralMsg = "Referral harus diisi";
@@ -150,8 +152,8 @@ class Program extends Component
                     if ($b->count()!=0) {
                         $this->referralMsg = "Referral telah anda gunakan";
                     } else {
-                        $this->referralMsg = "Potongan sebesar " . $r->baseReferral->discount . ' ';
-                        $this->referralDiscount = $r->baseReferral->discount;
+                        $this->referralMsg = "Potongan sebesar " . $this->referralBundle->referral_discount . ' ';
+                        $this->referralDiscount = $this->referralBundle->referral_discount;
                         $this->referralUse = $r;
                     }
                 } else {
