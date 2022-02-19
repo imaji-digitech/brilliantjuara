@@ -28,7 +28,7 @@
                 <td>{{ $exam->created_at }}</td>
                 <td>{{ $exam->created_at->addMinutes($exam->exam->time) }}</td>
                 <td>
-                    @if (\Carbon\Carbon::now()>$exam->created_at->addMinutes($exam->exam->time))
+                    @if (\Carbon\Carbon::now()>$exam->created_at->addMinutes($exam->exam->time) and $exam->status==1 )
                         {{ $exam->setDone($exam->id) }}
                         Selesai
                     @else
@@ -37,7 +37,7 @@
                 </td>
                 @php
                 $totalPoint=0;
-$totalHigh=0;
+                $totalHigh=0;
                 foreach ($exam->examAnswers as $i => $eu) {
                     $totalHigh+=$eu->examQuest->examStep->score_right;
                     $answer = $eu->examQuest->answer == $eu->answer;
@@ -48,7 +48,8 @@ $totalHigh=0;
                 @endphp
                 <td>{{ $exam->status==1?'-':number_format((float)($totalPoint/$totalHigh*100), 2, '.', '').'%' }}</td>
                 <td>
-                    @if($exam->status==1)
+                    @if (\Carbon\Carbon::now()<$exam->created_at->addMinutes($exam->exam->time) and $exam->status==1 )
+{{--                    @if($exam->status==1)--}}
                         <a role="button" href="{{ route('admin.user.exam.exam',[$exam->exam->slug,$exam->id]) }}"
                            class="mr-3">
                             <i class="fa fa-16px fa-forward">Start</i>

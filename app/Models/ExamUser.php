@@ -40,12 +40,24 @@ class ExamUser extends Model
                 });
     }
 
+    public static function searchLog($query)
+    {
+//        ->whereExamId($dataId)->whereUserId(auth()->id())
+        return empty($query) ? static::query()
+            : static::whereHas('user', function ($q) use ($query) {
+                $q->where('name', 'like', '%' . $query . '%');
+            })->orWhereHas('exam', function ($q) use ($query) {
+                $q->where('title', 'like', '%' . $query . '%');
+            });
+    }
+
     public static function setDone($id)
     {
         static::find($id)->update(['status' => 2]);
         $examUser = static::find($id);
-        $exam=ExamUser::whereUserId($examUser->user_id)->whereExamId($examUser->exam_id)->get();
-        if ($exam->count()==1) {
+        $exam = ExamUser::whereUserId($examUser->user_id)->whereExamId($examUser->exam_id)->get();
+        $ranking= Ranking::whereUserId($examUser->user_id)->whereExamId($examUser->exam_id)->get();
+        if ($exam->count() == 1 and $ranking->count() == 0) {
             $totalPoint = 0;
             foreach ($examUser->examAnswers as $i => $eu) {
                 $answer = $eu->examQuest->answer == $eu->answer;
