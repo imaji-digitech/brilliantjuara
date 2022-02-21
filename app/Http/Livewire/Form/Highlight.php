@@ -31,7 +31,18 @@ class Highlight extends Component
     public function create()
     {
         $this->validate();
-        \App\Models\CourseHighlight::create($this->data);
+        CourseHighlight::create($this->data);
+        $this->emit('notify', [
+            'type' => 'success',
+            'title' => 'Data berhasil ditambahkan',
+        ]);
+        $this->emit('redirect', route('admin.course.show',[$this->course->room->slug,$this->course->slug]));
+    }
+
+    public function update()
+    {
+        $this->validate();
+        CourseHighlight::find($this->dataId)->update($this->data);
         $this->emit('notify', [
             'type' => 'success',
             'title' => 'Data berhasil ditambahkan',

@@ -19,6 +19,7 @@ class BundlePrice extends Component
         $this->data = [
             'bundle_id'=>$this->bundle,
             'price'=>0,
+            'price_cut'=>0,
             'min'=>0,
         ];
         if ($this->dataId != null) {
@@ -26,6 +27,7 @@ class BundlePrice extends Component
             $this->data = [
                 'bundle_id'=>$data->bundle_id,
                 'price'=>$data->price,
+                'price_cut'=>$data->price_cut,
                 'min'=>$data->min,
             ];
         }

@@ -35,7 +35,7 @@ class Bundle extends Model
     /**
      * @var array
      */
-    protected $fillable = ['room_id', 'bundle_status_id', 'title', 'content', 'thumbnail', 'created_at', 'updated_at', 'referral_can_use', 'referral_discount', 'referral_money'];
+    protected $fillable = ['room_id', 'bundle_status_id', 'title', 'content', 'thumbnail', 'created_at', 'updated_at', 'referral_can_use', 'token_can_use','referral_discount', 'referral_money'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

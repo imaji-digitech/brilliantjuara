@@ -1,6 +1,6 @@
 <x-admin>
     <x-slot name="title">
-        Buat Data Highlight {{$course->title}}
+        Buat Data Materi {{$course->title}}
     </x-slot>
     <x-slot name="breadcumb">
         <li class="breadcrumb-item">
@@ -16,7 +16,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-body">
-                            <livewire:form.highlight action="update" :courseId="$course->slug" :dataId="$id"/>
+                            <livewire:form.course-detail action="update" :courseId="$course->slug" :type="$id" :dataId="$dataId"/>
                         </div>
                     </div>
                 </div>

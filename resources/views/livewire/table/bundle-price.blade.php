@@ -8,6 +8,9 @@
                 minimal @include('components.sort-icon',['field'=>"min"])
             </th>
             <th scope="col" wire:click.prevent="sortBy('price')" >
+                harga coret @include('components.sort-icon',['field'=>"price"])
+            </th>
+            <th scope="col" wire:click.prevent="sortBy('price')" >
                 harga @include('components.sort-icon',['field'=>"price"])
             </th>
             <th>aksi</th>
@@ -18,6 +21,7 @@
             <tr>
                 <td scope="row">{{ ($page-1)*$perPage+$index+1 }}</td>
                 <td>{{ $bundle->min }}</td>
+                <td>{{ $bundle->price_cut }}</td>
                 <td>{{ $bundle->price }}</td>
                 <td>
                     <a role="button" wire:click="deleteItem({{$bundle->id}})" class="mr-3">

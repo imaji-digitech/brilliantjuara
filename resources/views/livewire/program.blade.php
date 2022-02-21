@@ -87,6 +87,8 @@
                                                         @if($minus!=0)
                                                             <del>{{$bundle->bundlePrices[0]->price}} <br></del>
                                                         @endif
+                                                            <del>Rp. {{ isset($bundle->bundlePrices[0])?number_format($bundle->bundlePrices[0]->price_cut-$minus):'' }}
+                                                                <br></del>
                                                         Rp. {{ isset($bundle->bundlePrices[0])?number_format($bundle->bundlePrices[0]->price-$minus):'' }}
                                                     @endif
                                                 @endisset
@@ -94,6 +96,7 @@
                                             <br>
                                             <div style="text-align: center" class="row">
                                                 @if(auth()->user()->haveProgram($bundle->id)==0)
+                                                    @if($bundle->token_can_use==2)
                                                     <div class="col-md-12">
                                                         <form action="">
                                                             <input type="text" wire:model="token.{{$bundle->id}}"
@@ -105,6 +108,7 @@
                                                                 wire:click="activateToken({{$bundle->id}})">Redem
                                                         </button>
                                                     </div>
+                                                    @endif
                                                     @isset($bundle->bundlePrices[0])
                                                         <div class="col-md-12" style="margin-top: 10px">
                                                             <form action="">
@@ -116,7 +120,7 @@
                                                                 {{--                                                            </form>--}}
                                                                 @if($bundle->referral_can_use==2)
                                                                     <div class="row">
-                                                                        <div class="col-sm-5">
+                                                                        <div class="col-sm-12">
                                                                             <input
                                                                                 style="margin-top: 5px"
                                                                                 type="text"
@@ -124,7 +128,7 @@
                                                                                 class="form-control"
                                                                                 placeholder="Kode referral" required>
                                                                         </div>
-                                                                        <div class="col-sm-7">
+                                                                        <div class="col-sm-12">
                                                                             <button class="btn btn-success col-md-12"
                                                                                     type="button"
                                                                                     style="margin-top: 5px;height: 38px"
@@ -165,5 +169,4 @@
             </div>
         </div>
     </div>
-
 </div>

@@ -47,7 +47,7 @@ class CourseController extends Controller
     {
         $room = Room::getRoom($room);
         $course = Course::getCourse($course);
-
+        return view("pages.room.course.highlight-edit", compact('course', 'room','id'));
     }
 
     public function detail($room, $course,$id)
@@ -65,9 +65,10 @@ class CourseController extends Controller
         return view("pages.room.course.detail-create", compact('course', 'room','id'));
     }
 
-    public function detailEdit($room, $course, $id)
+    public function detailEdit($room, $course, $id, $dataId)
     {
         $room = Room::getRoom($room);
         $course = Course::getCourse($course);
+        return view("pages.room.course.detail-edit", compact('course', 'room','id','dataId'));
     }
 }

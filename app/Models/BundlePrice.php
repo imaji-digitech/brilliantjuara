@@ -26,7 +26,7 @@ class BundlePrice extends Model
     /**
      * @var array
      */
-    protected $fillable = ['bundle_id', 'price', 'min', 'created_at', 'updated_at'];
+    protected $fillable = ['bundle_id', 'price', 'price_cut', 'min', 'created_at', 'updated_at'];
 
     public static function search($query, $dataId)
     {

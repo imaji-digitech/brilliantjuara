@@ -167,7 +167,7 @@ Route::middleware(['auth:sanctum',])->name('admin.')->prefix('admin')->group(fun
         Route::get('room/{room}/course/{course}', [CourseController::class, 'show'])->name('course.show');
         Route::get('room/{room}/course/{course}/highlight/edit/{id}', [CourseController::class, 'highlightEdit'])->name('course.highlight.edit');
         Route::get('room/{room}/course/{course}/highlight/create', [CourseController::class, 'highlightCreate'])->name('course.highlight.create');
-        Route::get('room/{room}/course/{course}/detail/edit{id}', [CourseController::class, 'detailEdit'])->name('course.detail.edit');
+        Route::get('room/{room}/course/{course}/detail/edit/{type}/{id}', [CourseController::class, 'detailEdit'])->name('course.detail.edit');
         Route::get('room/{room}/course/{course}/detail/create/{id}', [CourseController::class, 'detailCreate'])->name('course.detail.create');
         Route::get('room/{room}/course/{course}/detail/show/{id}', [CourseController::class, 'detail'])->name('course.detail');
 

@@ -35,7 +35,10 @@ class Bundle extends Component
             'title'=>'',
             'content'=>'',
             'thumbnail'=>'',
-            'referral_can_use'=>1
+            'referral_can_use'=>1,
+            'token_can_use'=>1,
+            'referral_discount'=>0,
+            'referral_money'=>0
         ];
         if ($this->dataId != null) {
             $data = \App\Models\Bundle::find($this->dataId);
@@ -45,7 +48,10 @@ class Bundle extends Component
                 'room_id'=>$data->room_id,
                 'bundle_status_id'=>$data->bundle_status_id,
                 'content'=>$data->content,
-                'referral_can_use'=>$data->referral_can_use
+                'referral_can_use'=>$data->referral_can_use,
+                'token_can_use'=>$data->token_can_use,
+                'referral_discount'=>$data->referral_discount,
+                'referral_money'=>$data->referral_money
             ];
         }
     }
