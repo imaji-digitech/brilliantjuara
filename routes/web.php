@@ -80,7 +80,7 @@ Route::get('create/xendit/invoice', function () {
 
 
 Route::get('/', function () {
-    $banners=\App\Models\FrontpageBanner::get();
+    $banners=\App\Models\FrontpageBanner::orderBy('id','desc')->get();
     return view('index',compact('banners'));
 });
 Route::post('/summernote', [SupportController::class, 'upload'])->name('summernote');
