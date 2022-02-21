@@ -51,7 +51,7 @@
     </div>
 </nav>
 
-<div id="carouselCaptions" class="carousel" data-bs-ride="carousel" data-bs-interval="5000">
+<div id="carouselCaptions" class="carousel" data-bs-ride="carousel" data-bs-interval="3000">
     <div class="carousel-indicators">
         @for($i=0;$i<$banners->count();$i++)
         <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="{{ $i }}" @if($i==0) class="active" aria-current="true" @endif
