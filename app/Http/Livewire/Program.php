@@ -92,6 +92,9 @@ class Program extends Component
     {
         $this->room = Room::getRoom($this->room);
         $this->banners=PublicBanner::whereRoomId($this->room->id)->get();
+        $this->myclass();
+    }
+    public function myclass(){
         $ownExam = auth()->user()->userOwnExams;
         $ownCourse = auth()->user()->userOwnCourses;
         $myClass = [];
@@ -138,6 +141,7 @@ class Program extends Component
                 'title' => 'Token anda tidak valid atau telah terpakai',
             ]);
         }
+        $this->myclass();
     }
 
     public function checkReferral($id)

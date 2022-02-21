@@ -33,11 +33,11 @@
 {{--                @endforeach--}}
 {{--            </div>--}}
             <div class="owl-carousel owl-theme owl-loaded owl-drag" id="owl-carousel-14">
-                <div class="owl-stage-outer owl-height" style="height: 279px;">
+                <div class="owl-stage-outer owl-height">
                     <div class="owl-stage"
                          style="transform: translate3d(0px, 0px, 0px); transition: 0s; width: 11396px;">
                         @foreach($banners as $index=>$banner)
-                            <a href="{{ $banner->link }}" class="owl-item active" style="width: 1026px; margin-right: 10px;">
+                            <a href="{{ $banner->link }}" class="owl-item {{$index==0?'active':''}}" style="width: 100%; margin-right: 10px;">
                                 <div class="item"><img style="width: 100%" src="{{asset('storage/'.$banner->thumbnail)}}" alt="1"></div>
                             </a>
                         @endforeach
