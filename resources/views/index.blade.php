@@ -61,12 +61,12 @@
 {{--        <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>--}}
     </div>
     <div class="carousel-inner" style="margin-top: 100px">
-        <div class="carousel-item active">
-            @foreach($banners as $banner)
-            <img src="{{asset('frontpage/images/b.jpeg?_=1')}}" class="d-block"
+        @foreach($banners as $index=>$banner)
+        <div class="carousel-item {{($index==0)?'active':''}}">
+            <img src="{{asset('storage/'.$banner->thumbnail)}}" class="d-block"
                  alt="...">
-            @endforeach
         </div>
+        @endforeach
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselCaptions" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
