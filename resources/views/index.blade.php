@@ -51,7 +51,7 @@
     </div>
 </nav>
 
-<div id="carouselCaptions" class="carousel" data-bs-ride="carousel" data-bs-interval="7200">
+<div id="carouselCaptions" class="carousel" data-bs-ride="carousel" data-bs-interval="5000">
     <div class="carousel-indicators">
         @for($i=0;$i<$banners->count();$i++)
         <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="{{ $i }}" @if($i==0) class="active" aria-current="true" @endif
@@ -233,7 +233,7 @@
                 <h1><br></h1>
                 @for($i=0;$i<count($contents);$i++)
                     <div style="background-color: #36A7B3;border-radius: 10px;color: white">
-                        <div class="p-3" data-toggle="collapse" data-target="#faq{{$i}}"
+                        <div class="p-3" data-bs-toggle="collapse" data-bs-target="#faq{{$i}}"
                              aria-expanded="false" aria-controls="collapseExample">
                             <span>{{ $titles[$i] }}</span>
                             <span
@@ -360,17 +360,19 @@
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+<script src="https://cdn.jsdelivr.net/gh/jquery/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.9.2.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
-<script src="{{asset('frontpage/js/app.js')}}"></script>
+<script src="{{ asset('frontpage/js/app.js') }}"></script>
+
 
 
 </body>
