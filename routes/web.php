@@ -11,9 +11,11 @@ use App\Http\Controllers\Admin\ReferralController;
 use App\Http\Controllers\Admin\RoomEventController;
 use App\Http\Controllers\Admin\RoomBannerController;
 use App\Http\Controllers\Admin\RoomController;
+use App\Http\Controllers\Admin\WithdrawControlller;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\UploadFile;
 use App\Http\Controllers\User\ProgramController;
+use App\Models\ExamUser;
 use App\Models\Payment;
 use App\Models\ReportQuest;
 use App\Models\User;
@@ -42,9 +44,9 @@ Route::post('xendit/callback', function (Request $request) {
     $request = $request->all();
     $payment = Payment::where('payment_id', $request['id'])->first();
     if ($payment->referralCode != null) {
-        $commission=User::find($payment->referralCode->user_id);
+        $commission = User::find($payment->referralCode->user_id);
         $commission->update([
-            'commission'=>$commission->commission+$payment->bundle->referral_money
+            'commission' => $commission->commission + $payment->bundle->referral_money
         ]);
     }
     $payment->update(['status' => 2]);
@@ -78,7 +80,8 @@ Route::get('create/xendit/invoice', function () {
 
 
 Route::get('/', function () {
-    return view('index');
+    $banners=\App\Models\FrontpageBanner::get();
+    return view('index',compact('banners'));
 });
 Route::post('/summernote', [SupportController::class, 'upload'])->name('summernote');
 Route::middleware(['auth:sanctum',])->name('admin.')->prefix('admin')->group(function () {
@@ -114,6 +117,7 @@ Route::middleware(['auth:sanctum',])->name('admin.')->prefix('admin')->group(fun
     Route::get('exam/{slug}/exam/{id}', [\App\Http\Controllers\User\ExamController::class, 'exam'])->name('user.exam.exam');
     Route::get('exam/{slug}/discussion/{id}', [\App\Http\Controllers\User\ExamController::class, 'discussion'])->name('user.exam.discussion');
     Route::get('exam/{slug}/result/{id}', [\App\Http\Controllers\User\ExamController::class, 'result'])->name('user.exam.result');
+    Route::get('exam/{slug}/ranking', [\App\Http\Controllers\User\ExamController::class, 'ranking'])->name('user.exam.ranking');
 
     Route::get('payment', function () {
         $payments = Payment::class;
@@ -125,6 +129,9 @@ Route::middleware(['auth:sanctum',])->name('admin.')->prefix('admin')->group(fun
         Route::resource('announcement', PublicAnnouncementController::class)->only('index', 'create', 'edit');
         Route::resource('banner', PublicBannerController::class)->only('index', 'create', 'edit');
         Route::resource('event', PublicEventController::class)->only('index', 'create', 'edit');
+
+        Route::get('frontpage-banner', [PublicBannerController::class, 'frontpage'])->name('frontpage-banner.index');
+        Route::get('frontpage-banner/create', [PublicBannerController::class, 'frontpageCreate'])->name('frontpage-banner.create');
 
         Route::get('room/{room}/banner', [RoomBannerController::class, 'index'])->name('room.banner.index');
         Route::get('room/{room}/banner/create', [RoomBannerController::class, 'create'])->name('room.banner.create');
@@ -176,12 +183,20 @@ Route::middleware(['auth:sanctum',])->name('admin.')->prefix('admin')->group(fun
         Route::get('room/{room}/bundle/detail/{id}/create', [BundleController::class, 'bundleDetailCreate'])->name('bundle.detail.create');
         Route::get('room/{room}/bundle/token/{id}', [BundleController::class, 'bundleToken'])->name('bundle.token.index');
         Route::get('room/{room}/bundle/token/{id}/create/{number}', [BundleController::class, 'bundleTokenCreate'])->name('bundle.token.create');
+        Route::get('room/{room}/bundle/token/{id}/export',[BundleController::class,'export'])->name('bundle.export');
 
         Route::get('referral', [ReferralController::class, 'index'])->name('referral.index');
         Route::get('referral/create', [ReferralController::class, 'create'])->name('referral.create');
         Route::get('referral/edit/{id}', [ReferralController::class, 'edit'])->name('referral.edit');
         Route::get('referral/can-use/{id}', [ReferralController::class, 'canUse'])->name('referral.can.use');
         Route::get('referral/can-use/{id}/add', [ReferralController::class, 'canUseAdd'])->name('referral.can.use.add');
+
+        Route::get('exam/user/log', function () {
+            $exam = ExamUser::class;
+            return view('pages.exam-log', compact('exam'));
+        })->name('exam.user.log');
+        Route::get('withdraw',[WithdrawControlller::class,'index'])->name('withdraw.index');
+        Route::get('withdraw/{id}',[WithdrawControlller::class,'edit'])->name('withdraw.index');
     });
     Route::get('referral/me', [\App\Http\Controllers\User\ReferralController::class, 'index'])->name('referral.me.use');
     Route::get('referral/me/withdraw', [\App\Http\Controllers\User\ReferralController::class, 'withdraw'])->name('referral.me.withdraw');

@@ -157,6 +157,14 @@ class Main extends Component
                     "banners" =>  $banner,
                 ];
                 break;
+            case 'frontpage-banner':
+                $banner = $this->model::query()
+                    ->paginate($this->perPage);
+                return [
+                    "view" => "livewire.table.frontpage-banner",
+                    "banners" =>  $banner,
+                ];
+                break;
             case 'event':
                 $event = $this->model::search($this->search,$this->dataId)
                     ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
@@ -263,6 +271,15 @@ class Main extends Component
                 return [
                     "view" => "livewire.table.withdraw",
                     "withdraws" =>  $exam,
+                ];
+                break;
+            case 'examLog':
+                $exam = $this->model::searchLog($this->search)
+                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                    ->paginate($this->perPage);
+                return [
+                    "view" => "livewire.table.user-exam-log",
+                    "exams" =>  $exam,
                 ];
                 break;
             default:

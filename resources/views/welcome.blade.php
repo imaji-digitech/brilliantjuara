@@ -130,3 +130,54 @@
         </div>
     </body>
 </html>
+
+<section class="page-section" id="services" style="background-color:#fcfcfc ">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5" style="font-size: 18px">
+                <h1>Anda Perlu Bantuan?</h1>
+                <p style="text-align: justify">Temukan beberapa jawaban dari pertanyaan anda mengenai proses konsultasi
+                    dan cara menghubungi perusahaan. Pusat bantuan Sekawan Media menyediakan solusi alternatif untuk
+                    lebih mudah dalam menghubungi kami.
+                    <br>
+                    Berikut ini merupakan beberapa penjelasan dari pertanyaan yang sering diajukan oleh pengguna atau
+                    klien. Apabila anda tidak menemukan penjelasan detail dari permasalahan tersebut, anda dapat
+                    menghubungi email dan alamat kantor Sekawan Media.</p>
+            </div>
+            @php
+                $titles=[
+        'CARA MEMBELI PAKET',
+        'PRODUK BRILILANT JUARA',
+        'CARA MENJADI MEMBER',
+        'CARA MENDAPATKAN TOKEN AKSES',
+        'CARA MEMILIKI KODE REFERRAL'
+    ];
+                $contents=[
+                    'Klik program Brilliant yang kalian ingin beli dan pilih metode pembayaran lalu pastikan pembayaran sobat Brilli berhasil',
+                    'Uji Kompetensi, Seleksi Kedinasan, PPPK, CPNS, SBMPTN',
+                    'Pilih regristrasi lalu ikuti semua tahapnya sobat Brilli',
+                    'Penuhi syarat yang tertera (kode akan dikirim oleh admin melalui WA)',
+                    'Kode referral khusus pengajar Brilliant Juara'
+    ]
+            @endphp
+            <div class="col-md-7" style="font-size: 18px;">
+                <h1><br></h1>
+                @for($i=0;$i<count($contents);$i++)
+                    <div style="background-color: #36A7B3;border-radius: 10px;color: white">
+                        <div class="p-3" data-toggle="collapse" data-target="#faq{{$i}}"
+                             aria-expanded="false" aria-controls="collapseExample">
+                            <span>{{ $titles[$i] }}</span>
+                            <span style="float:right;border-radius: 20px;background-color: #faa41b;width: 30px; height: 30px;line-height: 30px; text-align: center">
+                        <i class="fa fa-question"></i>
+                    </span>
+                        </div>
+                        <div class="collapse p-3" id="faq{{$i}}">
+                            {{ $contents[$i] }}
+                        </div>
+                    </div>
+                    <br>
+                @endfor
+            </div>
+        </div>
+    </div>
+</section>

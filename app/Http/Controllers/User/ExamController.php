@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Exam;
 use App\Models\ExamAnswer;
 use App\Models\ExamUser;
+use App\Models\Ranking;
 use Carbon\Carbon;
 
 class ExamController extends Controller
@@ -53,7 +54,11 @@ class ExamController extends Controller
     public function discussion($slug,$id)
     {
         $exam = Exam::getExam($slug);
-        $examUser = ExamUser::whereId($id)->whereUserId(auth()->id())->firstOrFail();
+        if (auth()->user()->role==1) {
+            $examUser = ExamUser::whereId($id)->firstOrFail();
+        }else{
+            $examUser = ExamUser::whereId($id)->whereUserId(auth()->id())->firstOrFail();
+        }
         return view('pages.exam.discussion', compact('examUser', 'exam'));
     }
     public function result($slug,$id)
@@ -61,6 +66,17 @@ class ExamController extends Controller
         $exam = Exam::getExam($slug);
         $examUser = ExamUser::whereId($id)->whereUserId(auth()->id())->firstOrFail();
         return view('pages.exam.result', compact('examUser', 'exam'));
+    }
+    public function ranking($slug)
+    {
+        $exam=Exam::getExam($slug);
+        $examQuestCount=0;
+        foreach ($exam->examSteps as $e){
+            $examQuestCount+=$e->examQuests->count();
+        }
+        $ranking=Ranking::whereExamId($exam->id)->orderBy('point','desc')->get();
+//        dd($ranking);
+        return view('pages.exam.ranking',compact('exam','ranking','examQuestCount'));
     }
 
 }

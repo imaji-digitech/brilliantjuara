@@ -8,9 +8,6 @@
                 Judul referral @include('components.sort-icon',['field'=>"title"])
             </th>
             <th>
-                Total potongan
-            </th>
-            <th>
                 Dapat digunakan
             </th>
             <th>
@@ -24,7 +21,6 @@
             <tr>
                 <td scope="row">{{ ($page-1)*$perPage+$index+1 }}</td>
                 <td>{{ $referral->title }}</td>
-                <td>{{ $referral->discount }}</td>
                 <td>{{ $referral->referralCanUses->count() }}</td>
                 <td>{{ $referral->referralCodes->count() }}</td>
                 <td>

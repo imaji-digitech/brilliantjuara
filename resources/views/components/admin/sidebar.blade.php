@@ -113,6 +113,12 @@
                                 </li>
                                 <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title link-nav"
+                                       href="{{ route('admin.exam.user.log') }}">
+                                        <i class="fas fa-home"></i><span> Riwayat Ujian</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title link-nav"
                                        href="{{ route('admin.room.index') }}">
                                         <i class="fas fa-home"></i><span> Kelas</span>
                                     </a>
@@ -132,7 +138,13 @@
                                 <li class="sidebar-list">
                                     <a class="sidebar-link sidebar-title link-nav"
                                        href="{{ route('admin.banner.index') }}">
-                                        <i class="fas fa-home"></i><span> Banner</span>
+                                        <i class="fas fa-home"></i><span> Banner Dashboard</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title link-nav"
+                                       href="{{ route('admin.frontpage-banner.index') }}">
+                                        <i class="fas fa-home"></i><span> Banner Depan</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-list">

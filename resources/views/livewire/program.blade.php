@@ -57,8 +57,6 @@
         <div class="card" style="height: 100%;">
             <div class="card-header" style="padding: 15px">
                 <h4>Kelasku</h4>
-
-
             </div>
             <div class="card-body" style="padding: 15px;overflow-y: scroll;">
                 <h4>Try Out</h4>

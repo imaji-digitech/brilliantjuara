@@ -27,7 +27,7 @@ class BaseReferral extends Model
     /**
      * @var array
      */
-    protected $fillable = ['title', 'limit_date', 'limit_use', 'discount', 'created_at', 'updated_at'];
+    protected $fillable = ['title', 'limit_date', 'limit_use', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

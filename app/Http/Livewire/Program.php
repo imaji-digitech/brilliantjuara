@@ -148,7 +148,10 @@ class Program extends Component
                 $this->referralMsg = "Referral harus diisi";
             } else {
                 $r = ReferralCode::whereCode($this->referral[$id])->first();
-                if ($r != null) {
+                if ($r->user_id==auth()->id()){
+                    $this->referralMsg = "Referral tidak ditemukan";
+                }
+                elseif ($r != null) {
                     $b = ReferralCodeUse::whereReferralCodeId($r->id)->whereUserId(auth()->id())->get();
                     if ($b->count()!=0) {
                         $this->referralMsg = "Referral telah anda gunakan";

@@ -28,4 +28,5 @@ class ReferralController extends Controller
         return view('pages.referral.can-use-add',compact('id'));
     }
 
+
 }
