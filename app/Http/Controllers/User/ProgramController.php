@@ -13,6 +13,7 @@ class ProgramController extends Controller
     {
         $room = Room::getRoom($room);
         $banners=PublicBanner::whereRoomId($room->id)->get();
+//        dd($banners);
         return view('pages.program.index',compact('room','banners'));
     }
 }

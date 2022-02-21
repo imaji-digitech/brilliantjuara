@@ -6,9 +6,10 @@ use Livewire\Component;
 
 class ProgramBanner extends Component
 {
-    public $Pbanners;
+    public $banners;
     public function render()
     {
+//        dd($this->banners);
         return view('livewire.program-banner');
     }
 }
