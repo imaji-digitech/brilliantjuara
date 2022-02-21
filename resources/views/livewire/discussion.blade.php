@@ -71,7 +71,6 @@
     <div class="col-sm-8">
         <div class="card">
             <div class="card-body">
-                <body>
                 @isset( $questActive->examQuest->question)
                     <div class="row">
                         <div class="col-1" style="width: 30px;padding: 0;margin: 0">{{$number+1}}. </div>
@@ -149,7 +148,6 @@
                     @if($i%8==0)
                         <br>
                     @endif
-
                     <button class="btn-sm btn
                         @if($eu->answer==0) btn-light @elseif($answer) btn-success @else btn-danger @endif"
                             style="width: 30px;height: 30px; padding: 0;margin: 2px;

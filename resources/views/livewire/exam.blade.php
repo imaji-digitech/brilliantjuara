@@ -25,7 +25,12 @@
                 <br><br>
                 <br>
                 @isset( $questActive->examQuest->question)
-                    {{$number+1}}. {!! $questActive->examQuest->question  !!}
+                    <div class="row">
+                        <div class="col-1" style="width: 30px;padding: 0;margin: 0">{{$number+1}}. </div>
+                        <div class="col-11" >
+                            <p style="text-align: justify">{!! $questActive->examQuest->question  !!}</p>
+                        </div>
+                    </div>
 
                     <div class="col">
                         <div class="mb-3 m-t-15 custom-radio-ml">
