@@ -8,7 +8,7 @@
                 <div class="card">
                     <div class="col-sm-12 row">
                         <div class="card-body" style="padding: 10px">
-                            <livewire:program-banner :Pbanners="$banners"/>
+{{--                            <livewire:program-banner :Pbanners="$banners"/>--}}
                         </div>
                     </div>
                 </div>
