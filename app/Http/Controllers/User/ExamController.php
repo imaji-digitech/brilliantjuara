@@ -78,5 +78,10 @@ class ExamController extends Controller
 //        dd($ranking);
         return view('pages.exam.ranking',compact('exam','ranking','examQuestCount'));
     }
+    public function rankingRemove($id){
+        $rank=Ranking::find($id);
+        $rank->delete();
+        return redirect()->back();
+    }
 
 }

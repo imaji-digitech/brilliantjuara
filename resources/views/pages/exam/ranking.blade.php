@@ -17,6 +17,9 @@
                                         <td>Nilai</td>
                                         <td>Lulus</td>
                                         <td>Waktu selesai</td>
+                                        @if(auth()->user()->role==1)
+                                            <td>Aksi</td>
+                                            @endif
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -38,6 +41,13 @@
                                                 <b>{{ $r->point/$examQuestCount*100>=80?'Lulus':'Tidak lulus' }}</b>
                                             </td>
                                             <td>{{ $r->created_at }}</td>
+                                            <td>
+                                                @if(auth()->user()->role==1)
+                                                    <a href="{{ route('admin.user.exam.ranking.remove',$r->id) }}"
+                                                       onclick="return confirm('Are you sure you want to delete this item?');"
+                                                    >Hapus</a>
+                                                @endif
+                                            </td>
                                         </tr>
                                     @endforeach
                                     </tbody>
