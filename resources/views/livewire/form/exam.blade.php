@@ -2,5 +2,8 @@
     <x-form.input model="data.title" title="Nama TO" type="text"/>
     <x-form.input model="data.time" title="Waktu dalam menit" type="number"/>
     <x-form.input model="data.price" title="Harga satuan TO" type="number"/>
+    <x-form.select model="data.status_discussion" title="Status pembahasan" :selected="$data['status_discussion']" :options="$optionStatus"/>
+    <x-form.select model="data.status_multiple_attempt" title="Status pengerjaan berkali-kali" :selected="$data['status_discussion']" :options="$optionStatus"/>
+{{--    <x-form.select model="data.status_view_score" title="Status pembahasan" :selected="$data['status_discussion']" :options="$optionStatus"/>--}}
     <button type="submit" class="btn btn-primary float-end">Submit</button>
 </form>

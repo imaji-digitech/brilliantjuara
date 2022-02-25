@@ -11,27 +11,35 @@ class Exam extends Component
     public $dataId;
     public $roomId;
     public $room;
+    public $optionStatus;
 
     public function mount()
     {
-        $this->room=\App\Models\Room::getRoom($this->roomId);
+        $this->optionStatus = [
+            ['title' => 'Aktif', 'value' => 1],
+            ['title' => 'Tidak aktif', 'value' => 2],
+        ];
+        $this->room = \App\Models\Room::getRoom($this->roomId);
         $this->data = [
-            'room_id'=>$this->room->id,
+            'room_id' => $this->room->id,
             'title' => '',
             'slug' => '',
-            'price'=>0,
-            'time'=>0,
-            'status_discussion'=>2,
-            'status_multiple_attempt'=>2,
-            'status_view_score'=>2
+            'price' => 0,
+            'time' => 0,
+            'status_discussion' => 2,
+            'status_multiple_attempt' => 2,
+            'status_view_score' => 2
         ];
         if ($this->dataId != null) {
             $data = \App\Models\Exam::find($this->dataId);
             $this->data = [
                 'title' => $data->title,
                 'slug' => $data->slug,
-                'price'=>$data->price,
-                'time'=>$data->time
+                'price' => $data->price,
+                'time' => $data->time,
+                'status_discussion' => $data->status_discussion,
+                'status_multiple_attempt' => $data->status_multiple_attempt,
+                'status_view_score' => $data->status_view_score,
             ];
         }
     }
@@ -45,7 +53,7 @@ class Exam extends Component
             'type' => 'success',
             'title' => 'Data berhasil ditambahkan',
         ]);
-        $this->emit('redirect', route('admin.exam.index',$this->room->slug));
+        $this->emit('redirect', route('admin.exam.index', $this->room->slug));
     }
 
     public function update()
@@ -56,7 +64,7 @@ class Exam extends Component
             'type' => 'success',
             'title' => 'Data berhasil diubah',
         ]);
-        $this->emit('redirect', route('admin.exam.index',$this->room->slug));
+        $this->emit('redirect', route('admin.exam.index', $this->room->slug));
     }
 
     public function render()
