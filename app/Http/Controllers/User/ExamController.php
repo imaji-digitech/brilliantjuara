@@ -10,6 +10,7 @@ use App\Models\Ranking;
 use App\Models\UserHasDownload;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Str;
 
 class ExamController extends Controller
 {
@@ -91,7 +92,8 @@ class ExamController extends Controller
         UserHasDownload::create(['user_id'=>auth()->id(),'exam_id'=>$exam->id]);
         $pdf = App::make('dompdf.wrapper');
         $pdf->loadView('pdf.discussion',compact('exam'))->setPaper('A4', 'portrait');;
-        return $pdf->stream('report.pdf');
+        return $pdf->stream("Pembahasan-".Str::slug($exam->title).".pdf");
+
     }
 
 }
