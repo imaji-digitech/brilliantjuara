@@ -22,6 +22,7 @@ use App\Models\User;
 use App\Models\UserOwnCourse;
 use App\Models\UserOwnExam;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Xendit\Invoice;
 use Xendit\Xendit;
@@ -39,6 +40,12 @@ use Xendit\Xendit;
 Route::get('dashboard', function () {
     return redirect(route('admin.dashboard'));
 })->name('dashboard');
+
+Route::get('/discussion', function () {
+    $pdf = App::make('dompdf.wrapper');
+    $pdf->loadView('pdf.discussion')->setPaper('A4', 'portrait');;
+    return $pdf->stream('report.pdf');
+});
 
 Route::post('xendit/callback', function (Request $request) {
     $request = $request->all();
@@ -118,6 +125,7 @@ Route::middleware(['auth:sanctum',])->name('admin.')->prefix('admin')->group(fun
     Route::get('exam/{slug}/discussion/{id}', [\App\Http\Controllers\User\ExamController::class, 'discussion'])->name('user.exam.discussion');
     Route::get('exam/{slug}/result/{id}', [\App\Http\Controllers\User\ExamController::class, 'result'])->name('user.exam.result');
     Route::get('exam/{slug}/ranking', [\App\Http\Controllers\User\ExamController::class, 'ranking'])->name('user.exam.ranking');
+    Route::get('exam/{slug}/discussion', [\App\Http\Controllers\User\ExamController::class, 'download'])->name('user.exam.download');
 
     Route::get('payment', function () {
         $payments = Payment::class;
@@ -165,8 +173,10 @@ Route::middleware(['auth:sanctum',])->name('admin.')->prefix('admin')->group(fun
         Route::get('room/{room}/course/create', [CourseController::class, 'create'])->name('course.create');
         Route::get('room/{room}/course/edit/{id}', [CourseController::class, 'edit'])->name('course.edit');
         Route::get('room/{room}/course/{course}', [CourseController::class, 'show'])->name('course.show');
+        Route::get('room/{room}/course/{course}/highlight/edit/{id}/delete', [CourseController::class, 'highlightDelete'])->name('course.highlight.delete');
         Route::get('room/{room}/course/{course}/highlight/edit/{id}', [CourseController::class, 'highlightEdit'])->name('course.highlight.edit');
         Route::get('room/{room}/course/{course}/highlight/create', [CourseController::class, 'highlightCreate'])->name('course.highlight.create');
+        Route::get('room/{room}/course/{course}/detail/edit/{type}/{id}/delete', [CourseController::class, 'detailDelete'])->name('course.detail.delete');
         Route::get('room/{room}/course/{course}/detail/edit/{type}/{id}', [CourseController::class, 'detailEdit'])->name('course.detail.edit');
         Route::get('room/{room}/course/{course}/detail/create/{id}', [CourseController::class, 'detailCreate'])->name('course.detail.create');
         Route::get('room/{room}/course/{course}/detail/show/{id}', [CourseController::class, 'detail'])->name('course.detail');

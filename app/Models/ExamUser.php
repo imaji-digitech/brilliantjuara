@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -53,10 +54,16 @@ class ExamUser extends Model
 
     public static function setDone($id)
     {
-        static::find($id)->update(['status' => 2]);
+//        $examUserstatic::find($id)->update(['status' => 2]);
         $examUser = static::find($id);
+//        if ($examUser->created)
+        $examUser->update(['status' => 2]);
+        if (Carbon::now() > $examUser->created_at->addMinutes($examUser->exam->time)) {
+            $examUser->update(['updated_at' => $examUser->created_at->addMinutes($examUser->exam->time)]);
+        }
+
         $exam = ExamUser::whereUserId($examUser->user_id)->whereExamId($examUser->exam_id)->get();
-        $ranking= Ranking::whereUserId($examUser->user_id)->whereExamId($examUser->exam_id)->get();
+        $ranking = Ranking::whereUserId($examUser->user_id)->whereExamId($examUser->exam_id)->get();
         if ($exam->count() == 1 and $ranking->count() == 0) {
             $totalPoint = 0;
             foreach ($examUser->examAnswers as $i => $eu) {

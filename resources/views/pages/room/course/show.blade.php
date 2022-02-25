@@ -43,6 +43,8 @@
                                     {{ $ch->title }}
                                 </h2>
                                 <a href="{{ route('admin.course.highlight.edit',[$room->slug,$course->slug,$ch->id]) }}"> <i class="fa fa-edit">Edit</i></a>
+                                <a href="{{ route('admin.course.highlight.delete',[$room->slug,$course->slug,$ch->id]) }}"> <i class="fa fa-trash">Hapus</i></a>
+
                                 <ul class="crm-activity">
                                 @foreach($ch->courseDetails as $cd)
                                         <li class="media">
@@ -65,6 +67,7 @@
                                                             <i class="fa fa-file"></i>
                                                         @endif
                                                         {{ $cd->title }} <a href="{{ route('admin.course.detail.edit',[$room->slug,$course->slug,$cd->course_type_id,$cd->id]) }}"> <i class="fa fa-edit">Edit</i></a>
+                                                            <a href="{{ route('admin.course.detail.delete',[$room->slug,$course->slug,$cd->course_type_id,$cd->id]) }}"> <i class="fa fa-trash">Hapus</i></a>
                                                     </h6>
                                                     <ul class="dates">
                                                         <li>{{ $cd->created_at->format('d F Y') }}</li>

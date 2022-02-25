@@ -8,6 +8,7 @@ use App\Models\ExamAnswer;
 use App\Models\ExamUser;
 use App\Models\Ranking;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\App;
 
 class ExamController extends Controller
 {
@@ -82,6 +83,15 @@ class ExamController extends Controller
         $rank=Ranking::find($id);
         $rank->delete();
         return redirect()->back();
+    }
+    public function download($slug){
+        $exam=Exam::getExam($slug);
+//        foreach ($exam->examSteps as $e){
+//            $examQuestCount+=$e->examQuests->count();
+//        }
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadView('pdf.discussion',compact('exam'))->setPaper('A4', 'portrait');;
+        return $pdf->stream('report.pdf');
     }
 
 }
