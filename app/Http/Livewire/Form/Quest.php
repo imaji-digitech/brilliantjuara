@@ -50,6 +50,7 @@ class Quest extends Component
                 'equation' => $data->equation,
                 'question' => $data->question,
                 'answer' => $data->answer,
+                'discussion' => $data->discussion,
             ];
             foreach ($data->examQuestChoices as $i => $eqc) {
                 if ($this->exam->exam_type == 1) {
