@@ -42,6 +42,7 @@ class Quest extends Component
             'equation' => '',
             'question' => '',
             'answer' => 1,
+            'discussion' => '',
         ];
         if ($this->dataId != null) {
             $data = ExamQuest::find($this->dataId);
