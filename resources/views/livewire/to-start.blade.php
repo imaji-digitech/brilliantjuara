@@ -9,13 +9,14 @@
                 Mulai kembali TO
             </button>
         @endif
-        @if($exam->status_discussion==1 and \App\Models\UserHasDownload::hasDownload($exam->id))
-            <a href="{{ route('admin.user.exam.download',$exam->slug) }}" class="btn btn-primary" target="_blank">
-                Download Pembahasan
-            </a>
+        @if($examUserCheck[0]->status==2)
+            @if($exam->status_discussion==1 and \App\Models\UserHasDownload::hasDownload($exam->id))
+                <a href="{{ route('admin.user.exam.download',$exam->slug) }}" class="btn btn-primary" target="_blank">
+                    Download Pembahasan
+                </a>
+            @endif
         @endif
     @endif
-
     <a href="{{ route('admin.user.exam.ranking',$exam->slug) }}" class="btn btn-primary">
         Ranking
     </a>
