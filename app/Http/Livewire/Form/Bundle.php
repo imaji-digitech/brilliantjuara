@@ -71,7 +71,7 @@ class Bundle extends Component
     private function upload()
     {
         $image = $this->thumbnail;
-        $filename = Str::slug($this->data['title']) . '.' . $image->getClientOriginalExtension();
+        $filename = Str::slug($this->data['title']).rand() . '.' . $image->getClientOriginalExtension();
         $image = Image::make($image)->resize(1080, null, function ($constraint) {
             $constraint->aspectRatio();
         });
