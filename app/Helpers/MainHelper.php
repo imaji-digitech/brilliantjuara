@@ -36,6 +36,18 @@ if (!function_exists('empty_fallback')) {
         return ($data) ? $data : "-";
     }
 }
+if (!function_exists('empty_point')) {
+
+    /**
+     * Empty data or null data fallback to string -
+     *
+     * @return string
+     */
+    function empty_point ($data)
+    {
+        return ($data) ? $data : "0";
+    }
+}
 if (!function_exists('generateRandomString')){
     function generateRandomString($length = 10) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

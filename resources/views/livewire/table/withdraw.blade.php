@@ -1,13 +1,13 @@
 <x-data-table :model="$withdraws">
     <x-slot name="head">
         <tr>
-            <th scope="col" wire:click.prevent="sortBy('id')" >
+            <th scope="col" wire:click.prevent="sortBy('id')">
                 # @include('components.sort-icon',['field'=>"id"])
             </th>
-            <th scope="col" wire:click.prevent="sortBy('created_at')" >
+            <th scope="col" wire:click.prevent="sortBy('created_at')">
                 Ditarik pada @include('components.sort-icon',['field'=>"created_at"])
             </th>
-            <th scope="col" wire:click.prevent="sortBy('money')" >
+            <th scope="col" wire:click.prevent="sortBy('money')">
                 Jumlah uang @include('components.sort-icon',['field'=>"money"])
             </th>
             <th>
@@ -19,6 +19,9 @@
             <th>
                 Status penarikan
             </th>
+            @if(auth()->user()->role==1)
+                Aksi
+            @endif
         </tr>
     </x-slot>
     <x-slot name="body">
@@ -30,6 +33,15 @@
                 <td>{{ $withdraw->no_rek }}</td>
                 <td>{{ $withdraw->bank_name }}</td>
                 <td>{{ $withdraw->status==1?'Dalam proses admin':'Selesai' }}</td>
+                @if(auth()->user()->role==1)
+                    @if($withdraw->status==1)
+                        <td>
+                            <a href="{{ route('admin.withdraw.edit',$withdraw->id) }}">
+                                <i class="fa fa-check"></i>
+                            </a>
+                        </td>
+                    @endif
+                @endif
             </tr>
         @endforeach
     </x-slot>

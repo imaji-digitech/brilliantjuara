@@ -5,6 +5,7 @@
     <x-form.summernote model="choice3" title="C"/>
     <x-form.summernote model="choice4" title="D"/>
     <x-form.summernote model="choice5" title="E"/>
+{{--    <x-form.mathquill model="choice56" title="E"/>--}}
     @if($exam->type_exam==2)
         <x-form.input model="score1" title="nilai A" type="number"/>
         <x-form.input model="score2" title="nilai B" type="number"/>

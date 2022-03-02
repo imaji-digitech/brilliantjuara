@@ -12,12 +12,18 @@ class Exam extends Component
     public $roomId;
     public $room;
     public $optionStatus;
+    public $optionExamType;
 
     public function mount()
     {
         $this->optionStatus = [
             ['title' => 'Aktif', 'value' => 1],
             ['title' => 'Tidak aktif', 'value' => 2],
+        ];
+        $this->optionExamType = [
+            ['title' => 'UKOM', 'value' => 1],
+            ['title' => 'SEKDIN', 'value' => 2],
+            ['title' => 'CPNS', 'value' => 3],
         ];
         $this->room = \App\Models\Room::getRoom($this->roomId);
         $this->data = [
@@ -28,7 +34,8 @@ class Exam extends Component
             'time' => 0,
             'status_discussion' => 2,
             'status_multiple_attempt' => 2,
-            'status_view_score' => 2
+            'status_view_score' => 2,
+            'exam_type_id' => 1
         ];
         if ($this->dataId != null) {
             $data = \App\Models\Exam::find($this->dataId);
@@ -40,6 +47,7 @@ class Exam extends Component
                 'status_discussion' => $data->status_discussion,
                 'status_multiple_attempt' => $data->status_multiple_attempt,
                 'status_view_score' => $data->status_view_score,
+                'exam_type_id' => $data->exam_type_id
             ];
         }
     }

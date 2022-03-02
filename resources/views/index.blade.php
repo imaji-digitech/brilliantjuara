@@ -54,18 +54,19 @@
 <div id="carouselCaptions" class="carousel" data-bs-ride="carousel" data-bs-interval="3000">
     <div class="carousel-indicators">
         @for($i=0;$i<$banners->count();$i++)
-        <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="{{ $i }}" @if($i==0) class="active" aria-current="true" @endif
-                aria-label="Slide {{$i+1}}"></button>
+            <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="{{ $i }}"
+                    @if($i==0) class="active" aria-current="true" @endif
+                    aria-label="Slide {{$i+1}}"></button>
         @endfor
-{{--        <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>--}}
-{{--        <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>--}}
+        {{--        <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>--}}
+        {{--        <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>--}}
     </div>
     <div class="carousel-inner" style="margin-top: 100px">
         @foreach($banners as $index=>$banner)
-        <div class="carousel-item {{($index==0)?'active':''}}">
-            <img src="{{asset('storage/'.$banner->thumbnail)}}" class="d-block"
-                 alt="...">
-        </div>
+            <div class="carousel-item {{($index==0)?'active':''}}">
+                <img src="{{asset('storage/'.$banner->thumbnail)}}" class="d-block"
+                     alt="...">
+            </div>
         @endforeach
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselCaptions" data-bs-slide="prev">
@@ -210,7 +211,8 @@
                 <h1>Halo Sobat Brilli</h1>
                 <p style="text-align: justify">
                     Berikut ini merupakan beberapa penjelasan dari pertanyaan yang sering diajukan oleh Sobat Brilli
-                    yang lain. Apabila Sobat Brilli tidak menemukan penjelasan detail dari permasalahan, Sobat Brilli dapat
+                    yang lain. Apabila Sobat Brilli tidak menemukan penjelasan detail dari permasalahan, Sobat Brilli
+                    dapat
                     menghubungi email Brilliant Juara.</p>
             </div>
             @php
@@ -259,9 +261,32 @@
         <div class="text-center">
             <h2 class="section-heading text-uppercase">Hubungi <strong>Kami</strong></h2>
         </div>
+
         <div class="row mt-3" style="justify-content: center;">
-            <div class="col-lg-4 col-sm-6 mb-3">
-                <a href="https://wa.me/6285890313895" target="_blank" style="text-decoration: none; color: inherit;">
+{{--            <div class="col-lg-4 col-sm-4 mb-3">--}}
+{{--                <a href="https://wa.me/6285890313895" target="_blank" style="text-decoration: none; color: inherit;">--}}
+{{--                    <!-- Portfolio item 1-->--}}
+{{--                    <div class="contact-item">--}}
+{{--                        <div class="contact-caption">--}}
+{{--                            <div class="icon">--}}
+{{--                                <svg class="svg-inline--fa fa-facebook fa-3x" aria-hidden="true" focusable="false"--}}
+{{--                                     data-prefix="fab" data-icon="facebook" role="img"--}}
+{{--                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">--}}
+{{--                                    <path d="M40,0H10C4.486,0,0,4.486,0,10v30c0,5.514,4.486,10,10,10h30c5.514,0,10-4.486,10-10V10C50,4.486,45.514,0,40,0z M39,17h-3 c-2.145,0-3,0.504-3,2v3h6l-1,6h-5v20h-7V28h-3v-6h3v-3c0-4.677,1.581-8,7-8c2.902,0,6,1,6,1V17z"></path>--}}
+{{--                                </svg><!-- <i class="fab fa-whatsapp fa-3x"></i> Font Awesome fontawesome.com -->--}}
+{{--                                <i class="fa fa-facebook"></i>--}}
+{{--                            </div>--}}
+{{--                            <div class="text">--}}
+{{--                                <h3 class="portfolio-caption-heading">Whatsapp</h3>--}}
+{{--                                <p class="portfolio-caption-subheading">https://wa.me/6285890313895</p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </a>--}}
+{{--            </div>--}}
+            <div class="col-lg-4 col-sm-4 mb-3 mr-3 ml-3">
+                <a href="https://wa.me/6285890313895" target="_blank"
+                   style="text-decoration: none; color: inherit;">
                     <!-- Portfolio item 1-->
                     <div class="contact-item">
                         <div class="contact-caption">
@@ -281,7 +306,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col-lg-4 col-sm-6 mb-3">
+            <div class="col-lg-4 col-sm-4 mb-3">
                 <!-- Portfolio item 2-->
                 <a href="mailto:cs.brilliantjuara@gmail.com?subject=Saya Tertarik Dengan Program Brilliant Juara!"
                    style="text-decoration: none; color: inherit;">
@@ -310,48 +335,18 @@
 <footer class="footer py-4 bg-blue" style="border-top: 1px solid white;">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-lg-4 text-lg-start">Copyright © Brilliant Juara 2022</div>
+            <div class="col-lg-4 text-lg-start">
+                Copyright © Brilliant Juara 2022
+            </div>
             <div class="col-lg-2 my-3 my-lg-0" style="text-align:center;">
-
             </div>
             <div class="col-lg-6 text-lg-end" style="line-height: 4;">
-                <a class="btn btn-light btn-social mx-2" href="https://www.youtube.com/channel/UCkErvbG4zicFAQKJ-_9SNYA"
-                   target="_blank">
-                    <svg class="svg-inline--fa fa-youtube" aria-hidden="true" focusable="false" data-prefix="fab"
-                         data-icon="youtube" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
-                         data-fa-i2svg="">
-                        <path fill="currentColor"
-                              d="M549.7 124.1c-6.281-23.65-24.79-42.28-48.28-48.6C458.8 64 288 64 288 64S117.2 64 74.63 75.49c-23.5 6.322-42 24.95-48.28 48.6-11.41 42.87-11.41 132.3-11.41 132.3s0 89.44 11.41 132.3c6.281 23.65 24.79 41.5 48.28 47.82C117.2 448 288 448 288 448s170.8 0 213.4-11.49c23.5-6.321 42-24.17 48.28-47.82 11.41-42.87 11.41-132.3 11.41-132.3s0-89.44-11.41-132.3zm-317.5 213.5V175.2l142.7 81.21-142.7 81.2z"></path>
-                    </svg><!-- <i class="fab fa-youtube"></i> Font Awesome fontawesome.com --></a>
-                <a class="btn btn-light btn-social mx-2"
-                   href="https://instagram.com/brilliantjuara?utm_medium=copy_link" target="_blank">
-                    <svg class="svg-inline--fa fa-instagram" aria-hidden="true" focusable="false" data-prefix="fab"
-                         data-icon="instagram" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
-                         data-fa-i2svg="">
-                        <path fill="currentColor"
-                              d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path>
-                    </svg><!-- <i class="fab fa-instagram"></i> Font Awesome fontawesome.com --></a>
-                <a class="btn btn-light btn-social mx-2" href="https://vt.tiktok.com/ZSe47WE8N" target="_blank">
-                    <svg class="svg-inline--fa fa-tiktok" aria-hidden="true" focusable="false" data-prefix="fab"
-                         data-icon="tiktok" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
-                         data-fa-i2svg="">
-                        <path fill="currentColor"
-                              d="M448 209.9a210.1 210.1 0 0 1 -122.8-39.25V349.4A162.6 162.6 0 1 1 185 188.3V278.2a74.62 74.62 0 1 0 52.23 71.18V0l88 0a121.2 121.2 0 0 0 1.86 22.17h0A122.2 122.2 0 0 0 381 102.4a121.4 121.4 0 0 0 67 20.14z"></path>
-                    </svg><!-- <i class="fab fa-tiktok"></i> Font Awesome fontawesome.com --></a>
-                <a class="btn btn-light btn-social mx-2" href="https://www.twitter.com/brilliantjuara " target="_blank">
-                    <svg class="svg-inline--fa fa-twitter" aria-hidden="true" focusable="false" data-prefix="fab"
-                         data-icon="twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
-                         data-fa-i2svg="">
-                        <path fill="currentColor"
-                              d="M459.4 151.7c.325 4.548 .325 9.097 .325 13.65 0 138.7-105.6 298.6-298.6 298.6-59.45 0-114.7-17.22-161.1-47.11 8.447 .974 16.57 1.299 25.34 1.299 49.06 0 94.21-16.57 130.3-44.83-46.13-.975-84.79-31.19-98.11-72.77 6.498 .974 12.99 1.624 19.82 1.624 9.421 0 18.84-1.3 27.61-3.573-48.08-9.747-84.14-51.98-84.14-102.1v-1.299c13.97 7.797 30.21 12.67 47.43 13.32-28.26-18.84-46.78-51.01-46.78-87.39 0-19.49 5.197-37.36 14.29-52.95 51.65 63.67 129.3 105.3 216.4 109.8-1.624-7.797-2.599-15.92-2.599-24.04 0-57.83 46.78-104.9 104.9-104.9 30.21 0 57.5 12.67 76.67 33.14 23.72-4.548 46.46-13.32 66.6-25.34-7.798 24.37-24.37 44.83-46.13 57.83 21.12-2.273 41.58-8.122 60.43-16.24-14.29 20.79-32.16 39.31-52.63 54.25z"></path>
-                    </svg><!-- <i class="fab fa-twitter"></i> Font Awesome fontawesome.com --></a>
-                <a class="btn btn-light btn-social mx-2" href="https://t.me/brilliantjuaraofficial" target="_blank">
-                    <svg class="svg-inline--fa fa-telegram" aria-hidden="true" focusable="false" data-prefix="fab"
-                         data-icon="telegram" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"
-                         data-fa-i2svg="">
-                        <path fill="currentColor"
-                              d="M248 8C111 8 0 119 0 256S111 504 248 504 496 392.1 496 256 384.1 8 248 8zM362.1 176.7c-3.732 39.22-19.88 134.4-28.1 178.3-3.476 18.58-10.32 24.82-16.95 25.42-14.4 1.326-25.34-9.517-39.29-18.66-21.83-14.31-34.16-23.22-55.35-37.18-24.49-16.14-8.612-25 5.342-39.5 3.652-3.793 67.11-61.51 68.33-66.75 .153-.655 .3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283 .746-104.6 69.14-14.85 10.19-26.89 9.934c-8.855-.191-25.89-5.006-38.55-9.123-15.53-5.048-27.88-7.717-26.8-16.29q.84-6.7 18.45-13.7 108.4-47.25 144.6-62.3c68.87-28.65 83.18-33.62 92.51-33.79 2.052-.034 6.639 .474 9.61 2.885a10.45 10.45 0 0 1 3.53 6.716A43.76 43.76 0 0 1 362.1 176.7z"></path>
-                    </svg><!-- <i class="fab fa-telegram"></i> Font Awesome fontawesome.com --></a>
+                <a class="btn btn-light btn-social mx-2" href="https://www.youtube.com/channel/UCkErvbG4zicFAQKJ-_9SNYA" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a class="btn btn-light btn-social mx-2" href="https://instagram.com/brilliantjuara?utm_medium=copy_link" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a class="btn btn-light btn-social mx-2" href="https://vt.tiktok.com/ZSe47WE8N" target="_blank"><i class="fab fa-tiktok"></i></a>
+                <a class="btn btn-light btn-social mx-2" href="https://www.twitter.com/brilliantjuara " target="_blank"><i class="fab fa-twitter"></i></a>
+                <a class="btn btn-light btn-social mx-2" href="https://t.me/brilliantjuaraofficial" target="_blank"><i class="fab fa-telegram"></i></a>
+                <a class="btn btn-light btn-social mx-2" href="https://www.facebook.com/brilliantjuara" target="_blank"><i class="fab fa-facebook"></i></a>
             </div>
         </div>
     </div>
@@ -372,7 +367,6 @@
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
 <script src="{{ asset('frontpage/js/app.js') }}"></script>
-
 
 
 </body>

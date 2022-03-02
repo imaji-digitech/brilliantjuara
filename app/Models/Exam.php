@@ -32,7 +32,7 @@ class Exam extends Model
     /**
      * @var array
      */
-    protected $fillable = ['room_id', 'title', 'price', 'slug', 'time', 'created_at', 'updated_at', 'status_discussion', 'status_multiple_attempt', 'status_view_score'];
+    protected $fillable = ['room_id', 'title', 'price', 'slug', 'time', 'created_at', 'updated_at', 'status_discussion', 'status_multiple_attempt', 'status_view_score','exam_type_id'];
 
     public static function search($query, $dataId)
     {

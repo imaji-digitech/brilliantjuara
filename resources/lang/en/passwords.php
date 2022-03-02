@@ -14,7 +14,7 @@ return [
     */
 
     'reset' => 'Your password has been reset!',
-    'sent' => 'We have emailed your password reset link!',
+    'sent' => 'Silahkan Sobat Brilli periksa email untuk link reset password! Jika Sobat Brilli tidak menerima email selama 15 menit maka silahkan periksa spam atau hubungi admin melalui halo@brilliantjuara.com',
     'throttled' => 'Please wait before retrying.',
     'token' => 'This password reset token is invalid.',
     'user' => "We can't find a user with that email address.",

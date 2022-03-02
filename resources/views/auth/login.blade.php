@@ -218,7 +218,7 @@
 
 {{--</html>--}}
     <!DOCTYPE html>
-<html lang="en">
+<html lang="id-ID">
 
 <head>
     <meta charset="UTF-8">
@@ -263,8 +263,14 @@
                     <h3>Selamat Datang,<br> Masukkan akun anda : </h3>
                     <label for="container_form">
                         <input type="text" name="email" :value="old('email')" placeholder="Email" required autofocus>
+                        @if($errors->has('email'))
+                            <p class="error text-danger" style="color: red">{{ $errors->first('email') }}</p>
+                        @endif
                         <input type="password" name="password" autocomplete="current-password" placeholder="Password"
                                id="password" required>
+                        @if($errors->has('password'))
+                            <p class="error text-danger" style="color: red">{{ $errors->first('password') }}</p>
+                        @endif
                         <span>
                             <i class="fa-solid fa-eye eye" id="eye" onclick="toggle()"></i>
                             </span>
@@ -274,7 +280,7 @@
                         <label class="label_box" for="tetap_masuk">Biarkan tetap masuk</label>
                     </div>
                     <input type="submit" class="submit" name="login" value="Masuk">
-                    <h5 class="center-fpass-sign">Forget Password / Lupa Password ?</h5>
+                    <a href="{{ route('password.request') }}" style="text-decoration: none"><h5 class="center-fpass-sign">Forget Password / Lupa Password ?</h5></a>
                     <h5 class="center-fpass-sign" id="or-fpass">or</h5>
                     <h5 class="center-fpass-sign" id="goSignUpLabel" onclick="">Belum Punya Akun ?</h5>
                 </form>
@@ -294,20 +300,34 @@
                         <input type="text" placeholder="Nama Lengkap" name="name"
                                :value="old('name')" required
                         >
+                        @if($errors->has('name'))
+                            <p class="error text-danger" style="color: red">{{ $errors->first('name') }}</p>
+                        @endif
                         <input placeholder="Alamat Email" type="email" name="email" :value="old('email')" required>
+                        @if($errors->has('email'))
+                            <p class="error text-danger" style="color: red">{{ $errors->first('email') }}</p>
+                        @endif
                         <input placeholder="Password" type="password" name="password" required id="registerPassword"
                                autocomplete="new-password">
+                        @if($errors->has('password'))
+                            <p class="error text-danger" style="color: red">{{ $errors->first('password') }}</p>
+                        @endif
                         <span>
                             <i class="fa-solid fa-eye" id="eye_daftar" onclick="toggle1()"></i>
                         </span>
                         <input placeholder="Konfirmasi Password" type="password" name="password_confirmation" required
                                autocomplete="new-password" id="registerConfirmPassword">
+                        @if($errors->has('password_confirmation'))
+                            <p class="error text-danger" style="color: red">{{ $errors->first('password_confirmation') }}</p>
+                        @endif
                         <span>
                             <i class="fa-solid fa-eye" id="eye_daftar_konfirmasi"
                                onclick="toggle2()"></i>
                         </span>
                         <input type="text" name="phone_number" placeholder="Nomor Telepon" required>
-                        {{--                        <input type="text" name="kode_referral" placeholder="Kode Referral (Opsional)" required>--}}
+                        @if($errors->has('phone_number'))
+                            <p class="error text-danger" style="color: red">{{ $errors->first('phone_number') }}</p>
+                        @endif
                         <input type="submit" class="submit" name="daftar" value="Daftar">
                         <h5 id="goSignInLabel">Sudah Punya Akun ?</h5>
                     </label>

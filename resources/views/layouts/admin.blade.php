@@ -35,6 +35,8 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/date-picker.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/date-picker.custom.css?_=1')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/owlcarousel.css')}}">
+    <link href="{{ asset('vendor/mathquill/mathquill.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/mathquill/matheditor.css') }}" rel="stylesheet">
     <!-- Plugins css Ends-->
     <!-- Bootstrap css-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/bootstrap.css')}}">
@@ -196,8 +198,12 @@
 <!-- Plugins JS Ends-->
 <!-- Theme js-->
 <script src="{{asset('assets/js/script.js')}}"></script>
-{{--<script src="{{asset('assets/js/theme-customizer/customizer.js')}}"></script>--}}
+<script src="{{ asset('vendor/mathquill/mathquill.min.js') }}"></script>
+<script src="{{ asset('vendor/mathquill/matheditor.js') }}"></script>
 <!-- login js-->
+{{--@isset($script)--}}
+{{--    {{ $script }}--}}
+{{--@endif--}}
 <script>
     const SwalModal = (icon, title, html) => {
         Swal.fire({

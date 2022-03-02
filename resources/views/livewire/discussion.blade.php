@@ -1,52 +1,112 @@
 <div class="row">
-    <div class="col-md-12">
-        <div class="row">
+    @if($examUser->exam->exam_type_id==1)
+        <div class="col-md-12">
+            <div class="row">
 
-            <div class="col-md-4">
-                <div class="card" style="height: 285px">
-                    <div class="card-body" style="padding: 10px;">
-                        <br><br>
-                        <div class="text-center">
-                            <h6 style="color: #38a7b3">Benar : {{ $rightAnswer }}</h6>
-                            <h6 style="color: #faa41b">Salah : {{ $wrongAnswer }}</h6>
-                            <h6 style="color: #BC2C3D">Kosong : {{ $blankAnswer }}</h6>
-                        </div>
-                        <br>
-                        <div style="text-align: left">
-                            <h6 style="color: #38a7b3">Mulai : {{ $examUser->created_at->format('d-m-Y H:i') }}</h6>
-                            <h6 style="color: #faa41b">Selesai : {{ $examUser->updated_at->format('d-m-Y H:i') }}</h6>
-                        </div>
-                        @php
-                            $time=$examUser->updated_at->diffInSeconds($examUser->created_at);
-                        $minutes=intval($time/60);
-                        $seconds=$time%60
-                        @endphp
-                        <h6 style="color: #BC2C3D">Waktu pengerjaan : {{ $minutes }} menit {{ $seconds }} detik</h6>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card" style="height: 285px;">
-                    <div class="card-body" style="padding: 10px;text-align: center;">
-                        <div>
-                            <br><br><br>
-                            <h5 >Total nilai : </h5>
-                            <h4 style="color: #38a7b3">{{ number_format((float)($totalPoint/$totalHighValue*100), 2, '.', '') }}%</h4>
-{{--                            <h5>Dari :</h5>--}}
-{{--                            <h4 style="color: #faa41b">{{ $totalHighValue }}</h4>--}}
-                            <h5>Keterangan :</h5>
-                            <h4 style="color: {{ ($graduate=="Lulus")?'#38a7b3':'#BC2C3D' }}">{{ $graduate }}</h4>
+                <div class="col-md-4">
+                    <div class="card" style="height: 285px">
+                        <div class="card-body" style="padding: 10px;">
+                            <br><br>
+                            <div class="text-center">
+                                <h6 style="color: #38a7b3">Benar : {{ $rightAnswer }}</h6>
+                                <h6 style="color: #faa41b">Salah : {{ $wrongAnswer }}</h6>
+                                <h6 style="color: #BC2C3D">Kosong : {{ $blankAnswer }}</h6>
+                            </div>
+                            <br>
+                            <div style="text-align: left">
+                                <h6 style="color: #38a7b3">Mulai : {{ $examUser->created_at->format('d-m-Y H:i') }}</h6>
+                                <h6 style="color: #faa41b">Selesai
+                                    : {{ $examUser->updated_at->format('d-m-Y H:i') }}</h6>
+                            </div>
+                            @php
+                                $time=$examUser->updated_at->diffInSeconds($examUser->created_at);
+                            $minutes=intval($time/60);
+                            $seconds=$time%60
+                            @endphp
+                            <h6 style="color: #BC2C3D">Waktu pengerjaan : {{ $minutes }} menit {{ $seconds }} detik</h6>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card" style="height: 285px">
-                        <livewire:chart-result idComponent="result" :right="$rightAnswer" :wrong="$wrongAnswer" :blank="$blankAnswer" />
+                <div class="col-md-4">
+                    <div class="card" style="height: 285px;">
+                        <div class="card-body" style="padding: 10px;text-align: center;">
+                            <div>
+                                <br><br><br>
+                                <h5>Total nilai : </h5>
+                                <h4 style="color: #38a7b3">{{ number_format((float)($totalPoint/$totalHighValue*100), 2, '.', '') }}
+                                    %</h4>
+                                {{--                            <h5>Dari :</h5>--}}
+                                {{--                            <h4 style="color: #faa41b">{{ $totalHighValue }}</h4>--}}
+                                <h5>Keterangan :</h5>
+                                <h4 style="color: {{ ($graduate=="Lulus")?'#38a7b3':'#BC2C3D' }}">{{ $graduate }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card" style="height: 285px">
+                        <livewire:chart-result idComponent="result" :right="$rightAnswer" :wrong="$wrongAnswer"
+                                               :blank="$blankAnswer"/>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    @elseif($examUser->exam->exam_type_id==2)
+        <div class="col-md-12">
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="card" style="height: 285px">
+                        <div class="card-body" style="padding: 10px;">
+                            <br><br>
+                            <div class="text-center">
+                                {{--                                <h6 style="color: #38a7b3">Benar : {{ $rightAnswer }}</h6>--}}
+                                {{--                                <h6 style="color: #faa41b">Salah : {{ $wrongAnswer }}</h6>--}}
+                                {{--                                <h6 style="color: #BC2C3D">Kosong : {{ $blankAnswer }}</h6>--}}
+                            </div>
+                            <br>
+                            <div style="text-align: left">
+                                <h6 style="color: #38a7b3">Mulai : {{ $examUser->created_at->format('d-m-Y H:i') }}</h6>
+                                <h6 style="color: #faa41b">Selesai
+                                    : {{ $examUser->updated_at->format('d-m-Y H:i') }}</h6>
+                            </div>
+                            @php
+                                $time=$examUser->updated_at->diffInSeconds($examUser->created_at);
+                            $minutes=intval($time/60);
+                            $seconds=$time%60
+                            @endphp
+                            <h6 style="color: #BC2C3D">Waktu pengerjaan : {{ $minutes }} menit {{ $seconds }} detik</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card" style="height: 285px;">
+                        <div class="card-body" style="padding: 10px;text-align: center;">
+                            <div>
+                                <br><br><br>
+                                <h5>Total nilai : </h5>
+                                @foreach($examUser->exam->ExamSteps as $es)
+                                    <h4 style="color: #38a7b3"> {{ $es->title.' : '.empty_point($sekdinPoint[$es->id]) }} </h4>
+                                @endforeach
+                                {{--                            <h5>Dari :</h5>--}}
+                                {{--                            <h4 style="color: #faa41b">{{ $totalHighValue }}</h4>--}}
+                                {{--                                <h5>Keterangan :</h5>--}}
+                                {{--                                <h4 style="color: {{ ($graduate=="Lulus")?'#38a7b3':'#BC2C3D' }}">{{ $graduate }}</h4>--}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @foreach($examUser->exam->ExamSteps as $index=>$es)
+                <div class="col-md-4">
+                    <div class="card" style="height: 285px">
+                            <livewire:chart-result idComponent="{{ $es->title }}" right="{{ empty_point($sekdinRight[$es->id]) }}" wrong="{{ empty_point($sekdinWrong[$es->id])-empty_point($sekdinBlank[$es->id]) }}"
+                                                   blank="{{ empty_point($sekdinBlank[$es->id]) }}"/>
+                    </div>
+                </div>
+                    @endforeach
+            </div>
+        </div>
+    @endif
     <div class="col-sm-4 desktop-only">
         <div class="card" style="padding: 0;">
             <div class="card-body text-center" style="padding: 0; padding-bottom: 10px">
@@ -73,8 +133,8 @@
             <div class="card-body">
                 @isset( $questActive->examQuest->question)
                     <div class="row">
-                        <div class="col-1" style="width: 30px;padding: 0;margin: 0">{{$number+1}}. </div>
-                        <div class="col-11" >
+                        <div class="col-1" style="width: 30px;padding: 0;margin: 0">{{$number+1}}.</div>
+                        <div class="col-11">
                             <p style="text-align: justify">{!! $questActive->examQuest->question  !!}</p>
                         </div>
                     </div>
@@ -118,8 +178,9 @@
                             <br>
                             <div class="row">
                                 <div class="col-1" style="width: 1px;display: inline-block"></div>
-                                <div class="col-11" >
-                                    <span>Jawaban Benar : </span><span class="text-primary">{{$alphabet[$questActive->examQuest->answer]}}</span>
+                                <div class="col-11">
+                                    <span>Jawaban Benar : </span><span
+                                        class="text-primary">{{$alphabet[$questActive->examQuest->answer]}}</span>
                                     <p style="text-align: justify">{!! $questActive->examQuest->discussion  !!}</p>
                                 </div>
                             </div>

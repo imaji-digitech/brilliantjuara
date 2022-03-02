@@ -26,6 +26,19 @@
   left: 320px;
   top: 230px;
 }
+#eye_daftar2 {
+    position: absolute;
+    top: 178px;
+    left: 350px;
+    cursor: pointer;
+}
+
+#eye_daftar_konfirmasi2 {
+    position: absolute;
+    cursor: pointer;
+    left: 350px;
+    top: 223px;
+}
 
 body {
   line-height: 1;

@@ -22,7 +22,15 @@
                 <td scope="row">{{ ($page-1)*$perPage+$index+1 }}</td>
                 <td>{{ $referral->user->name }}</td>
                 <td>{{ $referral->code }}</td>
-                <td>{{ $referral->referralCodeUses->count() }}</td>
+                @php
+                    $c=0;
+                        foreach ($referral->payments as $p){
+                        if ($p->status==2){
+                            $c++;
+                        }
+                    }
+                @endphp
+                <td>{{ $c }}</td>
                 <td>
                     <a role="button" wire:click="deleteItem({{$referral->id}})" class="mr-3">
                         <i class="fa fa-16px fa-trash text-danger"></i></a>

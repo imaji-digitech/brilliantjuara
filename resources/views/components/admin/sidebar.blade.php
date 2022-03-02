@@ -36,11 +36,11 @@
                             <i class="fas fa-home"></i><span> Dashboard</span>
                         </a>
                     </li>
-{{--                    <li class="sidebar-list">--}}
-{{--                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.referral.me.use') }}">--}}
-{{--                            <i class="fas fa-home"></i><span> Referralku</span>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
+                    {{--                    <li class="sidebar-list">--}}
+                    {{--                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.referral.me.use') }}">--}}
+                    {{--                            <i class="fas fa-home"></i><span> Referralku</span>--}}
+                    {{--                        </a>--}}
+                    {{--                    </li>--}}
                     <li class="sidebar-main-title">
                         <div>
                             <h6>Program</h6>
@@ -75,17 +75,19 @@
                                     <i class="fas fa-home"></i><span> Riwayat</span>
                                 </a>
                             </li>
-                            <li class="sidebar-main-title">
-                                <div>
-                                    <h6>Refferal</h6>
-                                </div>
-                            </li>
-                            <li class="sidebar-list">
-                                <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.referral.me.use') }}">
-                                    <i class="fas fa-home"></i><span> Referralku</span>
-                                </a>
-                            </li>
-
+                            @if(auth()->user()->role!=1)
+                                <li class="sidebar-main-title">
+                                    <div>
+                                        <h6>Refferal</h6>
+                                    </div>
+                                </li>
+                                <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title link-nav"
+                                       href="{{ route('admin.referral.me.use') }}">
+                                        <i class="fas fa-home"></i><span> Referralku</span>
+                                    </a>
+                                </li>
+                            @endif
                             {{--                    @foreach(\App\Models\Room::get() as $room)--}}
                             {{--                        <li class="sidebar-list">--}}
                             {{--                            <a class="sidebar-link sidebar-title link-nav" href="">--}}
@@ -103,6 +105,12 @@
                                     <a class="sidebar-link sidebar-title link-nav"
                                        href="{{ route('admin.referral.index') }}">
                                         <i class="fas fa-home"></i><span> Referral Menu</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title link-nav"
+                                       href="{{ route('admin.referral.me.use') }}">
+                                        <i class="fas fa-home"></i><span> Withdraw Menu</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-list">
@@ -159,6 +167,22 @@
                                        href="{{ route('admin.access.course') }}">
                                         <i class="fas fa-home"></i><span> Akses Bimbel</span>
                                     </a>
+                                </li>
+                                <li class="sidebar-list">
+                                    <a href="#" class="sidebar-link sidebar-title link-nav"></a>
+                                </li><li class="sidebar-list">
+                                    <a href="#" class="sidebar-link sidebar-title link-nav"></a>
+                                </li><li class="sidebar-list">
+                                    <a href="#" class="sidebar-link sidebar-title link-nav"></a>
+                                </li><li class="sidebar-list">
+                                    <a href="#" class="sidebar-link sidebar-title link-nav"></a>
+                                </li><li class="sidebar-list">
+                                    <a href="#" class="sidebar-link sidebar-title link-nav"></a>
+                                </li><li class="sidebar-list">
+                                    <a href="#" class="sidebar-link sidebar-title link-nav"></a>
+                                </li>
+                                <li class="sidebar-list">
+                                    <a href="#" class="sidebar-link sidebar-title link-nav"></a>
                                 </li>
                             @endif
 

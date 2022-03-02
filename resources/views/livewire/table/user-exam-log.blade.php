@@ -19,9 +19,9 @@
             <th>
                 Status
             </th>
-            <th>
-                Hasil
-            </th>
+{{--            <th>--}}
+{{--                Hasil--}}
+{{--            </th>--}}
 
             {{--            <th>Hasil</th>--}}
             <th>aksi</th>
@@ -43,18 +43,18 @@
                         {{ $exam->status==1?'Pengerjaan':'Selesai' }}
                     @endif
                 </td>
-                @php
-                    $totalPoint=0;
-                    $totalHigh=0;
-                    foreach ($exam->examAnswers as $i => $eu) {
-                        $totalHigh+=$eu->examQuest->examStep->score_right;
-                        $answer = $eu->examQuest->answer == $eu->answer;
-                        if ($answer) {
-                            $totalPoint+=$eu->examQuest->examStep->score_right;
-                        }
-                    }
-                @endphp
-                <td>{{ $exam->status==1?'-':number_format((float)($totalPoint/$totalHigh*100), 2, '.', '').'%' }}</td>
+{{--                @php--}}
+{{--                    $totalPoint=0;--}}
+{{--                    $totalHigh=0;--}}
+{{--                    foreach ($exam->examAnswers as $i => $eu) {--}}
+{{--                        $totalHigh+=$eu->examQuest->examStep->score_right;--}}
+{{--                        $answer = $eu->examQuest->answer == $eu->answer;--}}
+{{--                        if ($answer) {--}}
+{{--                            $totalPoint+=$eu->examQuest->examStep->score_right;--}}
+{{--                        }--}}
+{{--                    }--}}
+{{--                @endphp--}}
+{{--                <td>{{ $exam->status==1?'-':number_format((float)($totalPoint/$totalHigh*100), 2, '.', '').'%' }}</td>--}}
                 <td>
                     <a role="button"
                        href="{{ route('admin.user.exam.discussion',[$exam->exam->slug,$exam->id]) }}"

@@ -168,6 +168,7 @@ Route::middleware(['auth:sanctum',])->name('admin.')->prefix('admin')->group(fun
         Route::get('room/{room}/exam/{exam}/step/{step}/question/create', [ExamController::class, 'questionCreate'])->name('exam.question.create');
         Route::get('room/{room}/exam/{exam}/step/{step}/question/edit/{id}', [ExamController::class, 'questionEdit'])->name('exam.question.edit');
         Route::post('room/quest/{step}/static', [UploadFile::class, 'uploadQuestStatic'])->name('upload-static');
+        Route::post('room/quest/{step}/dynamic', [UploadFile::class, 'uploadQuestDynamic'])->name('upload-dynamic');
 
         Route::get('room/{room}/course', [CourseController::class, 'index'])->name('course.index');
         Route::get('room/{room}/course/create', [CourseController::class, 'create'])->name('course.create');
@@ -205,8 +206,8 @@ Route::middleware(['auth:sanctum',])->name('admin.')->prefix('admin')->group(fun
             $exam = ExamUser::class;
             return view('pages.exam-log', compact('exam'));
         })->name('exam.user.log');
-        Route::get('withdraw',[WithdrawControlller::class,'index'])->name('withdraw.index');
-        Route::get('withdraw/{id}',[WithdrawControlller::class,'edit'])->name('withdraw.index');
+//        Route::get('withdraw',[WithdrawControlller::class,'index'])->name('withdraw.index');
+        Route::get('withdraw/{id}',[WithdrawControlller::class,'update'])->name('withdraw.edit');
         Route::get('exam/ranking/{id}', [\App\Http\Controllers\User\ExamController::class, 'rankingRemove'])->name('user.exam.ranking.remove');
     });
     Route::get('referral/me', [\App\Http\Controllers\User\ReferralController::class, 'index'])->name('referral.me.use');

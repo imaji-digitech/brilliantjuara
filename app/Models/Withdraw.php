@@ -28,6 +28,16 @@ class Withdraw extends Model
      */
     protected $fillable = ['user_id', 'money', 'no_rek', 'bank_name', 'status', 'created_at', 'updated_at'];
 
+    public static function search($query)
+    {
+        return empty($query) ? static::query()
+            : static::whereHas('user', function ($q) use ($query) {
+                $q->where('name', 'like', '%' . $query . '%');
+            })
+                ->orWhere('no_rek', 'like', '%' . $query . '%')
+                ->orWhere('bank_name', 'like', '%' . $query . '%');
+    }
+
     /**
      * @return BelongsTo
      */

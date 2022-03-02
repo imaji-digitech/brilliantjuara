@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Table;
 
+use App\Models\Exam;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -20,6 +21,7 @@ class Main extends Component
     public $sortAsc = false;
     public $search = '';
     protected $paginationTheme = 'bootstrap';
+    protected $listeners = ["delete" => "delete"];
 
     public function sortBy($field)
     {
@@ -37,22 +39,6 @@ class Main extends Component
         $data = $this->get_pagination_data();
 
         return view($data['view'], $data);
-    }
-    protected $listeners = ["delete" => "delete"];
-
-    public function deleteItem($id)
-    {
-        $this->del=$id;
-        $this->emit('swal:confirm', [
-            'title' => '',
-            'icon' => 'warning',
-            'confirmText' => 'Hapus',
-            'text' => 'Periksa kembali',
-            'method' => "delete"]);
-    }
-    public function delete(){
-        $data = $this->model::find($this->del);
-        $data->delete();
     }
 
     public function get_pagination_data()
@@ -73,88 +59,97 @@ class Main extends Component
                     ->paginate($this->perPage);
                 return [
                     "view" => "livewire.table.$this->name",
-                    "{$this->name}s" =>  ${$this->name},
+                    "{$this->name}s" => ${$this->name},
                 ];
                 break;
             case 'course':
-                $course = $this->model::search($this->search,$this->dataId)
+                $course = $this->model::search($this->search, $this->dataId)
                     ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
                     ->paginate($this->perPage);
                 return [
                     "view" => "livewire.table.course",
-                    "courses" =>  $course,
+                    "courses" => $course,
                 ];
                 break;
             case 'exam':
-                $exam = $this->model::search($this->search,$this->dataId)
+                $exam = $this->model::search($this->search, $this->dataId)
                     ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
                     ->paginate($this->perPage);
                 return [
                     "view" => "livewire.table.exam",
-                    "exams" =>  $exam,
+                    "exams" => $exam,
                 ];
                 break;
             case 'exam-step':
-                $step = $this->model::search($this->search,$this->dataId)
+                $step = $this->model::search($this->search, $this->dataId)
                     ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
                     ->paginate($this->perPage);
                 return [
                     "view" => "livewire.table.exam-step",
-                    "exams" =>  $step,
+                    "exams" => $step,
                 ];
                 break;
             case 'quest':
-                $quest = $this->model::search($this->search,$this->dataId)
+                $quest = $this->model::search($this->search, $this->dataId)
                     ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
                     ->paginate($this->perPage);
                 return [
                     "view" => "livewire.table.quest",
-                    "quests" =>  $quest,
+                    "quests" => $quest,
                 ];
                 break;
             case 'ownExam':
-                $own = $this->model::search($this->search,$this->dataId)
+                $own = $this->model::search($this->search, $this->dataId)
                     ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
                     ->paginate($this->perPage);
                 return [
                     "view" => "livewire.table.own-exam",
-                    "owns" =>  $own,
+                    "owns" => $own,
                 ];
                 break;
             case 'ownCourse':
-                $own = $this->model::search($this->search,$this->dataId)
+                $own = $this->model::search($this->search, $this->dataId)
                     ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
                     ->paginate($this->perPage);
                 return [
                     "view" => "livewire.table.own-course",
-                    "owns" =>  $own,
+                    "owns" => $own,
                 ];
                 break;
             case 'user-exam':
-                $exam = $this->model::search($this->search,$this->dataId)
+                $exam = $this->model::search($this->search, $this->dataId)
                     ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
                     ->paginate($this->perPage);
+                $view = "livewire.table.user-exam-ukom";
+                $exams = Exam::find($this->dataId);
+                if ($exams->exam_type_id == 1) {
+                    $view = "livewire.table.user-exam-ukom";
+                } elseif ($exams->exam_type_id == 2) {
+                    $view = "livewire.table.user-exam-sekdin";
+                } else {
+                    $view = "livewire.table.user-exam-cpns";
+                }
                 return [
-                    "view" => "livewire.table.user-exam",
-                    "exams" =>  $exam,
+                    "view" => $view,
+                    "exams" => $exam,
                 ];
                 break;
             case 'announcement':
-                $announcement = $this->model::search($this->search,$this->dataId)
+                $announcement = $this->model::search($this->search, $this->dataId)
                     ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
                     ->paginate($this->perPage);
                 return [
                     "view" => "livewire.table.announcement",
-                    "announcements" =>  $announcement,
+                    "announcements" => $announcement,
                 ];
                 break;
             case 'banner':
-                $banner = $this->model::search($this->search,$this->dataId)
+                $banner = $this->model::search($this->search, $this->dataId)
                     ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
                     ->paginate($this->perPage);
                 return [
                     "view" => "livewire.table.banner",
-                    "banners" =>  $banner,
+                    "banners" => $banner,
                 ];
                 break;
             case 'frontpage-banner':
@@ -162,52 +157,52 @@ class Main extends Component
                     ->paginate($this->perPage);
                 return [
                     "view" => "livewire.table.frontpage-banner",
-                    "banners" =>  $banner,
+                    "banners" => $banner,
                 ];
                 break;
             case 'event':
-                $event = $this->model::search($this->search,$this->dataId)
+                $event = $this->model::search($this->search, $this->dataId)
                     ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
                     ->paginate($this->perPage);
                 return [
                     "view" => "livewire.table.event",
-                    "events" =>  $event,
+                    "events" => $event,
                 ];
                 break;
             case 'bundle':
-                $bundle = $this->model::search($this->search,$this->dataId)
+                $bundle = $this->model::search($this->search, $this->dataId)
                     ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
                     ->paginate($this->perPage);
                 return [
                     "view" => "livewire.table.bundle",
-                    "bundles" =>  $bundle,
+                    "bundles" => $bundle,
                 ];
                 break;
             case 'bundle-detail':
-                $bundle = $this->model::search($this->search,$this->dataId)
+                $bundle = $this->model::search($this->search, $this->dataId)
                     ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
                     ->paginate($this->perPage);
                 return [
                     "view" => "livewire.table.bundle-detail",
-                    "bundles" =>  $bundle,
+                    "bundles" => $bundle,
                 ];
                 break;
             case 'bundle-price':
-                $bundle = $this->model::search($this->search,$this->dataId)
+                $bundle = $this->model::search($this->search, $this->dataId)
                     ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
                     ->paginate($this->perPage);
                 return [
                     "view" => "livewire.table.bundle-price",
-                    "bundles" =>  $bundle,
+                    "bundles" => $bundle,
                 ];
                 break;
             case 'token':
-                $token = $this->model::search($this->search,$this->dataId)
+                $token = $this->model::search($this->search, $this->dataId)
                     ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
                     ->paginate($this->perPage);
                 return [
                     "view" => "livewire.table.token",
-                    "tokens" =>  $token,
+                    "tokens" => $token,
                 ];
                 break;
             case 'referral':
@@ -216,16 +211,16 @@ class Main extends Component
                     ->paginate($this->perPage);
                 return [
                     "view" => "livewire.table.referral",
-                    "referrals" =>  $exam,
+                    "referrals" => $exam,
                 ];
                 break;
             case 'referralCanUse':
-                $exam = $this->model::search($this->search,$this->dataId)
+                $exam = $this->model::search($this->search, $this->dataId)
                     ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
                     ->paginate($this->perPage);
                 return [
                     "view" => "livewire.table.referral-can-use",
-                    "referrals" =>  $exam,
+                    "referrals" => $exam,
                 ];
                 break;
             case 'referralMe':
@@ -234,7 +229,7 @@ class Main extends Component
                     ->paginate($this->perPage);
                 return [
                     "view" => "livewire.table.referral-me",
-                    "referrals" =>  $exam,
+                    "referrals" => $exam,
                 ];
                 break;
             case 'reportQuest':
@@ -243,7 +238,7 @@ class Main extends Component
                     ->paginate($this->perPage);
                 return [
                     "view" => "livewire.table.report-quest",
-                    "reportQuests" =>  $exam,
+                    "reportQuests" => $exam,
                 ];
                 break;
             case 'payment':
@@ -252,7 +247,7 @@ class Main extends Component
                     ->paginate($this->perPage);
                 return [
                     "view" => "livewire.table.payment",
-                    "payments" =>  $exam,
+                    "payments" => $exam,
                 ];
                 break;
             case 'ranking':
@@ -261,30 +256,54 @@ class Main extends Component
                     ->paginate($this->perPage);
                 return [
                     "view" => "livewire.table.ranking",
-                    "ranking" =>  $exam,
+                    "ranking" => $exam,
                 ];
                 break;
             case 'withdraw':
-                $exam = $this->model::query()->whereUserId(auth()->id())
-                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
-                    ->paginate($this->perPage);
+                if (auth()->user()->role == 1) {
+                    $exam = $this->model::search($this->search)
+                        ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                        ->paginate($this->perPage);
+                } else {
+                    $exam = $this->model::query()->whereUserId(auth()->id())
+                        ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                        ->paginate($this->perPage);
+                }
                 return [
                     "view" => "livewire.table.withdraw",
-                    "withdraws" =>  $exam,
+                    "withdraws" => $exam,
                 ];
                 break;
+
             case 'examLog':
                 $exam = $this->model::searchLog($this->search)
                     ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
                     ->paginate($this->perPage);
                 return [
                     "view" => "livewire.table.user-exam-log",
-                    "exams" =>  $exam,
+                    "exams" => $exam,
                 ];
                 break;
             default:
                 break;
         }
+    }
+
+    public function deleteItem($id)
+    {
+        $this->del = $id;
+        $this->emit('swal:confirm', [
+            'title' => '',
+            'icon' => 'warning',
+            'confirmText' => 'Hapus',
+            'text' => 'Periksa kembali',
+            'method' => "delete"]);
+    }
+
+    public function delete()
+    {
+        $data = $this->model::find($this->del);
+        $data->delete();
     }
 
 }

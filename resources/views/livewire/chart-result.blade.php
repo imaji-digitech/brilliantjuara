@@ -1,5 +1,6 @@
 <div class="card-body" style="padding: 10px;">
-    <div id="result"></div>
+    <h5>{{ $idComponent }}</h5>
+    <div id="{{$idComponent}}"></div>
     <script>
         window.addEventListener('DOMContentLoaded', function () {
             var options3 = {

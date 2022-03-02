@@ -4,10 +4,10 @@
     </x-slot>
     <x-slot name="breadcumb">
         <li class="breadcrumb-item">
-            <a href="{{ route('admin.room.index') }}">Data kelas</a>
+            <a href="{{ route('admin.room.index') }}">{{ $room->title }}</a>
         </li>
         <li class="breadcrumb-item">
-            <a href="{{ route('admin.course.index',$room->slug) }}">Bimbel</a>
+            <a href="{{ route('admin.course.index',$room->slug) }}">Bimbel {{ $room->title }}</a>
         </li>
     </x-slot>
     <div>

@@ -2,7 +2,7 @@
 <div class="col">
     <div class="mb-3" wire:ignore>
         <label class="form-label">{{$title}}</label>
-        <textarea id="{{str_replace(".", "", $model)}}" class="summernote"></textarea>
+        <textarea id="{{ str_replace(".", "", $model) }}" class="summernote"></textarea>
         <script>
             document.addEventListener('livewire:load', function () {
                 $("textarea#{{str_replace('.', '', $model)}}").val(@this.get('{{$model}}'));

@@ -1,34 +1,79 @@
-<x-guest-layout>
-    <x-jet-authentication-card>
-        <x-slot name="logo">
-            <x-jet-authentication-card-logo />
-        </x-slot>
+<!DOCTYPE html>
+<html lang="id-ID">
 
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forget Password</title>
+    <link rel="stylesheet" href="{{asset('auth/css/stylelogin.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+</head>
+
+<body>
+<img class="background" src="{{asset('auth/img/background.jpeg')}}">
+<div class="header">
+    <div class="header-logo">
+        <ul>
+            {{--            <li><img src="{{ asset('assets/images/logo/logo.png') }}" class="img-logo"></li>--}}
+            <li><img src="{{ asset('auth/img/logo.png') }}" class="img-logo"></li>
+        </ul>
+    </div>
+</div>
+
+<div class="wrapper">
+    <div class="container" style="text-align: center; margin: auto; width: 30%">
+        <div class="formWx" style="width: 100%">
+            <div class="form signinForm">
+                <form method="POST" action="{{ route('password.email') }}">
+                    @csrf
+                    <h1>Lupa Password</h1>
+                    <br>
+                    @if (session('status'))
+                        <h6>
+                            {{ session('status') }}
+                        </h6>
+                    @endif
+                    <br>
+                    {{--                    <h3>Selamat Datang,<br> Masukkan akun anda : </h3>--}}
+                    <label for="container_form">
+                        <input type="text" id="email" name="email" :value="old('email')" placeholder="Email" required
+                               autofocus>
+                        @if($errors->has('email'))
+                            <p class="error text-danger" style="color: red">{{ $errors->first('email') }}</p>
+                        @endif
+                        {{--                        <input type="password" name="password" autocomplete="current-password" placeholder="Password"--}}
+                        {{--                               id="password" required>--}}
+                        {{--                        <span>--}}
+                        {{--                            <i class="fa-solid fa-eye eye" id="eye" onclick="toggle()"></i>--}}
+                        {{--                            </span>--}}
+                    </label>
+                    {{--                    <div class="checkboxDiv">--}}
+                    {{--                        <input class="check_box" type="checkbox" id="remember_me" name="remember">--}}
+                    {{--                        <label class="label_box" for="tetap_masuk">Biarkan tetap masuk</label>--}}
+                    {{--                    </div>--}}
+                    <input type="submit" class="submit" name="login" value="Email Password Reset Link">
+                    {{--                    <h5 class="center-fpass-sign">Forget Password / Lupa Password ?</h5>--}}
+                    {{--                    <h5 class="center-fpass-sign" id="or-fpass">or</h5>--}}
+                    {{--                    <h5 class="center-fpass-sign" id="goSignUpLabel" onclick="">Belum Punya Akun ?</h5>--}}
+                </form>
+            </div>
+            {{--            <div class="form signupForm">--}}
+
+            {{--                    <h3>Ayo Daftar dulu : </h3>--}}
+            {{--                    <label for="container_form_daftar">--}}
+
+            {{--                    </label>--}}
+            {{--                </form>--}}
+
+
         </div>
+    </div>
 
-        @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ session('status') }}
-            </div>
-        @endif
+</div>
 
-        <x-jet-validation-errors class="mb-4" />
 
-        <form method="POST" action="{{ route('password.email') }}">
-            @csrf
+</body>
 
-            <div class="block">
-                <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <x-jet-button>
-                    {{ __('Email Password Reset Link') }}
-                </x-jet-button>
-            </div>
-        </form>
-    </x-jet-authentication-card>
-</x-guest-layout>
+</html>
