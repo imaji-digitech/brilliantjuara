@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('vendor/select2/select2.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/summernote.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/date-picker.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/date-picker.custom.css?_=1')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/date-picker.custom.css?_=2')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/owlcarousel.css')}}">
     <link href="{{ asset('vendor/mathquill/mathquill.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/mathquill/matheditor.css') }}" rel="stylesheet">
@@ -41,8 +41,8 @@
     <!-- Bootstrap css-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/bootstrap.css')}}">
     <!-- App css-->
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css?_=1') }}">
-    <link id="color" rel="stylesheet" href="{{asset('assets/css/color-1.css?_=1')}}" media="screen">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css?_=2') }}">
+    <link id="color" rel="stylesheet" href="{{asset('assets/css/color-1.css?_=2')}}" media="screen">
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/responsive.css')}}">
 

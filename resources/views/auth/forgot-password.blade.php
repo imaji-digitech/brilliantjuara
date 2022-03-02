@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forget Password</title>
-    <link rel="stylesheet" href="{{asset('auth/css/stylelogin.css')}}">
+    <link rel="stylesheet" href="{{asset('auth/css/stylelogin.css?_=2')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 </head>
@@ -23,7 +23,7 @@
 </div>
 
 <div class="wrapper">
-    <div class="container" style="text-align: center; margin: auto; width: 30%">
+    <div class="container mobile-forgot" style="text-align: center; margin: auto;">
         <div class="formWx" style="width: 100%">
             <div class="form signinForm">
                 <form method="POST" action="{{ route('password.email') }}">

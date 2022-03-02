@@ -16,7 +16,7 @@
     <div class="header-logo-wrapper col-auto p-0" >
         <div class="logo-wrapper" style="padding: 0">
             <a href="">
-                <img class="img-fluid" src="{{asset('assets/images/logo.png')}}" alt=""></a></div>
+                <img class="img-fluid" src="{{asset('assets/images/logo.png?_=2')}}" alt=""></a></div>
         <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="align-center"></i>
         </div>
     </div>
