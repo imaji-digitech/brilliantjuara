@@ -30,6 +30,7 @@
                     @csrf
                     <h1>Lupa Password</h1>
                     <br>
+                    <h6>Masukkan email yang terdaftar di akun brilliant juara</h6>
                     @if (session('status'))
                         <h6>
                             {{ session('status') }}

@@ -57,10 +57,11 @@ class ExamUser extends Model
 //        $examUserstatic::find($id)->update(['status' => 2]);
         $examUser = static::find($id);
 //        if ($examUser->created)
-        $examUser->update(['status' => 2]);
-        if (Carbon::now() > $examUser->created_at->addMinutes($examUser->exam->time)) {
+
+        if (Carbon::now() > $examUser->created_at->addMinutes($examUser->exam->time) and $examUser->status==1) {
             $examUser->update(['updated_at' => $examUser->created_at->addMinutes($examUser->exam->time)]);
         }
+        $examUser->update(['status' => 2]);
 
         $exam = ExamUser::whereUserId($examUser->user_id)->whereExamId($examUser->exam_id)->get();
         $ranking = Ranking::whereUserId($examUser->user_id)->whereExamId($examUser->exam_id)->get();
