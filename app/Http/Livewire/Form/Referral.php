@@ -15,13 +15,13 @@ class Referral extends Component
     {
         $this->data = [
             'title' => '',
-            'discount' => 0
+//            'discount' => 0
         ];
         if ($this->dataId!=null){
             $data=BaseReferral::find($this->dataId);
             $this->data=[
                 'title'=>$data->title,
-                'discount'=>$data->content
+//                'discount'=>$data->content
             ];
         }
     }
@@ -29,7 +29,6 @@ class Referral extends Component
     {
         return [
             'data.title'=>'required',
-            'data.discount'=>'required',
         ];
     }
 
