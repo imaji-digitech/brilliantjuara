@@ -181,7 +181,7 @@
 <script src="{{asset('assets/js/chart/apex-chart/stock-prices.js')}}"></script>
 <script src="{{asset('assets/js/notify/bootstrap-notify.min.js')}}"></script>
 {{--<script src="{{asset('assets/js/notify/index.js')}}"></script>--}}
-<script src="{{asset('assets/js/editor/summernote/summernote.js')}}"></script>
+<script src="{{asset('assets/js/editor/summernote/summernote.js?_=2')}}"></script>
 <script src="{{asset('vendor/select2/select2.min.js')}}"></script>
 {{--<script src="{{ asset('assets/js/datepicker/date-picker/datepicker.js') }}"></script>--}}
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.2.3/jquery.datetimepicker.js"></script>--}}

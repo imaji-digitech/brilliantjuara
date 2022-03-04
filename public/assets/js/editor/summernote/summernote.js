@@ -110,7 +110,7 @@ var dropdownCheck = renderer.create('<div class="dropdown-menu note-check" role=
     var markup = $$1.isArray(options.items) ? options.items.map(function (item) {
         var value = (typeof item === 'string') ? item : (item.value || '');
         var content = options.template ? options.template(item) : item;
-        return '<a class="dropdown-item" href="#" data-value="' + value + '" role="listitem" aria-label="' + item + '">' + icon(options.checkClassName) + ' ' + content + '</a>';
+        return '<a class="dropdown-item" href="#" data-value="' + value + '" role="listitem" aria-label="' + item + '">'  + ' ' + content + '</a>';
     }).join('') : options.items;
     $node.html(markup).attr({ 'aria-label': options.title });
 });
