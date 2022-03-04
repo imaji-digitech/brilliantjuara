@@ -33,7 +33,7 @@
                                                @if($cd->course_type_id==2)target="_blank" @endif
                                                class="align-self-center media-body">
                                                 <h6 class="mt-0">
-                                                    {{ $cd->title }} - {{ $cd->course_type_id }}
+                                                    {{ $cd->title }}
                                                 </h6>
                                                 <ul class="dates">
                                                     <li>{{ $cd->created_at->format('d F Y') }}</li>
