@@ -18,6 +18,7 @@ class CourseDetail extends Component
     public $optionDetail;
     public $type;
     public $file;
+    public $optionExam;
     use WithFileUploads;
 
     public function mount()
@@ -26,6 +27,9 @@ class CourseDetail extends Component
         $this->course = \App\Models\Course::getCourse($this->courseId);
         $highlight = $this->course->courseHighlights[0]->id;
         $this->optionHighlight = eloquent_to_options($this->course->courseHighlights, 'id', 'title');
+//        dd($this->course->room->exams);
+        $this->optionExam = eloquent_to_options($this->course->room->exams,'slug','title');
+//        dd($this->optionExam);
         $this->optionDetail = eloquent_to_options(CourseType::get(), 'id', 'title');
         $this->data = [
             'course_highlight_id' => $highlight,

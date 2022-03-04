@@ -33,6 +33,10 @@
                            class="btn btn-primary">
                             Tambah File
                         </a>
+                        <a href="{{ route('admin.course.detail.create',[$room->slug,$course->slug,4]) }}"
+                           class="btn btn-primary">
+                            Tambah Test
+                        </a>
                     @endif
                     <br>
                     <br>
@@ -50,12 +54,12 @@
                                         <li class="media">
                                             <div>
 
-                                                <a href="@if($cd->course_type_id==1){{ route('admin.course.detail',[$room->slug,$course->slug,$cd->id]) }}@elseif($cd->course_type_id==2){{$cd->content}}@else{{ route('admin.download.course',[$cd->id]) }}@endif"
+                                                <a href="@if($cd->course_type_id==1){{ route('admin.course.detail',[$room->slug,$course->slug,$cd->id]) }}@elseif($cd->course_type_id==2){{$cd->content}}@elseif($cd->course_type_id==3){{ route('admin.download.course',[$cd->id]) }}@elseif($cd->course_type_id==4){{ route('admin.user.exam',$cd->content) }}@endif"
                                                    @if($cd->course_type_id==2) target="_blank" @endif
                                                    class="me-3 font-primary">
 
                                                 </a>
-                                                <a href="@if($cd->course_type_id==1){{ route('admin.course.detail',[$room->slug,$course->slug,$cd->id]) }}@elseif($cd->course_type_id==2){{$cd->content}}@else{{ route('admin.download.course',[$cd->id]) }}@endif"
+                                                <a href="@if($cd->course_type_id==1){{ route('admin.course.detail',[$room->slug,$course->slug,$cd->id]) }}@elseif($cd->course_type_id==2){{$cd->content}}@elseif($cd->course_type_id==3){{ route('admin.download.course',[$cd->id]) }}@elseif($cd->course_type_id==4){{ route('admin.user.exam',$cd->content) }}@endif"
                                                    @if($cd->course_type_id==2) target="_blank" @endif
                                                    class="">
                                                     <h6 class="mt-0">

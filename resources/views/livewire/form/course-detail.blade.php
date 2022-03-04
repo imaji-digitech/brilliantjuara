@@ -4,11 +4,13 @@
         <x-form.summernote model="data.content" title="Materi"/>
     @elseif($data['course_type_id']==2)
         <x-form.input model="data.content" title="Link" type="text"/>
-    @elseif($data['course_type_id']=3)
+    @elseif($data['course_type_id']==3)
         <x-form.input model="file" title="Link" type="file"/>
         <div wire:loading wire:target="file">
             Proses upload
         </div>
+    @elseif($data['course_type_id']==4)
+        <x-form.select :options="$optionExam" :selected="$data['content']" model="data.content" title="Ujian" type="text"/>
     @endif
     <x-form.input model="data.title" title="Nama materi" type="text"/>
     <button type="submit" class="btn btn-primary float-end">Submit</button>
