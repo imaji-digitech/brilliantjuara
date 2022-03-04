@@ -30,7 +30,7 @@
                                             </a>
 
                                             <a href="@if($cd->course_type_id==1){{ route('admin.course.detail',[$room->slug,$course->slug,$cd->id]) }}@elseif($cd->course_type_id==2){{$cd->content}}@elseif($cd->course_type_id==3){{ route('admin.download.course',[$cd->id]) }}@elseif($cd->course_type_id==4){{ route('admin.user.exam',$cd->content) }}@endif"
-                                               target="_blank" @endif
+                                               @if($cd->course_type_id==2)target="_blank" @endif
                                                class="align-self-center media-body">
                                                 <h6 class="mt-0">
                                                     {{ $cd->title }} - {{ $cd->course_type_id }}
