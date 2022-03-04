@@ -31,7 +31,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/animate.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/chartist.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('vendor/select2/select2.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/summernote.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/summernote.css?_=2')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/date-picker.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/date-picker.custom.css?_=2')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/owlcarousel.css')}}">
