@@ -36,8 +36,8 @@
                                                     {{ $cd->title }}
                                                 </h6>
                                                 <ul class="dates">
-                                                    <li>{{ $cd->created_at->format('d F Y') }}</li>
-                                                    <li>{{ $cd->created_at->diffForHumans() }}</li>
+{{--                                                    <li>{{ $cd->created_at->format('d F Y') }}</li>--}}
+{{--                                                    <li>{{ $cd->created_at->diffForHumans() }}</li>--}}
                                                 </ul>
                                             </a>
                                         </li>
