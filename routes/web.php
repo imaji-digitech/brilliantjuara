@@ -132,7 +132,7 @@ Route::middleware(['auth:sanctum',])->name('admin.')->prefix('admin')->group(fun
         return view('pages.payment', compact('payments'));
     })->name('payment');
 
-//    Route::middleware(['checkRole:1'])->group(function () {
+    Route::middleware(['checkRole:1'])->group(function () {
         Route::resource('room', RoomController::class)->only('index', 'create', 'edit', 'show');
         Route::resource('announcement', PublicAnnouncementController::class)->only('index', 'create', 'edit');
         Route::resource('banner', PublicBannerController::class)->only('index', 'create', 'edit');
@@ -209,7 +209,7 @@ Route::middleware(['auth:sanctum',])->name('admin.')->prefix('admin')->group(fun
 //        Route::get('withdraw',[WithdrawControlller::class,'index'])->name('withdraw.index');
         Route::get('withdraw/{id}',[WithdrawControlller::class,'update'])->name('withdraw.edit');
         Route::get('exam/ranking/{id}', [\App\Http\Controllers\User\ExamController::class, 'rankingRemove'])->name('user.exam.ranking.remove');
-//    });
+    });
     Route::get('referral/me', [\App\Http\Controllers\User\ReferralController::class, 'index'])->name('referral.me.use');
     Route::get('referral/me/withdraw', [\App\Http\Controllers\User\ReferralController::class, 'withdraw'])->name('referral.me.withdraw');
     Route::get('referral/me/{id}', [\App\Http\Controllers\User\ReferralController::class, 'edit'])->name('referral.me.edit');
