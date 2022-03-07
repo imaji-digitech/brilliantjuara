@@ -132,12 +132,22 @@
         <div class="card">
             <div class="card-body">
                 @isset( $questActive->examQuest->question)
-                    <div class="row">
-                        <div class="col-1" style="width: 30px;padding: 0;margin: 0">{{$number+1}}.</div>
-                        <div class="col-11">
-                            <p style="text-align: justify">{!! $questActive->examQuest->question  !!}</p>
-                        </div>
-                    </div>
+{{--                    <div class="row">--}}
+{{--                        <div class="col-1" style="width: 30px;padding: 0;margin: 0">{{$number+1}}. </div>--}}
+{{--                        <div class="col-11" style="text-align: justify !important;">--}}
+{{--                            {!! $questActive->examQuest->question  !!}--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+                    <table style="width: 100%">
+                        <tr>
+                            <td style="width: 35px; vertical-align: top">
+                                {{$number+1}}.
+                            </td>
+                            <td style="text-align: justify !important;vertical-align: top">
+                                {!! $questActive->examQuest->question  !!}
+                            </td>
+                        </tr>
+                    </table>
 
 
                     <div class="col">
@@ -167,8 +177,30 @@
                                         text-primary
 @else
                                         text-option
-@endif">
-                                        {!! $alphabet[$eqc->choice].". " .$eqc->answer !!}
+@endif" style="width: 100%">
+{{--                                        <label  style="width: 100%"--}}
+{{--                                                wire:click="changeAnswer({{$eqc->choice}})">--}}
+{{--                                            <div class="row">--}}
+{{--                                                <div class="col-1" style="width: 40px">{{ $alphabet[$eqc->choice] }}. </div>--}}
+{{--                                                <div class="col-11" >--}}
+{{--                                                    {!! $eqc->answer  !!}--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+                                        <table>
+                                            <tr>
+                                                <td style="width: 30px">
+                                                    {{ $alphabet[$eqc->choice] }}.
+                                                </td>
+                                                <td>
+                                                    {!! $eqc->answer  !!}
+                                                </td>
+                                            </tr>
+                                        </table>
+{{--                                        </label>--}}
+{{--                                        <div class="col-1" style="width: 30px;padding: 0;margin: 0">{{ $alphabet[$eqc->choice] }}. </div>--}}
+{{--                                        <div class="col-11" >--}}
+{{--                                            {!! $eqc->answer  !!}--}}
+{{--                                        </div>--}}
                                     </label>
                                 </div>
                             @endforeach
@@ -181,7 +213,10 @@
                                 <div class="col-11">
                                     <span>Jawaban Benar : </span><span
                                         class="text-primary">{{$alphabet[$questActive->examQuest->answer]}}</span>
-                                    <p style="text-align: justify">{!! $questActive->examQuest->discussion  !!}</p>
+                                    <br> <br>
+                                    <div style="text-align: justify !important;">
+                                        {!! $questActive->examQuest->discussion  !!}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -201,7 +236,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-5 mobile-only">
+    <div class="col-sm-12 mobile-only">
         <div class="card" style="padding: 0;">
             <div class="card-body text-center" style="padding: 0; padding-bottom: 10px">
                 @foreach($examUser->examAnswers as $i=>$eu)

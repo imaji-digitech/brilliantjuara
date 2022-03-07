@@ -21,16 +21,28 @@
     <div class="col-sm-8">
         <div class="card">
             <div class="card-body">
-                <button class="float-end btn btn-danger" wire:click="report({{$questActive->examQuest->id}})">Laporkan soal</button>
+                <button class="float-end btn btn-danger" wire:click="report({{$questActive->examQuest->id}})">Laporkan
+                    soal
+                </button>
                 <br><br>
                 <br>
                 @isset( $questActive->examQuest->question)
-                    <div class="row">
-                        <div class="col-1" style="width: 30px;padding: 0;margin: 0">{{$number+1}}. </div>
-                        <div class="col-11" >
-                            <p style="text-align: justify">{!! $questActive->examQuest->question  !!}</p>
-                        </div>
-                    </div>
+{{--                    <div class="row">--}}
+{{--                        <div class="col-1" style="width: 30px;padding: 0;margin: 0">{{$number+1}}.</div>--}}
+{{--                        <div class="col-11" style="text-align: justify !important;">--}}
+{{--                            {!! $questActive->examQuest->question  !!}--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+                    <table style="width: 100%">
+                        <tr>
+                            <td style="width: 35px; vertical-align: top">
+                                {{$number+1}}.
+                            </td>
+                            <td style="text-align: justify !important;vertical-align: top">
+                                {!! $questActive->examQuest->question  !!}
+                            </td>
+                        </tr>
+                    </table>
 
                     <div class="col">
                         <div class="mb-3 m-t-15 custom-radio-ml">
@@ -39,8 +51,25 @@
                                 <div class="form-check radio radio-primary">
                                     <input class="form-check-input" type="radio"
                                            wire:click="changeAnswer({{$eqc->choice}})" {{ $questActive->answer==$eqc->choice?'checked':'' }}>
-                                    <label class="form-check-label"
-                                           wire:click="changeAnswer({{$eqc->choice}})"> {!! $alphabet[$eqc->choice].". " .$eqc->answer !!}</label>
+                                    <label style="width: 100%"
+                                           wire:click="changeAnswer({{$eqc->choice}})">
+                                        <table>
+                                            <tr>
+                                                <td style="width: 30px">
+                                                    {{ $alphabet[$eqc->choice] }}.
+                                                </td>
+                                                <td>
+                                                    {!! $eqc->answer  !!}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        {{--                                        <div class="row">--}}
+                                        {{--                                            <div class="col-1" style="width: 40px">{{ $alphabet[$eqc->choice] }}. </div>--}}
+                                        {{--                                            <div class="col-11" >--}}
+                                        {{--                                                {!! $eqc->answer  !!}--}}
+                                        {{--                                            </div>--}}
+                                        {{--                                        </div>--}}
+                                    </label>
                                 </div>
                             @endforeach
 
