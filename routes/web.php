@@ -162,6 +162,8 @@ Route::middleware(['auth:sanctum',])->name('admin.')->prefix('admin')->group(fun
         Route::get('room/{room}/exam/create', [ExamController::class, 'create'])->name('exam.create');
         Route::get('room/{room}/exam/edit/{id}', [ExamController::class, 'edit'])->name('exam.edit');
         Route::get('room/{room}/exam/{exam}', [ExamController::class, 'show'])->name('exam.show');
+        Route::get('room/{room}/exam/{exam}/edit/{id}', [ExamController::class, 'examEdit'])->name('exam.exam-edit');
+        Route::get('room/{room}/exam/{exam}/edit/{id}/update/{number}', [ExamController::class, 'examEditUpdate'])->name('exam.exam-edit-update');
         Route::get('room/{room}/exam/{exam}/step/create', [ExamController::class, 'stepCreate'])->name('exam.step.create');
         Route::get('room/{room}/exam/{exam}/step/edit/{id}', [ExamController::class, 'stepEdit'])->name('exam.step.edit');
         Route::get('room/{room}/exam/{exam}/step/{step}/question', [ExamController::class, 'question'])->name('exam.question');

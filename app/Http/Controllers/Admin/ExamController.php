@@ -38,6 +38,19 @@ class ExamController extends Controller
         $step = ExamStep::class;
         return view("pages.room.exam.show", compact('exam', 'room', 'step'));
     }
+    public function examEdit($room, $exam,$id)
+    {
+        $room = Room::getRoom($room);
+        $exam = Exam::getExam($exam);
+        return view("pages.room.exam.edit-exam", compact('exam', 'room','id'));
+    }
+    public function examEditUpdate($room, $exam,$id,$number)
+    {
+        $room = Room::getRoom($room);
+        $exam = Exam::getExam($exam);
+//        dd($number);
+        return view("pages.room.exam.edit-exam-update", compact('exam', 'room','id','number'));
+    }
 
     public function stepCreate($room, $exam)
     {

@@ -9,9 +9,11 @@ use Livewire\Component;
 
 class Quest extends Component
 {
+    public $number;
     public $data;
     public $dataId;
     public $action;
+    public $examType;
     public $examStepId;
     public $exam;
     public $optionType;
@@ -27,8 +29,10 @@ class Quest extends Component
     public $score4;
     public $score5;
 
+
     public function mount()
     {
+//        dd($this->number);
         $this->optionAnswer=[
             ['value'=>1,'title'=>'A'],
             ['value'=>2,'title'=>'B'],
@@ -36,31 +40,35 @@ class Quest extends Component
             ['value'=>4,'title'=>'D'],
             ['value'=>5,'title'=>'E'],
         ];
-        $this->exam = ExamStep::find($this->examStepId);
-        $this->data = [
-            'exam_step_id' => $this->examStepId,
-            'equation' => '',
-            'question' => '',
-            'answer' => 1,
-            'discussion' => '',
-        ];
+        if ($this->number==null){
+            $this->exam = ExamStep::find($this->examStepId);
+            $this->examType=$this->exam->exam_type;
+            $this->data = [
+                'exam_step_id' => $this->examStepId,
+                'equation' => '',
+                'question' => '',
+                'answer' => 1,
+                'discussion' => '',
+            ];
+        }
         if ($this->dataId != null) {
             $data = ExamQuest::find($this->dataId);
             $this->data = [
-                'exam_step_id' => $this->examStepId,
+                'exam_step_id' => $data->exam_step_id,
                 'equation' => $data->equation,
                 'question' => $data->question,
                 'answer' => $data->answer,
                 'discussion' => $data->discussion,
             ];
             foreach ($data->examQuestChoices as $i => $eqc) {
-                if ($this->exam->exam_type == 1) {
+                if ($data->examStep->exam_type == 1) {
                     $this->{'choice' . ($i + 1)} = $eqc->answer;
                 } else {
                     $this->{'choice' . ($i + 1)} = $eqc->answer;
                     $this->{'score' . ($i + 1)} = $eqc->score;
                 }
             }
+            $this->examType=$data->examStep->exam_type;
         }
     }
 
@@ -72,12 +80,13 @@ class Quest extends Component
             'type' => 'success',
             'title' => 'Data berhasil ditambahkan',
         ]);
+//            $this->emit('redirect', route('admin.exam.show', [$this->exam->exam->room->slug, $this->exam->exam->slug, $this->examStepId]));
+        $this->emit('redirect', route('admin.exam.question', [$this->exam->exam->room->slug, $this->exam->exam->slug, $this->examStepId]));
 
-        $this->emit('redirect', route('admin.exam.show', [$this->exam->exam->room->slug, $this->exam->exam->slug, $this->examStepId]));
     }
     public function choice($quest){
         for ($i = 1; $i <= 5; $i++) {
-            if ($this->exam->exam_type == 1) {
+            if ($this->examType == 1) {
                 ExamQuestChoice::create([
                     'exam_quest_id' => $quest->id,
                     'answer' => $this->{'choice' . $i},
@@ -109,7 +118,13 @@ class Quest extends Component
             'title' => 'Data berhasil diubah',
         ]);
 
-        $this->emit('redirect', route('admin.exam.question', [$this->exam->exam->room->slug, $this->exam->exam->slug, $this->examStepId]));
+
+        if ($this->number==null){
+            $this->emit('redirect', route('admin.exam.show', [$this->exam->exam->room->slug, $this->exam->exam->slug, $this->examStepId]));
+//            $this->emit('redirect', route('admin.exam.question', [$this->exam->exam->room->slug, $this->exam->exam->slug, $this->examStepId]));
+        }else{
+            $this->emit('redirect', route('admin.exam.exam-edit', [$quest->examStep->exam->room->title, $quest->examStep->exam->slug, $this->number]));
+        }
     }
 
     public function render()

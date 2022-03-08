@@ -206,7 +206,6 @@
                             @endforeach
                         </div>
                         <div>
-
                             <br>
                             <div class="row">
                                 <div class="col-1" style="width: 1px;display: inline-block"></div>
