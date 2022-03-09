@@ -23,6 +23,11 @@ class Quest extends Component
     public $choice3;
     public $choice4;
     public $choice5;
+    public $equation1;
+    public $equation2;
+    public $equation3;
+    public $equation4;
+    public $equation5;
     public $score1;
     public $score2;
     public $score3;
@@ -63,9 +68,11 @@ class Quest extends Component
             foreach ($data->examQuestChoices as $i => $eqc) {
                 if ($data->examStep->exam_type == 1) {
                     $this->{'choice' . ($i + 1)} = $eqc->answer;
+                    $this->{'equation' . ($i + 1)} = $eqc->equation;
                 } else {
                     $this->{'choice' . ($i + 1)} = $eqc->answer;
                     $this->{'score' . ($i + 1)} = $eqc->score;
+                    $this->{'equation' . ($i + 1)} = $eqc->equation;
                 }
             }
             $this->examType=$data->examStep->exam_type;
@@ -90,7 +97,7 @@ class Quest extends Component
                 ExamQuestChoice::create([
                     'exam_quest_id' => $quest->id,
                     'answer' => $this->{'choice' . $i},
-                    'equation' => '',
+                    'equation' => $this->{'equation' . $i},
                     'score' => 0,
                     'choice' => $i,
                 ]);
@@ -98,7 +105,7 @@ class Quest extends Component
                 ExamQuestChoice::create([
                     'exam_quest_id' => $quest->id,
                     'answer' => $this->{'choice' . $i},
-                    'equation' => '',
+                    'equation' => $this->{'equation' . $i},
                     'score' => $this->{'score' . $i},
                     'choice' => $i,
                 ]);
@@ -123,7 +130,7 @@ class Quest extends Component
             $this->emit('redirect', route('admin.exam.show', [$this->exam->exam->room->slug, $this->exam->exam->slug, $this->examStepId]));
 //            $this->emit('redirect', route('admin.exam.question', [$this->exam->exam->room->slug, $this->exam->exam->slug, $this->examStepId]));
         }else{
-            $this->emit('redirect', route('admin.exam.exam-edit', [$quest->examStep->exam->room->title, $quest->examStep->exam->slug, $this->number]));
+            $this->emit('redirect', route('admin.exam.exam-edit', [$quest->examStep->exam->room->slug, $quest->examStep->exam->slug, $this->number]));
         }
     }
 

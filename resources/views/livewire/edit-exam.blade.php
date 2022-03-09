@@ -21,9 +21,11 @@
         <div class="card">
             <div class="card-body">
                 <div class="float-end btn btn-danger m-1">
-                    Jumlah dilaporkan : {{ \App\Models\ReportQuest::whereExamQuestId($questActive['id'])->get()->count() }}
+                    Jumlah dilaporkan
+                    : {{ \App\Models\ReportQuest::whereExamQuestId($questActive['id'])->get()->count() }}
                 </div>
-                <a href="{{ route('admin.exam.exam-edit-update',[$exam->room->slug,$exam->slug,$questActive['id'],$number]) }}" class="float-end btn btn-warning m-1">
+                <a href="{{ route('admin.exam.exam-edit-update',[$exam->room->slug,$exam->slug,$questActive['id'],$number]) }}"
+                   class="float-end btn btn-warning m-1">
                     Ubah
                 </a>
                 <br><br>
@@ -35,11 +37,37 @@
                                 {{$number+1}}.
                             </td>
                             <td style="text-align: justify !important;vertical-align: top">
+                                <div>
+                                    <div id="question"></div>
+                                    <div id="first"></div>
+{{--                                    {{ $questActive['equation'] }}--}}
+                                    <script>
+                                        document.addEventListener('livewire:load', function () {
+                                            var questiona = new MathEditor('first', 0, '');
+                                            questiona.setLatex('{{ str_replace('\\','\\\\',$questActive['equation']) }}')
+                                        });
+                                    </script>
+                                    @push('scripts')
+                                        <script>
+                                            document.addEventListener('DOMContentLoaded', () => {
+                                                this.livewire.on('mathQuill', data => {
+                                                    var question = new MathEditor('question', 0, '');
+                                                    question.setLatex(data)
+                                                })
+                                            });
+                                        </script>
+                                    @endpush
+                                </div>
+
+
                                 {!! $questActive['question']  !!}
+                                {{--                                {{$questActive['equation']}}--}}
                             </td>
                         </tr>
                     </table>
+                    {{--                    @push('scripts')--}}
 
+                    {{--                    @endpush--}}
                     <div class="col">
                         <div class="mb-3 m-t-15 custom-radio-ml">
                             @php($alphabet=['','A','B','C','D','E'])
@@ -105,7 +133,7 @@
                     @if($i%8==0)
                         <br>
                     @endif
-                    <button class="btn-sm btn btn-default"
+                        <button class="btn-sm btn {{($i==$number)?'btn-success':'btn-default'}}"
                             style="width: 30px;height: 30px; padding: 0;margin: 2px;
                                 box-shadow: -3px 3px gray;
                             {{---2px 2px {{$eu->answer!=0?'green':'pink'}},--}}

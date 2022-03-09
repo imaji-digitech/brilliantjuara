@@ -131,6 +131,7 @@ Route::middleware(['auth:sanctum',])->name('admin.')->prefix('admin')->group(fun
         $payments = Payment::class;
         return view('pages.payment', compact('payments'));
     })->name('payment');
+    Route::get('room/{room}/course/{course}/detail/show/{id}', [CourseController::class, 'detail'])->name('course.detail');
 
     Route::middleware(['checkRole:1'])->group(function () {
         Route::resource('room', RoomController::class)->only('index', 'create', 'edit', 'show');
@@ -182,7 +183,7 @@ Route::middleware(['auth:sanctum',])->name('admin.')->prefix('admin')->group(fun
         Route::get('room/{room}/course/{course}/detail/edit/{type}/{id}/delete', [CourseController::class, 'detailDelete'])->name('course.detail.delete');
         Route::get('room/{room}/course/{course}/detail/edit/{type}/{id}', [CourseController::class, 'detailEdit'])->name('course.detail.edit');
         Route::get('room/{room}/course/{course}/detail/create/{id}', [CourseController::class, 'detailCreate'])->name('course.detail.create');
-        Route::get('room/{room}/course/{course}/detail/show/{id}', [CourseController::class, 'detail'])->name('course.detail');
+//        Route::get('room/{room}/course/{course}/detail/show/{id}', [CourseController::class, 'detail'])->name('course.detail');
 
         Route::get('access/exam', [AccessController::class, 'exam'])->name('access.exam');
         Route::get('access/course', [AccessController::class, 'course'])->name('access.course');

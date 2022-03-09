@@ -17,31 +17,28 @@ class EditExam extends Component
     public $number;
     public $start;
     public $quest;
+    protected $listeners = ['changeActive'];
 
     public function mount()
     {
-        $this->quest=[];
+        $this->quest = [];
         foreach ($this->exam->examSteps as $es) {
             foreach ($es->examQuests as $eq) {
-                array_push($this->quest,$eq);
+                array_push($this->quest, $eq);
             }
         }
-//        dd($this->quest);
         $this->countQuest = count($this->quest);
-        if ($this->start==null) {
-            $this->changeActive(0);
-        }else{
-            $this->changeActive($this->start);
-        }
+        $this->changeActive($this->start);
     }
 
     public function changeActive($number)
     {
         $this->questActive = $this->quest[$number];
-
         $this->active = $this->questActive['id'];
-//        dd($this->questActive);
         $this->number = $number;
+        if ($this->questActive['equation']){
+            $this->emit('mathQuill', $this->questActive['equation']);
+        }
     }
 //    public function report($id){
 //        ReportQuest::create([
@@ -60,9 +57,8 @@ class EditExam extends Component
             'type' => 'success',
             'title' => 'Edit diselsaikan',
         ]);
-        $this->emit('redirect', route('admin.exam.show', [$this->exam->room->slug,$this->exam->slug]));
+        $this->emit('redirect', route('admin.exam.show', [$this->exam->room->slug, $this->exam->slug]));
     }
-
 
 
     public function render()

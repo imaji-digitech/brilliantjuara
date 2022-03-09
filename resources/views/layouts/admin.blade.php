@@ -301,5 +301,6 @@
 </script>
 <!-- Plugin used-->
 @livewireScripts
+@stack('scripts')
 </body>
 </html>
