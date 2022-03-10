@@ -105,7 +105,7 @@
                             </div>
                         </div>
                     </div>
-
+                    <br><br>
                     <div class="float-end">
 
                         @if($number!=0)
