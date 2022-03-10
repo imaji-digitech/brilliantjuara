@@ -54,6 +54,7 @@ class Quest extends Component
                 'question' => '',
                 'answer' => 1,
                 'discussion' => '',
+                'discussion_equation'=>''
             ];
         }
         if ($this->dataId != null) {
@@ -64,6 +65,7 @@ class Quest extends Component
                 'question' => $data->question,
                 'answer' => $data->answer,
                 'discussion' => $data->discussion,
+                'discussion_equation'=>$data->discussion_equation
             ];
             foreach ($data->examQuestChoices as $i => $eqc) {
                 if ($data->examStep->exam_type == 1) {

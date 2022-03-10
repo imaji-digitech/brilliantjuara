@@ -29,7 +29,7 @@ class ExamQuest extends Model
     /**
      * @var array
      */
-    protected $fillable = ['exam_step_id', 'equation', 'question', 'answer','discussion', 'created_at', 'updated_at'];
+    protected $fillable = ['exam_step_id', 'equation', 'discussion_equation', 'question', 'answer', 'discussion', 'created_at', 'updated_at'];
 
     public static function search($query, $dataId)
     {

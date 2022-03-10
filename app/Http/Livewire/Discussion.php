@@ -115,6 +115,9 @@ class Discussion extends Component
         $this->questActive = $this->examUser->examAnswers[$number];
         $this->active = $this->questActive->id;
         $this->number = $number;
+        if ($this->questActive->examQuest->equation!=null){
+            $this->emit('mathQuill', $this->questActive->examQuest->equation);
+        }
     }
 
 //    public function setDone()

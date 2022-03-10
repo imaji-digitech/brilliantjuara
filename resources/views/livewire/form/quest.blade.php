@@ -12,7 +12,6 @@
     <x-form.summernote model="choice4" title="D"/>
     <x-form.mathquill model="equation5" title="E"/>
     <x-form.summernote model="choice5" title="E"/>
-
     @if($examType==2)
         <x-form.input model="score1" title="nilai A" type="number"/>
         <x-form.input model="score2" title="nilai B" type="number"/>
@@ -21,6 +20,7 @@
         <x-form.input model="score5" title="nilai E" type="number"/>
     @endif
     <x-form.select :options="$optionAnswer" :selected="$data['answer']" model="data.answer" title="Jawaban" type="number"/>
+    <x-form.mathquill model="data.discussion_equation" title="Pembahasan"/>
     <x-form.summernote model="data.discussion" title="Pembahasan"/>
     <button type="submit" class="btn btn-primary float-end">Submit</button>
 </form>

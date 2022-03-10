@@ -40,7 +40,6 @@
                                 <div>
                                     <div id="question"></div>
                                     <div id="first"></div>
-{{--                                    {{ $questActive['equation'] }}--}}
                                     <script>
                                         document.addEventListener('livewire:load', function () {
                                             var questiona = new MathEditor('first', 0, '');

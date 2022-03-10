@@ -144,6 +144,28 @@
                                 {{$number+1}}.
                             </td>
                             <td style="text-align: justify !important;vertical-align: top">
+                                <div>
+                                    <div id="question"></div>
+                                    @if($this->questActive->examQuest->equation!=null)
+                                        <div id="first"></div>
+                                        <script>
+                                            document.addEventListener('livewire:load', function () {
+                                                var questiona = new MathEditor('first', 0, '');
+                                                questiona.setLatex('{{ str_replace('\\','\\\\',$questActive['equation']) }}')
+                                            });
+                                        </script>
+                                    @endif
+                                    @push('scripts')
+                                        <script>
+                                            document.addEventListener('DOMContentLoaded', () => {
+                                                this.livewire.on('mathQuill', data => {
+                                                    var question = new MathEditor('question', 0, '');
+                                                    question.setLatex(data)
+                                                })
+                                            });
+                                        </script>
+                                    @endpush
+                                </div>
                                 {!! $questActive->examQuest->question  !!}
                             </td>
                         </tr>

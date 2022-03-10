@@ -8,6 +8,7 @@ use App\Models\ExamAnswer;
 use App\Models\ExamUser;
 use App\Models\Ranking;
 use App\Models\UserHasDownload;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
@@ -90,9 +91,27 @@ class ExamController extends Controller
 
         $exam=Exam::getExam($slug);
         UserHasDownload::create(['user_id'=>auth()->id(),'exam_id'=>$exam->id]);
-        $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('pdf.discussion',compact('exam'))->setPaper('A4', 'portrait');;
+//        $pdf = App::make('dompdf.wrapper');
+//        $pdf->loadView('pdf.discussion',compact('exam'))->setPaper('A4', 'portrait');
+        //        $pdf = App::make('dompdf.wrapper');
+
+//        $pdf->set_option();
+
+//        $pdf->setOption('enable-smart-shrinking', true);
+//        $pdf->setOption('no-stop-slow-scripts', true);
+        $pdf=Pdf::loadView('pdf.discussion',compact('exam'))
+            ->setPaper('A4', 'portrait');
+
         return $pdf->stream("Pembahasan-".Str::slug($exam->title).".pdf");
+//        $pdf->setPaper('L');
+//        $pdf->output();
+//        $canvas = $pdf->getDomPDF()->getCanvas();
+//        $height = $canvas->get_height();
+//        $width = $canvas->get_width();
+//        $canvas->set_opacity(.2,"Multiply");
+//        $canvas->page_text($width/7, $height/2, 'This Is Watermark text', null,
+//            50, array(0,0,0),2,2,-30);
+//        return $pdf->stream('result.pdf');
 
     }
 

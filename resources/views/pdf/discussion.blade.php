@@ -14,12 +14,37 @@
             height: 150px;
             text-align: center;
         }
+        @page { margin: 100px 25px; }
+        .watermarked {
+            position: relative;
+        }
+
+        .watermarked:after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 5%;
+            left: 0;
+            {{--background-image: url({{ public_path('uploads/br-logo.png') }});--}}
+            background-size: {{ 1526/4 }}px {{ 992/4 }}px;
+            background-position: 10px center;
+            background-repeat: no-repeat;
+            opacity: 0.2;
+        }
+
+        p {
+            padding: 0;
+            margin: 0;
+        }
 
         body {
-            background-image: url({{ public_path('uploads/discussion.jpg') }});
+            background-image: url({{ public_path('uploads/asdaa.png') }});
             background-position: top left;
             background-repeat: no-repeat;
             background-size: 100%;
+            /*position: absolute;*/
             /*width: 100%;*/
             /*height: 100%;*/
         }
@@ -29,12 +54,13 @@
             left: 0;
             bottom: 0;
             right: 0;
-            height: 30px;
+            height: 40px;
         }
 
         #footer .page:after {
             content: counter(page, upper-roman);
         }
+
 
     </style>
 </head>
@@ -50,43 +76,88 @@
 </footer>
 
 <main style="width:100%;" id="content">
-    @php($i=1)
-    @foreach($exam->examSteps as $es)
-        @foreach($es->examQuests as $q)
-            <div style="border: 2px solid #36A7B3; padding: 5px">
-                <table style="width: 100%">
-                    <tr>
-                        <td style="vertical-align: top">
-                            <div
-                                style="background-color: #36A7B3; width: 20px;height: 20px; text-align: center; color: gold">
-                                {{ $i }}
-                            </div>
-                        </td>
-                        <td></td>
-                        <td style="text-align: justify !important;">
-                            {!! $q->question !!}
-                            @php($alphabet=['','A','B','C','D','E'])
-                            @foreach($q->examQuestChoices as $eqc)
+    <div>
+        @php($i=1)
+        @foreach($exam->examSteps as $es)
+            @foreach($es->examQuests as $q)
+                <div style="border: 2px solid #36A7B3; padding: 5px" class="watermarked">
+                    <table style="width: 100%">
+                        <tr>
+                            <td style="vertical-align: top; width: 30px">
+                                <div
+                                    style="background-color: #36A7B3; width: 30px;height: 25px; text-align: center; color: gold">
+                                    {{ $i }}
+                                </div>
+                            </td>
+                            <td></td>
+                            <td style="text-align: justify !important;">
+                                <div>
+                                    <div id="question"></div>
+                                    <div id="first"></div>
+                                    {{--                                    {{ $questActive['equation'] }}--}}
+                                    <script>
+                                        window.onload = function() {
+                                            var questiona = new MathEditor('first', 0, '');
+                                            questiona.setLatex('{{ str_replace('\\','\\\\',$q->equation) }}')
+                                        };
+                                    </script>
+{{--                                    @push('scripts')--}}
+{{--                                        <script>--}}
+{{--                                            document.addEventListener('DOMContentLoaded', () => {--}}
+{{--                                                this.livewire.on('mathQuill', data => {--}}
+{{--                                                    var question = new MathEditor('question', 0, '');--}}
+{{--                                                    question.setLatex(data)--}}
+{{--                                                })--}}
+{{--                                            });--}}
+{{--                                        </script>--}}
+{{--                                    @endpush--}}
+                                </div>
+                                    <br>
+{{--                    {{ public_path('uploads/discussion.jpg') }}--}}
+                    @php($some=str_replace('http://127.0.0.1:8000/','',$q->question))
+                                    {!! $some !!}
+                                </div>
+                                @php($alphabet=['','A','B','C','D','E'])
+                                @foreach($q->examQuestChoices as $eqc)
+
+                                    @if($eqc->choice==$q->answer)
+                                        {{--                                    <b>{!! $alphabet[$eqc->choice].". " .$eqc->answer !!}</b>--}}
+                                        <table>
+                                            <tr style="font-weight: bold">
+                                                <td style="width: 30px">
+                                                    {{ $alphabet[$eqc->choice] }}.
+                                                </td>
+                                                <td>
+                                                    {!! $eqc->answer  !!}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    @else
+                                        <table>
+                                            <tr>
+                                                <td style="width: 30px">
+                                                    {{ $alphabet[$eqc->choice] }}.
+                                                </td>
+                                                <td>
+                                                    {!! $eqc->answer  !!}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    @endif
+                                @endforeach
                                 <br>
-                                @if($eqc->choice==$q->answer)
-                                    <b>{!! $alphabet[$eqc->choice].". " .$eqc->answer !!}</b>
-                                @else
-                                    {!! $alphabet[$eqc->choice].". " .$eqc->answer !!}
-                                @endif
-                            @endforeach
-                            <br>
-                            <b>PEMBAHASAN : </b> <br>
-                            {!! $q->discussion !!}
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <br>
-            @php($i++)
+                                <b>PEMBAHASAN : </b> <br>
+                                {!! $q->discussion !!}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <br>
+                @php($i++)
+            @endforeach
         @endforeach
-    @endforeach
+    </div>
+    <br>
 </main>
-
-
 </body>
 </html>
