@@ -102,7 +102,7 @@
                                 <div style="text-align: justify !important;">
                                     <div>
                                         <div id="discussion"></div>
-                                        @if($questActive['equation']!=null)
+                                        @if($questActive['discussion_equation']!=null)
                                         <div id="first_discussion"></div>
                                         <script>
                                             document.addEventListener('livewire:load', function () {
