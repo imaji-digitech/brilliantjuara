@@ -38,6 +38,7 @@ class EditExam extends Component
         $this->number = $number;
         if ($this->questActive['equation']!=null){
             $this->emit('mathQuill', $this->questActive['equation']);
+            $this->emit('mathQuill', $this->questActive['mathQuillDiscussion']);
         }
     }
 //    public function report($id){

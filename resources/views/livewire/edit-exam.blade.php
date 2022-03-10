@@ -100,6 +100,28 @@
                                     class="text-primary">{{$alphabet[$questActive['answer']]}}</span>
                                 <br> <br>
                                 <div style="text-align: justify !important;">
+                                    <div>
+                                        <div id="discussion"></div>
+                                        @if($questActive['equation']!=null)
+                                        <div id="first_discussion"></div>
+                                        <script>
+                                            document.addEventListener('livewire:load', function () {
+                                                var questiona = new MathEditor('first_discussion', 0, '');
+                                                questiona.setLatex('{{ str_replace('\\','\\\\',$questActive['discussion_equation']) }}')
+                                            });
+                                        </script>
+                                        @endif
+                                        @push('scripts')
+                                            <script>
+                                                document.addEventListener('DOMContentLoaded', () => {
+                                                    this.livewire.on('mathQuillDiscussion', data => {
+                                                        var question = new MathEditor('discussion', 0, '');
+                                                        question.setLatex(data)
+                                                    })
+                                                });
+                                            </script>
+                                        @endpush
+                                    </div>
                                     {!! $questActive['discussion']  !!}
                                 </div>
                             </div>
