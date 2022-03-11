@@ -42,6 +42,9 @@ class EditExam extends Component
         if ($this->questActive['discussion_equation']!=null) {
             $this->emit('mathQuillDiscussion', $this->questActive['discussion_equation']);
         }
+        foreach (\App\Models\ExamQuestChoice::whereExamQuestId($this->questActive['id'])->get() as $eqc){
+            $this->emit('mathQuill'.$eqc->choice, $eqc->equation);
+        }
     }
 //    public function report($id){
 //        ReportQuest::create([

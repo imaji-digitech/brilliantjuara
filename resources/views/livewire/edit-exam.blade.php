@@ -81,6 +81,28 @@
                                                     {{ $alphabet[$eqc->choice] }}.
                                                 </td>
                                                 <td>
+                                                    <div>
+                                                        <div id="eq{{$eqc->choice}}"></div>
+                                                        @if($eqc->equation!=null)
+                                                        <div id="eqF{{$eqc->choice}}"></div>
+                                                        <script>
+                                                            document.addEventListener('livewire:load', function () {
+                                                                var questiona = new MathEditor('eqF{{$eqc->choice}}', 0, '');
+                                                                questiona.setLatex('{{ str_replace('\\','\\\\',$eqc->equation) }}')
+                                                            });
+                                                        </script>
+                                                        @endif
+                                                        @push('scripts')
+                                                            <script>
+                                                                document.addEventListener('DOMContentLoaded', () => {
+                                                                    this.livewire.on('mathQuill{{$eqc->choice}}', data => {
+                                                                        var question = new MathEditor('eq{{$eqc->choice}}', 0, '');
+                                                                        question.setLatex(data)
+                                                                    })
+                                                                });
+                                                            </script>
+                                                        @endpush
+                                                    </div>
                                                     {!! $eqc->answer  !!}
                                                 </td>
                                             </tr>

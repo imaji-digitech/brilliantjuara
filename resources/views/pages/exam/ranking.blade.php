@@ -37,8 +37,8 @@
                                             <td>{{ $index+1 }}</td>
                                             <td>{{ $r->user->name }}</td>
                                             <td>{{ number_format($r->point/$examQuestCount*100,2) }}%</td>
-                                            <td style="color: {{ $r->point/$examQuestCount*100>=80?'green':'red' }}">
-                                                <b>{{ $r->point/$examQuestCount*100>=80?'Lulus':'Tidak lulus' }}</b>
+                                            <td style="color: {{ $r->point/$examQuestCount*100>=52?'green':'red' }}">
+                                                <b>{{ $r->point/$examQuestCount*100>=52?'Lulus':'Tidak lulus' }}</b>
                                             </td>
                                             <td>{{ $r->created_at }}</td>
                                             <td>
