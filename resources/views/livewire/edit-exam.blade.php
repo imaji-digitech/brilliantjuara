@@ -82,30 +82,30 @@
                                                 </td>
                                                 <td>
                                                     @if($eqc->equation!=null)
-                                                    <div>
-                                                        <div id="eq{{$eqc->choice}}"></div>
-                                                        <div id="eqF{{$eqc->choice}}"></div>
-                                                        <script>
-                                                            document.addEventListener('livewire:load', function () {
-                                                                var questiona = new MathEditor('eqF{{$eqc->choice}}', 0, '');
-                                                                questiona.setLatex('{{ str_replace('\\','\\\\',$eqc->equation) }}')
-                                                            });
-                                                        </script>
-                                                        @push('scripts')
+                                                        <div>
+                                                            <div id="eq{{$eqc->choice}}"></div>
+                                                            <div id="eqF{{$eqc->choice}}"></div>
                                                             <script>
-                                                                document.addEventListener('DOMContentLoaded', () => {
-                                                                    this.livewire.on('mathQuill{{$eqc->choice}}', data => {
-                                                                        var question = new MathEditor('eq{{$eqc->choice}}', 0, '');
-                                                                        question.setLatex(data)
-                                                                    })
+                                                                document.addEventListener('livewire:load', function () {
+                                                                    var questiona = new MathEditor('eqF{{$eqc->choice}}', 0, '');
+                                                                    questiona.setLatex('{{ str_replace('\\','\\\\',$eqc->equation) }}')
                                                                 });
                                                             </script>
-                                                        @endpush
-                                                    </div>
+                                                            @push('scripts')
+                                                                <script>
+                                                                    document.addEventListener('DOMContentLoaded', () => {
+                                                                        this.livewire.on('mathQuill{{$eqc->choice}}', data => {
+                                                                            var question = new MathEditor('eq{{$eqc->choice}}', 0, '');
+                                                                            question.setLatex(data)
+                                                                        })
+                                                                    });
+                                                                </script>
+                                                            @endpush
+                                                        </div>
                                                     @endif
-                                                    @if($eqc->answer!='<br>')
-                                                    {!! $eqc->answer  !!}
-                                                        @endif
+{{--                                                    @if($eqc->answer!='<br>')--}}
+                                                        {!! $eqc->answer  !!}
+{{--                                                    @endif--}}
                                                 </td>
                                             </tr>
                                         </table>
@@ -127,13 +127,13 @@
                                     <div>
                                         <div id="discussion"></div>
                                         @if($questActive['discussion_equation']!=null)
-                                        <div id="first_discussion"></div>
-                                        <script>
-                                            document.addEventListener('livewire:load', function () {
-                                                var questiona = new MathEditor('first_discussion', 0, '');
-                                                questiona.setLatex('{{ str_replace('\\','\\\\',$questActive['discussion_equation']) }}')
-                                            });
-                                        </script>
+                                            <div id="first_discussion"></div>
+                                            <script>
+                                                document.addEventListener('livewire:load', function () {
+                                                    var questiona = new MathEditor('first_discussion', 0, '');
+                                                    questiona.setLatex('{{ str_replace('\\','\\\\',$questActive['discussion_equation']) }}')
+                                                });
+                                            </script>
                                         @endif
                                         @push('scripts')
                                             <script>
@@ -178,7 +178,7 @@
                     @if($i%8==0)
                         <br>
                     @endif
-                        <button class="btn-sm btn {{($i==$number)?'btn-success':'btn-default'}}"
+                    <button class="btn-sm btn {{($i==$number)?'btn-success':'btn-default'}}"
                             style="width: 30px;height: 30px; padding: 0;margin: 2px;
                                 box-shadow: -3px 3px gray;
                             {{---2px 2px {{$eu->answer!=0?'green':'pink'}},--}}
