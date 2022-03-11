@@ -85,12 +85,6 @@
                                                         <div>
                                                             <div id="eq{{$eqc->choice}}"></div>
                                                             <div id="eqF{{$eqc->choice}}"></div>
-                                                            <script>
-                                                                document.addEventListener('livewire:load', function () {
-                                                                    var questiona = new MathEditor('eqF{{$eqc->choice}}', 0, '');
-                                                                    questiona.setLatex('{{ str_replace('\\','\\\\',$eqc->equation) }}')
-                                                                });
-                                                            </script>
                                                             @push('scripts')
                                                                 <script>
                                                                     document.addEventListener('DOMContentLoaded', () => {
@@ -101,11 +95,18 @@
                                                                     });
                                                                 </script>
                                                             @endpush
+                                                            <script>
+                                                                document.addEventListener('livewire:load', function () {
+                                                                    var questiona = new MathEditor('eqF{{$eqc->choice}}', 0, '');
+                                                                    questiona.setLatex('{{ str_replace('\\','\\\\',$eqc->equation) }}')
+                                                                });
+                                                            </script>
+
                                                         </div>
                                                     @endif
-{{--                                                    @if($eqc->answer!='<br>')--}}
+                                                    @if($eqc->answer!='<br>')
                                                         {!! $eqc->answer  !!}
-{{--                                                    @endif--}}
+                                                    @endif
                                                 </td>
                                             </tr>
                                         </table>

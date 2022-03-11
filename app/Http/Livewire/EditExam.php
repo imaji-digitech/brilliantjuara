@@ -44,7 +44,7 @@ class EditExam extends Component
         }
         foreach (\App\Models\ExamQuestChoice::whereExamQuestId($this->questActive['id'])->get() as $eqc){
             if($eqc->equation!=null) {
-                $this->emit('mathQuill' . $eqc->choice, $eqc->equation);
+                $this->emit('mathQuill'. $eqc->choice, $eqc->equation);
             }
         }
     }
