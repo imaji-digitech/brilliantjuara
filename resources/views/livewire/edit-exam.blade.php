@@ -103,7 +103,9 @@
                                                         @endpush
                                                     </div>
                                                     @endif
+                                                    @if($eqc->answer!='<br>')
                                                     {!! $eqc->answer  !!}
+                                                        @endif
                                                 </td>
                                             </tr>
                                         </table>
