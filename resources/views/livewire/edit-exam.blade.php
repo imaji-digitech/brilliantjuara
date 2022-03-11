@@ -81,9 +81,9 @@
                                                     {{ $alphabet[$eqc->choice] }}.
                                                 </td>
                                                 <td>
+                                                    @if($eqc->equation!=null)
                                                     <div>
                                                         <div id="eq{{$eqc->choice}}"></div>
-                                                        @if($eqc->equation!=null)
                                                         <div id="eqF{{$eqc->choice}}"></div>
                                                         <script>
                                                             document.addEventListener('livewire:load', function () {
@@ -91,7 +91,6 @@
                                                                 questiona.setLatex('{{ str_replace('\\','\\\\',$eqc->equation) }}')
                                                             });
                                                         </script>
-                                                        @endif
                                                         @push('scripts')
                                                             <script>
                                                                 document.addEventListener('DOMContentLoaded', () => {
@@ -103,6 +102,7 @@
                                                             </script>
                                                         @endpush
                                                     </div>
+                                                    @endif
                                                     {!! $eqc->answer  !!}
                                                 </td>
                                             </tr>
