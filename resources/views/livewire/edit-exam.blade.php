@@ -85,7 +85,6 @@
                                                         <div>
                                                             <div id="eq{{$eqc->choice}}"></div>
                                                             <div id="eqF{{$eqc->choice}}"></div>
-                                                            {{ str_replace('\\','\\\\',$eqc->equation) }}
                                                             @push('scripts')
                                                                 <script>
                                                                     document.addEventListener('DOMContentLoaded', () => {
