@@ -35,8 +35,8 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/date-picker.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/date-picker.custom.css?_=2')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/owlcarousel.css')}}">
-    <link href="{{ asset('vendor/mathquill/mathquill.css') }}" rel="stylesheet">
-    <link href="{{ asset('vendor/mathquill/matheditor.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/mathquill/mathquill.css?_=2') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/mathquill/matheditor.css?_=2') }}" rel="stylesheet">
     <!-- Plugins css Ends-->
     <!-- Bootstrap css-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/bootstrap.css')}}">
@@ -198,8 +198,8 @@
 <!-- Plugins JS Ends-->
 <!-- Theme js-->
 <script src="{{asset('assets/js/script.js')}}"></script>
-<script src="{{ asset('vendor/mathquill/mathquill.min.js') }}"></script>
-<script src="{{ asset('vendor/mathquill/matheditor.js') }}"></script>
+<script src="{{ asset('vendor/mathquill/mathquill.min.js?_=2') }}"></script>
+<script src="{{ asset('vendor/mathquill/matheditor.js?_=2') }}"></script>
 <!-- login js-->
 {{--@isset($script)--}}
 {{--    {{ $script }}--}}
