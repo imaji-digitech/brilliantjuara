@@ -89,7 +89,7 @@
                                                                 <script>
                                                                     document.addEventListener('DOMContentLoaded', () => {
                                                                         this.livewire.on('mathQuill{{$eqc->choice}}', data => {
-                                                                            var question = new MathEditor('eq{{$eqc->choice}}', 1, '');
+                                                                            var question = new MathEditor('eq{{$eqc->choice}}', 0, '');
                                                                             question.setLatex(data)
                                                                         })
                                                                     });
@@ -108,7 +108,7 @@
                                                                             },
                                                                         }
                                                                     };
-                                                                    var questiona = new MathEditor('eqF{{$eqc->choice}}', 0, config);
+                                                                    var questiona = new MathEditor('eqF{{$eqc->choice}}', 1, config);
                                                                     questiona.setLatex('{{ $eqc->equation }}')
                                                                 });
 
