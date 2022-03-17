@@ -97,9 +97,22 @@
                                                             @endpush
                                                             <script>
                                                                 document.addEventListener('livewire:load', function () {
-                                                                    var questiona = new MathEditor('eqF{{$eqc->choice}}', 1, '');
+                                                                    var config= {
+                                                                        handlers: {
+                                                                            edit: function () {
+                                                                                var data = {{ str_replace(".", "", $model) }}.getLatex();
+                                                                            @this.set('{{$model}}', data);
+                                                                            },
+                                                                            enter: function () {
+
+                                                                            },
+                                                                        }
+                                                                    };
+                                                                    var questiona = new MathEditor('eqF{{$eqc->choice}}', 0, config);
                                                                     questiona.setLatex('{{ str_replace('\\','\\\\',$eqc->equation) }}')
                                                                 });
+
+{{--                                                                var {{ str_replace(".", "", $model) }} = new MathEditor('{{ str_replace(".", "", $model) }}', 1, config{{ str_replace(".", "", $model) }})--}}
                                                             </script>
 
                                                         </div>
