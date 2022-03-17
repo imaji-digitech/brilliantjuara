@@ -110,7 +110,7 @@
                                                                         }
                                                                     };
                                                                     var questiona = new MathEditor('eqF{{$eqc->choice}}', 0, config);
-                                                                    questiona.setLatex('{{ str_replace('\\','\\\\',$eqc->equation) }}')
+{{--                                                                    questiona.setLatex('{{ str_replace('\\','\\\\',$eqc->equation) }}')--}}
                                                                     questiona.setLatex('{{ $eqc->equation }}')
                                                                 });
 
