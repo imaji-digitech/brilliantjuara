@@ -100,8 +100,8 @@
                                                                     var config= {
                                                                         handlers: {
                                                                             edit: function () {
-                                                                                var data = {{ str_replace(".", "", $model) }}.getLatex();
-                                                                            @this.set('{{$model}}', data);
+                                                                            {{--    var data = {{ str_replace(".", "", $model) }}.getLatex();--}}
+                                                                            {{--@this.set('{{$model}}', data);--}}
                                                                             },
                                                                             enter: function () {
 
