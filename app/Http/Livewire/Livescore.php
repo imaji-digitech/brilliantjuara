@@ -43,7 +43,7 @@ class Livescore extends Component
             $r->total=array_sum($sekdinPoint);
         }
         usort($this->rankings, function($a, $b) {
-            strcmp($a->name, $b->name);
+            strcmp($a->total, $b->total);
         } );
 
 
