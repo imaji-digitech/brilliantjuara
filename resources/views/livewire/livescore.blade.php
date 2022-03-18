@@ -17,13 +17,8 @@
                             </tr>
                             </thead>
                             <tbody wire:poll.7000ms>
-                            @php
-                                $this->rankings->sortBy(function($post)
-{
-  return $post->total;
-})
-                            @endphp
-                            @foreach($rankings as $index=>$r)
+
+                            @foreach($ra as $index=>$r)
                                 <tr
                                     @if($index==0)
                                     style="background-color:  #ffd700;"
