@@ -30,7 +30,7 @@
                                     <td>{{ $index+1 }}</td>
                                     <td>{{ $r->examUser->user->name }}</td>
                                     @php
-                                        use App\Models\ExamQuestChoice;$sekdinPoint=[];
+                                        $sekdinPoint=[];
                     foreach ($r->examUser->examAnswers as $i => $eu) {
                     $answer = $eu->examQuest->answer == $eu->answer;
                     if (!isset($sekdinPoint[$eu->examQuest->exam_step_id])) {
@@ -38,7 +38,7 @@
                     }
                     if ($eu->examQuest->examStep->type_exam == 2) {
                         if (isset($sekdinPoint[$eu->examQuest->exam_step_id])) {
-                            $sekdinPoint[$eu->examQuest->exam_step_id] += ExamQuestChoice::whereChoice($eu->answer)->whereExamQuestId($eu->exam_quest_id)->first()->score;
+                            $sekdinPoint[$eu->examQuest->exam_step_id] += App\Models\ExamQuestChoice::whereChoice($eu->answer)->whereExamQuestId($eu->exam_quest_id)->first()->score;
                         }
                     } else {
                         if ($answer) {
