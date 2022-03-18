@@ -33,9 +33,10 @@ class ExamController extends Controller
             }
         }
         $examUser = ExamUser::create(['user_id' => auth()->id(), 'exam_id' => $exam->id]);
-        if (ExamUser::whereUserId(auth()->id())->whereExamId($exam->id)->first() == null) {
+        if (ExamUser::whereUserId(auth()->id())->whereExamId($exam->id)->get()->count() == 1) {
             RankingSekdin::create(['exam_user_id'=>$examUser->id]);
         }
+
         foreach ($exam->examSteps as $es) {
             foreach ($es->examQuests as $eq) {
                 ExamAnswer::create([
