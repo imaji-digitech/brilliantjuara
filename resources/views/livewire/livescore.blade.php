@@ -17,6 +17,7 @@
                             </tr>
                             </thead>
                             <tbody wire:poll.7000ms>
+                            @php($this->rankings->sortByDesc('total'))
                             @foreach($rankings as $index=>$r)
                                 <tr
                                     @if($index==0)

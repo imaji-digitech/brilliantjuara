@@ -42,7 +42,7 @@ class Livescore extends Component
             $r->point=$sekdinPoint;
             $r->total=array_sum($sekdinPoint);
         }
-        $this->rankings->sortByDesc('total');
+
 //        usort($this->rankings, function($a, $b) {
 //            strcmp($a->total, $b->total);
 //        } );
