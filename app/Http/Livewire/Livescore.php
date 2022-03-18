@@ -79,7 +79,7 @@ class Livescore extends Component
                 // traverse the array from 0 to n-i-1
                 // Swap if the element found is greater
                 // than the next element
-                if ($ra[$j]->total > $ra[$j+1]->total)
+                if ($ra[$j]->total < $ra[$j+1]->total)
                 {
                     $t = $ra[$j];
                     $ra[$j] = $ra[$j+1];
