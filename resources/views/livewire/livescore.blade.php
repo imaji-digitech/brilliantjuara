@@ -37,11 +37,7 @@
                         $sekdinPoint[$eu->examQuest->exam_step_id] = 0;
                     }
                     if ($eu->examQuest->examStep->type_exam == 2) {
-                        if (isset($sekdinPoint[$eu->examQuest->exam_step_id])) {
-                            if (!isset(App\Models\ExamQuestChoice::whereChoice($eu->answer)->whereExamQuestId($eu->exam_quest_id)->first()->score)){
-                                dd($eu->exam_quest_id,$eu->answer);
-                                dd(App\Models\ExamQuestChoice::whereChoice($eu->answer)->whereExamQuestId($eu->exam_quest_id)->first());
-                            }
+                        if (isset($sekdinPoint[$eu->examQuest->exam_step_id]) and $eu->answer!=0) {
                             $sekdinPoint[$eu->examQuest->exam_step_id] += App\Models\ExamQuestChoice::whereChoice($eu->answer)->whereExamQuestId($eu->exam_quest_id)->first()->score;
                         }
                     } else {
