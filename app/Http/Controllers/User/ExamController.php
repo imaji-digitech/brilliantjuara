@@ -33,6 +33,7 @@ class ExamController extends Controller
             }
         }
         $examUser = ExamUser::create(['user_id' => auth()->id(), 'exam_id' => $exam->id]);
+        dd(ExamUser::whereUserId(auth()->id())->whereExamId($exam->id)->get()->count());
         if (ExamUser::whereUserId(auth()->id())->whereExamId($exam->id)->get()->count() == 1) {
             RankingSekdin::create(['exam_user_id'=>$examUser->id]);
         }
