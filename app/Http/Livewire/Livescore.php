@@ -42,9 +42,10 @@ class Livescore extends Component
             $r->point=$sekdinPoint;
             $r->total=array_sum($sekdinPoint);
         }
-        usort($this->rankings, function($a, $b) {
-            strcmp($a->total, $b->total);
-        } );
+        $this->rankings->sortByDesc('total');
+//        usort($this->rankings, function($a, $b) {
+//            strcmp($a->total, $b->total);
+//        } );
 
 
         $this->last=Carbon::now();
