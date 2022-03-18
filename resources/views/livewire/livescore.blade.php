@@ -30,7 +30,7 @@
                                     <td>{{ $index+1 }}</td>
                                     <td>{{ $r->examUser->user->name }}</td>
                                     @php
-                                        $sekdinPoint=[];
+                                        use App\Models\ExamQuestChoice;$sekdinPoint=[];
                     foreach ($r->examUser->examAnswers as $i => $eu) {
                     $answer = $eu->examQuest->answer == $eu->answer;
                     if (!isset($sekdinPoint[$eu->examQuest->exam_step_id])) {

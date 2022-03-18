@@ -40,7 +40,7 @@
                     @endif
                 </td>
                 @php
-                    $totalPoint=[];
+                    use App\Models\ExamQuestChoice;$totalPoint=[];
                     //foreach ($exam->examAnswers as $i => $eu) {
                       //  $answer = $eu->examQuest->answer == $eu->answer;
                         //if ($answer) {
