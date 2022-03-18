@@ -18,7 +18,10 @@
                             </thead>
                             <tbody wire:poll.7000ms>
                             @php
-                                $this->rankings->sortByDesc('total')
+                                $this->rankings->sortBy(function($post)
+{
+  return $post->total;
+})
                             @endphp
                             @foreach($rankings as $index=>$r)
                                 <tr
