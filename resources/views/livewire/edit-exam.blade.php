@@ -1,5 +1,4 @@
 <div class="row">
-    {{--    {{ ($this->questActive) }}--}}
     <div class="col-sm-4 desktop-only">
         <div class="card" style="padding: 0;">
             <div class="card-body text-center" style="padding: 0; padding-bottom: 10px">
@@ -13,7 +12,6 @@
                                 border: 1px solid gray"
                             wire:click="changeActive({{$i}})">{{$i+1}} </button>
                 @endforeach
-
             </div>
         </div>
     </div>
@@ -43,7 +41,7 @@
                                     <script>
                                         document.addEventListener('livewire:load', function () {
                                             var questiona = new MathEditor('first', 0, '');
-                                            questiona.setLatex('{{ str_replace('\\','\\\\',$questActive['equation']) }}')
+                                            questiona.setLatex('{!! str_replace('\\','\\\\',$questActive['equation']) !!}')
                                         });
                                     </script>
                                     @push('scripts')
@@ -57,16 +55,11 @@
                                         </script>
                                     @endpush
                                 </div>
-
-
                                 {!! $questActive['question']  !!}
-                                {{--                                {{$questActive['equation']}}--}}
                             </td>
                         </tr>
                     </table>
-                    {{--                    @push('scripts')--}}
 
-                    {{--                    @endpush--}}
                     <div class="col">
                         <div class="mb-3 m-t-15 custom-radio-ml">
                             @php($alphabet=['','A','B','C','D','E'])
@@ -81,10 +74,12 @@
                                                     {{ $alphabet[$eqc->choice] }}.
                                                 </td>
                                                 <td>
-                                                    @if($eqc->equation!=null)
+{{--                                                    @if($eqc->equation!=null)--}}
                                                         <div>
+                                                            @if($eqc->equation!=null)
                                                             <div id="eq{{$eqc->choice}}"></div>
                                                             <div id="eqF{{$eqc->choice}}"></div>
+                                                            @endif
                                                             @push('scripts')
                                                                 <script>
                                                                     document.addEventListener('DOMContentLoaded', () => {
@@ -97,27 +92,12 @@
                                                             @endpush
                                                             <script>
                                                                 document.addEventListener('livewire:load', function () {
-                                                                    var config= {
-                                                                        handlers: {
-                                                                            edit: function () {
-                                                                            {{--    var data = {{ str_replace(".", "", $model) }}.getLatex();--}}
-                                                                            {{--@this.set('{{$model}}', data);--}}
-                                                                            },
-                                                                            enter: function () {
-
-                                                                            },
-                                                                        }
-                                                                    };
-                                                                    var questiona = new MathEditor('eqF{{$eqc->choice}}', 0, config);
+                                                                    var questiona = new MathEditor('eqF{{$eqc->choice}}', 0, '');
                                                                     questiona.setLatex('{!! str_replace('\\','\\\\',$eqc->equation) !!} ')
-{{--                                                                    questiona.setLatex('{{ $eqc->equation }}')--}}
                                                                 });
-
-{{--                                                                var {{ str_replace(".", "", $model) }} = new MathEditor('{{ str_replace(".", "", $model) }}', 1, config{{ str_replace(".", "", $model) }})--}}
                                                             </script>
-
                                                         </div>
-                                                    @endif
+
                                                     @if($eqc->answer!='<br>')
                                                         {!! $eqc->answer  !!}
                                                     @endif

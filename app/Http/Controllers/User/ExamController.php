@@ -7,6 +7,7 @@ use App\Models\Exam;
 use App\Models\ExamAnswer;
 use App\Models\ExamUser;
 use App\Models\Ranking;
+use App\Models\RankingSekdin;
 use App\Models\UserHasDownload;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
@@ -32,6 +33,9 @@ class ExamController extends Controller
             }
         }
         $examUser = ExamUser::create(['user_id' => auth()->id(), 'exam_id' => $exam->id]);
+        if (ExamUser::whereUserId(auth()->id())->whereExamId($exam->id)->first() == null) {
+            RankingSekdin::create(['exam_user_id'=>$examUser->id]);
+        }
         foreach ($exam->examSteps as $es) {
             foreach ($es->examQuests as $eq) {
                 ExamAnswer::create([
@@ -79,14 +83,17 @@ class ExamController extends Controller
             $examQuestCount+=$e->examQuests->count();
         }
         $ranking=Ranking::whereExamId($exam->id)->orderBy('point','desc')->get();
-//        dd($ranking);
         return view('pages.exam.ranking',compact('exam','ranking','examQuestCount'));
+    }
+    public function livescore($exam){
+        return view('pages.exam.livescore',compact('exam'));
     }
     public function rankingRemove($id){
         $rank=Ranking::find($id);
         $rank->delete();
         return redirect()->back();
     }
+
     public function download($slug){
 
         $exam=Exam::getExam($slug);

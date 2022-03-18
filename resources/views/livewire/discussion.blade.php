@@ -96,14 +96,19 @@
                         </div>
                     </div>
                 </div>
-                @foreach($examUser->exam->ExamSteps as $index=>$es)
-                <div class="col-md-4">
-                    <div class="card" style="height: 285px">
-                            <livewire:chart-result idComponent="{{ $es->title }}" right="{{ empty_point($sekdinRight[$es->id]) }}" wrong="{{ empty_point($sekdinWrong[$es->id])-empty_point($sekdinBlank[$es->id]) }}"
-                                                   blank="{{ empty_point($sekdinBlank[$es->id]) }}"/>
+                @foreach($examSteps as $index=>$es)
+                    <div class="col-md-4" wire:ignore>
+                        <div class="card" style="height: 285px">
+                            <livewire:chart-result
+                                idComponent="{{ $es->title }}"
+                                right="{{ empty_point($sekdinRight[$es->id]) }}"
+                                wrong="{{ empty_point($sekdinWrong[$es->id])-empty_point($sekdinBlank[$es->id]) }}"
+                                blank="{{ empty_point($sekdinBlank[$es->id]) }}"
+                                wire:key="{{$index}}"
+                            />
+                        </div>
                     </div>
-                </div>
-                    @endforeach
+                @endforeach
             </div>
         </div>
     @endif
@@ -132,12 +137,12 @@
         <div class="card">
             <div class="card-body">
                 @isset( $questActive->examQuest->question)
-{{--                    <div class="row">--}}
-{{--                        <div class="col-1" style="width: 30px;padding: 0;margin: 0">{{$number+1}}. </div>--}}
-{{--                        <div class="col-11" style="text-align: justify !important;">--}}
-{{--                            {!! $questActive->examQuest->question  !!}--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
+                    {{--                    <div class="row">--}}
+                    {{--                        <div class="col-1" style="width: 30px;padding: 0;margin: 0">{{$number+1}}. </div>--}}
+                    {{--                        <div class="col-11" style="text-align: justify !important;">--}}
+                    {{--                            {!! $questActive->examQuest->question  !!}--}}
+                    {{--                        </div>--}}
+                    {{--                    </div>--}}
                     <table style="width: 100%">
                         <tr>
                             <td style="width: 35px; vertical-align: top">
@@ -145,16 +150,16 @@
                             </td>
                             <td style="text-align: justify !important;vertical-align: top">
                                 <div>
-                                    <div id="question"></div>
                                     @if($this->questActive->examQuest->equation!=null)
+                                        <div id="question"></div>
                                         <div id="first"></div>
-                                        <script>
-                                            document.addEventListener('livewire:load', function () {
-                                                var questiona = new MathEditor('first', 0, '');
-                                                questiona.setLatex('{{ str_replace('\\','\\\\',$questActive['equation']) }}')
-                                            });
-                                        </script>
                                     @endif
+                                    <script>
+                                        document.addEventListener('livewire:load', function () {
+                                            var questiona = new MathEditor('first', 0, '');
+                                            questiona.setLatex('{{ str_replace('\\','\\\\',$questActive['equation']) }}')
+                                        });
+                                    </script>
                                     @push('scripts')
                                         <script>
                                             document.addEventListener('DOMContentLoaded', () => {
@@ -170,15 +175,11 @@
                             </td>
                         </tr>
                     </table>
-
-
                     <div class="col">
                         <div class="mb-3 m-t-15 custom-radio-ml">
                             @php($alphabet=['','A','B','C','D','E'])
-                            {{--                            {{$questActive->examQuest->answer}}--}}
                             @php($answer = $questActive->examQuest->answer== $questActive->answer)
                             @foreach($questActive->examQuest->examQuestChoices as $eqc)
-
                                 <div class="form-check radio
                                 @if($answer and $eqc->choice == $questActive->answer)
                                     radio-primary
@@ -200,14 +201,14 @@
 @else
                                         text-option
 @endif" style="width: 100%">
-{{--                                        <label  style="width: 100%"--}}
-{{--                                                wire:click="changeAnswer({{$eqc->choice}})">--}}
-{{--                                            <div class="row">--}}
-{{--                                                <div class="col-1" style="width: 40px">{{ $alphabet[$eqc->choice] }}. </div>--}}
-{{--                                                <div class="col-11" >--}}
-{{--                                                    {!! $eqc->answer  !!}--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
+                                        {{--                                        <label  style="width: 100%"--}}
+                                        {{--                                                wire:click="changeAnswer({{$eqc->choice}})">--}}
+                                        {{--                                            <div class="row">--}}
+                                        {{--                                                <div class="col-1" style="width: 40px">{{ $alphabet[$eqc->choice] }}. </div>--}}
+                                        {{--                                                <div class="col-11" >--}}
+                                        {{--                                                    {!! $eqc->answer  !!}--}}
+                                        {{--                                                </div>--}}
+                                        {{--                                            </div>--}}
                                         <table>
                                             <tr>
                                                 <td style="width: 30px">
@@ -218,11 +219,11 @@
                                                 </td>
                                             </tr>
                                         </table>
-{{--                                        </label>--}}
-{{--                                        <div class="col-1" style="width: 30px;padding: 0;margin: 0">{{ $alphabet[$eqc->choice] }}. </div>--}}
-{{--                                        <div class="col-11" >--}}
-{{--                                            {!! $eqc->answer  !!}--}}
-{{--                                        </div>--}}
+                                        {{--                                        </label>--}}
+                                        {{--                                        <div class="col-1" style="width: 30px;padding: 0;margin: 0">{{ $alphabet[$eqc->choice] }}. </div>--}}
+                                        {{--                                        <div class="col-11" >--}}
+                                        {{--                                            {!! $eqc->answer  !!}--}}
+                                        {{--                                        </div>--}}
                                     </label>
                                 </div>
                             @endforeach

@@ -16,8 +16,6 @@
             <th>
                 Hasil
             </th>
-
-            {{--            <th>Hasil</th>--}}
             <th>aksi</th>
         </tr>
     </x-slot>

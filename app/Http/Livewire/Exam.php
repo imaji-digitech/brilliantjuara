@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\ExamQuestChoice;
 use App\Models\ExamUser;
 use App\Models\ReportQuest;
 use Carbon\Carbon;
@@ -29,6 +30,11 @@ class Exam extends Component
         $this->number = $number;
         if ($this->questActive->examQuest->equation!=null){
             $this->emit('mathQuill', $this->questActive->examQuest->equation);
+        }
+        foreach (ExamQuestChoice::whereExamQuestId($this->questActive->id)->get() as $eqc){
+            if($eqc->equation!=null) {
+                $this->emit('mathQuill'. $eqc->choice, $eqc->equation);
+            }
         }
     }
     public function report($id){

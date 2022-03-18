@@ -17,6 +17,11 @@
             @endif
         @endif
     @endif
+    @if(auth()->user()->role==1)
+            <a href="{{ route('admin.user.exam.livescore',$exam->slug) }}" class="btn btn-primary">
+                Livescore
+            </a>
+    @endif
     <a href="{{ route('admin.user.exam.ranking',$exam->slug) }}" class="btn btn-primary">
         Ranking
     </a>

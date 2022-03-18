@@ -13,9 +13,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property integer $exam_id
  * @property string $created_at
  * @property string $updated_at
+ * @property int $status
  * @property Exam $exam
  * @property User $user
  * @property ExamAnswer[] $examAnswers
+ * @property RankingSekdin[] $rankingSekdins
  */
 class ExamUser extends Model
 {
@@ -29,7 +31,7 @@ class ExamUser extends Model
     /**
      * @var array
      */
-    protected $fillable = ['user_id', 'exam_id', 'status', 'created_at', 'updated_at'];
+    protected $fillable = ['user_id', 'exam_id', 'created_at', 'updated_at', 'status'];
 
     public static function search($query, $dataId)
     {
@@ -43,7 +45,6 @@ class ExamUser extends Model
 
     public static function searchLog($query)
     {
-//        ->whereExamId($dataId)->whereUserId(auth()->id())
         return empty($query) ? static::query()
             : static::whereHas('user', function ($q) use ($query) {
                 $q->where('name', 'like', '%' . $query . '%');
@@ -54,15 +55,11 @@ class ExamUser extends Model
 
     public static function setDone($id)
     {
-//        $examUserstatic::find($id)->update(['status' => 2]);
         $examUser = static::find($id);
-//        if ($examUser->created)
-
-        if (Carbon::now() > $examUser->created_at->addMinutes($examUser->exam->time) and $examUser->status==1) {
+        if (Carbon::now() > $examUser->created_at->addMinutes($examUser->exam->time) and $examUser->status == 1) {
             $examUser->update(['updated_at' => $examUser->created_at->addMinutes($examUser->exam->time)]);
         }
         $examUser->update(['status' => 2]);
-
         $exam = ExamUser::whereUserId($examUser->user_id)->whereExamId($examUser->exam_id)->get();
         $ranking = Ranking::whereUserId($examUser->user_id)->whereExamId($examUser->exam_id)->get();
         if ($exam->count() == 1 and $ranking->count() == 0) {
@@ -105,4 +102,11 @@ class ExamUser extends Model
         return $this->hasMany('App\Models\ExamAnswer');
     }
 
+    /**
+     * @return HasMany
+     */
+    public function rankingSekdins()
+    {
+        return $this->hasMany('App\Models\RankingSekdin');
+    }
 }

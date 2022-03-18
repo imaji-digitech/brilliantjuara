@@ -24,9 +24,11 @@ class Discussion extends Component
     public $sekdinWrong;
     public $sekdinRight;
     public $sekdinBlank;
+    public $examSteps;
 
     public function mount()
     {
+        $this->examSteps=$this->examUser->exam->ExamSteps;
         if ($this->examUser->exam->exam_type_id == 1) {
             $this->ukom();
         } elseif ($this->examUser->exam->exam_type_id == 2) {
@@ -34,7 +36,6 @@ class Discussion extends Component
         }
 
         $this->wrongAnswer = $this->wrongAnswer - $this->blankAnswer;
-//        $this->totalPoint=$this->rightAnswer*
         $this->countQuest = $this->examUser->examAnswers->count();
         $this->changeActive(0);
     }
@@ -65,49 +66,37 @@ class Discussion extends Component
     {
         foreach ($this->examUser->examAnswers as $i => $eu) {
             $answer = $eu->examQuest->answer == $eu->answer;
+            if (!isset($this->sekdinBlank[$eu->examQuest->exam_step_id])) {
+                $this->sekdinBlank[$eu->examQuest->exam_step_id] = 0;
+                $this->sekdinPoint[$eu->examQuest->exam_step_id] = 0;
+                $this->sekdinRight[$eu->examQuest->exam_step_id] = 0;
+                $this->sekdinWrong[$eu->examQuest->exam_step_id] = 0;
+            }
             if ($eu->answer == 0) {
-//                $this->blankAnswer += 1;
                 if (isset($this->sekdinBlank[$eu->examQuest->exam_step_id])) {
                     $this->sekdinBlank[$eu->examQuest->exam_step_id] += 1;
-                }else{
-                    $this->sekdinBlank[$eu->examQuest->exam_step_id] = 1;
                 }
             } else if ($eu->examQuest->examStep->type_exam == 2) {
                 if (isset($this->sekdinPoint[$eu->examQuest->exam_step_id])) {
                     $this->sekdinPoint[$eu->examQuest->exam_step_id] += ExamQuestChoice::whereChoice($eu->answer)->whereExamQuestId($eu->exam_quest_id)->first()->score;
-                } else {
-                    $this->sekdinPoint[$eu->examQuest->exam_step_id] = ExamQuestChoice::whereChoice($eu->answer)->whereExamQuestId($eu->exam_quest_id)->first()->score;
                 }
             } else {
                 if ($answer) {
                     if (isset($this->sekdinPoint[$eu->examQuest->exam_step_id])) {
                         $this->sekdinPoint[$eu->examQuest->exam_step_id] += $eu->examQuest->examStep->score_right;
-                    } else {
-                        $this->sekdinPoint[$eu->examQuest->exam_step_id] = $eu->examQuest->examStep->score_right;
                     }
                 }
             }
             if ($answer) {
                 if (isset($this->sekdinRight[$eu->examQuest->exam_step_id])) {
                     $this->sekdinRight[$eu->examQuest->exam_step_id] += 1;
-                }else{
-                    $this->sekdinRight[$eu->examQuest->exam_step_id] = 1;
                 }
             } else {
-//                $this->wrongAnswer += 1;
                 if (isset($this->sekdinWrong[$eu->examQuest->exam_step_id])) {
                     $this->sekdinWrong[$eu->examQuest->exam_step_id] += 1;
-                }else{
-                    $this->sekdinWrong[$eu->examQuest->exam_step_id] = 1;
                 }
             }
         }
-//        if ($this->totalHighValue * 0.8 < $this->totalPoint) {
-//            $this->graduate = "Lulus";
-//        } else {
-//            $this->graduate = "Tidak lulus";
-//        }
-//        dd($this->sekdinPoint);
     }
 
     public function changeActive($number)
@@ -115,9 +104,11 @@ class Discussion extends Component
         $this->questActive = $this->examUser->examAnswers[$number];
         $this->active = $this->questActive->id;
         $this->number = $number;
-        if ($this->questActive->examQuest->equation!=null){
+        if ($this->questActive->examQuest->equation != null) {
             $this->emit('mathQuill', $this->questActive->examQuest->equation);
         }
+
+
     }
 
 //    public function setDone()

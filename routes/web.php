@@ -212,6 +212,7 @@ Route::middleware(['auth:sanctum',])->name('admin.')->prefix('admin')->group(fun
 //        Route::get('withdraw',[WithdrawControlller::class,'index'])->name('withdraw.index');
         Route::get('withdraw/{id}',[WithdrawControlller::class,'update'])->name('withdraw.edit');
         Route::get('exam/ranking/{id}', [\App\Http\Controllers\User\ExamController::class, 'rankingRemove'])->name('user.exam.ranking.remove');
+        Route::get('exam/{slug}/livescore', [\App\Http\Controllers\User\ExamController::class, 'livescore'])->name('user.exam.livescore');
     });
     Route::get('referral/me', [\App\Http\Controllers\User\ReferralController::class, 'index'])->name('referral.me.use');
     Route::get('referral/me/withdraw', [\App\Http\Controllers\User\ReferralController::class, 'withdraw'])->name('referral.me.withdraw');

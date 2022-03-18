@@ -732,6 +732,15 @@
     right: 0;
     left: auto
 }
+.note-editable ul{
+    list-style: disc !important;
+    list-style-position: inside !important;
+}
+
+.note-editable ol {
+    list-style: decimal !important;
+    list-style-position: inside !important;
+}
 
 .card-header.note-toolbar .dropdown-menu.right::before {
     right: 9px;

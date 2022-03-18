@@ -2,7 +2,7 @@
     <h5>{{ $idComponent }}</h5>
     <div id="{{$idComponent}}"></div>
     <script>
-        window.addEventListener('DOMContentLoaded', function () {
+        window.addEventListener('livewire:load', function () {
             var options3 = {
                 chart: {
                     height: 250,
@@ -56,9 +56,6 @@
                 document.querySelector("#{{$idComponent}}"),
                 options3
             );
-            {{--<h6 style="color: #38a7b3">Benar : {{ $rightAnswer }}</h6>--}}
-            {{--<h6 style="color: #faa41b">Salah : {{ $wrongAnswer }}</h6>--}}
-            {{--<h6 style="color: #">Kosong : {{ $blankAnswer }}</h6>--}}
             chart3.render();
         });
     </script>

@@ -14,10 +14,14 @@
                 Status
             </th>
             <th>
-                Hasil
+                Hasil TWK
             </th>
-
-            {{--            <th>Hasil</th>--}}
+            <th>
+                Hasil TIU
+            </th>
+            <th>
+                Hasil TKP
+            </th>
             <th>aksi</th>
         </tr>
     </x-slot>
@@ -36,20 +40,38 @@
                     @endif
                 </td>
                 @php
-                $totalPoint=0;
-                $totalHigh=0;
+                    $totalPoint=[];
+                    //foreach ($exam->examAnswers as $i => $eu) {
+                      //  $answer = $eu->examQuest->answer == $eu->answer;
+                        //if ($answer) {
+                          //  $totalPoint+=$eu->examQuest->examStep->score_right;
+                        //}
+                    //}
+                    $sekdinPoint=[];
                 foreach ($exam->examAnswers as $i => $eu) {
-                    $totalHigh+=$eu->examQuest->examStep->score_right;
-                    $answer = $eu->examQuest->answer == $eu->answer;
+                $answer = $eu->examQuest->answer == $eu->answer;
+                if (!isset($sekdinPoint[$eu->examQuest->exam_step_id])) {
+                    $sekdinPoint[$eu->examQuest->exam_step_id] = 0;
+                }
+                if ($eu->examQuest->examStep->type_exam == 2) {
+                    if (isset($sekdinPoint[$eu->examQuest->exam_step_id])) {
+                        $sekdinPoint[$eu->examQuest->exam_step_id] += ExamQuestChoice::whereChoice($eu->answer)->whereExamQuestId($eu->exam_quest_id)->first()->score;
+                    }
+                } else {
                     if ($answer) {
-                        $totalPoint+=$eu->examQuest->examStep->score_right;
+                        if (isset($sekdinPoint[$eu->examQuest->exam_step_id])) {
+                            $sekdinPoint[$eu->examQuest->exam_step_id] += $eu->examQuest->examStep->score_right;
+                        }
                     }
                 }
+                }
                 @endphp
-                <td>{{ $exam->status==1?'-':number_format((float)($totalPoint/$totalHigh*100), 2, '.', '').'%' }}</td>
+                @foreach($exam->exam->examSteps as $a)
+                    <td>{{ $sekdinPoint[$a->id] }}</td>
+                @endforeach
                 <td>
                     @if (\Carbon\Carbon::now()<$exam->created_at->addMinutes($exam->exam->time) and $exam->status==1 )
-{{--                    @if($exam->status==1)--}}
+                        {{--                    @if($exam->status==1)--}}
                         <a role="button" href="{{ route('admin.user.exam.exam',[$exam->exam->slug,$exam->id]) }}"
                            class="mr-3">
                             <i class="fa fa-16px fa-forward">Start</i>
