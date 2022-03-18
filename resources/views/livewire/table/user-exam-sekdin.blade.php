@@ -54,7 +54,7 @@
                     $sekdinPoint[$eu->examQuest->exam_step_id] = 0;
                 }
                 if ($eu->examQuest->examStep->type_exam == 2) {
-                    if (isset($sekdinPoint[$eu->examQuest->exam_step_id])) {
+                        if (isset($sekdinPoint[$eu->examQuest->exam_step_id]) and $eu->answer!=0) {
                         $sekdinPoint[$eu->examQuest->exam_step_id] += App\Models\ExamQuestChoice::whereChoice($eu->answer)->whereExamQuestId($eu->exam_quest_id)->first()->score;
                     }
                 } else {
