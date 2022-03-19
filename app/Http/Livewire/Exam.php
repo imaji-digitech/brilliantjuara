@@ -32,6 +32,7 @@ class Exam extends Component
             $this->emit('mathQuill', $this->questActive->examQuest->equation);
         }
         foreach (ExamQuestChoice::whereExamQuestId($this->questActive->id)->get() as $eqc){
+            dd($eqc->equation);
             if($eqc->equation!=null) {
                 dd("asdasd");
                 $this->emit('mathQuill'. $eqc->choice, $eqc->equation);
