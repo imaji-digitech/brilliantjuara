@@ -64,23 +64,23 @@
                         <div class="mb-3 m-t-15 custom-radio-ml">
                             @php($alphabet=['','A','B','C','D','E'])
                             @foreach($questActive->examQuest->examQuestChoices as $eqc)
-{{--                                <div class="form-check radio radio-primary">--}}
-{{--                                    <input class="form-check-input" type="radio"--}}
-{{--                                           wire:click="changeAnswer({{$eqc->choice}})" {{ $questActive->answer==$eqc->choice?'checked':'' }}>--}}
-{{--                                    <label style="width: 100%"--}}
-{{--                                           wire:click="changeAnswer({{$eqc->choice}})">--}}
-{{--                                        <table>--}}
-{{--                                            <tr>--}}
-{{--                                                <td style="width: 30px">--}}
-{{--                                                    {{ $alphabet[$eqc->choice] }}.--}}
-{{--                                                </td>--}}
-{{--                                                <td>--}}
-{{--                                                    {!! $eqc->answer  !!}--}}
-{{--                                                </td>--}}
-{{--                                            </tr>--}}
-{{--                                        </table>--}}
-{{--                                    </label>--}}
-{{--                                </div>--}}
+                                {{--                                <div class="form-check radio radio-primary">--}}
+                                {{--                                    <input class="form-check-input" type="radio"--}}
+                                {{--                                           wire:click="changeAnswer({{$eqc->choice}})" {{ $questActive->answer==$eqc->choice?'checked':'' }}>--}}
+                                {{--                                    <label style="width: 100%"--}}
+                                {{--                                           wire:click="changeAnswer({{$eqc->choice}})">--}}
+                                {{--                                        <table>--}}
+                                {{--                                            <tr>--}}
+                                {{--                                                <td style="width: 30px">--}}
+                                {{--                                                    {{ $alphabet[$eqc->choice] }}.--}}
+                                {{--                                                </td>--}}
+                                {{--                                                <td>--}}
+                                {{--                                                    {!! $eqc->answer  !!}--}}
+                                {{--                                                </td>--}}
+                                {{--                                            </tr>--}}
+                                {{--                                        </table>--}}
+                                {{--                                    </label>--}}
+                                {{--                                </div>--}}
                                 <div class="form-check radio radio-primary">
                                     <input class="form-check-input"
                                            type="radio"
@@ -94,29 +94,28 @@
                                                     {{ $alphabet[$eqc->choice] }}.
                                                 </td>
                                                 <td>
-{{--                                                    @if($eqc->equation!=null)--}}
-                                                        <div>
-                                                            @if($eqc->equation!=null)
+                                                    <div>
+                                                        @if($eqc->equation!=null)
                                                             <div id="eq{{$eqc->choice}}"></div>
                                                             <div id="eqF{{$eqc->choice}}"></div>
-                                                            @endif
-                                                            @push('scripts')
-                                                                <script>
-                                                                    document.addEventListener('DOMContentLoaded', () => {
-                                                                        this.livewire.on('mathQuill{{$eqc->choice}}', data => {
-                                                                            var question = new MathEditor('eq{{$eqc->choice}}', 0, '');
-                                                                            question.setLatex(data)
-                                                                        })
-                                                                    });
-                                                                </script>
-                                                            @endpush
+                                                        @endif
+                                                        @push('scripts')
                                                             <script>
-                                                                document.addEventListener('livewire:load', function () {
-                                                                    var questiona = new MathEditor('eqF{{$eqc->choice}}', 0, '');
-                                                                    questiona.setLatex('{!! str_replace('\\','\\\\',$eqc->equation) !!} ')
+                                                                document.addEventListener('DOMContentLoaded', () => {
+                                                                    this.livewire.on('mathQuill{{$eqc->choice}}', data => {
+                                                                        var question = new MathEditor('eq{{$eqc->choice}}', 0, '');
+                                                                        question.setLatex(data)
+                                                                    })
                                                                 });
                                                             </script>
-                                                        </div>
+                                                        @endpush
+                                                        <script>
+                                                            document.addEventListener('livewire:load', function () {
+                                                                var questiona = new MathEditor('eqF{{$eqc->choice}}', 0, '');
+                                                                questiona.setLatex('{!! str_replace('\\','\\\\',$eqc->equation) !!} ')
+                                                            });
+                                                        </script>
+                                                    </div>
                                                     @if($eqc->answer!='<br>')
                                                         {!! $eqc->answer  !!}
                                                     @endif
