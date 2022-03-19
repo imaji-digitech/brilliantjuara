@@ -56,25 +56,28 @@ class ExamUser extends Model
     public static function setDone($id)
     {
         $examUser = static::find($id);
-        if (Carbon::now() > $examUser->created_at->addMinutes($examUser->exam->time) and $examUser->status == 1) {
+        $examUser->update(['status' => 2]);
+        if (Carbon::now() > $examUser->created_at->addMinutes($examUser->exam->time)) {
             $examUser->update(['updated_at' => $examUser->created_at->addMinutes($examUser->exam->time)]);
         }
-        $examUser->update(['status' => 2]);
+
         $exam = ExamUser::whereUserId($examUser->user_id)->whereExamId($examUser->exam_id)->get();
-        $ranking = Ranking::whereUserId($examUser->user_id)->whereExamId($examUser->exam_id)->get();
-        if ($exam->count() == 1 and $ranking->count() == 0) {
-            $totalPoint = 0;
-            foreach ($examUser->examAnswers as $i => $eu) {
-                $answer = $eu->examQuest->answer == $eu->answer;
-                if ($answer) {
-                    $totalPoint += $eu->examQuest->examStep->score_right;
+        if ($examUser->exam->exam_type_id == 1) {
+            $ranking = Ranking::whereUserId($examUser->user_id)->whereExamId($examUser->exam_id)->get();
+            if ($exam->count() == 1 and $ranking->count() == 0) {
+                $totalPoint = 0;
+                foreach ($examUser->examAnswers as $i => $eu) {
+                    $answer = $eu->examQuest->answer == $eu->answer;
+                    if ($answer) {
+                        $totalPoint += $eu->examQuest->examStep->score_right;
+                    }
                 }
+                Ranking::create([
+                    'user_id' => $examUser->user_id,
+                    'exam_id' => $examUser->exam_id,
+                    'point' => $totalPoint
+                ]);
             }
-            Ranking::create([
-                'user_id' => $examUser->user_id,
-                'exam_id' => $examUser->exam_id,
-                'point' => $totalPoint
-            ]);
         }
     }
 
