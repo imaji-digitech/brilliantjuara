@@ -93,7 +93,8 @@
                                                     {{ $questActive->answer==$eqc->choice?'checked':'' }}>
                                                     {{ $alphabet[$eqc->choice] }}.
                                                 </td>
-                                                <td>
+                                                <td wire:click="changeAnswer({{$eqc->choice}})"
+                                                    {{ $questActive->answer==$eqc->choice?'checked':'' }}>
                                                     <div>
                                                         @if($eqc->equation!=null)
                                                             <div id="eq{{$eqc->choice}}"></div>
