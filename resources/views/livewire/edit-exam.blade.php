@@ -76,8 +76,8 @@
                                                 <td>
                                                     <div>
                                                         @if($eqc->equation!=null)
-                                                            <div id="eq{{$eqc->choice}}"></div>
-                                                            <div id="eqF{{$eqc->choice}}"></div>
+                                                            <div id="eq{{$eqc->choice}}" wire:ignore></div>
+                                                            <div id="eqF{{$eqc->choice}}" wire:ignore></div>
                                                         @endif
                                                         @push('scripts')
                                                             <script>
