@@ -88,9 +88,9 @@
                                         {{ $questActive->answer==$eqc->choice?'checked':'' }}>
                                     <label style="width: 100%">
                                         <table>
-                                            <tr wire:click="changeAnswer({{$eqc->choice}})"
-                                                {{ $questActive->answer==$eqc->choice?'checked':'' }}>
-                                                <td style="width: 20px; vertical-align: top">
+                                            <tr>
+                                                <td style="width: 30px" wire:click="changeAnswer({{$eqc->choice}})"
+                                                    {{ $questActive->answer==$eqc->choice?'checked':'' }}>
                                                     {{ $alphabet[$eqc->choice] }}.
                                                 </td>
                                                 <td>
@@ -116,12 +116,14 @@
                                                             });
                                                         </script>
                                                     </div>
+
                                                     @if($eqc->answer!='<br>')
                                                         {!! $eqc->answer  !!}
                                                     @endif
                                                 </td>
                                             </tr>
                                         </table>
+
                                     </label>
                                 </div>
                             @endforeach
