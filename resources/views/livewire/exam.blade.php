@@ -95,7 +95,8 @@
                                                 </td>
                                                 <td wire:click="changeAnswer({{$eqc->choice}})"
                                                     {{ $questActive->answer==$eqc->choice?'checked':'' }}>
-                                                    <div>
+                                                    <div wire:click="changeAnswer({{$eqc->choice}})"
+                                                        {{ $questActive->answer==$eqc->choice?'checked':'' }} >
                                                         @if($eqc->equation!=null)
                                                             <div id="eq{{$eqc->choice}}"></div>
                                                             <div id="eqF{{$eqc->choice}}"></div>
