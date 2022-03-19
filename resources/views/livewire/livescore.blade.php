@@ -10,6 +10,8 @@
                             <tr>
                                 <td>Rank</td>
                                 <td>Nama</td>
+                                <td>Asal</td>
+                                <td>Keterangan</td>
                                 @foreach($exam->examSteps as $es)
                                     <td>{{ $es->title }}</td>
                                 @endforeach
@@ -17,7 +19,6 @@
                             </tr>
                             </thead>
                             <tbody wire:poll.7000ms>
-
                             @foreach($ra as $index=>$r)
                                 <tr
                                     @if($index==0)
@@ -31,37 +32,12 @@
                                     @endif>
                                     <td>{{ $index+1 }}</td>
                                     <td>{{ $r->examUser->user->name }}</td>
-{{--                                    @php--}}
-{{--                                        $sekdinPoint=[];--}}
-{{--                    foreach ($r->examUser->examAnswers as $i => $eu) {--}}
-{{--                    $answer = $eu->examQuest->answer == $eu->answer;--}}
-{{--                    if (!isset($sekdinPoint[$eu->examQuest->exam_step_id])) {--}}
-{{--                        $sekdinPoint[$eu->examQuest->exam_step_id] = 0;--}}
-{{--                    }--}}
-{{--                    if ($eu->examQuest->examStep->type_exam == 2) {--}}
-{{--                        if (isset($sekdinPoint[$eu->examQuest->exam_step_id]) and $eu->answer!=0) {--}}
-{{--                            $sekdinPoint[$eu->examQuest->exam_step_id] += App\Models\ExamQuestChoice::whereChoice($eu->answer)->whereExamQuestId($eu->exam_quest_id)->first()->score;--}}
-{{--                        }--}}
-{{--                    } else {--}}
-{{--                        if ($answer) {--}}
-{{--                            if (isset($sekdinPoint[$eu->examQuest->exam_step_id])) {--}}
-{{--                                $sekdinPoint[$eu->examQuest->exam_step_id] += $eu->examQuest->examStep->score_right;--}}
-{{--                            }--}}
-{{--                        }--}}
-{{--                    }--}}
-{{--                    }--}}
-{{--                                    @endphp--}}
+                                    <td>{{ 'Prov. '.$r->examUser->user->provinsi.' - '.$r->examUser->user->city }}</td>
+                                    <td>{{ $r->examUser->status==1?'Pengerjaan':'Selesai' }}</td>
                                     @foreach($exam->examSteps as $es)
                                         <td>{{ $r->point[$es->id] }}</td>
                                     @endforeach
                                     <td>{{ $r->total }}</td>
-{{--                                        <td>--}}
-{{--                                            @if(auth()->user()->role==1)--}}
-{{--                                                <a href="{{ route('admin.user.exam.ranking.remove',$r->id) }}"--}}
-{{--                                                   onclick="return confirm('Are you sure you want to delete this item?');"--}}
-{{--                                                >Hapus</a>--}}
-{{--                                            @endif--}}
-{{--                                        </td>--}}
                                 </tr>
                             @endforeach
                             </tbody>

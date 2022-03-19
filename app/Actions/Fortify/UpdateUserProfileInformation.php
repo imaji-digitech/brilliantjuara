@@ -14,7 +14,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
      *
      * @param  mixed  $user
      * @param  array  $input
-     * @return void
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update($user, array $input)
     {
@@ -37,8 +37,10 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                 'email' => $input['email'],
                 'phone_number' => $input['phone_number'],
                 'city' => $input['city'],
+                'provinsi' => $input['provinsi'],
             ])->save();
         }
+        return redirect(route('admin.dashboard'));
     }
 
     /**
