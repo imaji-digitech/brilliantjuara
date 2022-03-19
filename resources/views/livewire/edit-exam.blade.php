@@ -74,10 +74,10 @@
                                                     {{ $alphabet[$eqc->choice] }}.
                                                 </td>
                                                 <td>
-                                                    <div>
+                                                    <div wire:ignore>
                                                         @if($eqc->equation!=null)
-                                                            <div id="eq{{$eqc->choice}}" wire:ignore></div>
-                                                            <div id="eqF{{$eqc->choice}}" wire:ignore></div>
+                                                            <div id="eq{{$eqc->choice}}"></div>
+                                                            <div id="eqF{{$eqc->choice}}"></div>
                                                         @endif
                                                         @push('scripts')
                                                             <script>
