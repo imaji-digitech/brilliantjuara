@@ -31,10 +31,10 @@ class Exam extends Component
         if ($this->questActive->examQuest->equation!=null){
             $this->emit('mathQuill', $this->questActive->examQuest->equation);
         }
-        foreach (ExamQuestChoice::whereExamQuestId($this->questActive->id)->get() as $eqc){
-            dd($eqc->equation);
+        foreach (ExamQuestChoice::whereExamQuestId($this->questActive->examQuest->id)->get() as $eqc){
+//            dd($eqc->equation);
             if($eqc->equation!=null) {
-                dd("asdasd");
+//                dd("asdasd");
                 $this->emit('mathQuill'. $eqc->choice, $eqc->equation);
             }
         }
