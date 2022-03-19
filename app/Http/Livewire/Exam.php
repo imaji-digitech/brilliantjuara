@@ -69,6 +69,14 @@ class Exam extends Component
         }
         $this->examUser->examAnswers->find($this->active)->update(['answer' => $choice]);
         $this->questActive = $this->examUser->examAnswers->find($this->active);
+        if ($this->questActive->examQuest->equation!=null){
+            $this->emit('mathQuill', $this->questActive->examQuest->equation);
+        }
+        foreach (ExamQuestChoice::whereExamQuestId($this->questActive->examQuest->id)->get() as $eqc){
+            if($eqc->equation!=null) {
+                $this->emit('mathQuill'. $eqc->choice, $eqc->equation);
+            }
+        }
     }
 
     public function render()
