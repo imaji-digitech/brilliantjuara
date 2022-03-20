@@ -65,7 +65,6 @@
 
                     }
                                             @endphp
-                                            {{ $r->examUser->status==1?'Pengerjaan':'Selesai' }}
                                             @if($r->examUser->status==2)
                                                 <h6 style="color: {{ ($graduate=="Lulus")?'#38a7b3':'#BC2C3D' }}">{{ $graduate }}</h6>
                                             @endif
