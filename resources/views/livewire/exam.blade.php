@@ -34,14 +34,16 @@
                             </td>
                             <td style="text-align: justify !important;vertical-align: top">
                                 <div>
-                                    <div id="question"></div>
+{{--                                    <div id="question"></div>--}}
                                     @if($this->questActive->examQuest->equation!=null)
                                         <div id="question">{{ $questActive->examQuest->equation }}</div>
+{{--                                        $questActive->examQuest->question--}}
                                         <script>
                                             document.addEventListener('livewire:load', function () {
                                                 Livewire.emit('mathQuill', 'question')
                                             });
                                         </script>
+                                    @endif
 {{--                                        <div id="first"></div>--}}
 {{--                                        <script>--}}
 {{--                                            document.addEventListener('livewire:load', function () {--}}
@@ -59,7 +61,7 @@
 {{--                                                })--}}
 {{--                                            });--}}
 {{--                                        </script>--}}
-                                    @endif
+
 
                                 </div>
                                 {!! $questActive->examQuest->question  !!}
