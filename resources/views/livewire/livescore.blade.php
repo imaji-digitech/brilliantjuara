@@ -46,7 +46,7 @@
                                         <td>
                                     @php
                                         $graduate="Lulus";
-                                            foreach($exam->examSteps as $es){
+                                            foreach($exam->examSteps as $index=>$es){
                 if ($index==0){
                 if ($r->point[$es->id] <65){
                     $graduate="Tidak Lulus";
