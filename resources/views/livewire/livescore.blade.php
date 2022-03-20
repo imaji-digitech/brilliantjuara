@@ -3,7 +3,7 @@
         <div class="card col-md-12">
             <div class="card-body">
                 <div class="row mb-4 mt-4">
-                    <h5>{{ $last->format('Y m d H:i:s') }}</h5>
+                    <h5>{{ $last->format('d-m-Y H:i:s') }}</h5>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>

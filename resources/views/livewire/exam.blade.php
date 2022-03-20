@@ -81,7 +81,7 @@
                                     <label style="width: 100%">
                                         <table>
                                             <tr>
-                                                <td style="width: 30px" wire:click="changeAnswer({{$eqc->choice}})"
+                                                <td style="width: 30px; vertical-align: top" wire:click="changeAnswer({{$eqc->choice}})"
                                                     {{ $questActive->answer==$eqc->choice?'checked':'' }}>
                                                     {{ $alphabet[$eqc->choice] }}.
                                                 </td>
