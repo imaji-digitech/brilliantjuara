@@ -10,7 +10,8 @@
                     @foreach($myClass as $mc)
                         @isset($mc['exam'])
                             @foreach($mc['exam'] as $exam)
-                                <a href="{{ route('admin.user.exam',$exam['exam']['slug']) }}" class="media">
+                                <a href="{{ route('admin.user.exam',$exam['exam']['slug']) }}" class="media"
+                                   style="margin-top: 0 !important;">
                                     <div class="activity-dot-primary"></div>
                                     <div class="media-body"><span>{{ $exam['exam']['title'] }}</span>
                                     </div>
