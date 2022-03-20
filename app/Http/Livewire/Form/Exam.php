@@ -59,8 +59,8 @@ class Exam extends Component
                 'exam_start' => $data->exam_start
             ];
             $this->examStart = [
-                'date' => $data->exam_start->format('Y-m-d'),
-                'time' => $data->exam_start->format('h:i'),
+                'date' => Carbon::parse($data->exam_start)->format('Y-m-d'),
+                'time' => Carbon::parse($data->exam_start)->format('h:i'),
             ];
         }
     }
