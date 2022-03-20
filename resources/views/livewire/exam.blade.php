@@ -59,7 +59,7 @@
 {{--                                                })--}}
 {{--                                            });--}}
 {{--                                        </script>--}}
-                                    @endpush
+                                    @endif
 
                                 </div>
                                 {!! $questActive->examQuest->question  !!}
