@@ -20,13 +20,13 @@
                     @endforeach
                 </div>
                 <br>
-                <h4>Bimbingan Belajar</h4>
+                <h4>Program Belajar</h4>
                 <div class="activity-timeline">
                     @foreach($myClass as $mc)
                         @isset($mc['course'])
                             @foreach($mc['course'] as $course)
                                 <a href="{{ route('admin.user.course',$course['course']['slug']) }}" class="media"
-                                   style="margin-top: 0">
+                                   style="margin-top: 0 !important;">
                                     <div class="activity-dot-primary"></div>
                                     <div class="media-body">
                                         <span>{{ $course['course']['title'] }}</span>

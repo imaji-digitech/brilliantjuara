@@ -1,5 +1,5 @@
 <div>
-    @if($examUserCheck->count()==0)
+    @if($examUserCheck->count()==0 or $exam->exam_start<=\Carbon\Carbon::now())
         <button wire:click="start()" class="btn btn-primary">
             Mulai TO
         </button>
