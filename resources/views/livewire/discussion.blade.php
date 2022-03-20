@@ -114,7 +114,6 @@
                 <div class="col-md-4">
                     <div class="card" style="height: 285px;">
                         <div class="card-body" style="padding: 10px;text-align: center;">
-                            <br>
                             <div>
                                 <h5>Total nilai : </h5>
                                 @foreach($examUser->exam->ExamSteps as $es)
