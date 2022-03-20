@@ -19,26 +19,34 @@
                             </tr>
                             </thead>
                             <tbody wire:poll.7000ms>
-                            @foreach($ra as $index=>$r)
-                                <tr
-                                    @if($index==0)
-                                    style="background-color:  #ffd700;"
-                                    @elseif($index==1)
-                                    style="background-color:  #c0c0c0"
-                                    @elseif($index==2)
-                                    style="background-color:  #cd7f32"
-                                    @else
-                                    style="background-color:  white"
-                                    @endif>
-                                    <td>{{ $index+1 }}</td>
-                                    <td>{{ $r->examUser->user->name }}</td>
-                                    <td>{{ 'Prov. '.$r->examUser->user->provinsi.' - '.$r->examUser->user->city }}</td>
-                                    <td>{{ $r->examUser->status==1?'Pengerjaan':'Selesai' }}</td>
-                                    @foreach($exam->examSteps as $es)
-                                        <td>{{ $r->point[$es->id] }}</td>
-                                    @endforeach
-                                    <td>{{ $r->total }}</td>
-                                </tr>
+                            @php
+                                $index=0
+                            @endphp
+                            @foreach($ra as $r)
+                                @if(auth()->user()->role!=1)
+                                    <tr
+                                        @if($index==0)
+                                        style="background-color:  #ffd700;"
+                                        @elseif($index==1)
+                                        style="background-color:  #c0c0c0"
+                                        @elseif($index==2)
+                                        style="background-color:  #cd7f32"
+                                        @else
+                                        style="background-color:  white"
+                                        @endif>
+                                        <td>{{ $index+1 }}</td>
+                                        <td>{{ $r->examUser->user->name }}</td>
+                                        <td>{{ 'Prov. '.$r->examUser->user->provinsi.' - '.$r->examUser->user->city }}</td>
+                                        <td>{{ $r->examUser->status==1?'Pengerjaan':'Selesai' }}</td>
+                                        @foreach($exam->examSteps as $es)
+                                            <td>{{ $r->point[$es->id] }}</td>
+                                        @endforeach
+                                        <td>{{ $r->total }}</td>
+                                    </tr>
+                                    @php
+                                        $index+=1
+                                    @endphp
+                                @endif
                             @endforeach
                             </tbody>
                         </table>

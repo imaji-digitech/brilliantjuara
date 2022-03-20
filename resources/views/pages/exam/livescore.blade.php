@@ -1,6 +1,6 @@
 <x-admin>
     <x-slot name="title">
-        Livescore {{ \App\Models\Exam::getExam($exam)->title }}
+        Ranking {{ \App\Models\Exam::getExam($exam)->title }}
     </x-slot>
     <div>
         <div class="container-fluid">
