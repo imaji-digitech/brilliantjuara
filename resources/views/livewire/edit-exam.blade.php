@@ -65,7 +65,7 @@
                                                 </td>
                                                 <td>
                                                     <div>
-                                                        {!! $eqc->equation !!}
+{{--                                                        {!! $eqc->equation !!}--}}
                                                         @if($eqc->equation!=null)
                                                             <div id="eq{{$eqc->choice}}">{!! $eqc->equation !!}</div>
                                                             <script>
