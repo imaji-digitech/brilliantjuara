@@ -120,11 +120,11 @@
                                 @foreach($examUser->exam->ExamSteps as $es)
                                     <h4 style="color: #38a7b3"> {{ $es->title.' : '.empty_point($sekdinPoint[$es->id]) }} </h4>
                                 @endforeach
-                                <h5>Passing Grade :</h5>
+                                <h4>Passing Grade :</h4>
                                 {{--                                @foreach($examUser->exam->ExamSteps as $es)--}}
-                                <h4 style="color: #38a7b3"> TWK : 65</h4>
-                                <h4 style="color: #38a7b3"> TIU : 80</h4>
-                                <h4 style="color: #38a7b3"> TWK : 156</h4>
+                                <h5 style="color: #38a7b3"> TWK : 65</h5>
+                                <h5 style="color: #38a7b3"> TIU : 80</h5>
+                                <h5 style="color: #38a7b3"> TWK : 156</h5>
                                 {{--                                @endforeach--}}
 
                             </div>
