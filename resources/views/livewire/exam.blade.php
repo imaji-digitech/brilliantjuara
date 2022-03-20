@@ -28,7 +28,7 @@
                 <br>
                 @isset( $questActive->examQuest->question)
                     <table style="width: 100%">
-                        <tr>
+                        <tr style="vertical-align: top">
                             <td style="width: 35px; vertical-align: top">
                                 {{$number+1}}.
                             </td>
