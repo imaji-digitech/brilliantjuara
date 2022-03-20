@@ -23,7 +23,7 @@
                                 $index=0
                             @endphp
                             @foreach($ra as $r)
-                                @if(auth()->user()->role!=1)
+                                @if($r->examUser->user->role!=1)
                                     <tr
                                         @if($index==0)
                                         style="background-color:  #ffd700;"
