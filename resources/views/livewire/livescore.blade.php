@@ -16,6 +16,7 @@
                                     <td>{{ $es->title }}</td>
                                 @endforeach
                                 <td>Total</td>
+                                <td>Keterangan</td>
                             </tr>
                             </thead>
                             <tbody wire:poll.7000ms>
@@ -42,9 +43,33 @@
                                             <td>{{ $r->point[$es->id] }}</td>
                                         @endforeach
                                         <td>{{ $r->total }}</td>
-                                    </tr>
+                                        <td>
                                     @php
-                                        $index+=1
+                                        $graduate="Lulus";
+                                            foreach($exam->examSteps as $es){
+                if ($index==0){
+                if ($r->point[$es->id] <65){
+                    $graduate="Tidak Lulus";
+                }
+                }
+                if ($index==1){
+                if ($r->point[$es->id] <80){
+                    $graduate="Tidak Lulus";
+                }
+                }
+                if ($index==2){
+                if ($r->point[$es->id] <156){
+                    $graduate="Tidak Lulus";
+                }
+                }
+
+            }
+                                            @endphp
+                                            <h6 style="color: {{ ($graduate=="Lulus")?'#38a7b3':'#BC2C3D' }}">{{ $graduate }}</h6>
+                                                </td>
+                                            </tr>
+                                            @php
+                                                $index+=1
                                     @endphp
                                 @endif
                             @endforeach
