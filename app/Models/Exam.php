@@ -28,11 +28,12 @@ class Exam extends Model
      * @var string
      */
     protected $keyType = 'integer';
+    protected $dates=['exam_start'];
 
     /**
      * @var array
      */
-    protected $fillable = ['room_id', 'title', 'price', 'slug', 'time', 'created_at', 'updated_at', 'status_discussion', 'status_multiple_attempt', 'status_view_score','exam_type_id'];
+    protected $fillable = ['room_id', 'title', 'price', 'slug', 'time', 'created_at', 'updated_at', 'status_discussion', 'status_multiple_attempt', 'status_view_score','exam_type_id','exam_start'];
 
     public static function search($query, $dataId)
     {

@@ -37,14 +37,14 @@ class EditExam extends Component
         $this->active = $this->questActive['id'];
         $this->number = $number;
         if ($this->questActive['equation']!=null){
-            $this->emit('mathQuill', $this->questActive['equation']);
+            $this->emit('mathQuill', 'question');
         }
         if ($this->questActive['discussion_equation']!=null) {
-            $this->emit('mathQuillDiscussion', $this->questActive['discussion_equation']);
+            $this->emit('mathQuill', 'discussion');
         }
         foreach (\App\Models\ExamQuestChoice::whereExamQuestId($this->questActive['id'])->get() as $eqc){
             if($eqc->equation!=null) {
-                $this->emit('mathQuill'. $eqc->choice, $eqc->equation);
+                $this->emit('mathQuill', 'eq'.$eqc->choice);
             }
         }
     }

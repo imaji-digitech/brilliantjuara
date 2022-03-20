@@ -150,26 +150,14 @@
                             </td>
                             <td style="text-align: justify !important;vertical-align: top">
                                 <div>
-                                    @if($this->questActive->examQuest->equation!=null)
-                                        <div id="question"></div>
-                                        <div id="first"></div>
-                                    @endif
-                                    <script>
-                                        document.addEventListener('livewire:load', function () {
-                                            var questiona = new MathEditor('first', 0, '');
-                                            questiona.setLatex('{{ str_replace('\\','\\\\',$questActive['equation']) }}')
-                                        });
-                                    </script>
-                                    @push('scripts')
+                                    @if($questActive->examQuest->equation!=null)
+                                        <div id="question">{{ $questActive->examQuest->equation }}</div>
                                         <script>
-                                            document.addEventListener('DOMContentLoaded', () => {
-                                                this.livewire.on('mathQuill', data => {
-                                                    var question = new MathEditor('question', 0, '');
-                                                    question.setLatex(data)
-                                                })
+                                            document.addEventListener('livewire:load', function () {
+                                                Livewire.emit('mathQuill','question')
                                             });
                                         </script>
-                                    @endpush
+                                    @endif
                                 </div>
                                 {!! $questActive->examQuest->question  !!}
                             </td>
@@ -201,21 +189,26 @@
 @else
                                         text-option
 @endif" style="width: 100%">
-                                        {{--                                        <label  style="width: 100%"--}}
-                                        {{--                                                wire:click="changeAnswer({{$eqc->choice}})">--}}
-                                        {{--                                            <div class="row">--}}
-                                        {{--                                                <div class="col-1" style="width: 40px">{{ $alphabet[$eqc->choice] }}. </div>--}}
-                                        {{--                                                <div class="col-11" >--}}
-                                        {{--                                                    {!! $eqc->answer  !!}--}}
-                                        {{--                                                </div>--}}
-                                        {{--                                            </div>--}}
                                         <table>
                                             <tr>
-                                                <td style="width: 30px">
+                                                <td style="text-align: justify !important;vertical-align: top">
                                                     {{ $alphabet[$eqc->choice] }}.
                                                 </td>
                                                 <td>
-                                                    {!! $eqc->answer  !!}
+                                                    <div>
+                                                        @if($eqc->equation!=null)
+                                                            <div id="eq{{$eqc->choice}}">{!! $eqc->equation !!}</div>
+                                                            <script>
+                                                                document.addEventListener('livewire:load', function () {
+                                                                    Livewire.emit('mathQuill','eq{{$eqc->choice}}')
+                                                                });
+                                                            </script>
+                                                        @endif
+                                                    </div>
+
+                                                    @if($eqc->answer!='<br>')
+                                                        {!! $eqc->answer  !!}
+                                                    @endif
                                                 </td>
                                             </tr>
                                         </table>

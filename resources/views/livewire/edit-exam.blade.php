@@ -35,26 +35,16 @@
                                 {{$number+1}}.
                             </td>
                             <td style="text-align: justify !important;vertical-align: top">
+                                @if($questActive['equation']!=null)
                                 <div>
-                                    <div id="question"></div>
-                                    <div id="first"></div>
+                                    <div id="question">{{ $questActive['equation'] }}</div>
                                     <script>
                                         document.addEventListener('livewire:load', function () {
-                                            var questiona = new MathEditor('first', 0, '');
-                                            questiona.setLatex('{!! str_replace('\\','\\\\',$questActive['equation']) !!}')
+                                            Livewire.emit('mathQuill','question')
                                         });
                                     </script>
-                                    @push('scripts')
-                                        <script>
-                                            document.addEventListener('DOMContentLoaded', () => {
-                                                this.livewire.on('mathQuill', data => {
-                                                    var question = new MathEditor('question', 0, '');
-                                                    question.setLatex(data)
-                                                })
-                                            });
-                                        </script>
-                                    @endpush
                                 </div>
+                                @endif
                                 {!! $questActive['question']  !!}
                             </td>
                         </tr>
@@ -70,31 +60,19 @@
                                     <label style="width: 100%">
                                         <table>
                                             <tr>
-                                                <td style="width: 30px">
+                                                <td style="text-align: justify !important;vertical-align: top">
                                                     {{ $alphabet[$eqc->choice] }}.
                                                 </td>
                                                 <td>
-                                                    <div wire:ignore>
+                                                    <div>
                                                         @if($eqc->equation!=null)
-                                                            <div id="eq{{$eqc->choice}}"></div>
-                                                            <div id="eqF{{$eqc->choice}}"></div>
-                                                        @endif
-                                                        @push('scripts')
+                                                            <div id="eq{{$eqc->choice}}">{!! $eqc->equation !!}</div>
                                                             <script>
-                                                                document.addEventListener('DOMContentLoaded', () => {
-                                                                    this.livewire.on('mathQuill{{$eqc->choice}}', data => {
-                                                                        var question = new MathEditor('eq{{$eqc->choice}}', 0, '');
-                                                                        question.setLatex(data)
-                                                                    })
+                                                                document.addEventListener('livewire:load', function () {
+                                                                    Livewire.emit('mathQuill','eq{{$eqc->choice}}')
                                                                 });
                                                             </script>
-                                                        @endpush
-                                                        <script>
-                                                            document.addEventListener('livewire:load', function () {
-                                                                var questiona = new MathEditor('eqF{{$eqc->choice}}', 0, '');
-                                                                questiona.setLatex('{!! str_replace('\\','\\\\',$eqc->equation) !!} ')
-                                                            });
-                                                        </script>
+                                                        @endif
                                                     </div>
 
                                                     @if($eqc->answer!='<br>')
@@ -119,26 +97,12 @@
                                 <br> <br>
                                 <div style="text-align: justify !important;">
                                     <div>
-                                        <div id="discussion"></div>
-                                        @if($questActive['discussion_equation']!=null)
-                                            <div id="first_discussion"></div>
-                                            <script>
-                                                document.addEventListener('livewire:load', function () {
-                                                    var questiona = new MathEditor('first_discussion', 0, '');
-                                                    questiona.setLatex('{{ str_replace('\\','\\\\',$questActive['discussion_equation']) }}')
-                                                });
-                                            </script>
-                                        @endif
-                                        @push('scripts')
-                                            <script>
-                                                document.addEventListener('DOMContentLoaded', () => {
-                                                    this.livewire.on('mathQuillDiscussion', data => {
-                                                        var question = new MathEditor('discussion', 0, '');
-                                                        question.setLatex(data)
-                                                    })
-                                                });
-                                            </script>
-                                        @endpush
+                                        <div id="discussion">{{ $questActive['discussion_equation'] }}</div>
+                                        <script>
+                                            document.addEventListener('livewire:load', function () {
+                                                Livewire.emit('mathQuill','discussion')
+                                            });
+                                        </script>
                                     </div>
                                     {!! $questActive['discussion']  !!}
                                 </div>

@@ -27,27 +27,31 @@ class ExamController extends Controller
     public function start($slug)
     {
         $exam = Exam::getExam($slug);
-        if ($exam->status_multiple_attempt != 1) {
-            if (ExamUser::whereUserId(auth()->id())->whereExamId($exam->id)->first() != null) {
-                return redirect(route('admin.user.exam', $slug));
-            }
-        }
-        $examUser = ExamUser::create(['user_id' => auth()->id(), 'exam_id' => $exam->id]);
-//        dd(ExamUser::whereUserId(auth()->id())->whereExamId($exam->id)->get()->count());
-        if (ExamUser::whereUserId(auth()->id())->whereExamId($exam->id)->get()->count() == 1) {
-            RankingSekdin::create(['exam_user_id'=>$examUser->id]);
-        }
 
-        foreach ($exam->examSteps as $es) {
-            foreach ($es->examQuests as $eq) {
-                ExamAnswer::create([
-                    'exam_user_id' => $examUser->id,
-                    'exam_quest_id' => $eq->id,
-                    'answer' => 0
-                ]);
+        if ($exam->exam_start==null or $exam->exam_start<=Carbon::now()){
+            if ($exam->status_multiple_attempt != 1) {
+                if (ExamUser::whereUserId(auth()->id())->whereExamId($exam->id)->first() != null) {
+                    return redirect(route('admin.user.exam', $slug));
+                }
             }
+
+            $examUser = ExamUser::create(['user_id' => auth()->id(), 'exam_id' => $exam->id]);
+//        dd(ExamUser::whereUserId(auth()->id())->whereExamId($exam->id)->get()->count());
+            if (ExamUser::whereUserId(auth()->id())->whereExamId($exam->id)->get()->count() == 1 and $exam->exam_type_id==2) {
+                RankingSekdin::create(['exam_user_id'=>$examUser->id]);
+            }
+
+            foreach ($exam->examSteps as $es) {
+                foreach ($es->examQuests as $eq) {
+                    ExamAnswer::create([
+                        'exam_user_id' => $examUser->id,
+                        'exam_quest_id' => $eq->id,
+                        'answer' => 0
+                    ]);
+                }
+            }
+            return redirect(route('admin.user.exam.exam', [$slug, $examUser->id]));
         }
-        return redirect(route('admin.user.exam.exam', [$slug, $examUser->id]));
     }
 
     public function exam($slug, $id)

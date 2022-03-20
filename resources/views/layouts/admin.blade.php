@@ -71,15 +71,17 @@
             .mobile-cashier {
                 width: 33%
             }
-            .desktop-only{
+
+            .desktop-only {
                 display: none;
             }
         }
 
-        @media (min-width:800px) {
-            .mobile-only{
+        @media (min-width: 800px) {
+            .mobile-only {
                 display: none;
             }
+
             .product-list {
                 overflow-y: scroll;
                 height: 800px;
@@ -158,8 +160,12 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 {{--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>--}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 <!-- latest jquery-->
 {{--<script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>--}}
 
@@ -253,12 +259,19 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-        window.addEventListener("load",function() {
-            setTimeout(function(){
+        window.addEventListener("load", function () {
+            setTimeout(function () {
                 // This hides the address bar:
                 window.scrollTo(0, 1);
             }, 0);
         });
+
+        this.livewire.on('mathQuill', data => {
+            var MQ1 = MathQuill.getInterface(2);
+            var problemSpan = document.getElementById(data);
+            MQ1.StaticMath(problemSpan)
+        })
+
         this.livewire.on('swal:modal', data => {
             SwalModal(data.icon, data.title, data.text)
         })
@@ -274,9 +287,9 @@
             }, 2000);
         })
         this.livewire.on('redirect:new', data => {
-            let a= document.createElement('a');
-            a.target= '_blank';
-            a.href= data;
+            let a = document.createElement('a');
+            a.target = '_blank';
+            a.href = data;
             a.click();
         })
         this.livewire.on('notify', data => {

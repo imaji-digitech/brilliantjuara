@@ -4,7 +4,7 @@
             Mulai TO
         </button>
     @else
-        @if($exam->status_multiple_attempt==1)
+        @if($exam->status_multiple_attempt==1 or auth()->user()->role==1)
             <button wire:click="start()" class="btn btn-primary">
                 Mulai kembali TO
             </button>
@@ -17,12 +17,16 @@
             @endif
         @endif
     @endif
-    @if(auth()->user()->role==1)
+    @if(auth()->user()->role==1 or $exam->status_view_score==1)
+        @if($exam->exam_type_id==2)
             <a href="{{ route('admin.user.exam.livescore',$exam->slug) }}" class="btn btn-primary">
-                Livescore
+                Ranking
             </a>
+        @endif
+        @if($exam->exam_type_id==1)
+            <a href="{{ route('admin.user.exam.ranking',$exam->slug) }}" class="btn btn-primary">
+                Ranking
+            </a>
+        @endif
     @endif
-    <a href="{{ route('admin.user.exam.ranking',$exam->slug) }}" class="btn btn-primary">
-        Ranking
-    </a>
 </div>

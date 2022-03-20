@@ -104,8 +104,19 @@ class Discussion extends Component
         $this->questActive = $this->examUser->examAnswers[$number];
         $this->active = $this->questActive->id;
         $this->number = $number;
+//        if ($this->questActive->examQuest->equation != null) {
+//            $this->emit('mathQuill', $this->questActive->examQuest->equation);
+//        }
         if ($this->questActive->examQuest->equation != null) {
-            $this->emit('mathQuill', $this->questActive->examQuest->equation);
+            $this->emit('mathQuill', 'question');
+        }
+        if ($this->questActive->examQuest->discussion_equation != null) {
+            $this->emit('mathQuill', 'discussion');
+        }
+        foreach (ExamQuestChoice::whereExamQuestId($this->questActive->examQuest->id)->get() as $eqc) {
+            if ($eqc->equation != null) {
+                $this->emit('mathQuill', 'eq' . $eqc->choice);
+            }
         }
 
 

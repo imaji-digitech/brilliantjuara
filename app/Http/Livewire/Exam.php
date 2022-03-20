@@ -28,18 +28,20 @@ class Exam extends Component
         $this->questActive = $this->examUser->examAnswers[$number];
         $this->active = $this->questActive->id;
         $this->number = $number;
-        if ($this->questActive->examQuest->equation!=null){
-            $this->emit('mathQuill', $this->questActive->examQuest->equation);
+        if ($this->questActive->examQuest->equation != null) {
+            $this->emit('mathQuill', 'question');
         }
-        foreach (ExamQuestChoice::whereExamQuestId($this->questActive->examQuest->id)->get() as $eqc){
-            if($eqc->equation!=null) {
-                $this->emit('mathQuill'. $eqc->choice, $eqc->equation);
+        foreach (ExamQuestChoice::whereExamQuestId($this->questActive->examQuest->id)->get() as $eqc) {
+            if ($eqc->equation != null) {
+                $this->emit('mathQuill', 'eq' . $eqc->choice);
             }
         }
     }
-    public function report($id){
+
+    public function report($id)
+    {
         ReportQuest::create([
-            'user_id'=>auth()->id(), 'exam_quest_id'=>$id
+            'user_id' => auth()->id(), 'exam_quest_id' => $id
         ]);
         $this->emit('notify', [
             'type' => 'success',
@@ -69,12 +71,12 @@ class Exam extends Component
         }
         $this->examUser->examAnswers->find($this->active)->update(['answer' => $choice]);
         $this->questActive = $this->examUser->examAnswers->find($this->active);
-        if ($this->questActive->examQuest->equation!=null){
-            $this->emit('mathQuill', $this->questActive->examQuest->equation);
+        if ($this->questActive->examQuest->equation != null) {
+            $this->emit('mathQuill', 'question');
         }
-        foreach (ExamQuestChoice::whereExamQuestId($this->questActive->examQuest->id)->get() as $eqc){
-            if($eqc->equation!=null) {
-                $this->emit('mathQuill'. $eqc->choice, $eqc->equation);
+        foreach (ExamQuestChoice::whereExamQuestId($this->questActive->examQuest->id)->get() as $eqc) {
+            if ($eqc->equation != null) {
+                $this->emit('mathQuill', 'eq' . $eqc->choice);
             }
         }
     }

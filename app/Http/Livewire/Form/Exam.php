@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Form;
 
+use Carbon\Carbon;
 use Livewire\Component;
 
 class Exam extends Component
@@ -13,6 +14,7 @@ class Exam extends Component
     public $room;
     public $optionStatus;
     public $optionExamType;
+    public $examStart;
 
     public function mount()
     {
@@ -35,8 +37,14 @@ class Exam extends Component
             'status_discussion' => 2,
             'status_multiple_attempt' => 2,
             'status_view_score' => 2,
-            'exam_type_id' => 1
+            'exam_type_id' => 1,
+            'exam_start' => Carbon::now()->format('Y-m-d h:i'),
         ];
+        $this->examStart = [
+            'date' => Carbon::now()->format('Y-m-d'),
+            'time' => Carbon::now()->format('h:i'),
+        ];
+//        dd($this->data);
         if ($this->dataId != null) {
             $data = \App\Models\Exam::find($this->dataId);
             $this->data = [
@@ -47,7 +55,12 @@ class Exam extends Component
                 'status_discussion' => $data->status_discussion,
                 'status_multiple_attempt' => $data->status_multiple_attempt,
                 'status_view_score' => $data->status_view_score,
-                'exam_type_id' => $data->exam_type_id
+                'exam_type_id' => $data->exam_type_id,
+                'exam_start' => $data->exam_start
+            ];
+            $this->examStart = [
+                'date' => $data->exam_start->format('Y-m-d'),
+                'time' => $data->exam_start->format('h:i'),
             ];
         }
     }
@@ -55,7 +68,9 @@ class Exam extends Component
     public function create()
     {
         $this->validate();
+        $this->data['exam_start'] = $this->examStart['date'] . ' ' . $this->examStart['time'];
         $this->data['slug'] = generateRandomString(20);
+
         \App\Models\Exam::create($this->data);
         $this->emit('notify', [
             'type' => 'success',
@@ -67,6 +82,7 @@ class Exam extends Component
     public function update()
     {
         $this->validate();
+        $this->data['exam_start'] = $this->examStart['date'] . ' ' . $this->examStart['time'];
         \App\Models\Exam::find($this->dataId)->update($this->data);
         $this->emit('notify', [
             'type' => 'success',
