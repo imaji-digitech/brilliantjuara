@@ -55,16 +55,15 @@
         <div class="col-md-12">
             <div class="row">
 
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="card" style="height: 285px">
                         <div class="card-body" style="padding: 10px;">
-                            <br><br>
+                            <br><br><br>
                             <div class="text-center">
                                 {{--                                <h6 style="color: #38a7b3">Benar : {{ $rightAnswer }}</h6>--}}
                                 {{--                                <h6 style="color: #faa41b">Salah : {{ $wrongAnswer }}</h6>--}}
                                 {{--                                <h6 style="color: #BC2C3D">Kosong : {{ $blankAnswer }}</h6>--}}
                             </div>
-                            <br>
                             <div style="text-align: left">
                                 <h6 style="color: #38a7b3">Mulai : {{ $examUser->created_at->format('d-m-Y H:i') }}</h6>
                                 <h6 style="color: #faa41b">Selesai
@@ -79,19 +78,55 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
+                    <div class="card" style="height: 285px">
+                        <div class="card-body" style="padding: 10px;text-align: center;">
+                            <br><br>
+                            <h4>Skor Akhir</h4>
+                            <h5>{{ array_sum($sekdinPoint) }}</h5>
+                            <h6>Dari 301</h6>
+                            @php
+                                $graduate="Lulus";
+                                    foreach($examUser->exam->ExamSteps as $index=>$es){
+        if ($index==0){
+        if ($sekdinPoint[$es->id] <65){
+            $graduate="Tidak Lulus";
+        }
+        }
+        if ($index==1){
+        if ($sekdinPoint[$es->id] <80){
+            $graduate="Tidak Lulus";
+        }
+        }
+        if ($index==2){
+        if ($sekdinPoint[$es->id] <156){
+            $graduate="Tidak Lulus";
+        }
+        }
+
+    }
+                            @endphp
+                            <h5>Keterangan :</h5>
+                            <h4 style="color: {{ ($graduate=="Lulus")?'#38a7b3':'#BC2C3D' }}">{{ $graduate }}</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
                     <div class="card" style="height: 285px;">
                         <div class="card-body" style="padding: 10px;text-align: center;">
+                            <br>
                             <div>
-                                <br><br><br>
                                 <h5>Total nilai : </h5>
                                 @foreach($examUser->exam->ExamSteps as $es)
                                     <h4 style="color: #38a7b3"> {{ $es->title.' : '.empty_point($sekdinPoint[$es->id]) }} </h4>
                                 @endforeach
-                                {{--                            <h5>Dari :</h5>--}}
-                                {{--                            <h4 style="color: #faa41b">{{ $totalHighValue }}</h4>--}}
-                                {{--                                <h5>Keterangan :</h5>--}}
-                                {{--                                <h4 style="color: {{ ($graduate=="Lulus")?'#38a7b3':'#BC2C3D' }}">{{ $graduate }}</h4>--}}
+                                <h5>Passing Grade :</h5>
+                                {{--                                @foreach($examUser->exam->ExamSteps as $es)--}}
+                                <h4 style="color: #38a7b3"> TWK : 65</h4>
+                                <h4 style="color: #38a7b3"> TIU : 80</h4>
+                                <h4 style="color: #38a7b3"> TWK : 156</h4>
+                                {{--                                @endforeach--}}
+
                             </div>
                         </div>
                     </div>
@@ -154,7 +189,7 @@
                                         <div id="question">{{ $questActive->examQuest->equation }}</div>
                                         <script>
                                             document.addEventListener('livewire:load', function () {
-                                                Livewire.emit('mathQuill','question')
+                                                Livewire.emit('mathQuill', 'question')
                                             });
                                         </script>
                                     @endif
@@ -200,7 +235,7 @@
                                                             <div id="eq{{$eqc->choice}}">{!! $eqc->equation !!}</div>
                                                             <script>
                                                                 document.addEventListener('livewire:load', function () {
-                                                                    Livewire.emit('mathQuill','eq{{$eqc->choice}}')
+                                                                    Livewire.emit('mathQuill', 'eq{{$eqc->choice}}')
                                                                 });
                                                             </script>
                                                         @endif
