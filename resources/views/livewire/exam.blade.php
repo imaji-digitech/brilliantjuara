@@ -82,7 +82,7 @@
                                                     <div wire:click="changeAnswer({{$eqc->choice}})"
                                                         {{ $questActive->answer==$eqc->choice?'checked':'' }} >
                                                         @if($eqc->equation!=null)
-                                                            <div id="eq{{$eqc->choice}}">{!! $eqc->equation !!}</div>
+                                                            <div id="eq{{$eqc->choice}}">{{$eqc->equation}}</div>
                                                             <script>
                                                                 document.addEventListener('livewire:load', function () {
                                                                     Livewire.emit('mathQuill', 'eq{{$eqc->choice}}')
