@@ -46,18 +46,18 @@
                                         <td>
                                     @php
                                         $graduate="Lulus";
-                                            foreach($exam->examSteps as $index=>$es){
-                if ($index==0){
+                                            foreach($exam->examSteps as $i=>$es){
+                if ($i==0){
                 if ($r->point[$es->id] <65){
                     $graduate="Tidak Lulus";
                 }
                 }
-                if ($index==1){
+                if ($i==1){
                 if ($r->point[$es->id] <80){
                     $graduate="Tidak Lulus";
                 }
                 }
-                if ($index==2){
+                if ($i==2){
                 if ($r->point[$es->id] <156){
                     $graduate="Tidak Lulus";
                 }
