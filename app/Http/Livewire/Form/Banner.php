@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Form;
 
 use App\Models\PublicBanner;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
@@ -18,10 +19,8 @@ class Banner extends Component
     public $action;
     public $thumbnail;
     public $roomId;
-
     public function mount()
     {
-
         $this->data = [
             'title' => '',
             'thumbnail' => '',

@@ -123,7 +123,7 @@
                                 {{--                                @foreach($examUser->exam->ExamSteps as $es)--}}
                                 <h5 style="color: #38a7b3"> TWK : 65</h5>
                                 <h5 style="color: #38a7b3"> TIU : 80</h5>
-                                <h5 style="color: #38a7b3"> TWK : 156</h5>
+                                <h5 style="color: #38a7b3"> TKP : 156</h5>
                                 {{--                                @endforeach--}}
 
                             </div>

@@ -22,6 +22,9 @@
             <th>
                 Hasil TKP
             </th>
+            <th>
+                Total
+            </th>
             <th>aksi</th>
         </tr>
     </x-slot>
@@ -69,6 +72,7 @@
                 @foreach($exam->exam->examSteps as $a)
                     <td>{{ $sekdinPoint[$a->id] }}</td>
                 @endforeach
+                <td>{{ array_sum($sekdinPoint) }}</td>
                 <td>
                     @if (\Carbon\Carbon::now()<$exam->created_at->addMinutes($exam->exam->time) and $exam->status==1 )
                         {{--                    @if($exam->status==1)--}}

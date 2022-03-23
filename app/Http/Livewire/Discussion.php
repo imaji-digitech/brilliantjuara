@@ -55,7 +55,7 @@ class Discussion extends Component
                 $this->wrongAnswer += 1;
             }
         }
-        if ($this->totalHighValue * 0.8 < $this->totalPoint) {
+        if ($this->totalHighValue * 0.52 < $this->totalPoint) {
             $this->graduate = "Lulus";
         } else {
             $this->graduate = "Tidak lulus";

@@ -73,7 +73,7 @@
                         <div class="mb-3 m-t-15 custom-radio-ml">
                             @php($alphabet=['','A','B','C','D','E'])
                             @foreach($questActive->examQuest->examQuestChoices as $eqc)
-                                <div class="form-check radio radio-primary">
+                                <div class="form-check radio radio-primary" wire:click="changeAnswer({{$eqc->choice}})">
                                     <input class="form-check-input"
                                            type="radio"
                                            wire:click="changeAnswer({{$eqc->choice}})"
