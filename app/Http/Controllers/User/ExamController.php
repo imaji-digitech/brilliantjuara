@@ -51,6 +51,8 @@ class ExamController extends Controller
                 }
             }
             return redirect(route('admin.user.exam.exam', [$slug, $examUser->id]));
+        }else{
+            return redirect()->back();
         }
     }
 
