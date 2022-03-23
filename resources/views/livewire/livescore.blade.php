@@ -4,8 +4,9 @@
             <div class="card-body">
                 <div class="row mb-4 mt-4">
                     <div>
-                        <h5 class="text-primary" style="float: left">{{ $last->format('d-m-Y H:i:s') }}</h5>
-                        <h5 class="text-primary" style="float: right" wire:click="score()"><i class="fa fa-refresh"> Fresh</i></h5>
+                        <button class=" text-primary" wire:click="score()"><i class="fa fa-refresh"> Fresh</i></button>
+                        <br><br>
+                        <h5 class="text-primary">{{ $last->format('d-m-Y H:i:s') }}</h5>
                     </div>
 
                     <div class="table-responsive">
