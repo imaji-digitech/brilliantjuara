@@ -19,7 +19,7 @@
                                 <td>Keterangan</td>
                             </tr>
                             </thead>
-                            <tbody wire:poll.7000ms>
+                            <tbody wire:poll.60000ms>
                             @php
                                 $index=0
                             @endphp
