@@ -54,11 +54,12 @@ class Livescore extends Component
                     }
                 }
             }
-//            dd($this->rankings);
+
 
             $r->point = $sekdinPoint;
             $r->total = array_sum($sekdinPoint);
             array_push($ra,$r);
+                        dd($this->rankings);
         }
 //        for ($i=0;$i<count($ra)-1;$i++){
 //            for ($i=0;$i<count($ra)-1;$i++) {
