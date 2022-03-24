@@ -17,13 +17,9 @@ class Livescore extends Component
     public function mount()
     {
         $this->exam = \App\Models\Exam::getExam($this->exam);
-        dd('asd');
+
     }
 
-    function cmp($a, $b)
-    {
-        return strcmp($a->total, $b->total);
-    }
 
     public function render()
     {
@@ -36,7 +32,8 @@ class Livescore extends Component
         $this->rankings = RankingSekdin::whereHas('examUser', function ($q) {
             $q->whereExamId($this->exam->id);
         })->get();
-//        dd($this->rankings);
+        dd($this->rankings);
+
         $ra = [];
         foreach ($this->rankings as $r) {
             $sekdinPoint = [];
