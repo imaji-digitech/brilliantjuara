@@ -58,11 +58,8 @@
                 <div class="col-md-4">
                     <div class="card" style="height: 285px">
                         <div class="card-body" style="padding: 10px;">
-                            <br><br><br>
+                            <br>
                             <div class="text-center">
-                                {{--                                <h6 style="color: #38a7b3">Benar : {{ $rightAnswer }}</h6>--}}
-                                {{--                                <h6 style="color: #faa41b">Salah : {{ $wrongAnswer }}</h6>--}}
-                                {{--                                <h6 style="color: #BC2C3D">Kosong : {{ $blankAnswer }}</h6>--}}
                             </div>
                             <div style="text-align: left">
                                 <h6 style="color: #38a7b3">Mulai : {{ $examUser->created_at->format('d-m-Y H:i') }}</h6>
@@ -75,6 +72,13 @@
                             $seconds=$time%60
                             @endphp
                             <h6 style="color: #BC2C3D">Waktu pengerjaan : {{ $minutes }} menit {{ $seconds }} detik</h6>
+                            <br>
+                            <div class="text-center">
+                                <h5>Passing Grade :</h5>
+                                <h5 style="color: #38a7b3"> TWK : 65</h5>
+                                <h5 style="color: #38a7b3"> TIU : 80</h5>
+                                <h5 style="color: #38a7b3"> TKP : 156</h5>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -84,30 +88,30 @@
                             <br><br>
                             <h4>Skor Akhir</h4>
                             <h5>{{ array_sum($sekdinPoint) }}</h5>
-                            <h6>Dari 301</h6>
+                            <h6 style="color: #BC2C3D">Dari 301</h6>
                             @php
-                                $graduate="Lulus";
+                                $graduate="LULUS";
                                     foreach($examUser->exam->ExamSteps as $index=>$es){
         if ($index==0){
         if ($sekdinPoint[$es->id] <65){
-            $graduate="Tidak Lulus";
+            $graduate="TIDAK LULUS";
         }
         }
         if ($index==1){
         if ($sekdinPoint[$es->id] <80){
-            $graduate="Tidak Lulus";
+            $graduate="TIDAK LULUS";
         }
         }
         if ($index==2){
         if ($sekdinPoint[$es->id] <156){
-            $graduate="Tidak Lulus";
+            $graduate="TIDAK LULUS";
         }
         }
 
     }
                             @endphp
                             <h5>Keterangan :</h5>
-                            <h4 style="color: {{ ($graduate=="Lulus")?'#38a7b3':'#BC2C3D' }}">{{ $graduate }}</h4>
+                            <h4 style="color: {{ ($graduate=="LULUS")?'#38a7b3':'#BC2C3D' }}">{{ $graduate }}</h4>
                         </div>
                     </div>
                 </div>
@@ -115,16 +119,21 @@
                     <div class="card" style="height: 285px;">
                         <div class="card-body" style="padding: 10px;text-align: center;">
                             <div>
+                                <br><br><br>
                                 <h5>Total nilai : </h5>
-                                @foreach($examUser->exam->ExamSteps as $es)
-                                    <h4 style="color: #38a7b3"> {{ $es->title.' : '.empty_point($sekdinPoint[$es->id]) }} </h4>
+                                @php
+                                $standard=[65,80,156]
+                                @endphp
+                                @foreach($examUser->exam->ExamSteps as $index=>$es)
+                                    <h4 style="color:
+                                    @if($sekdinPoint[$es->id]<$standard[$index])
+                                        #BC2C3D
+                                    @else
+                                        #38a7b3
+                                    @endif
+                                     "> {{ $es->title.' : '.empty_point($sekdinPoint[$es->id]) }} </h4>
                                 @endforeach
-                                <h6>Passing Grade :</h6>
-                                {{--                                @foreach($examUser->exam->ExamSteps as $es)--}}
-                                <h5 style="color: #38a7b3"> TWK : 65</h5>
-                                <h5 style="color: #38a7b3"> TIU : 80</h5>
-                                <h5 style="color: #38a7b3"> TKP : 156</h5>
-                                {{--                                @endforeach--}}
+
 
                             </div>
                         </div>
