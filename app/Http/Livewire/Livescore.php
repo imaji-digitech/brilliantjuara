@@ -54,7 +54,7 @@ class Livescore extends Component
                     }
                 }
             }
-            dd($this->rankings);
+//            dd($this->rankings);
 
             $r->point = $sekdinPoint;
             $r->total = array_sum($sekdinPoint);
