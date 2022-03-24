@@ -62,16 +62,16 @@ class Livescore extends Component
         }
 //                                dd($this->rankings);
 
-        for ($i = 0; $i < count($ra); $i++) {
-            for ($j = 0; $j < count($ra) - $i - 1; $j++) {
-                if ($ra[$j]->total < $ra[$j + 1]->total) {
-                    $t = $ra[$j];
-                    $ra[$j] = $ra[$j + 1];
-                    $ra[$j + 1] = $t;
-                }
-            }
-        }
-        $this->ra = $ra;
+//        for ($i = 0; $i < count($ra); $i++) {
+//            for ($j = 0; $j < count($ra) - $i - 1; $j++) {
+//                if ($ra[$j]->total < $ra[$j + 1]->total) {
+//                    $t = $ra[$j];
+//                    $ra[$j] = $ra[$j + 1];
+//                    $ra[$j + 1] = $t;
+//                }
+//            }
+//        }
+        $this->ra = $this->rankings->sortBy('total');
 
         $this->last = Carbon::now();
     }
