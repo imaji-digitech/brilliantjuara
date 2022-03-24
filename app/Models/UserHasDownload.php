@@ -31,6 +31,7 @@ class UserHasDownload extends Model
     public static function hasDownload($id)
     {
         $some = static::query()->whereUserId(auth()->id())->whereExamId($id);
+//        dd($some);
         if ($some->count() == 0) {
             return true;
         } else {
