@@ -38,7 +38,7 @@ class Livescore extends Component
             $sekdinPoint = [];
             foreach ($r->examUser->examAnswers as $i => $eu) {
                 $answer = $eu->examQuest->answer == $eu->answer;
-                $step=$eu->examQuest->exam_step_id;
+                $step = $eu->examQuest->exam_step_id;
                 if (!isset($sekdinPoint[$step])) {
                     $sekdinPoint[$step] = 0;
                 }
@@ -58,37 +58,20 @@ class Livescore extends Component
 
             $r->point = $sekdinPoint;
             $r->total = array_sum($sekdinPoint);
-            array_push($ra,$r);
+            array_push($ra, $r);
         }
-                                dd($this->rankings);
-//        for ($i=0;$i<count($ra)-1;$i++){
-//            for ($i=0;$i<count($ra)-1;$i++) {
-//                if ($ra[$i]->total < $ra[$i + 1]->total) {
-//
-//                }
-//            }
-//        }
+//                                dd($this->rankings);
 
-//        $n = sizeof($arr);
-
-        // Traverse through all array elements
-        for($i = 0; $i < count($ra); $i++)
-        {
-            // Last i elements are already in place
-            for ($j = 0; $j < count($ra) - $i - 1; $j++)
-            {
-                // traverse the array from 0 to n-i-1
-                // Swap if the element found is greater
-                // than the next element
-                if ($ra[$j]->total < $ra[$j+1]->total)
-                {
+        for ($i = 0; $i < count($ra); $i++) {
+            for ($j = 0; $j < count($ra) - $i - 1; $j++) {
+                if ($ra[$j]->total < $ra[$j + 1]->total) {
                     $t = $ra[$j];
-                    $ra[$j] = $ra[$j+1];
-                    $ra[$j+1] = $t;
+                    $ra[$j] = $ra[$j + 1];
+                    $ra[$j + 1] = $t;
                 }
             }
         }
-        $this->ra=$ra;
+        $this->ra = $ra;
 
         $this->last = Carbon::now();
     }
