@@ -87,7 +87,7 @@
                         <div class="card-body" style="padding: 10px;text-align: center;">
                             <br><br>
                             <h4>Skor Akhir</h4>
-                            <h5>{{ array_sum($sekdinPoint) }}</h5>
+                            <h4 style="color: #38a7b3">{{ array_sum($sekdinPoint) }}</h4>
                             <h6 style="color: #BC2C3D">Dari 301</h6>
                             @php
                                 $graduate="LULUS";
