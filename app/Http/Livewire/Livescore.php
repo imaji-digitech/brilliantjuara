@@ -38,17 +38,18 @@ class Livescore extends Component
             $sekdinPoint = [];
             foreach ($r->examUser->examAnswers as $i => $eu) {
                 $answer = $eu->examQuest->answer == $eu->answer;
-                if (!isset($sekdinPoint[$eu->examQuest->exam_step_id])) {
-                    $sekdinPoint[$eu->examQuest->exam_step_id] = 0;
+                $step=$eu->examQuest->exam_step_id;
+                if (!isset($sekdinPoint[$step])) {
+                    $sekdinPoint[$step] = 0;
                 }
                 if ($eu->examQuest->examStep->type_exam == 2) {
-                    if (isset($sekdinPoint[$eu->examQuest->exam_step_id]) and $eu->answer != 0) {
-                        $sekdinPoint[$eu->examQuest->exam_step_id] += ExamQuestChoice::whereChoice($eu->answer)->whereExamQuestId($eu->exam_quest_id)->first()->score;
+                    if (isset($sekdinPoint[$step]) and $eu->answer != 0) {
+                        $sekdinPoint[$step] += ExamQuestChoice::whereChoice($eu->answer)->whereExamQuestId($eu->exam_quest_id)->first()->score;
                     }
                 } else {
                     if ($answer) {
-                        if (isset($sekdinPoint[$eu->examQuest->exam_step_id])) {
-                            $sekdinPoint[$eu->examQuest->exam_step_id] += $eu->examQuest->examStep->score_right;
+                        if (isset($sekdinPoint[$step])) {
+                            $sekdinPoint[$step] += $eu->examQuest->examStep->score_right;
                         }
                     }
                 }
