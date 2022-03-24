@@ -32,7 +32,6 @@ class Livescore extends Component
         $this->rankings = RankingSekdin::whereHas('examUser', function ($q) {
             $q->whereExamId($this->exam->id);
         })->get();
-        dd($this->rankings);
 
         $ra = [];
         foreach ($this->rankings as $r) {
@@ -54,6 +53,8 @@ class Livescore extends Component
                     }
                 }
             }
+            dd($this->rankings);
+
             $r->point = $sekdinPoint;
             $r->total = array_sum($sekdinPoint);
             array_push($ra,$r);
