@@ -28,7 +28,7 @@
                             @php
                                 $index=0
                             @endphp
-                            @foreach($ra as $r)
+                            @foreach($rankings as $r)
                                 @if($r->examUser->user->role!=1)
                                     <tr
                                         @if($index==0)

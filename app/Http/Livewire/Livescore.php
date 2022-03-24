@@ -12,7 +12,7 @@ class Livescore extends Component
     public $rankings;
     public $exam;
     public $last;
-    public $ra;
+//    public $ra;
 
     public function mount()
     {
@@ -33,7 +33,7 @@ class Livescore extends Component
             $q->whereExamId($this->exam->id);
         })->get();
 
-        $ra = [];
+//        $ra = [];
         foreach ($this->rankings as $r) {
             $sekdinPoint = [];
             foreach ($r->examUser->examAnswers as $i => $eu) {
@@ -58,20 +58,9 @@ class Livescore extends Component
 
             $r->point = $sekdinPoint;
             $r->total = array_sum($sekdinPoint);
-            array_push($ra, $r);
+//            array_push($ra, $r);
         }
-//                                dd($this->rankings);
-
-//        for ($i = 0; $i < count($ra); $i++) {
-//            for ($j = 0; $j < count($ra) - $i - 1; $j++) {
-//                if ($ra[$j]->total < $ra[$j + 1]->total) {
-//                    $t = $ra[$j];
-//                    $ra[$j] = $ra[$j + 1];
-//                    $ra[$j + 1] = $t;
-//                }
-//            }
-//        }
-        $this->ra = $this->rankings->sortBy('total');
+        $this->rankings= $this->rankings->sortByDesc('total');
 
         $this->last = Carbon::now();
     }
