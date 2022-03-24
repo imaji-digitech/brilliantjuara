@@ -17,6 +17,7 @@ class Livescore extends Component
     public function mount()
     {
         $this->exam = \App\Models\Exam::getExam($this->exam);
+        dd('asd');
     }
 
     function cmp($a, $b)
