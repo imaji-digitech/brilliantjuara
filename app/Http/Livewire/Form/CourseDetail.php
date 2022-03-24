@@ -51,6 +51,7 @@ class CourseDetail extends Component
     public function create()
     {
         $this->validate();
+
         if ($this->type == 3) {
             $filename = Str::slug($this->data['title']) . '.' . $this->file->getClientOriginalExtension();
             $this->data['content'] = 'course-files/' . $filename;
@@ -87,8 +88,15 @@ class CourseDetail extends Component
 
     protected function getRules()
     {
-        return [
-            'data.title' => 'required'
-        ];
+        if ($this->type == 3) {
+            return [
+                'data.title' => 'required',
+                'file' => 'required'
+            ];
+        }else {
+            return [
+                'data.title' => 'required'
+            ];
+        }
     }
 }
