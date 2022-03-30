@@ -11,9 +11,12 @@
         @endif
         @if($examUserCheck[0]->status==2)
             @if($exam->status_discussion==1 and \App\Models\UserHasDownload::hasDownload($exam->id))
-                <a href="{{ route('admin.user.exam.download',$exam->slug) }}" class="btn btn-primary" target="_blank">
-                    Download Pembahasan
-                </a>
+                @if($exam->exam_type_id==1)
+                    <a href="{{ route('admin.user.exam.download',$exam->slug) }}" class="btn btn-primary"
+                       target="_blank">
+                        Download Pembahasan
+                    </a>
+                @endif
             @endif
         @endif
     @endif
