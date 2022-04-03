@@ -16,6 +16,29 @@
         </div>
     </div>
     <div class="col-sm-8">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body" style="padding: 10px">
+                        Total pengerjaan : {{ $totalAnalytic }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body" style="padding: 10px">
+                        Total benar : {{ $rightAnalytic/$totalAnalytic*100 }}%
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body" style="padding: 10px">
+                        Total kesalahan : {{ $wrongAnalytic/$totalAnalytic*100 }}%
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="card">
             <div class="card-body">
                 <div class="float-end btn btn-danger m-1">
@@ -36,14 +59,14 @@
                             </td>
                             <td style="text-align: justify !important;vertical-align: top">
                                 @if($questActive['equation']!=null)
-                                <div>
-                                    <div id="question">{{ $questActive['equation'] }}</div>
-                                    <script>
-                                        document.addEventListener('livewire:load', function () {
-                                            Livewire.emit('mathQuill','question')
-                                        });
-                                    </script>
-                                </div>
+                                    <div>
+                                        <div id="question">{{ $questActive['equation'] }}</div>
+                                        <script>
+                                            document.addEventListener('livewire:load', function () {
+                                                Livewire.emit('mathQuill', 'question')
+                                            });
+                                        </script>
+                                    </div>
                                 @endif
                                 {!! $questActive['question']  !!}
                             </td>
@@ -65,12 +88,11 @@
                                                 </td>
                                                 <td>
                                                     <div>
-{{--                                                        {!! $eqc->equation !!}--}}
                                                         @if($eqc->equation!=null)
                                                             <div id="eq{{$eqc->choice}}">{{$eqc->equation}}</div>
                                                             <script>
                                                                 document.addEventListener('livewire:load', function () {
-                                                                    Livewire.emit('mathQuill','eq{{$eqc->choice}}')
+                                                                    Livewire.emit('mathQuill', 'eq{{$eqc->choice}}')
                                                                 });
                                                             </script>
                                                         @endif
@@ -85,7 +107,6 @@
                                     </label>
                                 </div>
                             @endforeach
-
                         </div>
                     </div>
                     <div>
@@ -101,7 +122,7 @@
                                         <div id="discussion">{{ $questActive['discussion_equation'] }}</div>
                                         <script>
                                             document.addEventListener('livewire:load', function () {
-                                                Livewire.emit('mathQuill','discussion')
+                                                Livewire.emit('mathQuill', 'discussion')
                                             });
                                         </script>
                                     </div>
@@ -145,7 +166,6 @@
                                 border: 1px solid gray"
                             wire:click="changeActive({{$i}})">{{$i+1}} </button>
                 @endforeach
-
             </div>
         </div>
     </div>

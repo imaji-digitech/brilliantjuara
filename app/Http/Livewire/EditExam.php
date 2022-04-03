@@ -2,9 +2,8 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\ExamUser;
-use App\Models\ReportQuest;
-use Carbon\Carbon;
+use App\Models\ExamQuestChoice;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class EditExam extends Component
@@ -17,6 +16,9 @@ class EditExam extends Component
     public $number;
     public $start;
     public $quest;
+    public $wrongAnalytic;
+    public $rightAnalytic;
+    public $totalAnalytic;
     protected $listeners = ['changeActive'];
 
     public function mount()
@@ -36,31 +38,43 @@ class EditExam extends Component
         $this->questActive = $this->quest[$number];
         $this->active = $this->questActive['id'];
         $this->number = $number;
-        if ($this->questActive['equation']!=null){
+        if ($this->questActive['equation'] != null) {
             $this->emit('mathQuill', 'question');
         }
-        if ($this->questActive['discussion_equation']!=null) {
+        if ($this->questActive['discussion_equation'] != null) {
             $this->emit('mathQuill', 'discussion');
         }
-        foreach (\App\Models\ExamQuestChoice::whereExamQuestId($this->questActive['id'])->get() as $eqc){
-            if($eqc->equation!=null) {
-                $this->emit('mathQuill', 'eq'.$eqc->choice);
+        foreach (ExamQuestChoice::whereExamQuestId($this->questActive['id'])->get() as $eqc) {
+            if ($eqc->equation != null) {
+                $this->emit('mathQuill', 'eq' . $eqc->choice);
             }
         }
+        $id = $this->questActive['id'];
+        $this->wrongAnalytic = DB::select(DB::raw("
+SELECT COUNT(*) as answer FROM `exam_answers`
+    JOIN exam_quests ON exam_quests.id=exam_answers.exam_quest_id
+WHERE exam_quest_id = $id AND exam_answers.answer!=exam_quests.answer"));
+        $this->rightAnalytic = DB::select(DB::raw("
+SELECT COUNT(*) as answer FROM `exam_answers`
+    JOIN exam_quests ON exam_quests.id=exam_answers.exam_quest_id
+WHERE exam_quest_id = $id AND exam_answers.answer=exam_quests.answer"));
+        $this->totalAnalytic = DB::select(DB::raw("
+SELECT COUNT(*) as answer FROM `exam_answers`
+    JOIN exam_quests ON exam_quests.id=exam_answers.exam_quest_id
+WHERE exam_quest_id = $id"));
+        if ($this->wrongAnalytic!=null){
+            $this->wrongAnalytic=$this->wrongAnalytic[0]->answer;
+        }
+        if ($this->rightAnalytic!=null){
+            $this->rightAnalytic=$this->rightAnalytic[0]->answer;
+        }
+        if ($this->totalAnalytic!=null){
+            $this->totalAnalytic=$this->totalAnalytic[0]->answer;
+        }
     }
-//    public function report($id){
-//        ReportQuest::create([
-//            'user_id'=>auth()->id(), 'exam_quest_id'=>$id
-//        ]);
-//        $this->emit('notify', [
-//            'type' => 'success',
-//            'title' => 'Terima kasih telah melapor admin akan segera melihat permasalahan soal',
-//        ]);
-//    }
 
     public function setDone()
     {
-//        ExamUser::setDone($this->examUser->id);
         $this->emit('notify', [
             'type' => 'success',
             'title' => 'Edit diselsaikan',
