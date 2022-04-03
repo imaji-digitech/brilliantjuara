@@ -7,6 +7,8 @@
             <th scope="col" wire:click.prevent="sortBy('question')" >
                 Soal
             </th>
+            <th>Benar</th>
+            <th>Salah</th>
             <th>aksi</th>
         </tr>
     </x-slot>
@@ -15,6 +17,37 @@
             <tr x-data="window.__controller.dataTableController({{ $quest->id }})">
                 <td scope="row">{{ ($page-1)*$perPage+$index+1 }}</td>
                 <td>{{ \Illuminate\Support\Str::limit(strip_tags($quest->question), 150, $end='...') }}</td>
+                @php
+                $id=$quest->id;
+$totalAnalytic = \Illuminate\Support\Facades\DB::select(\Illuminate\Support\Facades\DB::raw("
+    SELECT COUNT(*) as answer FROM `exam_answers`
+        JOIN exam_quests ON exam_quests.id=exam_answers.exam_quest_id
+    WHERE exam_quest_id = $id"));
+if ($totalAnalytic!=null){
+                $totalAnalytic=$totalAnalytic[0]->answer;
+                $wrongAnalytic = \Illuminate\Support\Facades\DB::select(\Illuminate\Support\Facades\DB::raw("
+    SELECT COUNT(*) as answer FROM `exam_answers`
+        JOIN exam_quests ON exam_quests.id=exam_answers.exam_quest_id
+    WHERE exam_quest_id = $id AND exam_answers.answer!=exam_quests.answer"));
+            $rightAnalytic = \Illuminate\Support\Facades\DB::select(\Illuminate\Support\Facades\DB::raw("
+    SELECT COUNT(*) as answer FROM `exam_answers`
+        JOIN exam_quests ON exam_quests.id=exam_answers.exam_quest_id
+    WHERE exam_quest_id = $id AND exam_answers.answer=exam_quests.answer"));
+
+            if ($wrongAnalytic!=null){
+                $wrongAnalytic=$wrongAnalytic[0]->answer;
+            }
+            if ($rightAnalytic!=null){
+                $rightAnalytic=$rightAnalytic[0]->answer;
+            }
+            }else{
+    $rightAnalytic=0;
+    $wrongAnalytic=0;
+    $totalAnalytic=0;
+            }
+                @endphp
+                <td>{{ ($totalAnalytic!=0)?$rightAnalytic/$totalAnalytic*100:0 }}%</td>
+                <td>{{ ($totalAnalytic!=0)?$wrongAnalytic/$totalAnalytic*100:0 }}%</td>
                 <td>
                     <a role="button" href="{{ route('admin.exam.question.edit',[$quest->examStep->exam->room->slug,$quest->examStep->exam->slug,$quest->exam_step_id,$quest->id]) }}" class="mr-3">
                         <i class="fa fa-16px fa-pen">Ubah</i></a>
