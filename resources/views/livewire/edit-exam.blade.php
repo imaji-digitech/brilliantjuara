@@ -17,26 +17,25 @@
     </div>
     <div class="col-sm-8">
         <div class="row">
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body" style="padding: 10px">
-                        Total pengerjaan : {{ $totalAnalytic }}
-                    </div>
-                </div>
-            </div>
+            <div class="card">
+                <div class="card-body" style="padding: 10px">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <br>
+                            Total pengerjaan : {{ $totalAnalytic }} <br>
+                            Total benar : {{ ($totalAnalytic!=0)?round($rightAnalytic/$totalAnalytic*100,2):0 }}% <br>
+                            Total kesalahan : {{ ($totalAnalytic!=0)?round($wrongAnalytic/$totalAnalytic*100,2):0 }}%
+                        </div>
+                        <div class="col-md-6">
+                            A : {{ $answerAnalytic[1] }} <br>
+                            B : {{ $answerAnalytic[2] }} <br>
+                            C : {{ $answerAnalytic[3] }} <br>
+                            D : {{ $answerAnalytic[4] }} <br>
+                            E : {{ $answerAnalytic[5] }} <br>
+                        </div>
 
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body" style="padding: 10px">
-                        Total benar : {{ ($totalAnalytic!=0)?round($rightAnalytic/$totalAnalytic*100,2):0 }}%
                     </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body" style="padding: 10px">
-                        Total kesalahan : {{ ($totalAnalytic!=0)?round($wrongAnalytic/$totalAnalytic*100,2):0 }}%
-                    </div>
+
                 </div>
             </div>
         </div>

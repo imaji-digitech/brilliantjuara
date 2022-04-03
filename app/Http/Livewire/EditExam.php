@@ -19,6 +19,7 @@ class EditExam extends Component
     public $wrongAnalytic;
     public $rightAnalytic;
     public $totalAnalytic;
+    public $answerAnalytic;
     protected $listeners = ['changeActive'];
 
     public function mount()
@@ -62,6 +63,19 @@ WHERE exam_quest_id = $id AND exam_answers.answer=exam_quests.answer"));
 SELECT COUNT(*) as answer FROM `exam_answers`
     JOIN exam_quests ON exam_quests.id=exam_answers.exam_quest_id
 WHERE exam_quest_id = $id"));
+
+        $this->answerAnalytic = DB::select(DB::raw("
+SELECT COUNT(*) as c,exam_answers.answer as answer  FROM `exam_answers`
+    JOIN exam_quests ON exam_quests.id=exam_answers.exam_quest_id
+WHERE exam_quest_id = $id
+GROUP BY answer"));
+        $a=[1=>0,2=>0,3=>0,4=>0,5=>0];
+        foreach ($this->answerAnalytic as $aa){
+$a[$aa->answer]=$aa->answer;
+        }
+//        dd($this->answerAnalytic);
+        $this->answerAnalytic=$a;
+
         if ($this->wrongAnalytic!=null){
             $this->wrongAnalytic=$this->wrongAnalytic[0]->answer;
         }
