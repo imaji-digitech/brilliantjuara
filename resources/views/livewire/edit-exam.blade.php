@@ -24,17 +24,18 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body" style="padding: 10px">
-                        Total benar : {{ $rightAnalytic/$totalAnalytic*100 }}%
+                        Total benar : {{ ($totalAnalytic!=0)?round($rightAnalytic/$totalAnalytic*100,2):0 }}%
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body" style="padding: 10px">
-                        Total kesalahan : {{ $wrongAnalytic/$totalAnalytic*100 }}%
+                        Total kesalahan : {{ ($totalAnalytic!=0)?round($wrongAnalytic/$totalAnalytic*100,2):0 }}%
                     </div>
                 </div>
             </div>
@@ -57,7 +58,13 @@
                             <td style="width: 35px; vertical-align: top">
                                 {{$number+1}}.
                             </td>
-                            <td style="text-align: justify !important;vertical-align: top">
+                            <td style="text-align: justify !important;vertical-align: top;
+                            -webkit-user-select: none;
+                            -khtml-user-select: none;
+                            -moz-user-select: none;
+                            -ms-user-select: none;
+                            -o-user-select: none;
+                            user-select: none;">
                                 @if($questActive['equation']!=null)
                                     <div>
                                         <div id="question">{{ $questActive['equation'] }}</div>

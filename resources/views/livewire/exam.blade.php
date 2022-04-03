@@ -85,7 +85,12 @@
                                                     {{ $questActive->answer==$eqc->choice?'checked':'' }}>
                                                     {{ $alphabet[$eqc->choice] }}.
                                                 </td>
-                                                <td style="text-align: justify !important;vertical-align: top"
+                                                <td style="text-align: justify !important;vertical-align: top;-webkit-user-select: none;
+                            -khtml-user-select: none;
+                            -moz-user-select: none;
+                            -ms-user-select: none;
+                            -o-user-select: none;
+                            user-select: none;"
                                                     wire:click="changeAnswer({{$eqc->choice}})"
                                                     {{ $questActive->answer==$eqc->choice?'checked':'' }}>
                                                     <div wire:click="changeAnswer({{$eqc->choice}})"

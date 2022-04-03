@@ -191,7 +191,12 @@
                             <td style="width: 35px; vertical-align: top">
                                 {{$number+1}}.
                             </td>
-                            <td style="text-align: justify !important;vertical-align: top">
+                            <td style="text-align: justify !important;vertical-align: top;-webkit-user-select: none;
+                            -khtml-user-select: none;
+                            -moz-user-select: none;
+                            -ms-user-select: none;
+                            -o-user-select: none;
+                            user-select: none;">
                                 <div>
                                     @if($questActive->examQuest->equation!=null)
                                         <div id="question">{{ $questActive->examQuest->equation }}</div>
