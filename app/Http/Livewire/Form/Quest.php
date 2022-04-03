@@ -47,7 +47,7 @@ class Quest extends Component
         ];
         if ($this->number==null){
             $this->exam = ExamStep::find($this->examStepId);
-            $this->examType=$this->exam->exam_type;
+            $this->examType=$this->exam->type_exam;
             $this->data = [
                 'exam_step_id' => $this->examStepId,
                 'equation' => '',
@@ -68,7 +68,7 @@ class Quest extends Component
                 'discussion_equation'=>$data->discussion_equation
             ];
             foreach ($data->examQuestChoices as $i => $eqc) {
-                if ($data->examStep->exam_type == 1) {
+                if ($data->examStep->type_exam == 1) {
                     $this->{'choice' . ($i + 1)} = $eqc->answer;
                     $this->{'equation' . ($i + 1)} = $eqc->equation;
                 } else {
@@ -77,7 +77,7 @@ class Quest extends Component
                     $this->{'equation' . ($i + 1)} = $eqc->equation;
                 }
             }
-            $this->examType=$data->examStep->exam_type;
+            $this->examType=$data->examStep->type_exam;
         }
     }
 
