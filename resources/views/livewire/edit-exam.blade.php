@@ -27,6 +27,7 @@
                             Total kesalahan : {{ ($totalAnalytic!=0)?round($wrongAnalytic/$totalAnalytic*100,2):0 }}%
                         </div>
                         <div class="col-md-6">
+                            Kosong : {{ $answerAnalytic[0] }} <br>
                             A : {{ $answerAnalytic[1] }} <br>
                             B : {{ $answerAnalytic[2] }} <br>
                             C : {{ $answerAnalytic[3] }} <br>
