@@ -46,8 +46,8 @@ if ($totalAnalytic!=null){
     $totalAnalytic=0;
             }
                 @endphp
-                <td>{{ ($totalAnalytic!=0)?intval($rightAnalytic/$totalAnalytic*100):0 }}%</td>
-                <td>{{ ($totalAnalytic!=0)?intval($wrongAnalytic/$totalAnalytic*100):0 }}%</td>
+                <td>{{ ($totalAnalytic!=0)?round($rightAnalytic/$totalAnalytic*100,2):0 }}%</td>
+                <td>{{ ($totalAnalytic!=0)?round($wrongAnalytic/$totalAnalytic*100,2):0 }}%</td>
                 <td>
                     <a role="button" href="{{ route('admin.exam.question.edit',[$quest->examStep->exam->room->slug,$quest->examStep->exam->slug,$quest->exam_step_id,$quest->id]) }}" class="mr-3">
                         <i class="fa fa-16px fa-pen">Ubah</i></a>
