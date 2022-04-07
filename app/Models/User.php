@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Notifications\ResetPassword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -39,12 +39,6 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
-    public function sendPasswordResetNotification($token)
-    {
-        // Your your own implementation.
-        $this->notify(new ResetPassword($token));
-    }
-
     /**
      * The attributes that are mass assignable.
      *
@@ -59,7 +53,15 @@ class User extends Authenticatable
         'city',
         'provinsi',
     ];
-
+    public function search($query)
+    {
+        return empty($query) ? static::query()
+            : static::where('name', 'like', '%' . $query . '%')
+                ->orWhere('email', 'like', '%' . $query . '%')
+                ->orWhere('commission', 'like', '%' . $query . '%')
+                ->orWhere('city', 'like', '%' . $query . '%')
+                ->orWhere('provinsi', 'like', '%' . $query . '%');
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -71,7 +73,6 @@ class User extends Authenticatable
         'two_factor_recovery_codes',
         'two_factor_secret',
     ];
-
     /**
      * The attributes that should be cast.
      *
@@ -80,7 +81,6 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
     /**
      * The accessors to append to the model's array form.
      *
@@ -96,12 +96,79 @@ class User extends Authenticatable
      */
     protected $keyType = 'integer';
 
+    public static function haveCourse($id)
+    {
+//        dd($id);
+        if (auth()->user()->userOwnCourses->where('course_id', $id)->count() != 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function haveExam($id)
+    {
+        if (auth()->user()->userOwnExams->where('exam_id', $id)->count() != 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * @var array
      */
 
+    public static function haveProgram($id)
+    {
+        $examKey = [];
+        $myExam = auth()->user()->userOwnExams;
+        foreach ($myExam as $me) {
+            array_push($examKey, $me->exam_id);
+        }
+        $exam = Bundle::find($id)->bundleDetails;
+        $examProgram = [];
+        foreach ($exam as $me) {
+            if ($me->exam_id != null) {
+                array_push($examProgram, $me->exam_id);
+            }
+        }
+        foreach ($examProgram as $index => $e) {
+            if (!in_array($e, $examKey)) {
+                return 0;
+            }
+        }
+//        dd("asd");
+        $courseKey = [];
+        $myCourse = auth()->user()->userOwnCourses;
+        foreach ($myCourse as $me) {
+            array_push($courseKey, $me->course_id);
+        }
+        $course = Bundle::find($id)->bundleDetails;
+        $courseProgram = [];
+        foreach ($course as $me) {
+            if ($me->course_id != null) {
+                array_push($courseProgram, $me->course_id);
+            }
+        }
+        foreach ($courseProgram as $e) {
+            if (!in_array($e, $courseKey)) {
+                return 0;
+            }
+        }
+        return 1;
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        // Your your own implementation.
+        $this->notify(new ResetPassword($token));
+    }
+
+
+
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function examUsers()
     {
@@ -109,7 +176,7 @@ class User extends Authenticatable
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function referralCodeUses()
     {
@@ -117,7 +184,7 @@ class User extends Authenticatable
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function referralCodes()
     {
@@ -125,75 +192,23 @@ class User extends Authenticatable
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function userOwnCourses()
     {
         return $this->hasMany('App\Models\UserOwnCourse');
     }
+
     public function withdraws()
     {
         return $this->hasMany('App\Models\Withdraw');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function userOwnExams()
     {
         return $this->hasMany('App\Models\UserOwnExam');
-    }
-    public static function haveCourse($id){
-//        dd($id);
-        if (auth()->user()->userOwnCourses->where('course_id',$id)->count()!=0){
-            return true;
-        }else{
-            return false;
-        }
-    }
-    public static function haveExam($id){
-        if (auth()->user()->userOwnExams->where('exam_id',$id)->count()!=0){
-            return true;
-        }else{
-            return false;
-        }
-    }
-    public static function haveProgram($id){
-        $examKey=[];
-        $myExam=auth()->user()->userOwnExams;
-        foreach ($myExam as $me){
-            array_push($examKey,$me->exam_id);
-        }
-        $exam = Bundle::find($id)->bundleDetails;
-        $examProgram=[];
-        foreach ($exam as $me){
-            if ($me->exam_id!=null) {
-                array_push($examProgram, $me->exam_id);
-            }
-        }
-        foreach ($examProgram as $index=>$e){
-            if (!in_array($e,$examKey)){
-                return 0;
-            }
-        }
-//        dd("asd");
-        $courseKey=[];
-        $myCourse=auth()->user()->userOwnCourses;
-        foreach ($myCourse as $me){
-            array_push($courseKey,$me->course_id);
-        }
-        $course = Bundle::find($id)->bundleDetails;
-        $courseProgram=[];
-        foreach ($course as $me){
-            if ($me->course_id!=null) {
-                array_push($courseProgram, $me->course_id);
-            }
-        }
-        foreach ($courseProgram as $e){
-            if (!in_array($e,$courseKey)){
-                return 0;
-            }
-        }
-        return 1;
     }
 }

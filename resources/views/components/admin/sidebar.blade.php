@@ -36,17 +36,12 @@
                             <i class="fas fa-home"></i><span> Dashboard</span>
                         </a>
                     </li>
-                    {{--                    <li class="sidebar-list">--}}
-                    {{--                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.referral.me.use') }}">--}}
-                    {{--                            <i class="fas fa-home"></i><span> Referralku</span>--}}
-                    {{--                        </a>--}}
-                    {{--                    </li>--}}
                     <li class="sidebar-main-title">
                         <div>
                             <h6>Program</h6>
                         </div>
                     </li>
-                    @foreach(\App\Models\RoomCategory::get() as $rooms)
+                    @foreach(\App\Models\RoomCategory::orderBy('order')->get() as $rooms)
                         @if($rooms->rooms->count()!=0)
                             <li class="sidebar-list">
                                 {{--                            <label class="badge badge-light-primary">{{ $rooms->count() }}</label>--}}
@@ -129,6 +124,12 @@
                                     <a class="sidebar-link sidebar-title link-nav"
                                        href="{{ route('admin.room.index') }}">
                                         <i class="fas fa-home"></i><span> Kelas</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-list">
+                                    <a class="sidebar-link sidebar-title link-nav"
+                                       href="{{ route('admin.room-category.index') }}">
+                                        <i class="fas fa-home"></i><span> Kategori Kelas</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-list">

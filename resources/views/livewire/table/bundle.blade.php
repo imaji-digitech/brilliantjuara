@@ -8,18 +8,11 @@
             <th scope="col" wire:click.prevent="sortBy('title')">
                 judul @include('components.sort-icon',['field'=>"title"])
             </th>
-            <th>
-                Harga paket
-            </th>
-            <th>
-                Isi paket
-            </th>
-            <th>
-                Status paket
-            </th>
-            <th>
-                thumbnail
-            </th>
+            <th>Harga paket</th>
+            <th>Isi paket</th>
+            <th>Status paket</th>
+            <th>Thumbnail</th>
+            <th>Jumlah terbeli</th>
             <th>aksi</th>
         </tr>
     </x-slot>
@@ -46,6 +39,7 @@
                 <td>
                     <img src="{{ asset('storage/'.$bundle->thumbnail) }}" alt="" style="height: 200px">
                 </td>
+                <td>{{ $bundle->payments->where('status',2)->count() }}</td>
                 <td>
                     <a role="button" href="{{ route('admin.bundle.price.index',[$bundle->room->slug,$bundle->id]) }}" class="mr-3">
                         <i class="fa fa-16px fa-money">Harga</i></a>

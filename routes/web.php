@@ -8,9 +8,10 @@ use App\Http\Controllers\Admin\PublicAnnouncementController;
 use App\Http\Controllers\Admin\PublicBannerController;
 use App\Http\Controllers\Admin\PublicEventController;
 use App\Http\Controllers\Admin\ReferralController;
-use App\Http\Controllers\Admin\RoomEventController;
 use App\Http\Controllers\Admin\RoomBannerController;
+use App\Http\Controllers\Admin\RoomCategoryController;
 use App\Http\Controllers\Admin\RoomController;
+use App\Http\Controllers\Admin\RoomEventController;
 use App\Http\Controllers\Admin\WithdrawControlller;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\UploadFile;
@@ -139,6 +140,7 @@ Route::middleware(['auth:sanctum',])->name('admin.')->prefix('admin')->group(fun
 
     Route::middleware(['checkRole:1'])->group(function () {
         Route::resource('room', RoomController::class)->only('index', 'create', 'edit', 'show');
+        Route::resource('room-category', RoomCategoryController::class)->only('index', 'create', 'edit', 'show');
         Route::resource('announcement', PublicAnnouncementController::class)->only('index', 'create', 'edit');
         Route::resource('banner', PublicBannerController::class)->only('index', 'create', 'edit');
         Route::resource('event', PublicEventController::class)->only('index', 'create', 'edit');

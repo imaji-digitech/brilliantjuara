@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $created_at
  * @property string $updated_at
  * @property Room $room
+ * @property BundleDetail[] $bundleDetails
  * @property CourseHighlight[] $courseHighlights
  * @property SaleDetail[] $saleDetails
  * @property UserOwnCourse[] $userOwnCourses
@@ -42,6 +43,14 @@ class Course extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+    public function bundleDetails()
+    {
+        return $this->hasMany('App\Models\BundleDetail');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function courseHighlights()
     {
         return $this->hasMany('App\Models\CourseHighlight');
@@ -62,6 +71,7 @@ class Course extends Model
     {
         return $this->hasMany('App\Models\UserOwnCourse');
     }
+
     public static function search($query,$dataId){
         return empty($query) ? static::query()->whereRoomId($dataId)
             : static::whereRoomId($dataId)->where('title', 'like', '%' . $query . '%');

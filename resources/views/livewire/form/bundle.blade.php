@@ -5,7 +5,7 @@
     <x-form.select model="data.token_can_use" :selected="$data['token_can_use']" title="Token Status" :options="$optionCanUse" />
     <x-form.input model="data.referral_discount" title="Jumlah potongan" type="text"/>
     <x-form.input model="data.referral_money" title="Uang yang diterima BA" type="text"/>
-    <x-form.textarea model="data.content" title="Deskripsi"/>
+    <x-form.summernote model="data.content" title="Deskripsi"/>
     <x-form.input model="thumbnail" title="thumbnail (rasio 600px*350px)" type="file" accept="image/*"/>
     <div wire:loading wire:target="thumbnail">
         Proses upload

@@ -57,11 +57,29 @@ class Payment extends Model
     }
     public static function search($query)
     {
-        return empty($query) ? static::query()->whereUserId(auth()->id())
-            : static::whereUserId(auth()->id())->where(function ($q) use ($query) {
-                $q->whereHas('referralCode',function ($q2) use ($query) {
+        if (auth()->user()->role!=1) {
+            return empty($query) ? static::query()->whereUserId(auth()->id())
+                : static::whereUserId(auth()->id())->where(function ($q) use ($query) {
+                    $q->whereHas('referralCode', function ($q2) use ($query) {
                         $q2->where('code', 'like', '%' . $query . '%');
                     });
+                });
+        }else{
+            return empty($query) ? static::query()
+                : static::where(function ($q) use ($query) {
+                    $q->whereHas('referralCode',function ($q2) use ($query) {
+                        $q2->where('code', 'like', '%' . $query . '%');
+                    });
+                });
+        }
+    }
+    public static function searchAdmin($query)
+    {
+        return empty($query) ? static::query()
+            : static::where(function ($q) use ($query) {
+                $q->whereHas('referralCode',function ($q2) use ($query) {
+                    $q2->where('code', 'like', '%' . $query . '%');
+                });
             });
     }
 }

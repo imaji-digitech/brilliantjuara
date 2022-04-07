@@ -61,7 +61,7 @@
                                         </div>
                                         <div class="product-details">
                                             <h4>{{ $bundle->title }}</h4>
-                                            <p>{{ $bundle->content }}</p>
+                                            <p>{!! $bundle->content !!}</p>
                                             <p>
                                                 @php($minus=0)
                                                 @foreach($bundle->bundleDetails as $detail)
@@ -86,10 +86,12 @@
                                                 @isset($bundle->bundlePrices[0])
                                                     @if($minus<$bundle->bundlePrices[0]->price)
                                                         @if($minus!=0)
-                                                            <del>{{$bundle->bundlePrices[0]->price}} <br></del>
+                                                            <del>Rp. {{number_format($bundle->bundlePrices[0]->price)}}</del>
+                                                            <br>
                                                         @endif
-                                                            <del>Rp. {{ isset($bundle->bundlePrices[0])?number_format($bundle->bundlePrices[0]->price_cut-$minus):'' }}
-                                                                <br></del>
+{{--                                                        <del>--}}
+
+{{--                                                        </del>--}}
                                                         Rp. {{ isset($bundle->bundlePrices[0])?number_format($bundle->bundlePrices[0]->price-$minus):'' }}
                                                     @endif
                                                 @endisset
@@ -98,17 +100,18 @@
                                             <div style="text-align: center" class="row">
                                                 @if(auth()->user()->haveProgram($bundle->id)==0)
                                                     @if($bundle->token_can_use==2)
-                                                    <div class="col-md-12">
-                                                        <form action="">
-                                                            <input type="text" wire:model="token.{{$bundle->id}}"
-                                                                   class="form-control"
-                                                                   placeholder="token">
-                                                        </form>
-                                                        <button class="btn btn-warning-gradien col-md-12" type="button"
-                                                                style="margin-top: 5px"
-                                                                wire:click="activateToken({{$bundle->id}})">Redem
-                                                        </button>
-                                                    </div>
+                                                        <div class="col-md-12">
+                                                            <form action="">
+                                                                <input type="text" wire:model="token.{{$bundle->id}}"
+                                                                       class="form-control"
+                                                                       placeholder="token">
+                                                            </form>
+                                                            <button class="btn btn-warning-gradien col-md-12"
+                                                                    type="button"
+                                                                    style="margin-top: 5px"
+                                                                    wire:click="activateToken({{$bundle->id}})">Redem
+                                                            </button>
+                                                        </div>
                                                     @endif
                                                     @isset($bundle->bundlePrices[0])
                                                         <div class="col-md-12" style="margin-top: 10px">

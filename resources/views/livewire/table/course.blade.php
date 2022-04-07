@@ -13,6 +13,7 @@
             <th scope="col" wire:click.prevent="sortBy('title')" >
                 Slug @include('components.sort-icon',['field'=>"title"])
             </th>
+            <th>Pemilik</th>
             <th>aksi</th>
         </tr>
     </x-slot>
@@ -23,6 +24,7 @@
                 <td>{{ $course->title }}</td>
                 <td>Rp. {{ number_format($course->price) }}</td>
                 <td>{{ $course->slug }}</td>
+                <td>{{ $course->userOwnCourses->count() }}</td>
                 <td>
                     <a role="button" href="{{ route('admin.course.edit',[$course->room->slug,$course->id]) }}" class="mr-3">
                         <i class="fa fa-16px fa-pen">Ubah</i></a>

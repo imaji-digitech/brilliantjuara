@@ -4,6 +4,12 @@
             <th scope="col" wire:click.prevent="sortBy('payment_id')">
                 # @include('components.sort-icon',['field'=>"payment_id"])
             </th>
+            @if(auth()->user()->role==1)
+                <th>Nama</th>
+                <th>
+                    Dibeli pada
+                </th>
+            @endif
             <th scope="col" wire:click.prevent="sortBy('bundle_id')">
                 Nama bundle @include('components.sort-icon',['field'=>"bundle_id"])
             </th>
@@ -19,6 +25,10 @@
         @foreach ($payments as $index=>$payment)
             <tr>
                 <td scope="row">{{ $payment->payment_id }}</td>
+                @if(auth()->user()->role==1)
+                    <td>{{ $payment->user->name }}</td>
+                    <td> @if($payment->status==2) {{ $payment->updated_at }} @endif</td>
+                @endif
                 <td>{{ $payment->bundle->title }}</td>
                 <td>{{ isset($payment->referralCode)?$payment->referralCode->code:'' }}</td>
                 <td>

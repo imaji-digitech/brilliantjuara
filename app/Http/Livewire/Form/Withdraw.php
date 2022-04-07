@@ -8,6 +8,7 @@ use Livewire\Component;
 class Withdraw extends Component
 {
     public $data;
+    public $option;
     protected $messages = [
         'data.money.min' => 'minimal pengambilan 100.000.'
     ];
@@ -16,6 +17,7 @@ class Withdraw extends Component
     {
         $this->data['money'] = auth()->user()->withdraw;
         $this->data['user_id'] = auth()->user()->id;
+        $this->option=eloquent_to_options(User::where('commission','!=',0)->get(),'id','key');
 //        dd($this->data);
     }
 
@@ -48,10 +50,18 @@ class Withdraw extends Component
 
     protected function getRules()
     {
-        return [
-            'data.money' => 'required|numeric|min:100000',
-            'data.bank_name' => 'required|max:255',
-            'data.no_rek' => 'required|max:255',
-        ];
+        if (auth()->user()->role==1){
+            return [
+                'data.money' => 'required|numeric',
+                'data.bank_name' => 'required|max:255',
+                'data.no_rek' => 'required|max:255',
+            ];
+        }else {
+            return [
+                'data.money' => 'required|numeric|min:100000',
+                'data.bank_name' => 'required|max:255',
+                'data.no_rek' => 'required|max:255',
+            ];
+        }
     }
 }

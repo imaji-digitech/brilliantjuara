@@ -62,6 +62,15 @@ class Main extends Component
                     "{$this->name}s" => ${$this->name},
                 ];
                 break;
+            case 'room-category':
+                $rooms = $this->model::search($this->search)
+                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                    ->paginate($this->perPage);
+                return [
+                    "view" => "livewire.table.room-category",
+                    "rooms" => $rooms,
+                ];
+                break;
             case 'course':
                 $course = $this->model::search($this->search, $this->dataId)
                     ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')

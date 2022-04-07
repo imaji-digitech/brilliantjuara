@@ -16,7 +16,7 @@ class RoomCategory extends Model
 {
     /**
      * The "type" of the auto-incrementing ID.
-     * 
+     *
      * @var string
      */
     protected $keyType = 'integer';
@@ -32,5 +32,9 @@ class RoomCategory extends Model
     public function rooms()
     {
         return $this->hasMany('App\Models\Room');
+    }
+    public static function search($query){
+        return empty($query) ? static::query()
+            : static::where('title', 'like', '%' . $query . '%');
     }
 }

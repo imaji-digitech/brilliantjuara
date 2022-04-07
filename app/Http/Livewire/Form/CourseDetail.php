@@ -28,7 +28,7 @@ class CourseDetail extends Component
         $highlight = $this->course->courseHighlights[0]->id;
         $this->optionHighlight = eloquent_to_options($this->course->courseHighlights, 'id', 'title');
 //        dd($this->course->room->exams);
-        $this->optionExam = eloquent_to_options($this->course->room->exams,'slug','title');
+        $this->optionExam = eloquent_to_options($this->course->room->exams, 'slug', 'title');
 //        dd($this->optionExam);
         $this->optionDetail = eloquent_to_options(CourseType::get(), 'id', 'title');
         $this->data = [
@@ -69,9 +69,11 @@ class CourseDetail extends Component
     {
         $this->validate();
         if ($this->type == 3) {
-            $filename = Str::slug($this->data['title']) . '.' . $this->file->getClientOriginalExtension();
-            $this->data['content'] = 'course-files/' . $filename;
-            $this->file->storeAs('public/course-files', $filename);
+            if ($this->file != null) {
+                $filename = Str::slug($this->data['title']) . '.' . $this->file->getClientOriginalExtension();
+                $this->data['content'] = 'course-files/' . $filename;
+                $this->file->storeAs('public/course-files', $filename);
+            }
         }
         \App\Models\CourseDetail::find($this->dataId)->update($this->data);
         $this->emit('notify', [
@@ -89,11 +91,17 @@ class CourseDetail extends Component
     protected function getRules()
     {
         if ($this->type == 3) {
-            return [
-                'data.title' => 'required',
-                'file' => 'required'
-            ];
-        }else {
+            if ($this->action == "create") {
+                return [
+                    'data.title' => 'required',
+                    'file' => 'required'
+                ];
+            } else {
+                return [
+                    'data.title' => 'required',
+                ];
+            }
+        } else {
             return [
                 'data.title' => 'required'
             ];

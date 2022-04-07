@@ -10,7 +10,8 @@
             <th scope="col" wire:click.prevent="sortBy('title')" >
                 slug @include('components.sort-icon',['field'=>"title"])
             </th>
-
+            <th>TO</th>
+            <th>Bimbel</th>
             <th>aksi</th>
         </tr>
     </x-slot>
@@ -20,6 +21,8 @@
                 <td scope="row">{{ ($page-1)*$perPage+$index+1 }}</td>
                 <td>{{ $room->title }}</td>
                 <td>{{ $room->slug }}</td>
+                <td>{{ $room->courses->count() }}</td>
+                <td>{{ $room->exams->count() }}</td>
                 <td>
                     <a role="button" href="{{ route('admin.room.edit',$room->id) }}" style="margin-right:15px">
                         <i class="fa fa-16px fa-pen">Ubah</i></a>
