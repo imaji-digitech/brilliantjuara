@@ -6,6 +6,8 @@
 {{--            </th>--}}
             @if(auth()->user()->role==1)
                 <th>Nama</th>
+                <th>Email</th>
+                <th>No HP</th>
                 <th>
                     Dibeli pada
                 </th>
@@ -28,6 +30,7 @@
                 @if(auth()->user()->role==1)
                     <td>{{ $payment->user->name }}</td>
                     <td>{{ $payment->user->email }}</td>
+                    <td>{{ $payment->user->phone_number }}</td>
                     <td> @if($payment->status==2) {{ $payment->updated_at }} @endif</td>
                 @endif
                 <td>{{ $payment->bundle->title }}</td>
