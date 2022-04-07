@@ -107,7 +107,7 @@ class Program extends Component
         }
         foreach ($ownCourse as $oe) {
             if ($oe->course->room_id == $this->room->id) {
-                $myClass[$oe->course->room->title]['course'][$oe->exam_id] = $oe->toArray();
+                $myClass[$oe->course->room->title]['course'][$oe->course_id] = $oe->toArray();
             }
         }
         $this->myClass = $myClass;
