@@ -1,9 +1,9 @@
 <x-data-table :model="$payments">
     <x-slot name="head">
         <tr>
-            <th scope="col" wire:click.prevent="sortBy('payment_id')">
-                # @include('components.sort-icon',['field'=>"payment_id"])
-            </th>
+{{--            <th scope="col" wire:click.prevent="sortBy('payment_id')">--}}
+{{--                # @include('components.sort-icon',['field'=>"payment_id"])--}}
+{{--            </th>--}}
             @if(auth()->user()->role==1)
                 <th>Nama</th>
                 <th>
@@ -24,9 +24,10 @@
     <x-slot name="body">
         @foreach ($payments as $index=>$payment)
             <tr>
-                <td scope="row">{{ $payment->payment_id }}</td>
+{{--                <td scope="row">{{ $payment->payment_id }}</td>--}}
                 @if(auth()->user()->role==1)
                     <td>{{ $payment->user->name }}</td>
+                    <td>{{ $payment->user->email }}</td>
                     <td> @if($payment->status==2) {{ $payment->updated_at }} @endif</td>
                 @endif
                 <td>{{ $payment->bundle->title }}</td>
