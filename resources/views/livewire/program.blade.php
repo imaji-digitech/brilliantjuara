@@ -86,8 +86,15 @@
                                                 @isset($bundle->bundlePrices[0])
                                                     @if($minus<$bundle->bundlePrices[0]->price)
                                                         @if($minus!=0)
-                                                            <del>Rp. {{number_format($bundle->bundlePrices[0]->price)}}</del>
+                                                            <del>
+                                                                Rp. {{number_format($bundle->bundlePrices[0]->price)}}</del>
                                                             <br>
+                                                        @endif
+                                                        @if($bundle->bundlePrices[0]->price_cut!=0)
+                                                            <del>
+                                                                Rp. {{ isset($bundle->bundlePrices[0])?number_format($bundle->bundlePrices[0]->price_cut-$minus):'' }}
+                                                            </del>
+                                                                <br>
                                                         @endif
                                                         Rp. {{ isset($bundle->bundlePrices[0])?number_format($bundle->bundlePrices[0]->price-$minus):'' }}
                                                     @endif
