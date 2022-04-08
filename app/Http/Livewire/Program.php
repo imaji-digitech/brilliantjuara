@@ -36,7 +36,7 @@ class Program extends Component
 
     public function buy($id,$minus)
     {
-        dd($minus);
+//        dd($minus);
         $this->amount[$id] = 1;
         $this->checkOut = $id;
         $this->bundleActive = Bundle::find($id);
