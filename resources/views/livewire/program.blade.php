@@ -89,9 +89,6 @@
                                                             <del>Rp. {{number_format($bundle->bundlePrices[0]->price)}}</del>
                                                             <br>
                                                         @endif
-{{--                                                        <del>--}}
-
-{{--                                                        </del>--}}
                                                         Rp. {{ isset($bundle->bundlePrices[0])?number_format($bundle->bundlePrices[0]->price-$minus):'' }}
                                                     @endif
                                                 @endisset
@@ -149,7 +146,7 @@
                                                             </form>
                                                             <button class="btn btn-primary col-md-12" type="button"
                                                                     style="margin-top: 5px"
-                                                                    wire:click="buy({{$bundle->id}})">Beli
+                                                                    wire:click="buy({{$bundle->id}},{{$minus}})">Beli
                                                             </button>
                                                         </div>
                                                     @endisset

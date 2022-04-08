@@ -34,19 +34,19 @@ class Program extends Component
     public $banners;
     protected $listeners = ["payment" => "payment"];
 
-    public function buy($id)
+    public function buy($id,$minus)
     {
-//        dd($this->referralDiscount);
+        dd($minus);
         $this->amount[$id] = 1;
         $this->checkOut = $id;
         $this->bundleActive = Bundle::find($id);
         $total = $this->amount[$id] * $this->bundleActive->bundlePrices[0]->price;
-        $this->total = $total;
+        $this->total = $total - $minus;
         $this->emit('swal:confirm', ['title' => 'Periksa kembali',
             'icon' => 'info',
             'confirmText' => 'Proses',
             'text' => 'Pembelian Paket <br>' . $this->bundleActive->title . ' - ' . intval($this->amount[$id]) . 'x <br>' .
-                'Total : ' . ($total - $this->referralDiscount)
+                'Total : ' . ($total - $minus - $this->referralDiscount)
             ,
             'method' => 'payment']);
     }
