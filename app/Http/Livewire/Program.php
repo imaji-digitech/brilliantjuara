@@ -37,11 +37,16 @@ class Program extends Component
     public function buy($id,$minus)
     {
 //        dd($minus);
+
         $this->amount[$id] = 1;
         $this->checkOut = $id;
         $this->bundleActive = Bundle::find($id);
         $total = $this->amount[$id] * $this->bundleActive->bundlePrices[0]->price;
         $this->total = $total - $minus;
+        if ($this->bundleActive->token_can_use==2){
+            $this->referralDiscount=0;
+            $this->referralUse=null;
+        }
         $this->emit('swal:confirm', ['title' => 'Periksa kembali',
             'icon' => 'info',
             'confirmText' => 'Proses',
