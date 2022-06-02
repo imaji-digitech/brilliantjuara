@@ -158,24 +158,24 @@ class Program extends Component
         $this->referralBundle = Bundle::find($id);
         if (isset($this->referral[$id])) {
             if ($this->referral[$id] == null) {
-                $this->referralMsg = "Referral harus diisi";
+                $this->referralMsg[$id] = "Referral harus diisi";
             } else {
                 $r = ReferralCode::whereCode($this->referral[$id])->first();
                 if ($r != null) {
                     if ($r->user_id == auth()->id()) {
-                        $this->referralMsg = "Referral tidak dapat digunakan";
+                        $this->referralMsg[$id] = "Referral tidak dapat digunakan";
                     } else {
                         $b = ReferralCodeUse::whereReferralCodeId($r->id)->whereUserId(auth()->id())->get();
 //                        if ($b->count()!=0) {
 //                            $this->referralMsg = "Referral telah anda gunakan";
 //                        } else {
-                        $this->referralMsg = "Potongan sebesar " . $this->referralBundle->referral_discount . ' ';
+                        $this->referralMsg[$id] = "Potongan sebesar " . $this->referralBundle->referral_discount . ' ';
                         $this->referralDiscount = $this->referralBundle->referral_discount;
                         $this->referralUse = $r;
 //                        }
                     }
                 } else {
-                    $this->referralMsg = "Referral tidak dapat digunakan";
+                    $this->referralMsg[$id] = "Referral tidak dapat digunakan";
                 }
             }
         }
