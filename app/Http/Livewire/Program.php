@@ -45,7 +45,7 @@ class Program extends Component
             $this->referralDiscount=0;
             $this->referralUse=null;
         }
-        if ($this->referralBundle!=$this->bundleActive){
+        if ($this->referralBundle->id!=$this->bundleActive->id){
             $this->referralDiscount=0;
             $this->referralUse=null;
         }
