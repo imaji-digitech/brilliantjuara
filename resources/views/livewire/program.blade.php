@@ -94,7 +94,7 @@
                                                             <del>
                                                                 Rp. {{ isset($bundle->bundlePrices[0])?number_format($bundle->bundlePrices[0]->price_cut-$minus):'' }}
                                                             </del>
-                                                                <br>
+                                                            <br>
                                                         @endif
                                                         Rp. {{ isset($bundle->bundlePrices[0])?number_format($bundle->bundlePrices[0]->price-$minus):'' }}
                                                     @endif
@@ -146,7 +146,9 @@
                                                                         </div>
                                                                         <div class="col-sm-12 text-left"
                                                                              style="text-align: left">
-                                                                            {{ $referralMsg }}
+                                                                            @isset($referralMsg[$bundle->id])
+                                                                            {{$referralMsg[$bundle->id]}}
+                                                                            @endisset
                                                                         </div>
                                                                     </div>
                                                                 @endif
