@@ -45,9 +45,11 @@ class Program extends Component
             $this->referralDiscount=0;
             $this->referralUse=null;
         }
-        if ($this->referralBundle->id!=$this->bundleActive->id){
-            $this->referralDiscount=0;
-            $this->referralUse=null;
+        if($this->referralBundle->id!=null) {
+            if ($this->referralBundle->id != $this->bundleActive->id) {
+                $this->referralDiscount = 0;
+                $this->referralUse = null;
+            }
         }
         $this->emit('swal:confirm', ['title' => 'Periksa kembali',
             'icon' => 'info',
