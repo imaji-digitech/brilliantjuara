@@ -40,7 +40,6 @@
                             }
                             console.log(some)
                             if (event) {
-
                                 some.forEach(myFunction);
                                 function myFunction(item, index) {
                                     $("#events").prepend(
@@ -54,7 +53,6 @@
                             var matching = $.grep(events, function (event) {
                                 return event.Date.valueOf() === date.valueOf();
                             });
-
                             if (matching.length) {
                                 result = [true, 'highlight-event', null];
                             }
@@ -63,8 +61,6 @@
                     })
                 });
             </script>
-
         </div>
     </div>
-
 </div>

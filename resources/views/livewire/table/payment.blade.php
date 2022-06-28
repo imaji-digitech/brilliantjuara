@@ -21,6 +21,7 @@
             <th scope="col" wire:click.prevent="sortBy('status')">
                 Status @include('components.sort-icon',['field'=>"status"])
             </th>
+            <th>link</th>
         </tr>
     </x-slot>
     <x-slot name="body">
@@ -40,6 +41,13 @@
                         Menunggu
                     @else
                         Berhasil
+                    @endif
+                </td>
+                <td>
+                    @if($payment->status==1 and $payment->link!=null )
+                        <a href="{{ $payment->link }}" class="btn btn-primary">
+                            Menuju ke pembayaran
+                        </a>
                     @endif
                 </td>
             </tr>

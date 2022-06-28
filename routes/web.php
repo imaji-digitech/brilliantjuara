@@ -41,9 +41,9 @@ use Xendit\Xendit;
 Route::get('dashboard', function () {
     return redirect(route('admin.dashboard'));
 })->name('dashboard');
-Route::get('phpinfo', function () {
-    phpinfo();
-})->name('dashboard');
+//Route::get('phpinfo', function () {
+//    phpinfo();
+//})->name('dashboard');
 
 Route::get('/discussion', function () {
     $pdf = App::make('dompdf.wrapper');

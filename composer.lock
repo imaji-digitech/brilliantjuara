@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f5d355048f20e175cfdafad90e48979a",
+    "content-hash": "5e3e68e9b26c78e481d0868eebefb08f",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -253,28 +253,28 @@
         },
         {
             "name": "browner12/helpers",
-            "version": "v3.3.0",
+            "version": "v3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/browner12/helpers.git",
-                "reference": "cdf34b5863ea13949947f6c013e8b78d3aefdc5d"
+                "reference": "18eb1f7e98cfd97266533a87871ad269d678839d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/browner12/helpers/zipball/cdf34b5863ea13949947f6c013e8b78d3aefdc5d",
-                "reference": "cdf34b5863ea13949947f6c013e8b78d3aefdc5d",
+                "url": "https://api.github.com/repos/browner12/helpers/zipball/18eb1f7e98cfd97266533a87871ad269d678839d",
+                "reference": "18eb1f7e98cfd97266533a87871ad269d678839d",
                 "shasum": ""
             },
             "require": {
-                "illuminate/console": "^6.0|^7.0|^8.0",
-                "illuminate/contracts": "^6.0|^7.0|^8.0",
-                "illuminate/support": "^6.0|^7.0|^8.0",
+                "illuminate/console": "^6.0|^7.0|^8.0|^9.0",
+                "illuminate/contracts": "^6.0|^7.0|^8.0|^9.0",
+                "illuminate/support": "^6.0|^7.0|^8.0|^9.0",
                 "php": "^7.2|^8.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^8.0",
+                "phpunit/phpunit": "^8.0|^9.5.10",
                 "scrutinizer/ocular": "~1.1",
-                "squizlabs/php_codesniffer": "~2.3"
+                "squizlabs/php_codesniffer": "~2.3|^3.6"
             },
             "suggest": {
                 "moneyphp/money": "Money value object."
@@ -314,9 +314,9 @@
             ],
             "support": {
                 "issues": "https://github.com/browner12/helpers/issues",
-                "source": "https://github.com/browner12/helpers/tree/v3.3.0"
+                "source": "https://github.com/browner12/helpers/tree/v3.4.0"
             },
-            "time": "2020-12-08T15:46:07+00:00"
+            "time": "2022-02-07T15:48:53+00:00"
         },
         {
             "name": "dasprid/enum",

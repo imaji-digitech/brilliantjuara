@@ -4,7 +4,10 @@
     </x-slot>
     <div>
         <div class="container-fluid">
-            <livewire:dashboard/>
+            @if(auth()->user()->role==1)
+                <livewire:admin-dashboard/>
+            @endif
+                <livewire:dashboard/>
         </div>
     </div>
 </x-admin>

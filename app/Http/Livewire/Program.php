@@ -79,7 +79,8 @@ class Program extends Component
                 'amount' => $this->amount[$id],
                 'status' => 1,
                 'user_id' => auth()->id(),
-                'referral_code_id' => $this->referralUse->id
+                'referral_code_id' => $this->referralUse->id,
+                'link'=>$url
             ]);
             ReferralCodeUse::create([
                 'referral_code_id' => $this->referralUse->id,
@@ -92,6 +93,7 @@ class Program extends Component
                 'amount' => $this->amount[$id],
                 'status' => 1,
                 'user_id' => auth()->id(),
+                'link'=>$url
             ]);
         }
         $this->emit('redirect:new', $url);
