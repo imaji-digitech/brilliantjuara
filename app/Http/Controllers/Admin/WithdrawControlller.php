@@ -11,4 +11,7 @@ class WithdrawControlller extends Controller
     public function index(){
         $withdraw=Withdraw::class;
     }
+    public function edit(){
+
+    }
 }

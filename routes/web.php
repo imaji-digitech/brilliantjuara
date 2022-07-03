@@ -12,16 +12,17 @@ use App\Http\Controllers\Admin\RoomBannerController;
 use App\Http\Controllers\Admin\RoomCategoryController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\RoomEventController;
-use App\Http\Controllers\Admin\WithdrawControlller;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\UploadFile;
 use App\Http\Controllers\User\ProgramController;
 use App\Models\ExamUser;
+use App\Models\FrontpageBanner;
 use App\Models\Payment;
 use App\Models\ReportQuest;
 use App\Models\User;
 use App\Models\UserOwnCourse;
 use App\Models\UserOwnExam;
+use App\Models\Withdraw;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
@@ -47,7 +48,7 @@ Route::get('dashboard', function () {
 
 Route::get('/discussion', function () {
     $pdf = App::make('dompdf.wrapper');
-    $pdf->loadView('pdf.discussion')->setPaper('A4', 'portrait');;
+    $pdf->loadView('pdf.discussion')->setPaper('A4', 'portrait');
     return $pdf->stream('report.pdf');
 });
 
@@ -91,8 +92,8 @@ Route::get('create/xendit/invoice', function () {
 
 
 Route::get('/', function () {
-    $banners=\App\Models\FrontpageBanner::orderBy('id','desc')->get();
-    return view('index',compact('banners'));
+    $banners = FrontpageBanner::orderBy('id', 'desc')->get();
+    return view('index', compact('banners'));
 });
 Route::post('/summernote', [SupportController::class, 'upload'])->name('summernote');
 Route::middleware(['auth:sanctum',])->name('admin.')->prefix('admin')->group(function () {
@@ -203,7 +204,7 @@ Route::middleware(['auth:sanctum',])->name('admin.')->prefix('admin')->group(fun
         Route::get('room/{room}/bundle/detail/{id}/create', [BundleController::class, 'bundleDetailCreate'])->name('bundle.detail.create');
         Route::get('room/{room}/bundle/token/{id}', [BundleController::class, 'bundleToken'])->name('bundle.token.index');
         Route::get('room/{room}/bundle/token/{id}/create/{number}', [BundleController::class, 'bundleTokenCreate'])->name('bundle.token.create');
-        Route::get('room/{room}/bundle/token/{id}/export',[BundleController::class,'export'])->name('bundle.export');
+        Route::get('room/{room}/bundle/token/{id}/export', [BundleController::class, 'export'])->name('bundle.export');
 
         Route::get('referral', [ReferralController::class, 'index'])->name('referral.index');
         Route::get('referral/create', [ReferralController::class, 'create'])->name('referral.create');
@@ -216,7 +217,10 @@ Route::middleware(['auth:sanctum',])->name('admin.')->prefix('admin')->group(fun
             return view('pages.exam-log', compact('exam'));
         })->name('exam.user.log');
 //        Route::get('withdraw',[WithdrawControlller::class,'index'])->name('withdraw.index');
-        Route::get('withdraw/{id}',[WithdrawControlller::class,'update'])->name('withdraw.edit');
+        Route::get('withdraw/{id}', function ($id) {
+            Withdraw::find($id)->update(['status' => 2]);
+            return redirect()->back();
+        })->name('withdraw.edit');
         Route::get('exam/ranking/{id}', [\App\Http\Controllers\User\ExamController::class, 'rankingRemove'])->name('user.exam.ranking.remove');
 
     });
