@@ -19,11 +19,13 @@
             <th>
                 Status penarikan
             </th>
+            <th>
             @if(auth()->user()->role==1)
 {{--                @if($withdraw->status==1)--}}
                     Aksi
 {{--                @endif--}}
             @endif
+            </th>
         </tr>
     </x-slot>
     <x-slot name="body">
