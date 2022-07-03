@@ -20,9 +20,9 @@
                 Status penarikan
             </th>
             @if(auth()->user()->role==1)
-                @if($withdraw->status==1)
+{{--                @if($withdraw->status==1)--}}
                     Aksi
-                @endif
+{{--                @endif--}}
             @endif
         </tr>
     </x-slot>
@@ -36,13 +36,15 @@
                 <td>{{ $withdraw->bank_name }}</td>
                 <td>{{ $withdraw->status==1?'Dalam proses admin':'Selesai' }}</td>
                 @if(auth()->user()->role==1)
+                    <td>
                     @if($withdraw->status==1)
-                        <td>
+
                             <a href="{{ route('admin.withdraw.edit',$withdraw->id) }}">
                                 <i class="fa fa-check">Selesai</i>
                             </a>
-                        </td>
+
                     @endif
+                    </td>
                 @endif
             </tr>
         @endforeach
